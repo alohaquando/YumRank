@@ -1,30 +1,27 @@
 <script lang="ts">
+	// noinspection ES6UnusedImports
+	import Fa from 'svelte-fa';
 	import NavItem from '$lib/components/navigation/NavItem.svelte';
+	import IconButton from '$lib/components/buttons/IconButton.svelte';
+	import { faUserCheck } from '@fortawesome/pro-solid-svg-icons';
 
 	let customClasses = '';
 	export { customClasses as class };
 </script>
 
 <div class="h-16 border-t border-gray-200 flex bg-white w-full {customClasses}">
-	<div class="container mx-auto px-6 flex ring-amber-600 ring-2 justify-between">
-
+	<div class="container mx-auto px-6 space-x-2 flex justify-between">
 
 		<div class="flex">
-			<NavItem icon="home" href="/" state="active">
-				Home
-			</NavItem>
-			<NavItem icon="globe" href="/">
-
-			</NavItem>
-			<NavItem icon="user" href="/">
-
-			</NavItem>
+			<NavItem destination="home" />
+			<NavItem destination="discover" />
+			<NavItem destination="me" />
 		</div>
 
-		<div class="flex">
-			<NavItem href="/">
-				Home
-			</NavItem>
+		<div class="flex items-center">
+			<IconButton class="!rounded-2xl !h-12 !w-12" design="tonal">
+				<Fa icon={faUserCheck} />
+			</IconButton>
 		</div>
 	</div>
 </div>

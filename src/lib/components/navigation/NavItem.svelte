@@ -1,47 +1,60 @@
+<!--suppress JSUnreachableSwitchBranches -->
 <script lang="ts">
-	import { faGlobe, faHome, faUserCircle } from '@fortawesome/pro-regular-svg-icons';
+	// noinspection ES6UnusedImports
 	import Fa from 'svelte-fa';
+	import { faGlobe, faHome, faUserCircle } from '@fortawesome/pro-regular-svg-icons';
+	import {
+		faGlobe as faGlobeSolid,
+		faHome as faHomeSolid,
+		faUserCircle as faUserCircleSolid
+	} from '@fortawesome/pro-solid-svg-icons';
 	import type { IconDefinition } from '@fortawesome/sharp-light-svg-icons';
 
-	export let href: string = '/';
-	export let state: 'default' | 'active' = 'default';
-	export let icon: 'home' | 'globe' | 'user' = 'home';
+	export let active: boolean = false;
+	export let destination: 'home' | 'discover' | 'me' = 'home';
 
 	let chosenIcon: IconDefinition;
-	switch (icon) {
+	let label: string;
+	let href: string;
+	switch (destination) {
 		case 'home': {
-			chosenIcon = faHome;
+			active ? chosenIcon = faHomeSolid : chosenIcon = faHome;
+			label = 'Home';
+			href = '/';
 			break;
 		}
-		case 'globe': {
-			chosenIcon = faGlobe;
+		case 'discover': {
+			active ? chosenIcon = faGlobeSolid : chosenIcon = faGlobe;
+			label = 'Discover';
+			href = '/';
 			break;
 		}
-		case 'user': {
-			chosenIcon = faUserCircle;
+		case 'me': {
+			active ? chosenIcon = faUserCircleSolid : chosenIcon = faUserCircle;
+			label = 'Me';
+			href = '/';
 			break;
 		}
 	}
 
 	let stateClasses: string;
-	// noinspection JSUnreachableSwitchBranches
-	switch (state) {
-		case 'default': {
+	switch (active) {
+		case false: {
 			stateClasses = 'text-gray-400';
 			break;
 		}
-		case 'active': {
+		case true: {
 			stateClasses = 'text-red-500 font-semibold';
 			break;
 		}
 	}
 </script>
 
-<a {href} class="flex flex-col ring-2 ring-blue-400 w-16 justify-center items-center space-y-1 {stateClasses} ">
+<a class="flex flex-col w-16 justify-center items-center space-y-1 transition {stateClasses}" {href}>
 	<div class="text-xl">
 		<Fa icon={chosenIcon} />
 	</div>
-	<label class="text-xs">
-		<slot />
-	</label>
+	<p class="text-xs">
+		{label}
+	</p>
 </a>
