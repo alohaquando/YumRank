@@ -2,35 +2,41 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' = 'filled';
+	export let design: 'filled' | 'outlined' | "tonal" = 'filled';
 	export let disabled: boolean = false;
+	let customClasses = "";
+	export {customClasses as class }
 
-	let size_classes: string;
+	let sizeClasses: string;
 	switch (size) {
 		case 'md': {
-			size_classes = 'w-10 h-10';
+			sizeClasses = 'w-10 h-10';
 			break;
 		}
 		case 'lg': {
-			size_classes = 'w-14 h-14';
+			sizeClasses = 'w-14 h-14';
 			break;
 		}
 	}
 
-	let design_classes: string;
+	let designClasses: string;
 	switch (design) {
 		case 'filled': {
-			design_classes = 'bg-red-500 text-white hover:bg-red-600';
+			designClasses = 'bg-red-500 text-white hover:bg-red-600';
 			break;
 		}
 		case 'outlined': {
-			design_classes = 'outline outline-1 outline-gray-300 hover:bg-red-50';
+			designClasses = 'outline outline-1 outline-gray-300 hover:bg-red-50';
+			break;
+		}
+		case 'tonal': {
+			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
 			break;
 		}
 	}
 </script>
 
 <button on:click {disabled} {type}
-				class="flex justify-center items-center rounded-full transition  {size_classes} {design_classes}">
+				class="flex justify-center items-center rounded-full transition  {sizeClasses} {designClasses} {customClasses}">
 	<slot />
 </button>
