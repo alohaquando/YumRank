@@ -5,6 +5,7 @@
 	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'outlined';
 	export let disabled: boolean = false;
 	export let width: "fit" | "full" = "fit";
+	export let href: string | undefined | null = undefined;
 	let customClasses: string = '';
 	export { customClasses as class };
 
@@ -50,7 +51,13 @@
 	}
 </script>
 
-<button on:click {disabled} {type}
+<svelte:element
+	this={href ? 'a' : 'button'}
+	{href}
+	tabindex="0"
+	role="button"
+	on:click
+	{disabled} {type}
 				class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}">
 	{#if $$slots.icon}
 		<div>
@@ -60,4 +67,4 @@
 	<label class="font-sans trim-both font-medium truncate">
 		<slot />
 	</label>
-</button>
+</svelte:element>

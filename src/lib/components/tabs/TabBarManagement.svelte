@@ -1,22 +1,22 @@
 <script>
-import LinkChip from '$lib/components/chips/LinkChip.svelte';
+import ActionChip from '$lib/components/chips/ActionChip.svelte';
 import TabBar from '$lib/components/tabs/TabBar.svelte';
 </script>
 
 <TabBar>
-	<LinkChip width="fit" href="/">
+	<ActionChip width="fit" href="/">
 		Today
-	</LinkChip>
-	<LinkChip width="fit" href="/">
+	</ActionChip>
+	<ActionChip width="fit" href="/">
 		Posts
-	</LinkChip>
-	<LinkChip width="fit" href="/">
+	</ActionChip>
+	<ActionChip width="fit" href="/">
 		Discounts
-	</LinkChip>
-	<LinkChip width="fit" href="/">
+	</ActionChip>
+	<ActionChip width="fit" href="/">
 		All check-ins
-	</LinkChip>
-	<LinkChip width="fit" href="/">
+	</ActionChip>
+	<ActionChip width="fit" href="/">
 		Settings
-	</LinkChip>
+	</ActionChip>
 </TabBar>
