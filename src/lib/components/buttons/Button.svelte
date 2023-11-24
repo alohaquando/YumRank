@@ -6,34 +6,36 @@
 	export let size: 'md' | 'lg' = 'md';
 	export let design: 'filled' | 'outlined' = 'filled';
 	export let disabled: boolean = false;
+	let customClasses: string = '';
+	export { customClasses as class };
 
-	let size_classes: string;
+	let sizeClasses: string;
 	switch (size) {
 		case 'md': {
-			size_classes = 'px-6 h-10';
+			sizeClasses = 'px-6 h-10';
 			break;
 		}
 		case 'lg': {
-			size_classes = 'px-8 h-14';
+			sizeClasses = 'px-8 h-14';
 			break;
 		}
 	}
 
-	let design_classes: string;
+	let designClasses: string;
 	switch (design) {
 		case 'filled': {
-			design_classes = 'bg-red-500 text-white hover:bg-red-600';
+			designClasses = 'bg-red-500 text-white hover:bg-red-600';
 			break;
 		}
 		case 'outlined': {
-			design_classes = 'outline outline-1 outline-gray-300 hover:bg-red-50';
+			designClasses = 'outline outline-1 outline-gray-300 hover:bg-red-50';
 			break;
 		}
 	}
 </script>
 
 <button on:click {disabled} {type}
-				class="flex justify-center items-center rounded-full transition space-x-2 {size_classes} {design_classes}">
+				class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {customClasses}">
 	<slot name="icon" />
 	<Title>
 		<slot />
