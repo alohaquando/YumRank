@@ -4,6 +4,7 @@
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import Header from '$lib/components/navigation/Header.svelte';
+	import NavBar from '$lib/components/navigation/NavBar.svelte';
 
 	export let data;
 
@@ -31,8 +32,13 @@
 	<title>YumRank</title>
 </svelte:head>
 
-<Header/>
+<Header class="sticky top-0 z-50" />
 
 <div class="container mx-auto px-6">
 	<slot />
 </div>
+
+<!-- Spacing to avoid bottom nav bar-->
+<div class="h-16"/>
+
+<NavBar class="fixed bottom-0 left-0 z-50"/>
