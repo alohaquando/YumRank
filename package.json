@@ -33,6 +33,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@capsizecss/core": "^3.1.1",
 		"@fortawesome/fontawesome-svg-core": "^6.4.2",
 		"@fortawesome/free-brands-svg-icons": "^6.4.2",
 		"@fortawesome/pro-duotone-svg-icons": "^6.4.2",
@@ -46,6 +47,7 @@
 		"@supabase/auth-helpers-sveltekit": "^0.10.7",
 		"@supabase/supabase-js": "^2.38.4",
 		"supabase": "^1.112.0",
-		"svelte-fa": "^3.0.4"
+		"svelte-fa": "^3.0.4",
+		"tailwindcss-leading-trim": "^1.1.0"
 	}
 }
