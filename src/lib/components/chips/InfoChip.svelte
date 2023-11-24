@@ -59,7 +59,7 @@
 			<slot name="icon" />
 		</div>
 	{/if}
-	<p class="font-sans trim-both">
+	<p class="font-sans trim-both truncate">
 		<slot />
 	</p>
 </div>

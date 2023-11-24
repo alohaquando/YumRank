@@ -57,7 +57,7 @@
 			<slot name="icon" />
 		</div>
 	{/if}
-	<label class="font-sans trim-both font-medium">
+	<label class="font-sans trim-both font-medium truncate">
 		<slot />
 	</label>
 </button>

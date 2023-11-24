@@ -1,23 +1,18 @@
 <!--suppress JSUnreachableSwitchBranches -->
 <script lang="ts">
-	import Title from '$lib/components/typography/Title.svelte';
-
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
-	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
+	export let size: 'md' | 'sm' = 'md';
+	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'outlined';
 	export let disabled: boolean = false;
 	export let width: "fit" | "full" = "fit";
+	export let href: string = "/";
 	let customClasses: string = '';
 	export { customClasses as class };
 
 	let sizeClasses: string;
 	switch (size) {
 		case 'md': {
-			sizeClasses = 'px-6 h-10';
-			break;
-		}
-		case 'lg': {
-			sizeClasses = 'px-8 h-14';
+			sizeClasses = 'px-4 h-8';
 			break;
 		}
 	}
@@ -34,6 +29,7 @@
 		}
 	}
 
+
 	let designClasses: string;
 	switch (design) {
 		case 'filled': {
@@ -48,17 +44,21 @@
 			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
 			break;
 		}
+		case 'text': {
+			designClasses = 'hover:bg-red-50';
+			break;
+		}
 	}
 </script>
 
-<button on:click {disabled} {type}
+<a {href} {disabled} {type}
 				class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}">
 	{#if $$slots.icon}
 		<div>
 			<slot name="icon" />
 		</div>
 	{/if}
-	<Title class="truncate">
+	<label class="font-sans trim-both font-medium truncate">
 		<slot />
-	</Title>
-</button>
+	</label>
+</a>
