@@ -3,6 +3,7 @@
 	import '../app.postcss';
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
+	import Header from '$lib/components/navigation/Header.svelte';
 
 	export let data;
 
@@ -29,6 +30,8 @@
 <svelte:head>
 	<title>YumRank</title>
 </svelte:head>
+
+<Header/>
 
 <div class="container mx-auto px-6">
 	<slot />
