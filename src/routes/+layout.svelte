@@ -5,6 +5,8 @@
 	import { onMount } from 'svelte';
 	import Header from '$lib/components/navigation/Header.svelte';
 	import NavBar from '$lib/components/navigation/NavBar.svelte';
+	import TabBarManagement from '$lib/components/navigation/TabBarManagement.svelte';
+	import RestaurantSwitcher from '$lib/components/navigation/RestaurantSwitcher.svelte';
 
 	export let data;
 
@@ -33,6 +35,8 @@
 </svelte:head>
 
 <Header class="sticky top-0 z-50" />
+<RestaurantSwitcher/>
+<TabBarManagement/>
 
 <div class="container mx-auto px-6">
 	<slot />
