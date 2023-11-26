@@ -16,7 +16,7 @@
 </script>
 
 <div class="flex-col flex space-y-2">
-	<a href={restaurantHref}>
+	<a href={restaurantHref} class="w-fit">
 		<RestaurantTitleItem name={restaurantName} src={restaurantSrc}></RestaurantTitleItem>
 	</a>
 	<div class="w-full h-[11rem] bg-red-50 rounded-2xl overflow-clip">
