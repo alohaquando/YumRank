@@ -1,7 +1,7 @@
 <!--suppress JSUnreachableSwitchBranches -->
 <script lang="ts">
 	// eslint-disable-next-line @typescript-eslint/prefer-as-const
-	export let size: 'md' | 'sm' = 'md';
+	export let size: 'md' | 'sm' = 'sm';
 	export let design: 'filled' | 'outlined' | 'tonal' | 'text' | 'subtle' = 'subtle';
 	export let width: "fit" | "full" = "fit";
 	let customClasses: string = '';
@@ -11,6 +11,10 @@
 	switch (size) {
 		case 'md': {
 			sizeClasses = 'px-4 h-8';
+			break;
+		}
+		case 'sm': {
+			sizeClasses = '';
 			break;
 		}
 	}
