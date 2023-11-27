@@ -1,5 +1,5 @@
 <script lang="ts">
-	import RestaurantTitleItem from '$lib/components/building_blocks/TitleItem.svelte';
+	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 
@@ -17,12 +17,11 @@
 </script>
 
 <div class="flex-col flex space-y-2">
-	<a href={restaurantHref} class="w-fit">
-		<RestaurantTitleItem name={restaurantName} src={restaurantSrc}></RestaurantTitleItem>
-	</a>
+	<TitleItem
+		href={restaurantHref} src={restaurantSrc} title={restaurantName}></TitleItem>
 	<div class="w-full h-[11rem] bg-red-50 rounded-2xl overflow-clip">
 		<Image alt="Post" on:error={handleError}
-				 src={imageSrc} />
+					 src={imageSrc} />
 	</div>
 	<div class="flex-col flex space-y-1">
 		<Body>{content}</Body>
