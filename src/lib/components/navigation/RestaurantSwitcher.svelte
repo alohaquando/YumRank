@@ -1,6 +1,6 @@
 <script>
 	import TabBar from '$lib/components/navigation/TabBar.svelte';
-	import RestaurantTitleItem from '$lib/components/building_blocks/RestaurantTitleItem.svelte';
+	import RestaurantTitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	// noinspection ES6UnusedImports
 	import Fa from 'svelte-fa';
 	import { faChevronDown } from '@fortawesome/pro-regular-svg-icons';
