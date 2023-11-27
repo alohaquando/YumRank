@@ -38,7 +38,7 @@
 	<textarea
 		{autocomplete}
 		{autofocus}
-		class="{stateClasses} rounded-3xl min-h-[9rem] h-36 border border-black/20 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
+		class="{stateClasses} rounded-3xl min-h-[9rem] h-36 border border-gray-300 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
 		focus:ring-black/70 focus:ring-2
 		disabled:bg-black/5
 		disabled:placeholder-black/20 disabled:text-black/50

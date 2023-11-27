@@ -39,7 +39,7 @@
 	<input
 		{autocomplete}
 		{autofocus}
-		class="{stateClasses} rounded-full border border-black/20 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
+		class="{stateClasses} rounded-full border border-gray-300 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
 		focus:ring-black/70 focus:ring-2
 		disabled:bg-black/5
 		disabled:placeholder-black/20 disabled:text-black/50
