@@ -15,10 +15,10 @@
 	class="flex flex-nowrap flex-row space-x-4 items-center place-content-between">
 	<div class="flex flex-row space-x-2 items-center">
 		<Image alt="{title}" class="w-8 h-8 rounded-xl ring-1 ring-gray-200" {src} />
-		<Title>{title}</Title>
+		<Title class="truncate">{title}</Title>
 	</div>
 	<div />
 	{#if trailingText}
-		<Body class="opacity-50">{trailingText}</Body>
+		<Body class="opacity-50 truncate">{trailingText}</Body>
 	{/if}
 </svelte:element>
