@@ -34,10 +34,10 @@
 			mask="url(#a)" />
 	</svg>
 
-	<div class="py-4 px-6 absolute top-0 bottom-0 left-0 right-0 ring">
+	<div class="py-4 px-6 absolute top-0 bottom-0 left-0 right-0">
 		<div class="w-full h-full flex flex-row divide-x divide-dashed">
 			<div class="w-32 pr-4 flex flex-col space-y-2 items-center justify-center">
-				<Image class="w-14 h-14 rounded-2xl ring-1 ring-gray-200" src={restaurantSrc} />
+				<Image class="w-14 h-14 rounded-2xl ring-1 ring-gray-200" alt="Logo of {restaurantName}" src={restaurantSrc} />
 				<Title class="text-center line-clamp-2">{restaurantName}
 				</Title>
 			</div>
