@@ -97,7 +97,7 @@
 
 	<Body class="!text-sm opacity-70 text-center">This QR will refresh in {secondsLeft} seconds</Body>
 
-	{#if isScanned}
+	{#if !isScanned}
 		<AlertCard design="gray">
 			<Fa icon={faSpinner} slot="icon" />
 			<Title slot="title">Waiting for guests to scan</Title>

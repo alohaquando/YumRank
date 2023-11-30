@@ -44,13 +44,15 @@
 	}
 </script>
 
-
-<a class="{bgClasses} px-6 h-10 rounded-full justify-start items-center gap-4 flex transition" {href}>
-	<div class="{textStyleClasses} text-xl w-5 flex justify-center ">
+<a
+	class="{bgClasses} px-6 h-10 rounded-full justify-start items-center gap-4 flex transition"
+	{href}
+>
+	<div class="{textStyleClasses} text-xl w-5 flex justify-center">
 		{#if provider === 'google'}
 			<GoogleG />
-		{:else }
-			<Fa icon={icon} />
+		{:else}
+			<Fa {icon} />
 		{/if}
 	</div>
 	<Title class="grow text-center {textStyleClasses}">{authenticationTypeText} {providerName}</Title>

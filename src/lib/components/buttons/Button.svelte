@@ -6,7 +6,7 @@
 	export let size: 'md' | 'lg' = 'md';
 	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
 	export let disabled: boolean = false;
-	export let width: "fit" | "full" = "fit";
+	export let width: 'fit' | 'full' = 'fit';
 	export let href: string | undefined | null = undefined;
 	let customClasses: string = '';
 	export { customClasses as class };
@@ -55,12 +55,14 @@
 <svelte:element
 	this={href ? 'a' : 'button'}
 	on:keydown
-	on:click 
+	on:click
 	tabindex="0"
 	role="button"
 	{href}
-	{disabled} {type}
-				class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}">
+	{disabled}
+	{type}
+	class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}"
+>
 	{#if $$slots.icon}
 		<div>
 			<slot name="icon" />

@@ -15,18 +15,19 @@
 	} else if (rank > 10) {
 		rankStyle = 'text-black/60';
 	}
-
 </script>
 
-<div class=" w-[2.625rem]  h-12 relative {rankStyle}">
+<div class=" w-[2.625rem] h-12 relative {rankStyle}">
 	{#if rank <= 10}
 		<Fa class="text-5xl " icon={faFire} />
-	{:else }
+	{:else}
 		<div
-			class="absolute bottom-0 rounded-full w-[2.5rem] h-[2.5rem] bg-gray-300 left-1/2 transform -translate-x-1/2 flex items-center justify-center" />
+			class="absolute bottom-0 rounded-full w-[2.5rem] h-[2.5rem] bg-gray-300 left-1/2 transform -translate-x-1/2 flex items-center justify-center"
+		/>
 	{/if}
 	<div
-		class="absolute bottom-1.5 rounded-full w-7 h-7 bg-white left-1/2 transform -translate-x-1/2 flex items-center justify-center">
-		<p class="select-none font-semibold text-sm  text-center trim-both">{rank}</p>
+		class="absolute bottom-1.5 rounded-full w-7 h-7 bg-white left-1/2 transform -translate-x-1/2 flex items-center justify-center"
+	>
+		<p class="select-none font-semibold text-sm text-center trim-both">{rank}</p>
 	</div>
 </div>

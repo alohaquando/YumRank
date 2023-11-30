@@ -9,9 +9,8 @@
 	export { customClasses as class };
 </script>
 
-<div class="h-16 border-t border-gray-200 flex bg-white  {customClasses}">
+<div class="h-16 border-t border-gray-200 flex bg-white {customClasses}">
 	<div class="container mx-auto px-6 space-x-2 flex justify-between">
-
 		<div class="flex">
 			<NavItem destination="home" />
 			<NavItem destination="discover" />

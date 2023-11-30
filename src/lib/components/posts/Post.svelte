@@ -17,11 +17,9 @@
 </script>
 
 <div class="flex-col flex space-y-2">
-	<TitleItem
-		href={restaurantHref} src={restaurantSrc} title={restaurantName}></TitleItem>
+	<TitleItem href={restaurantHref} src={restaurantSrc} title={restaurantName} />
 	<div class="w-full h-[11rem] bg-red-50 rounded-2xl overflow-clip">
-		<Image alt="Post" on:error={handleError}
-					 src={imageSrc} />
+		<Image alt="Post" on:error={handleError} src={imageSrc} />
 	</div>
 	<div class="flex-col flex space-y-1">
 		<Body>{content}</Body>

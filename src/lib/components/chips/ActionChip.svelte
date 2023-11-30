@@ -4,7 +4,7 @@
 	export let size: 'md' | 'sm' = 'md';
 	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'outlined';
 	export let disabled: boolean = false;
-	export let width: "fit" | "full" = "fit";
+	export let width: 'fit' | 'full' = 'fit';
 	export let href: string | undefined | null = undefined;
 	let customClasses: string = '';
 	export { customClasses as class };
@@ -28,7 +28,6 @@
 			break;
 		}
 	}
-
 
 	let designClasses: string;
 	switch (design) {
@@ -57,8 +56,10 @@
 	tabindex="0"
 	role="button"
 	on:click
-	{disabled} {type}
-				class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}">
+	{disabled}
+	{type}
+	class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}"
+>
 	{#if $$slots.icon}
 		<div>
 			<slot name="icon" />

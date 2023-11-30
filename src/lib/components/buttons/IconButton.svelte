@@ -2,10 +2,10 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' | "tonal" = 'filled';
+	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
 	export let disabled: boolean = false;
-	let customClasses = "";
-	export {customClasses as class }
+	let customClasses = '';
+	export { customClasses as class };
 
 	let sizeClasses: string;
 	switch (size) {
@@ -36,7 +36,11 @@
 	}
 </script>
 
-<button on:click {disabled} {type}
-				class="flex justify-center items-center rounded-full transition  {sizeClasses} {designClasses} {customClasses}">
+<button
+	on:click
+	{disabled}
+	{type}
+	class="flex justify-center items-center rounded-full transition {sizeClasses} {designClasses} {customClasses}"
+>
 	<slot />
 </button>

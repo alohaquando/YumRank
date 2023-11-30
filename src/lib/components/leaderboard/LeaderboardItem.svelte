@@ -11,8 +11,8 @@
 	export let rank: number;
 	export let restaurantSrc: string;
 	export let dishSrc: string;
-	export let restaurantName: string ;
-	export let dishName: string ;
+	export let restaurantName: string;
+	export let dishName: string;
 	export let checkIns: number;
 	export let rating: number;
 	export let favorites: number;
@@ -27,10 +27,16 @@
 	</div>
 	<div class="flex grow {prominent ? 'flex-col space-y-3' : 'flex-row space-x-4'}">
 		<div class="relative">
-			<Image alt="{restaurantName}" class="{prominent ? 'w-full h-40' : 'w-16 h-16'} rounded-3xl" src={restaurantSrc} />
+			<Image
+				alt={restaurantName}
+				class="{prominent ? 'w-full h-40' : 'w-16 h-16'} rounded-3xl"
+				src={restaurantSrc}
+			/>
 			{#if prominent}
-				<div class="absolute w-20 h-20 bottom-0 right-0 ring-[0.5rem] ring-white rounded-full overflow-clip">
-					<Image alt="{dishName}" class="w-20 h-20" src={dishSrc} />
+				<div
+					class="absolute w-20 h-20 bottom-0 right-0 ring-[0.5rem] ring-white rounded-full overflow-clip"
+				>
+					<Image alt={dishName} class="w-20 h-20" src={dishSrc} />
 				</div>
 			{/if}
 		</div>

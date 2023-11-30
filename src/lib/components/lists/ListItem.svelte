@@ -4,17 +4,20 @@
 	import { faChevronRight } from '@fortawesome/pro-regular-svg-icons';
 
 	export let href: string | undefined | null = undefined;
-	let customClasses = "";
-	export {customClasses as class}
+	let customClasses = '';
+	export { customClasses as class };
 </script>
 
 <svelte:element
-	class="flex min-h-[56px] items-center justify-between w-full relative group {href ? '' : '!font-medium'} {customClasses}"
+	this={href ? 'a' : 'button'}
+	class="flex min-h-[56px] items-center justify-between w-full relative group {href
+		? ''
+		: '!font-medium'} {customClasses}"
 	{href}
 	on:click
 	role="button"
 	tabindex="0"
-	this={href ? 'a' : 'button'}>
+>
 	<div class="flex items-center space-x-2">
 		<slot name="leading" />
 		<slot name="text" />
@@ -25,7 +28,9 @@
 		{/if}
 	</slot>
 
-	<div class="absolute top-0 bottom-0 -left-4 -right-4 bg-white group-hover:bg-red-50 rounded-full transition -z-10"></div>
+	<div
+		class="absolute top-0 bottom-0 -left-4 -right-4 bg-white group-hover:bg-red-50 rounded-full transition -z-10"
+	/>
 </svelte:element>
 
 <!--Example-->

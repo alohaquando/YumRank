@@ -3,7 +3,7 @@
 	// eslint-disable-next-line @typescript-eslint/prefer-as-const
 	export let size: 'md' | 'sm' = 'sm';
 	export let design: 'filled' | 'outlined' | 'tonal' | 'text' | 'subtle' = 'subtle';
-	export let width: "fit" | "full" = "fit";
+	export let width: 'fit' | 'full' = 'fit';
 	let customClasses: string = '';
 	export { customClasses as class };
 
@@ -57,7 +57,8 @@
 </script>
 
 <div
-				class="flex justify-center items-center rounded-full transition space-x-2 text-sm {sizeClasses} {designClasses} {widthClasses} {customClasses}">
+	class="flex justify-center items-center rounded-full transition space-x-2 text-sm {sizeClasses} {designClasses} {widthClasses} {customClasses}"
+>
 	{#if $$slots.icon}
 		<div>
 			<slot name="icon" />
@@ -67,4 +68,3 @@
 		<slot />
 	</p>
 </div>
-

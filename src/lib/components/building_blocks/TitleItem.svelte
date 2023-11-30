@@ -10,11 +10,12 @@
 </script>
 
 <svelte:element
-	this={href?'a' : 'div'}
+	this={href ? 'a' : 'div'}
 	{href}
-	class="flex flex-nowrap flex-row space-x-4 items-center place-content-between">
+	class="flex flex-nowrap flex-row space-x-4 items-center place-content-between"
+>
 	<div class="flex flex-row space-x-2 items-center">
-		<Image alt="{title}" class="w-8 h-8 rounded-xl ring-1 ring-gray-200" {src} />
+		<Image alt={title} class="w-8 h-8 rounded-xl ring-1 ring-gray-200" {src} />
 		<Title class="truncate">{title}</Title>
 	</div>
 	<div />
