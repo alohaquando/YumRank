@@ -10,8 +10,10 @@
 	export let icon: IconDefinition;
 </script>
 
-<div class="flex flex-row flex-nowrap space-x-2 items-end">
-	<Fa icon={icon} slot="icon" class="w-5 "/>
-	<Title>{title}</Title>
-	<Body>{subtitle}</Body>
+<div class="flex flex-row space-x-2 items-baseline">
+	<Fa class="w-5" icon={icon} slot="icon" />
+	<div class="flex-wrap flex space-y-1 items-baseline space-x-2">
+		<Title>{title}</Title>
+		<Body>{subtitle}</Body>
+	</div>
 </div>

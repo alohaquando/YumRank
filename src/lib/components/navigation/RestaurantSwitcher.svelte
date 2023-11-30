@@ -7,8 +7,8 @@
 </script>
 
 <button class="w-full" on:click type="button">
-	<TabBar class="justify-between ">
+	<TabBar class="justify-between">
 		<RestaurantTitleItem></RestaurantTitleItem>
-		<Fa icon={faChevronDown} />
+		<Fa icon={faChevronDown} class="pr-2" />
 	</TabBar>
 </button>

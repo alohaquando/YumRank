@@ -22,14 +22,14 @@
 </script>
 
 
-<div class="relative drop-shadow-sm w-full py-5 px-6 rounded-2xl border border-gray-200">
+<div class="relative drop-shadow-sm w-full py-5 px-4 rounded-2xl border border-gray-200">
 	<div class="w-full h-full flex flex-row divide-x divide-dashed">
 		<div class="w-36 pr-4 flex flex-col space-y-2 items-center justify-center">
 			<Rank rank={rank} />
 			<Title class="text-center line-clamp-2">{rankFlavorText}
 			</Title>
 		</div>
-		<div class=" pl-4 grow flex flex-col space-y-4 justify-between py-2">
+		<div class=" pl-4 grow flex flex-col space-y-1.5 justify-between py-2">
 			<StatsSummaryRow icon={faUserCheck} subtitle="new check-ins" title={checkIns?.toString()} />
 			<StatsSummaryRow icon={faHeart} subtitle="new favorites" title={favorites?.toString()} />
 			<StatsSummaryRow icon={faStar} subtitle="/ 5" title={rating?.toString()} />
