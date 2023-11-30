@@ -43,14 +43,16 @@
 		class="absolute -bottom-2 -left-2 -right-2 -top-2 bg-white opacity-0 dark:bg-zinc-900 pointer-events-auto"
 		{id}
 		{name}
-		on:change>
+		on:change
+	>
 		{#each Object.values(options) as option}
 			<option value={option.value}>{option.title}</option>
 		{/each}
 	</select>
 	<div
-		class="flex flex-row border-gray-900 w-fit h-fit group-hover:text-red-500 group-hover:border-red-500 transition items-center {borderClasses}">
-		<svelte:component this={design === "display"? Display : Title}>{value}</svelte:component>
-		<Fa class="{iconClasses}" icon={faChevronDown} />
+		class="flex flex-row border-gray-900 w-fit h-fit group-hover:text-red-500 group-hover:border-red-500 transition items-center {borderClasses}"
+	>
+		<svelte:component this={design === 'display' ? Display : Title}>{value}</svelte:component>
+		<Fa class={iconClasses} icon={faChevronDown} />
 	</div>
 </div>

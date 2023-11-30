@@ -1,11 +1,36 @@
-<div class="rounded-[40px] bg-red-50 py-8 px-6 flex-col items-center  justify-center flex text-center text-red-900 border border-red-100">
-	<div class="flex items-center space-x-2 pb-4">
+<script lang="ts">
+	export let design: 'default' | 'gray' | 'green' = 'default';
+
+	let designClasses: string;
+	// noinspection JSUnreachableSwitchBranches
+	switch (design) {
+		case 'default': {
+			designClasses = 'bg-red-50 border-red-100 text-red-900';
+			break;
+		}
+		case 'gray': {
+			designClasses = 'bg-gray-50 border-gray-100 text-gray-900';
+			break;
+		}
+		case 'green': {
+			designClasses = 'bg-green-50 border-green-100 text-green-900';
+			break;
+		}
+	}
+</script>
+
+<div
+	class="rounded-[40px] py-8 px-6 flex-col items-center justify-center flex text-center border {designClasses} "
+>
+	<div class="flex items-center space-x-2">
 		<slot name="icon" />
 		<slot name="title" />
 	</div>
-	<div class="self-stretch flex">
-		<slot name="body" />
-	</div>
+	{#if $$slots.body}
+		<div class="self-stretch flex mt-4 text-center mx-auto">
+			<slot name="body" />
+		</div>
+	{/if}
 </div>
 
 <!--Example-->

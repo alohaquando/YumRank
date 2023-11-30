@@ -18,21 +18,21 @@
 	let href: string;
 	switch (destination) {
 		case 'home': {
-			active ? chosenIcon = faHomeSolid : chosenIcon = faHome;
+			active ? (chosenIcon = faHomeSolid) : (chosenIcon = faHome);
 			label = 'Home';
 			href = '/';
 			break;
 		}
 		case 'discover': {
-			active ? chosenIcon = faGlobeSolid : chosenIcon = faGlobe;
+			active ? (chosenIcon = faGlobeSolid) : (chosenIcon = faGlobe);
 			label = 'Discover';
-			href = '/';
+			href = '/discover';
 			break;
 		}
 		case 'me': {
-			active ? chosenIcon = faUserCircleSolid : chosenIcon = faUserCircle;
+			active ? (chosenIcon = faUserCircleSolid) : (chosenIcon = faUserCircle);
 			label = 'Me';
-			href = '/';
+			href = '/sign-in';
 			break;
 		}
 	}
@@ -50,7 +50,10 @@
 	}
 </script>
 
-<a class="flex flex-col w-16 justify-center items-center space-y-1 transition {stateClasses}" {href}>
+<a
+	class="flex flex-col w-16 justify-center items-center space-y-1 transition {stateClasses}"
+	{href}
+>
 	<div class="text-xl">
 		<Fa icon={chosenIcon} />
 	</div>

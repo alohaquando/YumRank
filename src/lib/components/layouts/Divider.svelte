@@ -3,10 +3,10 @@
 
 	let widthClasses: string;
 	if (full) {
-		widthClasses = "w-screen -translate-x-6"
+		widthClasses = ' -translate-x-6 w-screen sm:sm:w-[40rem]';
 	} else {
-		widthClasses = "w-full"
+		widthClasses = 'w-full';
 	}
 </script>
 
-<div class=" h-px bg-gray-200 {widthClasses}"></div>
+<div class=" h-px bg-gray-200 {widthClasses}" />

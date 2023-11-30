@@ -9,7 +9,22 @@
 	export let label: string | undefined = undefined;
 	export let error: boolean = false;
 	export let errorMessage: string | undefined = 'Please check this input again';
-	export let type: 'color' | 'date' | 'datetime-local' | 'email' | 'month' | 'number' | 'password' | 'range' | 'reset' | 'search' | 'tel' | 'text' | 'time' | 'url' | 'week' = 'text';
+	export let type:
+		| 'color'
+		| 'date'
+		| 'datetime-local'
+		| 'email'
+		| 'month'
+		| 'number'
+		| 'password'
+		| 'range'
+		| 'reset'
+		| 'search'
+		| 'tel'
+		| 'text'
+		| 'time'
+		| 'url'
+		| 'week' = 'text';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
 	export let readonly: boolean = false;
@@ -28,11 +43,9 @@
 	if (error) {
 		stateClasses = '!border-red-300';
 	}
-
 </script>
 
-
-<div class="flex flex-col">
+<div class="flex flex-col w-full">
 	{#if label}
 		<label class="block mb-2 text-sm font-sans trim-both pb-4" for={id}>{label}</label>
 	{/if}
@@ -60,7 +73,8 @@
 		{required}
 		{size}
 		{type}
-		{value} />
+		{value}
+	/>
 	{#if error}
 		<div class="flex space-x-2 items-center text-red-300 pt-4">
 			<Fa icon={faExclamationCircle} />

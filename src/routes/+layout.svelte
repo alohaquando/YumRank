@@ -7,6 +7,8 @@
 	import Header from '$lib/components/navigation/Header.svelte';
 	import RestaurantSwitcher from '$lib/components/navigation/RestaurantSwitcher.svelte';
 	import TabBarManagement from '$lib/components/navigation/TabBarManagement.svelte';
+	import Image from '$lib/components/media/Image.svelte';
+	import bg from '$lib/assets/bg/bg.avif';
 
 	export let data;
 
@@ -28,22 +30,32 @@
 	async function logout() {
 		await supabase.auth.signOut();
 	}
+
+	let title = 'The Red Cafe';
+	let restaurantSrc =
+		'https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094833/the-red-cafe.png';
+	let userSrc =
+		'https://m.media-amazon.com/images/M/MV5BNDM1YjNkZjEtNTllMC00M2M3LTg4OGYtMjYyYTRmMzNjNjRjXkEyXkFqcGdeQXVyNDY5MjMyNTg@._V1_.jpg';
 </script>
 
 <svelte:head>
 	<title>YumRank</title>
 </svelte:head>
 
-<div class="hidden sm:block bg-mesh fixed top-0 bottom-0 left-0 right-0 -z-50 " />
+<Image
+	class="hidden sm:block fixed top-0 bottom-0 left-0 right-0 -z-50 object-cover ring h-screen"
+	alt="Background"
+	src={bg}
+/>
+<div class="hidden sm:block bg-red-500/50 fixed top-0 bottom-0 left-0 right-0 -z-40" />
+<div class="hidden sm:block bg-black/50 fixed top-0 bottom-0 left-0 right-0 -z-30" />
 
-<div class="hidden sm:block bg-black/50 fixed top-0 bottom-0 left-0 right-0 -z-40 " />
-
-<div class="sm:w-[40rem] shadow-2xl min-h-screen mx-auto bg-white relative  ">
-	<Header class="sticky top-0 z-50" />
-	<RestaurantSwitcher />
+<div class="sm:w-[40rem] shadow-2xl min-h-screen mx-auto bg-white relative">
+	<Header class="sticky top-0 z-50" {userSrc} />
+	<RestaurantSwitcher {title} {restaurantSrc} />
 	<TabBarManagement />
 
-	<div class=" mx-auto px-6 bg-white ">
+	<div class=" mx-auto px-6 bg-white">
 		<slot />
 	</div>
 
@@ -51,16 +63,3 @@
 	<div class="h-20 bg-white" />
 	<NavBar class="fixed bottom-0 w-full sm:w-[40rem]" />
 </div>
-
-<style>
-	.bg-mesh {
-      background-color: #ef4444;
-      background-image: radial-gradient(at 44% 71%, hsl(346, 89%, 69%) 0, hsla(252, 89%, 69%, 0) 50%),
-      radial-gradient(at 19% 0%, hsl(0, 83%, 47%) 0, hsla(305, 90%, 59%, 0) 50%),
-      radial-gradient(at 25% 99%, hsl(345, 100%, 68%) 0, hsla(222, 89%, 59%, 0) 50%),
-      radial-gradient(at 36% 29%, hsla(108, 87%, 55%, 1) 0, hsla(108, 87%, 55%, 0) 50%),
-      radial-gradient(at 28% 47%, hsla(63, 91%, 54%, 1) 0, hsla(63, 91%, 54%, 0) 50%),
-      radial-gradient(at 35% 74%, hsla(9, 88%, 62%, 1) 0, hsla(9, 88%, 62%, 0) 50%),
-      radial-gradient(at 78% 18%, hsla(349, 92%, 70%, 1) 0, hsla(349, 92%, 70%, 0) 50%);
-	}
-</style>
