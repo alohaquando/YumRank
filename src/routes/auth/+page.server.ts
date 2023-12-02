@@ -87,6 +87,52 @@ export const actions = {
       })
     }
   },
+  forgot: async ({ request, url, locals: { supabase } }) => {
+		const form_data = await request.formData();
+		const email = form_data.get('email') as string;
+
+		// console.log(PUBLIC_SITE_URL + '/auth?reset')
+		const { error } = await supabase.auth.resetPasswordForEmail(email, {
+			redirectTo: `${url.origin}/auth?reset`
+		});
+
+		if (error) {
+			if (error instanceof AuthApiError) {
+				return fail(400, {
+					error: error.message
+				});
+			}
+			return fail(500, {
+				error: 'Server error. Try again later.'
+			});
+		} else {
+			return {
+				message: 'Reset link sent to email'
+			};
+		}
+	},
+  reset: async ({ request, locals: { supabase } }) => {
+		const form_data = await request.formData();
+		const password = form_data.get('password') as string;
+
+		const { error } = await supabase.auth.updateUser({
+			password
+		});
+
+		if (error) {
+			if (error instanceof AuthApiError) {
+				return fail(400, {
+					error: error.message
+				});
+			}
+			return fail(500, {
+				error: 'Server error. Try again later.'
+			});
+		}
+
+		throw redirect(303, '/dashboard');
+	},
+
   signout: async ({ locals: { supabase } }) => {
     await supabase.auth.signOut()
     throw redirect(303, '/')
