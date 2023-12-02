@@ -34,11 +34,85 @@ export interface Database {
   }
   public: {
     Tables: {
+      cuisine: {
+        Row: {
+          name: string
+        }
+        Insert: {
+          name: string
+        }
+        Update: {
+          name?: string
+        }
+        Relationships: []
+      }
+      discounts: {
+        Row: {
+          created_at: string
+          id: number
+          number: number | null
+          restaurant_id: number | null
+          type: Database["public"]["Enums"]["discount_type"] | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          number?: number | null
+          restaurant_id?: number | null
+          type?: Database["public"]["Enums"]["discount_type"] | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          number?: number | null
+          restaurant_id?: number | null
+          type?: Database["public"]["Enums"]["discount_type"] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "discounts_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      posts: {
+        Row: {
+          context: string | null
+          created_at: string
+          id: number
+          restaurant_id: number | null
+        }
+        Insert: {
+          context?: string | null
+          created_at?: string
+          id?: number
+          restaurant_id?: number | null
+        }
+        Update: {
+          context?: string | null
+          created_at?: string
+          id?: number
+          restaurant_id?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "posts_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       profiles: {
         Row: {
           avatar_url: string | null
           full_name: string | null
           id: string
+          role: Database["public"]["Enums"]["role"] | null
           updated_at: string | null
           username: string | null
         }
@@ -46,6 +120,7 @@ export interface Database {
           avatar_url?: string | null
           full_name?: string | null
           id: string
+          role?: Database["public"]["Enums"]["role"] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -53,6 +128,7 @@ export interface Database {
           avatar_url?: string | null
           full_name?: string | null
           id?: string
+          role?: Database["public"]["Enums"]["role"] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -66,6 +142,138 @@ export interface Database {
           }
         ]
       }
+      qrscanning: {
+        Row: {
+          created_at: string
+          qr_code_data: string | null
+          qr_code_exp: string | null
+          restaurant_id: number
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          qr_code_data?: string | null
+          qr_code_exp?: string | null
+          restaurant_id: number
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          qr_code_data?: string | null
+          qr_code_exp?: string | null
+          restaurant_id?: number
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "qrscanning_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "qrscanning_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      restaurants: {
+        Row: {
+          created_at: string
+          cuisine: string | null
+          description: string | null
+          id: number
+          is_verified: boolean | null
+          menu_images: string[] | null
+          name: string | null
+          owner_id: string | null
+          res_images: string[] | null
+        }
+        Insert: {
+          created_at?: string
+          cuisine?: string | null
+          description?: string | null
+          id?: number
+          is_verified?: boolean | null
+          menu_images?: string[] | null
+          name?: string | null
+          owner_id?: string | null
+          res_images?: string[] | null
+        }
+        Update: {
+          created_at?: string
+          cuisine?: string | null
+          description?: string | null
+          id?: number
+          is_verified?: boolean | null
+          menu_images?: string[] | null
+          name?: string | null
+          owner_id?: string | null
+          res_images?: string[] | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "restaurants_cuisine_fkey"
+            columns: ["cuisine"]
+            isOneToOne: false
+            referencedRelation: "cuisine"
+            referencedColumns: ["name"]
+          },
+          {
+            foreignKeyName: "restaurants_owner_id_fkey"
+            columns: ["owner_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      reviews: {
+        Row: {
+          created_at: string
+          id: number
+          rating: number
+          restaurant_id: number
+          text: string | null
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          rating: number
+          restaurant_id: number
+          text?: string | null
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          rating?: number
+          restaurant_id?: number
+          text?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "reviews_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "reviews_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -74,7 +282,8 @@ export interface Database {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      discount_type: "percent" | "value"
+      role: "admin" | "user" | "owner"
     }
     CompositeTypes: {
       [_ in never]: never
