@@ -7,7 +7,7 @@
     <input name="password" placeholder="password" type="password">
     <button style="margin-top: 12px;">Login</button>
     <button formaction="?/signup" style="margin-top: 12px;">Signup</button>
-    <button formaction="?/forgot" style="margin-top: 12px;">Forgot password</button>
+    <button formaction="?/forgot" style="margin-top: 12px;">Reset password</button>
   </form>
   <form method="POST" action="?/signin">
     <button style="margin-top: 12px;" name="provider" value="github">Login with GitHub</button>

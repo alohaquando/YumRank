@@ -19,6 +19,9 @@
 
 		return () => subscription.unsubscribe();
 	});
+	const publicUrl = supabase.storage
+		.from('avatars')
+		.getPublicUrl(session?.user.user_metadata.avatar_url);
 </script>
 
 <svelte:head>
@@ -33,9 +36,10 @@
 		{#if session.user.app_metadata.provider == 'email'}
 			<img
 				style="width: 32px; height: 32px; border-radius: 9999px;"
-				src={`https://spkuounwjckbvmdirseo.supabase.co/storage/v1/object/sign/avatars/${session.user.user_metadata.avatar_url}?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzLzAuNTUxNjAxNDE5ODIwNTE4MS5wbmciLCJpYXQiOjE3MDE1MzMzMjIsImV4cCI6MTcwNjcxNzMyMn0.JIKJqv4_R6Y-LESAkZyCJLfbfGicReDlA-2uJqFS9dQ&t=2023-12-02T16%3A08%3A18.309Z`}
+				src={publicUrl.data.publicUrl}
 				alt="person_avatar"
 			/>
+		
 		{:else}
 			<img
 				style="width: 32px; height: 32px; border-radius: 9999px;"
