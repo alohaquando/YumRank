@@ -9,10 +9,12 @@
 	export let value: string;
 	export let name: string;
 	export let id: string;
+
 	type ThemeOption = {
 		value: string;
 		title: string;
 	};
+
 	type Options<K extends string> = {
 		[key in K]: ThemeOption;
 	};
