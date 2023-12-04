@@ -1,0 +1,14 @@
+/auth
+
+
+
+
+
+
+
+Restaurant form:
+name
+description
+cuisine (choose from a dropdown list): optional
+restaurant images: images upload
+menu: images upload

@@ -1,6 +1,5 @@
 <!-- src/routes/+layout.svelte -->
-<script>
-	import '../app.postcss';
+<script lang="ts">
 	import { invalidate } from '$app/navigation';
 	import { onMount } from 'svelte';
 	import NavBar from '$lib/components/navigation/NavBar.svelte';
@@ -18,7 +17,7 @@
 	onMount(() => {
 		const {
 			data: { subscription }
-		} = supabase.auth.onAuthStateChange((event, _session) => {
+		} = supabase.auth.onAuthStateChange(async (event, _session) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}
@@ -26,6 +25,9 @@
 
 		return () => subscription.unsubscribe();
 	});
+	const publicUrl = supabase.storage
+		.from('avatars')
+		.getPublicUrl(session?.user.user_metadata.avatar_url);
 
 	async function logout() {
 		await supabase.auth.signOut();
@@ -63,3 +65,32 @@
 	<div class="h-20 bg-white" />
 	<NavBar class="fixed bottom-0 w-full sm:w-[40rem]" />
 </div>
+
+<nav style="border: solid; border-width: 0 0 2px; padding-bottom: 5px;">
+	<a href="/">Home</a>
+	{#if session}
+		<a href="/app">App</a>
+		<a href="/admin">Admin</a>
+		{#if session.user.app_metadata.provider == 'email'}
+			<img
+				style="width: 32px; height: 32px; border-radius: 9999px;"
+				src={publicUrl.data.publicUrl}
+				alt="person_avatar"
+			/>
+
+		{:else}
+			<img
+				style="width: 32px; height: 32px; border-radius: 9999px;"
+				src={session.user.user_metadata.avatar_url}
+				alt="person_avatar"
+			/>
+		{/if}
+		<form method="POST" action="auth?/signout">
+			<button>Logout</button>
+		</form>
+	{:else}
+		<a href="/auth">Login</a>
+	{/if}
+</nav>
+
+<slot />

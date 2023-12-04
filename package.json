@@ -45,7 +45,7 @@
 		"@fortawesome/sharp-light-svg-icons": "^6.4.2",
 		"@fortawesome/sharp-regular-svg-icons": "^6.4.2",
 		"@fortawesome/sharp-solid-svg-icons": "^6.4.2",
-		"@supabase/auth-helpers-sveltekit": "^0.10.7",
+		"@supabase/ssr": "^0.0.10",
 		"@supabase/supabase-js": "^2.38.4",
 		"supabase": "^1.112.0",
 		"svelte-fa": "^3.0.4",
