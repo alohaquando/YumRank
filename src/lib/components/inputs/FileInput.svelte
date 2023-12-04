@@ -11,6 +11,7 @@
 	export let label: string | undefined = undefined;
 	export let error: boolean = false;
 	export let errorMessage: string | undefined = 'Please check this input again';
+	export let value: any = undefined;
 	</script>
 
 <div class="flex flex-col w-full">
@@ -32,6 +33,7 @@
 	on:change
 	{disabled}
 	type="file"
+	bind:value={value}
 />
 	{#if error}
 		<div class="flex space-x-2 items-center text-red-300 pt-4">

@@ -73,9 +73,12 @@
 	id="profile-picture"
 	label={uploading ? 'Uploading ...' : 'Upload your profile picture'}
 	name="profile-picture"
+	value={url}
 	on:change={uploadAvatar}
 	placeholder="Add your image"
 />
+
+<input type="hidden" name="avatarUrl" value={url}>
 
 {#if avatarUrl}
 	<Image
@@ -84,3 +87,4 @@
 		class=" rounded-2xl max-w-sm mx-auto aspect-square object-cover ring-1 ring-gray-200"
 	/>
 {/if}
+
