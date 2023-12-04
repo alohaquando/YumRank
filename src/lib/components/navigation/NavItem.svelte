@@ -32,7 +32,7 @@
 		case 'me': {
 			active ? (chosenIcon = faUserCircleSolid) : (chosenIcon = faUserCircle);
 			label = 'Me';
-			href = '/sign-in';
+			href = '/me';
 			break;
 		}
 	}

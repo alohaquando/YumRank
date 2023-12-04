@@ -6,6 +6,7 @@
 	export let disabled: boolean = false;
 	export let width: 'fit' | 'full' = 'fit';
 	export let href: string | undefined | null = undefined;
+	export let formaction: string | undefined = undefined;
 	let customClasses: string = '';
 	export { customClasses as class };
 
@@ -58,6 +59,7 @@
 	on:click
 	{disabled}
 	{type}
+	{formaction}
 	class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}"
 >
 	{#if $$slots.icon}

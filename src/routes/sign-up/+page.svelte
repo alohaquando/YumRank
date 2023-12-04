@@ -9,18 +9,30 @@
 	import Title from '$lib/components/typography/Title.svelte';
 	import Logo from '$lib/components/logos/Logo.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
+
+	export let form;
 </script>
 
 <LargePageTitle>Welcome</LargePageTitle>
 
-<div class="flex flex-col space-y-8">
-	<SocialButton href="/" provider="google" />
+<div class="flex flex-col space-y-8 items-center">
+	<form method="POST" action="?/signup">
+		<SocialButton provider="github" name="provider" value="github"/>
+	</form>
 
 	<Divider />
 
-	<form class="flex-col flex space-y-6 items-center">
-		<TextField id="email" name="email" placeholder="Email" type="email" />
-		<Button type="submit" width="full">Continue with email</Button>
+	{#if form?.message}
+		<p>{form.message}</p>
+	{/if}
+	{#if form?.error}
+		<p>{form.error}</p>
+	{/if}
+
+	<form class="flex-col flex space-y-6 items-center w-full" method="POST" action="?/signup">
+		<TextField id="email" name="email" placeholder="Email" type="email" value={form?.data?.email ?? ""}/>
+		<TextField id="password" name="password" placeholder="Password" type="password" />
+		<Button type="submit" width="full">Sign up</Button>
 	</form>
 
 	<Divider />

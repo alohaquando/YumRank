@@ -2,14 +2,15 @@
 	// noinspection ES6UnusedImports
 	import Fa from 'svelte-fa';
 
-	import { faApple, faFacebook, faGoogle } from '@fortawesome/free-brands-svg-icons';
+	import { faApple, faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 	import type { IconDefinition } from '@fortawesome/sharp-light-svg-icons';
 	import Title from '$lib/components/typography/Title.svelte';
 	import GoogleG from '$lib/assets/logos/GoogleG.svelte';
 
-	export let href: string;
-	export let provider: 'facebook' | 'google' | 'apple';
+	export let provider: 'facebook' | 'google' | 'apple' | 'github';
 	export let isNew: boolean = false;
+	export let name: string;
+	export let value: string;
 
 	let bgClasses: string, providerName: string, icon: IconDefinition, textStyleClasses: string;
 	switch (provider) {
@@ -17,6 +18,13 @@
 			bgClasses = 'bg-blue-600 hover:bg-blue-700 active:bg-blue-800';
 			providerName = 'Facebook';
 			icon = faFacebook;
+			textStyleClasses = 'text-white';
+			break;
+		}
+		case 'github': {
+			bgClasses = 'bg-violet-700 hover:bg-violet-800 active:bg-violet-900';
+			providerName = 'GitHub';
+			icon = faGithub;
 			textStyleClasses = 'text-white';
 			break;
 		}
@@ -44,9 +52,10 @@
 	}
 </script>
 
-<a
-	class="{bgClasses} px-6 h-10 rounded-full justify-start items-center gap-4 flex transition"
-	{href}
+<button type="submit"
+				{name}
+				{value}
+	class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition"
 >
 	<div class="{textStyleClasses} text-xl w-5 flex justify-center">
 		{#if provider === 'google'}
@@ -56,7 +65,7 @@
 		{/if}
 	</div>
 	<Title class="grow text-center {textStyleClasses}">{authenticationTypeText} {providerName}</Title>
-</a>
+</button>
 
 <!--Example-->
 <!--<SocialButton isNew provider="facebook" href="/"/>-->
