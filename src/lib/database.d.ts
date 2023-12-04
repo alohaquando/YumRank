@@ -48,6 +48,7 @@ export interface Database {
       }
       discounts: {
         Row: {
+          condition: string | null
           created_at: string
           id: number
           number: number | null
@@ -55,6 +56,7 @@ export interface Database {
           type: Database["public"]["Enums"]["discount_type"] | null
         }
         Insert: {
+          condition?: string | null
           created_at?: string
           id?: number
           number?: number | null
@@ -62,6 +64,7 @@ export interface Database {
           type?: Database["public"]["Enums"]["discount_type"] | null
         }
         Update: {
+          condition?: string | null
           created_at?: string
           id?: number
           number?: number | null
@@ -183,6 +186,7 @@ export interface Database {
       }
       restaurants: {
         Row: {
+          address: string | null
           created_at: string
           cuisine: string | null
           description: string | null
@@ -194,6 +198,7 @@ export interface Database {
           res_images: string[] | null
         }
         Insert: {
+          address?: string | null
           created_at?: string
           cuisine?: string | null
           description?: string | null
@@ -205,6 +210,7 @@ export interface Database {
           res_images?: string[] | null
         }
         Update: {
+          address?: string | null
           created_at?: string
           cuisine?: string | null
           description?: string | null

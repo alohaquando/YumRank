@@ -51,7 +51,7 @@
 	src={bg}
 />
 <div class="hidden sm:block bg-red-500/50 fixed top-0 bottom-0 left-0 right-0 -z-40" />
-<div class="hidden sm:block bg-black/50 fixed top-0 bottom-0 left-0 right-0 -z-30" />
+<div class="hidden sm:block bg-white/80 fixed top-0 bottom-0 left-0 right-0 -z-30" />
 
 <div class="sm:w-[40rem] shadow-2xl min-h-screen mx-auto bg-white relative">
 	<Header class="sticky top-0 z-50" {userSrc} />
