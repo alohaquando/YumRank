@@ -9,24 +9,6 @@ export const load = async ({ locals: { getSession } }) => {
 }
 
 export const actions = {
-  signup: async ({ request, url, locals: { supabase } }) => {
-    const formData = await request.formData()
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-
-    if (email && password) {
-      const { error } = await supabase.auth.signUp({
-        email,
-        password,
-        options: { emailRedirectTo: `${url.origin}/app` }
-      })
-
-      if (error) 
-        console.error(error)
-      else
-        return { message: 'Please check your email to confirm your signup.' }
-    }
-  },
   signin: async ({ request, url, locals: { supabase } }) => {
     const formData = await request.formData()
     const email = formData.get('email') as string
@@ -69,7 +51,7 @@ export const actions = {
       const { data, error } = await supabase.auth.signInWithOAuth({ 
         provider,
         options: {
-          redirectTo: `${url.origin}/auth/callback?next=/app`
+          redirectTo: `${url.origin}/sign-in/callback?next=/app`
         }
       })
 
@@ -93,7 +75,7 @@ export const actions = {
 
 		// console.log(PUBLIC_SITE_URL + '/auth?reset')
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo: `${url.origin}/auth?reset`
+			redirectTo: `${url.origin}/reset?reset`
 		});
 
 		if (error) {

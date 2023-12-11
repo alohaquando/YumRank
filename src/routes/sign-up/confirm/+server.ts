@@ -18,5 +18,5 @@ export const GET = async (event) => {
   }
 
   /* Return the user to an error page with some instructions */
-  throw redirect(303, '/')
+  throw redirect(303, '/sign-in')
 }

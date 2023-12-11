@@ -45,9 +45,10 @@ export const actions = {
         username,
         avatarUrl,
       })
-    }
-
+    } 
+    
     throw redirect(303, '/app')
+ 
   },
   signout: async ({ locals: { supabase, getSession } }) => {
     const session = await getSession()

@@ -5,7 +5,7 @@
 <div class="flex flex-col space-y-4 pt-4">
 	<Button class="w-full" href="/sign-in">Sign in</Button>
 
-	<form action="auth?/signout" method="POST">
+	<form action="sign-out?/signout" method="POST">
 		<Button class="w-full" type="submit">Sign out</Button>
 	</form>
 

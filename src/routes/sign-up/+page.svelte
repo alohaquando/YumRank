@@ -1,4 +1,6 @@
 <script>
+// @ts-nocheck
+
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import SocialButton from '$lib/components/buttons/SocialButton.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';

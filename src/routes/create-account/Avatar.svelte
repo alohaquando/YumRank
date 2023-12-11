@@ -5,7 +5,7 @@
 	import FileInput from '$lib/components/inputs/FileInput.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 
-	export let size = 10;
+	export const size = 10;
 	export let url: string;
 	export let supabase: SupabaseClient;
 
