@@ -20,6 +20,7 @@
 	let rating = 4.5;
 	let favorites = 84;
 	let href = '/';
+
 </script>
 
 <LargePageTitle>
