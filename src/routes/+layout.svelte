@@ -26,13 +26,11 @@
 
 		return () => subscription.unsubscribe();
 	});
+
+
 	const publicUrl = supabase.storage
 		.from('avatars')
 		.getPublicUrl(session?.user.user_metadata.avatar_url);
-
-	async function logout() {
-		await supabase.auth.signOut();
-	}
 
 	let title = 'The Red Cafe';
 	let restaurantSrc =
@@ -49,7 +47,6 @@
 <form method="POST" action="?/signout">
 	<button>Logout</button>
 </form>
-
 
 <Image
 	class="hidden sm:block fixed top-0 bottom-0 left-0 right-0 -z-50 object-cover ring h-screen"
