@@ -46,7 +46,7 @@ export const actions = {
         avatarUrl,
       })
     } 
-    
+     
     throw redirect(303, '/app')
  
   },

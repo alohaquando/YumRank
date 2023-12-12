@@ -36,3 +36,30 @@ npm run build
 You can preview the production build with `npm run preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+
+
+(authenticated)     
+
+Owner:
+
+/create-restaurant
+/my-restaurants
+/res-id/
+/res-id/posts
+/res-id/settings
+/res-id/settings/(something)
+
+
+/:resId
+/:resId/reviews (params: sort/filter) ?search='chinese'  ?date=''
+/:resId/
+
+User:
+/me (logged in)
+/home (/restaurants)
+/discover (/posts param: ?search='')
+
+
+yumrank/me/all-restaurant
+
+yumrank/res-id/setting
