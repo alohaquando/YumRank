@@ -1,4 +1,5 @@
 Owner:
+/management:  (all of user's restaurants)
 
 /create-restaurant
 /my-restaurants
@@ -7,17 +8,22 @@ Owner:
 /res-id/settings
 /res-id/settings/(something)
 
-
-/:resId
-/:resId/reviews (params: sort/filter) ?search='chinese'  ?date=''
-/:resId/
-
 User:
 /me (logged in)
 /home (/restaurants)
-/discover (/posts param: ?search='')
+/discover (/posts param: ?search='') also restaurants
+/restaurants/name-of-restaurant 
+/restaurants/name-of-restaurant/reviews    (params: sort/filter) ?search='chinese'  ?date=''
+/restaurants/name-of-restaurant/reviewId
+/restaurants/name-of-restaurant/posts
+/restaurants/name-of-restaurant/postId
 
 
-yumrank/me/all-restaurant
 
-yumrank/res-id/setting
+
+Restaurant form:
+name
+description
+cuisine (choose from a dropdown list): optional
+restaurant images: images upload
+menu: images upload
