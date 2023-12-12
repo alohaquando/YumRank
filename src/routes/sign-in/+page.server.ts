@@ -5,7 +5,7 @@ export const load = async ({ locals: { getSession } }) => {
   const session = await getSession()
 
   /* User is already logged in. */
-  if (session) throw redirect(303, '/app')
+  if (session) throw redirect(303, '/')
 }
 
 export const actions = {
@@ -39,7 +39,7 @@ export const actions = {
       }
 
       /* Login successful, redirect. */
-      throw redirect(303, '/app')
+      throw redirect(303, '/')
       
     } else if (provider) {
       /* OAuth sign-in. */
@@ -51,7 +51,7 @@ export const actions = {
       const { data, error } = await supabase.auth.signInWithOAuth({ 
         provider,
         options: {
-          redirectTo: `${url.origin}/sign-in/callback?next=/app`
+          redirectTo: `${url.origin}/sign-in/callback?next=/`
         }
       })
 

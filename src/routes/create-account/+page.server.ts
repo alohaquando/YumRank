@@ -47,7 +47,7 @@ export const actions = {
       })
     } 
      
-    throw redirect(303, '/app')
+    throw redirect(303, '/')
  
   },
   signout: async ({ locals: { supabase, getSession } }) => {
