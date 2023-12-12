@@ -1,14 +1,23 @@
-/auth
+Owner:
+
+/create-restaurant
+/my-restaurants
+/res-id/
+/res-id/posts
+/res-id/settings
+/res-id/settings/(something)
 
 
+/:resId
+/:resId/reviews (params: sort/filter) ?search='chinese'  ?date=''
+/:resId/
+
+User:
+/me (logged in)
+/home (/restaurants)
+/discover (/posts param: ?search='')
 
 
+yumrank/me/all-restaurant
 
-
-
-Restaurant form:
-name
-description
-cuisine (choose from a dropdown list): optional
-restaurant images: images upload
-menu: images upload
+yumrank/res-id/setting
