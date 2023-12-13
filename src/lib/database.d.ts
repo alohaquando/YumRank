@@ -115,7 +115,6 @@ export interface Database {
           avatar_url: string | null
           full_name: string | null
           id: string
-          role: Database["public"]["Enums"]["role"] | null
           updated_at: string | null
           username: string | null
         }
@@ -123,7 +122,6 @@ export interface Database {
           avatar_url?: string | null
           full_name?: string | null
           id: string
-          role?: Database["public"]["Enums"]["role"] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -131,7 +129,6 @@ export interface Database {
           avatar_url?: string | null
           full_name?: string | null
           id?: string
-          role?: Database["public"]["Enums"]["role"] | null
           updated_at?: string | null
           username?: string | null
         }

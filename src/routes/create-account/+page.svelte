@@ -27,13 +27,13 @@
 		};
 	};
 
-	const handleSignOut: SubmitFunction = () => {
-		loading = true;
-		return async ({ update }) => {
-			loading = false;
-			update();
-		};
-	};
+	// const handleSignOut: SubmitFunction = () => {
+	// 	loading = true;
+	// 	return async ({ update }) => {
+	// 		loading = false;
+	// 		update();
+	// 	};
+	// };
 </script>
 
 <LargePageTitle>Complete your account</LargePageTitle>
