@@ -1,6 +1,6 @@
 import { redirect } from '@sveltejs/kit'
 
-export const load = async ({ locals: { getSession } }) => {
+export const load = async ({ locals: { supabase, getSession } }) => {
   const session = await getSession()
   console.log('session', session?.user)
 
@@ -8,7 +8,11 @@ export const load = async ({ locals: { getSession } }) => {
     throw redirect(307, '/create-account');
   } 
 
-  return {};
+  const restaurants = await supabase
+  .from('restaurants')
+  .select('*');
+  
+  return { restaurants };
 }
 
 export const actions = {
