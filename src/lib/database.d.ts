@@ -194,7 +194,7 @@ export interface Database {
           is_verified: boolean | null
           logo_url: string | null
           menu_images: string[] | null
-          name: string | null
+          name: string
           owner_id: string | null
           res_images: string[] | null
         }
@@ -207,7 +207,7 @@ export interface Database {
           is_verified?: boolean | null
           logo_url?: string | null
           menu_images?: string[] | null
-          name?: string | null
+          name: string
           owner_id?: string | null
           res_images?: string[] | null
         }
@@ -220,7 +220,7 @@ export interface Database {
           is_verified?: boolean | null
           logo_url?: string | null
           menu_images?: string[] | null
-          name?: string | null
+          name?: string
           owner_id?: string | null
           res_images?: string[] | null
         }
