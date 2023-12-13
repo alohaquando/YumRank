@@ -87,18 +87,21 @@ export interface Database {
           created_at: string
           id: number
           restaurant_id: number | null
+          title: string
         }
         Insert: {
           context?: string | null
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          title: string
         }
         Update: {
           context?: string | null
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          title?: string
         }
         Relationships: [
           {
@@ -189,6 +192,7 @@ export interface Database {
           description: string | null
           id: number
           is_verified: boolean | null
+          logo_url: string | null
           menu_images: string[] | null
           name: string | null
           owner_id: string | null
@@ -201,6 +205,7 @@ export interface Database {
           description?: string | null
           id?: number
           is_verified?: boolean | null
+          logo_url?: string | null
           menu_images?: string[] | null
           name?: string | null
           owner_id?: string | null
@@ -213,6 +218,7 @@ export interface Database {
           description?: string | null
           id?: number
           is_verified?: boolean | null
+          logo_url?: string | null
           menu_images?: string[] | null
           name?: string | null
           owner_id?: string | null
