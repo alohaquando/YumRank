@@ -10,7 +10,28 @@
 		log = [...log, str];
 	};
 
-	export const establishWebSocket = () => {
+	// export const establishWebSocket = () => {
+	// 	if (webSocketEstablished) return;
+	// 	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+	// 	ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+		
+	// 	ws.addEventListener('open', (event) => {
+	// 		webSocketEstablished = true;
+	// 		console.log('[websocket] connection open', event);
+	// 		logEvent('[websocket] connection open');
+
+	// 	});
+	// 	ws.addEventListener('close', (event) => {
+	// 		console.log('[websocket] connection closed', event);
+	// 		logEvent('[websocket] connection closed');
+	// 	});
+	// 	ws.addEventListener('message', (event) => {
+	// 		console.log('[websocket] message received', event);
+	// 		logEvent(`[websocket] message received: ${event.data}`);
+	// 	});
+	// };
+
+	export const requestData = async (placeName: String) => {
 		if (webSocketEstablished) return;
 		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
@@ -29,9 +50,6 @@
 			console.log('[websocket] message received', event);
 			logEvent(`[websocket] message received: ${event.data}`);
 		});
-	};
-
-	export const requestData = async (placeName: String) => {
 		const res = await fetch(`/places/${placeName}`);
 		const data = await res.json();
 		console.log('Data from GET endpoint', data);
@@ -41,6 +59,7 @@
 </script>
 
 <div>
+	{#if data.restaurant} 
 	{#each data.restaurant as item}
 		<p>{item.id}</p>
 		<p>{item.created_at}</p>
@@ -54,16 +73,17 @@
 		<p>{item.address}</p>
 		<p>{item.logo_url}</p>
 	{/each}
+	{/if}
 </div>
 
 <main>
 	
 
-	<Button disabled={webSocketEstablished} on:click={() => establishWebSocket()}>
+	<!-- <Button disabled={webSocketEstablished} on:click={() => establishWebSocket()}>
 		Establish WebSocket connection
-	</Button>
+	</Button> -->
 
-	<Button on:click={() => requestData(`test-name`)}> check-in (will send back qr hard-coded for n) </Button>
+	<Button disabled={webSocketEstablished} on:click={() => requestData(`test-name`)}> check-in (will send back qr hard-coded for n) </Button>
 
 		<ul>
 			{#each log as event}
