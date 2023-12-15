@@ -1,14 +1,46 @@
-<script>
-	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
-	import Button from '$lib/components/buttons/Button.svelte';
-	import TextField from '$lib/components/inputs/TextField.svelte';
+<script lang="ts">
+    import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
+    import type { SubmitFunction } from '@sveltejs/kit';
+    import TextField from '$lib/components/inputs/TextField.svelte';
+    import FileInput from '$lib/components/inputs/FileInput.svelte';
+    import Button from '$lib/components/buttons/Button.svelte';
 	import TextArea from '$lib/components/inputs/TextArea.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
+	import { enhance } from '$app/forms';
+
+	export let data;
+	export let form;
+
+	let { session, supabase } = data;
+	$: ({ session, supabase } = data);
+
+	let restaurantForm: HTMLFormElement;
+	let name: string;
+    let address: string;
+    let description: string;
+    let logoUrl: string;
+    let restaurantImages: string[];
+    let menuImages: string[];
+    let loading = false;
+
+    const handleSubmit: SubmitFunction = () => {
+		loading = true;
+		return async () => {
+			loading = false;
+		};
+	};
 </script>
 
 <LargePageTitle>Register and verify your place</LargePageTitle>
 
-<form class="flex-col flex space-y-6">
+<form
+		action="?/create"
+		bind:this={restaurantForm}
+		class="form-widget flex-col flex space-y-8"
+		method="post"
+		enctype="multipart/form-data"
+		use:enhance={handleSubmit}
+	>
 	<Title>Logo</Title>
 
 	<input
@@ -27,9 +59,15 @@
 
 	<Title>Info</Title>
 
-	<TextField required id="name" name="name" placeholder="Place name" />
-	<TextField required id="address" name="address" placeholder="Address" />
-	<TextField required id="type" name="type" placeholder="Type" />
-	<TextArea required id="description" name="description" placeholder="Description" />
-	<Button type="submit" width="full">Submit</Button>
+	<TextField id="name" label="Name" name="name" placeholder="Name" type="text" bind:value={name} />
+    <TextField id="address" label="Address" name="address" placeholder="Address" type="text" bind:value={address} />
+    <TextField id="description" label="Description" name="description" placeholder="Description" type="text" bind:value={description} />
+
+<!-- Probably create component for the 3 input field -->
+
+    <!-- <FileInput id="logoUrl" label="Logo" name="logoUrl" bind:url={logoUrl} />
+    <FileInput id="restaurantImages" label="Restaurant Images" name="restaurantImages" bind:urls={restaurantImages} multiple />
+    <FileInput id="menuImages" label="Menu Images" name="menuImages" bind:urls={menuImages} multiple /> -->
+    <Button disabled={loading} type="submit">{loading ? 'Loading...' : 'Create'}</Button>
 </form>
+
