@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
@@ -21,6 +21,42 @@
 	let favorites = 84;
 	let href = '/';
 
+	let webSocketEstablished = false;
+	let ws: WebSocket | null = null;
+	let log: string[] = [];
+
+	const logEvent = (str: string) => {
+		log = [...log, str];
+	};
+
+	export const establishWebSocket = () => {
+		if (webSocketEstablished) return;
+		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+		
+		ws.addEventListener('open', (event) => {
+			webSocketEstablished = true;
+			console.log('[websocket] connection open', event);
+			logEvent('[websocket] connection open');
+
+		});
+		ws.addEventListener('close', (event) => {
+			console.log('[websocket] connection closed', event);
+			logEvent('[websocket] connection closed');
+		});
+		ws.addEventListener('message', (event) => {
+			console.log('[websocket] message received', event);
+			logEvent(`[websocket] message received: ${event.data}`);
+		});
+	};
+
+	export const requestData = async (placeName: String) => {
+		const res = await fetch(`/places/${placeName}`);
+		const data = await res.json();
+		console.log('Data from GET endpoint', data);
+		console.log(data)
+		logEvent(`[GET] data received: ${JSON.stringify(data)}`);
+	};
 </script>
 
 <LargePageTitle>
@@ -43,3 +79,28 @@
 		/>
 	{/each}
 </div>
+
+<main>
+	<h1>SvelteKit with WebSocket Integration</h1>
+
+	<button disabled={webSocketEstablished} on:click={() => establishWebSocket()}>
+		Establish WebSocket connection
+	</button>
+
+	<button on:click={() => requestData(`test-name`)}> check-in (will send back qr hard-coded for n) </button>
+
+		<ul>
+			{#each log as event}
+				{#if event.includes("image/png")}
+					<img src="{event.slice(30)}" alt="QR"/>
+				{/if}
+				<li>{event}</li>
+			{/each}
+		</ul>
+	</main>
+
+<style>
+	main {
+		font-family: sans-serif;
+	}
+</style>

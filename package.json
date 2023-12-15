@@ -3,8 +3,8 @@
 	"version": "0.0.1",
 	"private": true,
 	"scripts": {
-		"dev": "vite dev",
-		"dev host": "vite dev --host",
+		"dev": "vite dev --port 3004",
+		"dev host": "vite dev --host --port 3006",
 		"build": "vite build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -14,10 +14,14 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-node": "^1.3.0",
 		"@sveltejs/kit": "^1.29.1",
+		"@types/ws": "^8.5.5",
+		"@types/qrcode": "^1.5.5",
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.14",
+		"cross-env": "^7.0.3",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -28,8 +32,9 @@
 		"svelte": "^4.2.8",
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.3.2",
+		"tsm": "^2.3.0",
 		"tslib": "^2.4.1",
-		"typescript": "^5.0.0",
+		"typescript": "^5.2.2",
 		"vite": "^4.4.2"
 	},
 	"type": "module",
@@ -47,8 +52,11 @@
 		"@fortawesome/sharp-solid-svg-icons": "^6.4.2",
 		"@supabase/ssr": "^0.0.10",
 		"@supabase/supabase-js": "^2.38.4",
+		"nanoid": "^4.0.2",
+		"qrcode": "^1.5.3",
 		"supabase": "^1.112.0",
 		"svelte-fa": "^3.0.4",
-		"tailwindcss-leading-trim": "^1.1.0"
+		"tailwindcss-leading-trim": "^1.1.0",
+		"ws": "^8.13.0"
 	}
 }

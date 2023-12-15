@@ -4,6 +4,7 @@ import { Database } from './DatabaseDefinitions'
 declare global {
   namespace App {
     interface Locals {
+      wss?: ExtendedWebSocketServer;
       supabase: SupabaseClient<Database>
       getSession(): Promise<Session | null>
     }
