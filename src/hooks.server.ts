@@ -4,36 +4,12 @@ import type { Handle } from '@sveltejs/kit'
 import type { ExtendedGlobal } from '$lib/server/webSocketUtils';
 import { building } from '$app/environment';
 import { GlobalThisWSS } from '$lib/server/webSocketUtils';
+import type { Session } from '@supabase/supabase-js';
+import { parse } from 'cookie';
 
 // This can be extracted into a separate file
 let wssInitialized = false;
-const userConnections = new Map();
-
-function startupWebsocketServer(session: { user: { id: any; }; } | undefined) {
-  if (!building) {
-    if (wssInitialized) return;
-    console.log('[wss:kit] setup');
-    const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
-    if (wss !== undefined) {
-      
-      wss.on('connection', async (ws, request) => {
-        // This is where you can authenticate the client from the request
-        const userId = session?.user.id;
-        userConnections.set(userId, ws);
-
-
-        console.log(`[wss:kit] client connected (${ws.socketId})`);
-        ws.send(`One user tryna check in (${ws.socketId})]`);
-  
-        ws.on('close', () => {
-          console.log(`[wss:kit] client disconnected (${ws.socketId})`);
-          userConnections.delete(userId);
-        });
-      });
-      wssInitialized = true;
-    }
-  };
-};
+export const userConnections = new Map();
 
 export const handle: Handle = (async ({ event, resolve }) => {
   event.locals.supabase = createServerClient(
@@ -51,6 +27,8 @@ export const handle: Handle = (async ({ event, resolve }) => {
       }
     }
   )
+  // ...
+
   
 
   /**
@@ -65,26 +43,17 @@ export const handle: Handle = (async ({ event, resolve }) => {
     return session
   }
 
-    const getSessionFromCookie = async () => {
-      const { data: { session } } = await event.locals.supabase.auth.getSession();
-      return session;
-    }
+      
+  startupWebsocketServer();
 
-    const session = await getSessionFromCookie();
+  if (!building) {
+    const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
+    if (wss !== undefined) {
+      event.locals.wss = wss;
+      event.locals.userConnections = userConnections;
 
-    if (session) {
-      const { user } = session;
-      startupWebsocketServer({ user });
     }
-
-    if (!building) {
-      const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
-      if (wss !== undefined) {
-        event.locals.wss = wss;
-        event.locals.userConnections = userConnections;
-  
-      }
-    }
+  }
 
     const response = await resolve(event, {
   		filterSerializedResponseHeaders: name => name === 'content-type',
@@ -92,3 +61,34 @@ export const handle: Handle = (async ({ event, resolve }) => {
   return response;
 }) satisfies Handle;
 
+
+function startupWebsocketServer() {
+  if (!building) {
+    if (wssInitialized) return;
+    console.log('[wss:kit] setup');
+    const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
+    if (wss !== undefined) {
+      
+      wss.on('connection', async (ws, request) => {
+        const cookie = request.headers.cookie;
+        const decodedCookie = cookie ? parse(cookie) : null;
+        const token = decodedCookie?.['sb-spkuounwjckbvmdirseo-auth-token'];
+        const parsedToken = token ? JSON.parse(token) : null;
+        const userId = parsedToken?.user.id;
+        // This is where you can authenticate the client from the request
+        
+        userConnections.set(userId, ws);
+
+        ws.send(userId)
+        console.log(`[wss:kit] client connected (${ws.socketId})`);
+        ws.send(`One user tryna check in (${ws.socketId})]`);
+  
+        ws.on('close', () => {
+          console.log(`[wss:kit] client disconnected (${ws.socketId})`);
+          userConnections.delete(userId);
+        });
+      });
+      wssInitialized = true;
+    }
+  };
+};
