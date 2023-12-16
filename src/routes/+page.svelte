@@ -23,10 +23,7 @@
 
 </script>
 
-<LargePageTitle>
-	Popular this
-	<TitleDropdown id="time_selected" name="time_selected" {options} slot="dropdown" value="week" />
-</LargePageTitle>
+
 
 <div class="flex flex-col space-y-10">
 	{#each { length: 15 } as _, i}
