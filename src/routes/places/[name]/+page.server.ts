@@ -1,7 +1,10 @@
 import { redirect } from '@sveltejs/kit';
 
-export const load = async ({ locals: { supabase, getSession }, params }) => {
+export const load = async ({ locals: { supabase, getSession, userConnections }, params }) => {
   const session = await getSession()
+  
+  console.log(userConnections)
+
   const { data: restaurant, error } = await supabase
   .from('restaurants')
   .select('*')
@@ -9,9 +12,9 @@ export const load = async ({ locals: { supabase, getSession }, params }) => {
 
   let resownern = (restaurant && restaurant[0])?.owner_id as string;
 
-  if (resownern == session?.user.id) { 
-    throw redirect(303, `/management/places/${params.name}`)
-  }
+  // if (resownern == session?.user.id) { 
+  //   throw redirect(303, `/management/places/${params.name}`)
+  // }
   
   if (error) {
     console.error(error);

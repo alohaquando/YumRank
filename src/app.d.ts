@@ -7,6 +7,7 @@ declare global {
       wss?: ExtendedWebSocketServer;
       supabase: SupabaseClient<Database>
       getSession(): Promise<Session | null>
+      userConnections?: Map<string, WebSocket>
     }
     interface PageData {
       session: Session | null

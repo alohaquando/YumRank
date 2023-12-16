@@ -7,37 +7,35 @@ import { GlobalThisWSS } from '$lib/server/webSocketUtils';
 
 // This can be extracted into a separate file
 let wssInitialized = false;
-const startupWebsocketServer = () => {
-  if (wssInitialized) return;
-  console.log('[wss:kit] setup');
-  const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
-  if (wss !== undefined) {
-    wss.on('connection', (ws, _request) => {
-      // This is where you can authenticate the client from the request
-      // const session = await getSessionFromCookie(request.headers.cookie || '');
-      // if (!session) ws.close(1008, 'User not authenticated');
-      // ws.userId = session.userId;
-      console.log(`[wss:kit] client connected (${ws.socketId})`);
-      ws.send(`One user tryna check in (${ws.socketId})]`);
+const userConnections = new Map();
 
-      ws.on('close', () => {
-        console.log(`[wss:kit] client disconnected (${ws.socketId})`);
+function startupWebsocketServer(session: { user: { id: any; }; } | undefined) {
+  if (!building) {
+    if (wssInitialized) return;
+    console.log('[wss:kit] setup');
+    const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
+    if (wss !== undefined) {
+      
+      wss.on('connection', async (ws, request) => {
+        // This is where you can authenticate the client from the request
+        const userId = session?.user.id;
+        userConnections.set(userId, ws);
+
+
+        console.log(`[wss:kit] client connected (${ws.socketId})`);
+        ws.send(`One user tryna check in (${ws.socketId})]`);
+  
+        ws.on('close', () => {
+          console.log(`[wss:kit] client disconnected (${ws.socketId})`);
+          userConnections.delete(userId);
+        });
       });
-    });
-    wssInitialized = true;
-  }
+      wssInitialized = true;
+    }
+  };
 };
 
 export const handle: Handle = (async ({ event, resolve }) => {
-  startupWebsocketServer();
-  // Skip WebSocket server when pre-rendering pages
-  if (!building) {
-    const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
-    if (wss !== undefined) {
-      event.locals.wss = wss;
-    }
-  }
-  
   event.locals.supabase = createServerClient(
     PUBLIC_SUPABASE_URL,
     PUBLIC_SUPABASE_ANON_KEY,
@@ -67,8 +65,30 @@ export const handle: Handle = (async ({ event, resolve }) => {
     return session
   }
 
-  const response = await resolve(event, {
-		filterSerializedResponseHeaders: name => name === 'content-type',
-	});
+    const getSessionFromCookie = async () => {
+      const { data: { session } } = await event.locals.supabase.auth.getSession();
+      return session;
+    }
+
+    const session = await getSessionFromCookie();
+
+    if (session) {
+      const { user } = session;
+      startupWebsocketServer({ user });
+    }
+
+    if (!building) {
+      const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
+      if (wss !== undefined) {
+        event.locals.wss = wss;
+        event.locals.userConnections = userConnections;
+  
+      }
+    }
+
+    const response = await resolve(event, {
+  		filterSerializedResponseHeaders: name => name === 'content-type',
+  	});
   return response;
 }) satisfies Handle;
+

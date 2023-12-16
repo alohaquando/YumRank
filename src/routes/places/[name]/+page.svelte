@@ -47,13 +47,16 @@
 		});
 		ws.addEventListener('message', (event) => {
 			console.log('[websocket] message received', event);
-			logEvent(`[websocket] message received: ${event.data}`);
+			logEvent(event.data);
 		});
-		const res = await fetch(`/places/${placeName}`);
+		const res = await fetch(`/places/${placeName}`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+		});
 		const data = await res.json();
-		console.log('Data from GET endpoint', data);
-		console.log(data);
-		logEvent(`[GET] data received: ${JSON.stringify(data)}`);
+		logEvent(`[GET] data received: ${data.userId}`);
 	};
 </script>
 
@@ -87,7 +90,7 @@
 	<ul>
 		{#each log as event}
 			{#if event.includes('image/png')}
-				<img src={event.slice(30)} alt="QR" />
+				<img src={event} alt="QR" />
 			{/if}
 			<li>{event}</li>
 		{/each}
