@@ -23,9 +23,9 @@ export const GET = async ({ locals: { supabase, wss, getSession, userConnections
     wss.clients.forEach((client: { readyState: number; send: (arg0: string) => void; }) => {
       if (client.readyState === 1) {
   
-        let resownern = (restaurant && restaurant[0])?.owner_id as string;
+        let resowner = (restaurant && restaurant[0])?.owner_id as string;
         console.log(userConnections);
-        const ownerWs = userConnections?.get(resownern);
+        const ownerWs = userConnections?.get(resowner);
         let otherWs = [];
         for (let [key, value] of (userConnections ?? new Map()).entries()) {
           if (value !== ownerWs) {
