@@ -79,7 +79,6 @@ function startupWebsocketServer() {
         
         userConnections.set(userId, ws);
 
-        ws.send(userId)
         console.log(`[wss:kit] client connected (${ws.socketId})`);
   
         ws.on('close', () => {
