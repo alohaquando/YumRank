@@ -75,7 +75,7 @@ function startupWebsocketServer() {
         const token = decodedCookie?.['sb-spkuounwjckbvmdirseo-auth-token'];
         const parsedToken = token ? JSON.parse(token) : null;
         const userId = parsedToken?.user.id;
-        // This is where you can authenticate the client from the request
+
         
         userConnections.set(userId, ws);
 

@@ -48,7 +48,7 @@ export const GET = async ({ locals: { supabase, wss, getSession, userConnections
             if (client !== ownerWs) {
               client.send(qrDataURL);
               for (const userId of userIds) {
-                ownerWs?.send(`${userId} want to leave a review`);
+                ownerWs?.send(`${userId} want to leave a review for ${params.name.replace('-', ' ')}`);
               }
             }
   
