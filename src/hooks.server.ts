@@ -81,7 +81,6 @@ function startupWebsocketServer() {
 
         ws.send(userId)
         console.log(`[wss:kit] client connected (${ws.socketId})`);
-        ws.send(`One user tryna check in (${ws.socketId})]`);
   
         ws.on('close', () => {
           console.log(`[wss:kit] client disconnected (${ws.socketId})`);
