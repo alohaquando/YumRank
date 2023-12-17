@@ -1,6 +1,6 @@
 <script lang="ts">
-	export let src: string | undefined | null;
-	export let alt: string | undefined | null;
+	export let src: string | undefined | null = null;
+	export let alt: string | undefined | null = undefined;
 	export let eager: boolean = false;
 	let customClasses: string = '';
 	export { customClasses as class };
@@ -11,13 +11,16 @@
 	};
 </script>
 
-<div class="bg-red-50 {customClasses}">
-	<img
-		bind:this={imgEle}
-		class=" {customClasses} object-cover object-center"
-		{alt}
-		{src}
-		on:error={handleError}
-		loading={eager ? 'eager' : 'lazy'}
-	/>
+<div class="bg-red-50 {customClasses} ring-2 ring-gray-200 flex items-center justify-center">
+	{#if src != null}
+		<img
+			{alt}
+			bind:this={imgEle}
+			class=" {customClasses} object-cover object-center"
+			loading={eager ? 'eager' : 'lazy'}
+			on:error={handleError}
+			{src}
+		/>
+	{/if}
+	<slot />
 </div>

@@ -24,7 +24,7 @@
 	</div>
 	<slot name="trailing">
 		{#if href}
-			<Fa icon={faChevronRight} class="text-xs" />
+			<Fa icon={faChevronRight} class="text-xs opacity-50" />
 		{/if}
 	</slot>
 
@@ -37,4 +37,5 @@
 <!--<ListItem class="text-red-500"  on:click={() => {window.alert('hi')}}>-->
 <!--	<Fa icon={faInfoCircle} slot="leading" />-->
 <!--	<Body slot="text">My account</Body>-->
+<!--	<Body slot="trailing">Trailing text</Body>-->
 <!--</ListItem>-->

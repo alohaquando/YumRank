@@ -1,9 +1,9 @@
 <script lang="ts">
-    import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
-    import type { SubmitFunction } from '@sveltejs/kit';
-    import TextField from '$lib/components/inputs/TextField.svelte';
-    import FileInput from '$lib/components/inputs/FileInput.svelte';
-    import Button from '$lib/components/buttons/Button.svelte';
+	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
+	import type { SubmitFunction } from '@sveltejs/kit';
+	import TextField from '$lib/components/inputs/TextField.svelte';
+	import FileInput from '$lib/components/inputs/FileInput.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
 	import TextArea from '$lib/components/inputs/TextArea.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
 	import { enhance } from '$app/forms';
@@ -16,14 +16,14 @@
 
 	let restaurantForm: HTMLFormElement;
 	let name: string;
-    let address: string;
-    let description: string;
-    let logoUrl: string;
-    let restaurantImages: string[];
-    let menuImages: string[];
-    let loading = false;
+	let address: string;
+	let description: string;
+	let logoUrl: string;
+	let restaurantImages: string[];
+	let menuImages: string[];
+	let loading = false;
 
-    const handleSubmit: SubmitFunction = () => {
+	const handleSubmit: SubmitFunction = () => {
 		loading = true;
 		return async () => {
 			loading = false;
@@ -31,7 +31,7 @@
 	};
 </script>
 
-<LargePageTitle>Register and verify your place</LargePageTitle>
+<LargePageTitle showBackButton>Add a place</LargePageTitle>
 
 <form
 		action="?/create"
@@ -55,6 +55,7 @@
 		name="logo"
 		type="file"
 		placeholder="Upload logo"
+		multiple={true}
 	/>
 
 	<Title>Info</Title>
@@ -65,9 +66,9 @@
 
 <!-- Probably create component for the 3 input field -->
 
-    <!-- <FileInput id="logoUrl" label="Logo" name="logoUrl" bind:url={logoUrl} />
-    <FileInput id="restaurantImages" label="Restaurant Images" name="restaurantImages" bind:urls={restaurantImages} multiple />
-    <FileInput id="menuImages" label="Menu Images" name="menuImages" bind:urls={menuImages} multiple /> -->
-    <Button disabled={loading} type="submit">{loading ? 'Loading...' : 'Create'}</Button>
+<!-- <FileInput id="logoUrl" label="Logo" name="logoUrl" bind:url={logoUrl} />
+<FileInput id="restaurantImages" label="Restaurant Images" name="restaurantImages" bind:urls={restaurantImages} multiple />
+<FileInput id="menuImages" label="Menu Images" name="menuImages" bind:urls={menuImages} multiple /> -->
+<Button disabled={loading} type="submit">{loading ? 'Loading...' : 'Create'}</Button>
 </form>
 

@@ -18,7 +18,7 @@
 <LargePageTitle>Welcome</LargePageTitle>
 
 <div class="flex flex-col space-y-8 items-center">
-	<form method="POST" action="?/signup">
+	<form method="POST" action="?/signup" class="w-full">
 		<SocialButton provider="github" name="provider" value="github"/>
 	</form>
 
@@ -44,11 +44,11 @@
 		<ActionChip href="/sign-in">Sign in</ActionChip>
 	</div>
 
-	<Divider full />
+<!--	<Divider full />-->
 
-	<BasicCard>
-		<Logo slot="start" type="management" />
-		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>
-		<Button href="/management/sign-up" slot="end" width="full">Go to management portal</Button>
-	</BasicCard>
+<!--	<BasicCard>-->
+<!--		<Logo slot="start" type="management" />-->
+<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
+<!--		<Button href="/management/sign-up" slot="end" width="full">Go to management portal</Button>-->
+<!--	</BasicCard>-->
 </div>
