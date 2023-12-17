@@ -31,9 +31,9 @@
 	// 		logEvent(`${event.data}`);
 	// 	});
 	// };
-	
+
 	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
-	
+
 	export const requestData = async () => {
 		if (webSocketEstablished) return;
 		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
@@ -42,11 +42,9 @@
 		ws.addEventListener('open', (event) => {
 			webSocketEstablished = true;
 			console.log('[websocket] connection open', event);
-			
 		});
 		ws.addEventListener('close', (event) => {
 			console.log('[websocket] connection closed', event);
-			
 		});
 		ws.addEventListener('message', (event) => {
 			console.log('[websocket] message received', event);
@@ -78,36 +76,25 @@
 			<p>{item.address}</p>
 			<p>{item.logo_url}</p>
 		{/each}
+		{#if data.owner}
+			<Button on:click={() => requestData()}>Check Notification</Button>
+		{:else}
+			<Button on:click={() => requestData()}>Check-in</Button>
+		{/if}
+
+		<ul>
+			{#each log as event}
+				{#if event.includes('image/png')}
+					<img src={event} alt="QR" />
+				{/if}
+				<li>{event}</li>
+			{/each}
+		</ul>
 	{/if}
 </div>
 
-<main>
-	<!-- <Button disabled={webSocketEstablished} on:click={() => establishWebSocket()}>
-		Establish WebSocket connection
-	</Button> -->
-
-	{#if data.owner}
-		<Button on:click={() => requestData()}>
-			Check Notification
-		</Button>
-	{:else}
-		<Button on:click={() => requestData()}>
-			Check-in 
-		</Button>
-	{/if}
-
-	<ul>
-		{#each log as event}
-			{#if event.includes('image/png')}
-				<img src={event} alt="QR" />
-			{/if}
-			<li>{event}</li>
-		{/each}
-	</ul>
-</main>
-
 <style>
-	main {
+	p {
 		font-family: sans-serif;
 	}
 </style>
