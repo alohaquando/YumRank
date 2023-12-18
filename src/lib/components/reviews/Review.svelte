@@ -9,20 +9,20 @@
 	export let userSrc: string;
 	export let userFullName: string;
 	export let time: string;
-	export let rv_content: string;
-	export let rv_rating: number;
+	export let content: string;
+	export let rating: number;
 </script>
 
 <div class="flex flex-col space-y-4">
 	<TitleItem title={userFullName} src={userSrc} trailingText={time} />
 	<div class="flex-row flex space-x-2">
 		{#each { length: 5 } as _, i}
-			{#if i + 1 <= rv_rating}
+			{#if i + 1 <= rating}
 				<Fa icon={faStarFilled} class="text-red-500" />
 			{:else}
 				<Fa icon={faStar} class="opacity-50" />
 			{/if}
 		{/each}
 	</div>
-	<Body>{rv_content}</Body>
+	<Body>{content}</Body>
 </div>

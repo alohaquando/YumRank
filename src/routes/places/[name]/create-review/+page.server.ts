@@ -7,4 +7,6 @@ export const load = async ({ locals: { supabase, getSession }, params }) => {
     return redirect(301, '/sign-in');
   }
 
+  console.log('bruh')
+
 };

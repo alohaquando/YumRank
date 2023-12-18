@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
@@ -43,3 +43,4 @@
 		/>
 	{/each}
 </div>
+
