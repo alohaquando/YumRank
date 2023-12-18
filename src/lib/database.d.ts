@@ -87,18 +87,21 @@ export interface Database {
           created_at: string
           id: number
           restaurant_id: number | null
+          title: string
         }
         Insert: {
           context?: string | null
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          title: string
         }
         Update: {
           context?: string | null
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          title?: string
         }
         Relationships: [
           {
@@ -115,7 +118,6 @@ export interface Database {
           avatar_url: string | null
           full_name: string | null
           id: string
-          role: Database["public"]["Enums"]["role"] | null
           updated_at: string | null
           username: string | null
         }
@@ -123,7 +125,6 @@ export interface Database {
           avatar_url?: string | null
           full_name?: string | null
           id: string
-          role?: Database["public"]["Enums"]["role"] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -131,7 +132,6 @@ export interface Database {
           avatar_url?: string | null
           full_name?: string | null
           id?: string
-          role?: Database["public"]["Enums"]["role"] | null
           updated_at?: string | null
           username?: string | null
         }
@@ -192,8 +192,9 @@ export interface Database {
           description: string | null
           id: number
           is_verified: boolean | null
+          logo_url: string | null
           menu_images: string[] | null
-          name: string | null
+          name: string
           owner_id: string | null
           res_images: string[] | null
         }
@@ -204,8 +205,9 @@ export interface Database {
           description?: string | null
           id?: number
           is_verified?: boolean | null
+          logo_url?: string | null
           menu_images?: string[] | null
-          name?: string | null
+          name: string
           owner_id?: string | null
           res_images?: string[] | null
         }
@@ -216,8 +218,9 @@ export interface Database {
           description?: string | null
           id?: number
           is_verified?: boolean | null
+          logo_url?: string | null
           menu_images?: string[] | null
-          name?: string | null
+          name?: string
           owner_id?: string | null
           res_images?: string[] | null
         }

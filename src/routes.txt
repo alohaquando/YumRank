@@ -23,6 +23,7 @@ User:
 
 Restaurant form:
 name
+logo: image 
 description
 cuisine (choose from a dropdown list): optional
 restaurant images: images upload

@@ -25,7 +25,7 @@
 
 <LargePageTitle>
 	Popular this
-	<TitleDropdown id="time_selected" name="time_selected" {options} slot="dropdown" value="week" />
+	<TitleDropdown id="time_selected" name="time_selected" {options} slot="trailing" value="week" />
 </LargePageTitle>
 
 <div class="flex flex-col space-y-10">

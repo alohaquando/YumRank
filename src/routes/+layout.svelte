@@ -43,13 +43,8 @@
 	<title>YumRank</title>
 </svelte:head>
 
-<!-- LOGOUT  -->
-<form method="POST" action="?/signout">
-	<button>Logout</button>
-</form>
-
 <Image
-	class="hidden sm:block fixed top-0 bottom-0 left-0 right-0 -z-50 object-cover ring h-screen"
+	class="hidden sm:block fixed top-0 bottom-0 left-0 right-0 -z-50 object-cover ring h-screen w-full"
 	alt="Background"
 	src={bg}
 />
@@ -63,8 +58,8 @@
 			? publicUrl.data.publicUrl
 			: session?.user.user_metadata.avatar_url}
 	/>
-	<RestaurantSwitcher {title} {restaurantSrc} />
-	<TabBarManagement />
+<!--	<RestaurantSwitcher {title} {restaurantSrc} />-->
+<!--	<TabBarManagement />-->
 
 	<div class=" mx-auto px-6 bg-white">
 		<slot />

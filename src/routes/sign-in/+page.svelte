@@ -36,13 +36,13 @@
 		<ActionChip href="/sign-up">Create an account</ActionChip>
 	</div>
 
-	<Divider full />
+<!--	<Divider full />-->
 
-	<BasicCard>
-		<Logo slot="start" type="management" />
-		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>
-		<Button href="/management/sign-in" slot="end" width="full">Go to management portal</Button>
-	</BasicCard>
+<!--	<BasicCard>-->
+<!--		<Logo slot="start" type="management" />-->
+<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
+<!--		<Button href="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
+<!--	</BasicCard>-->
 </div>
 
 

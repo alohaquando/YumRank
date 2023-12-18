@@ -55,7 +55,7 @@
 <button type="submit"
 				{name}
 				{value}
-	class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition"
+	class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition self-stretch"
 >
 	<div class="{textStyleClasses} text-xl w-5 flex justify-center">
 		{#if provider === 'google'}

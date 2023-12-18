@@ -2,7 +2,6 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import Display from '$lib/components/typography/Display.svelte';
-	import Coupon from '$lib/components/coupons/Coupon.svelte';
 	import Post from '$lib/components/posts/Post.svelte';
 
 	let restaurantName = 'The Red Cafe';
@@ -24,29 +23,33 @@
 
 <Divider full />
 
-<div class="py-8">
-	<Display class="pb-8">Discover</Display>
+<!--<div class="py-8">-->
 
-	<div
-		class="flex flex-row space-x-4 w-screen sm:sm:w-[40rem] -translate-x-6 scroll-px-6 px-6 py-2 overflow-x-scroll"
-	>
-		{#each { length: 5 } as _, i}
-			<Coupon
-				{restaurantName}
-				{restaurantSrc}
-				{discountValue}
-				{discountCondition}
-				{isDiscountSaved}
-				{restaurantHref}
-			/>
-		{/each}
-	</div>
-</div>
+<!--	<div-->
+<!--		class="flex flex-row space-x-4 w-screen sm:sm:w-[40rem] -translate-x-6 scroll-px-6 px-6 py-2 overflow-x-scroll"-->
+<!--	>-->
+<!--		{#each { length: 5 } as _, i}-->
+<!--			<Coupon-->
+<!--				{restaurantName}-->
+<!--				{restaurantSrc}-->
+<!--				{discountValue}-->
+<!--				{discountCondition}-->
+<!--				{isDiscountSaved}-->
+<!--				{restaurantHref}-->
+<!--			/>-->
+<!--		{/each}-->
+<!--	</div>-->
+<!--</div>-->
 
-<Divider full />
+<!--<Divider full />-->
 
 <div class="flex flex-col space-y-8 py-8">
-	{#each { length: 5 } as _, i}
-		<Post {restaurantSrc} {restaurantName} {restaurantHref} {imageSrc} {content} {date} />
-	{/each}
+	<Display class="">Discover</Display>
+	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
+	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
+	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
+	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
+	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
+
+
 </div>
