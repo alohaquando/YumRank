@@ -27,7 +27,7 @@
         }
     </script>
     
-    <LargePageTitle>
+    <LargePageTitle showBackButton>
         Update information
     </LargePageTitle>
     

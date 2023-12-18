@@ -1,27 +1,25 @@
 <script>
     import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
     import Divider from '$lib/components/layouts/Divider.svelte';
+    import ListItem from '$lib/components/lists/ListItem.svelte';
+    import Body from '$lib/components/typography/Body.svelte';
+    import Fa from 'svelte-fa';
+	import { faInfoCircle, faTrash } from '@fortawesome/pro-solid-svg-icons';
+	import IconButton from '$lib/components/buttons/IconButton.svelte';
 </script>
 
-<LargePageTitle>
+<LargePageTitle showBackButton>
     Place Settings
 </LargePageTitle>
 
-<div class="w-80 h-14 py-4 justify-start items-center gap-4 inline-flex">
-    <div class="grow shrink basis-0 h-6 justify-start items-center gap-3 flex">
-        <div class="w-6 h-6 justify-center items-center flex">
-        </div>
-        <div class="grow shrink basis-0 text-gray-900 text-base font-normal font-['Inter'] leading-normal">Update information</div>
-    </div>
-</div>
+<ListItem class="text-black"  href='/management/settings/update'>
+<Fa icon={faInfoCircle} slot="leading" />
+<Body slot="text">Update information</Body>
+</ListItem>
 
-<Divider full={true} />
+<Divider />
 
-<div class="w-80 h-14 py-4 justify-start items-center gap-4 inline-flex">
-    <div class="grow shrink basis-0 h-6 justify-start items-center gap-3 flex">
-        <div class="grow shrink basis-0 text-red-600 text-base font-semibold font-['Inter'] leading-normal">Delete place</div>
-    </div>
-</div>
-
-
-
+<ListItem class="text-red-500"  on:click={() => {window.alert('hi')}}>
+<Fa icon={faTrash} slot="leading" />
+<Body slot="text">Delete restaurant</Body>
+</ListItem>
