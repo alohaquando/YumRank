@@ -13,11 +13,10 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';
 
-
-	let signedIn: boolean = true;
+	export let data;
 </script>
 
-{#if !signedIn}
+{#if !data.session}
 	<div class="flex flex-col ">
 		<LargePageTitle>
 			<Image class="h-10 w-10 rounded-full" slot="leading">

@@ -13,5 +13,12 @@ export const load = async ({ locals: { supabase, getSession } }) => {
   .select('*')
   .eq('owner_id', userId);
   
-  return { restaurants };
+  return { session };
 };
+
+export const actions = {
+  signout: async ({ locals: { supabase } }) => {
+    await supabase.auth.signOut()
+    throw redirect(303, '/')
+  }
+}

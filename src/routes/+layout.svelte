@@ -9,6 +9,8 @@
 	import TabBarManagement from '$lib/components/navigation/TabBarManagement.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 	import bg from '$lib/assets/bg/bg.avif';
+	import Button from '$lib/components/buttons/Button.svelte';
+	import Body from '$lib/components/typography/Body.svelte';
 
 	export let data;
 
@@ -37,6 +39,10 @@
 		'https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094833/the-red-cafe.png';
 	let userSrc =
 		'https://m.media-amazon.com/images/M/MV5BNDM1YjNkZjEtNTllMC00M2M3LTg4OGYtMjYyYTRmMzNjNjRjXkEyXkFqcGdeQXVyNDY5MjMyNTg@._V1_.jpg';
+
+	let debug: boolean = true;
+	let signIn: boolean = true;
+	let email: string = '';
 </script>
 
 <svelte:head>
@@ -44,10 +50,23 @@
 </svelte:head>
 
 <Image
-	class="hidden sm:block fixed top-0 bottom-0 left-0 right-0 -z-50 object-cover ring h-screen w-full"
 	alt="Background"
+	class="hidden sm:block fixed top-0 bottom-0 left-0 right-0 -z-50 object-cover ring h-screen w-full"
 	src={bg}
 />
+{#if debug}
+	<div class="fixed h-screen w-screen top-0 left-0  p-2  ">
+		<div class="space-y-4 w-fit p-4 rounded-2xl items-end justify-center bg-white flex-col flex ml-auto max-w-lg">
+			<Image class="w-8 h-8 rounded-full" src="{publicUrl.data.publicUrl}"/>
+			<Body>Signed {signIn ? 'in as \n' + data.session?.user.user_metadata.user_name : 'out'}</Body>
+			{#if signIn}
+				<Button width="full" design="tonal">Sign out</Button>
+			{:else }
+				<Button width="full" design="tonal">Sign in</Button>
+			{/if}
+		</div>
+	</div>
+{/if}
 <div class="hidden sm:block bg-red-500/50 fixed top-0 bottom-0 left-0 right-0 -z-40" />
 <div class="hidden sm:block bg-white/80 fixed top-0 bottom-0 left-0 right-0 -z-30" />
 
@@ -58,8 +77,8 @@
 			? publicUrl.data.publicUrl
 			: session?.user.user_metadata.avatar_url}
 	/>
-<!--	<RestaurantSwitcher {title} {restaurantSrc} />-->
-<!--	<TabBarManagement />-->
+	<!--	<RestaurantSwitcher {title} {restaurantSrc} />-->
+	<!--	<TabBarManagement />-->
 
 	<div class=" mx-auto px-6 bg-white">
 		<slot />
