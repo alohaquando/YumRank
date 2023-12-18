@@ -1,8 +1,9 @@
 import { redirect } from '@sveltejs/kit'
 import { page } from '$app/stores';
 
-export const load = async ({ locals: { supabase, getSession }, url }) => {
+export const load = async ({ locals: { supabase, getSession, userConnections }, url }) => {
   const session = await getSession();
+
 
   if (url.pathname  === '/') {
     console.log('session', session?.user);
