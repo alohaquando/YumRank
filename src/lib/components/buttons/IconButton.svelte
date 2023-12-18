@@ -10,11 +10,11 @@
 	let sizeClasses: string;
 	switch (size) {
 		case 'md': {
-			sizeClasses = 'w-10 h-10';
+			sizeClasses = 'w-10 h-10 aspect-square';
 			break;
 		}
 		case 'lg': {
-			sizeClasses = 'w-14 h-14';
+			sizeClasses = 'w-14 h-14 aspect-square';
 			break;
 		}
 	}
