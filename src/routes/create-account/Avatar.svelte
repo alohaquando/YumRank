@@ -23,8 +23,7 @@
 				throw error;
 			}
 
-			const url = URL.createObjectURL(data);
-			avatarUrl = url;
+			avatarUrl = URL.createObjectURL(data);
 		} catch (error) {
 			if (error instanceof Error) {
 				console.log('Error downloading image: ', error.message);

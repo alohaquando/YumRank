@@ -4,7 +4,7 @@
 
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
+	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'filled';
 	export let disabled: boolean = false;
 	export let width: 'fit' | 'full' = 'fit';
 	export let href: string | undefined | null = undefined;
@@ -46,7 +46,11 @@
 			break;
 		}
 		case 'tonal': {
-			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
+			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white disabled:text-gray-500 disabled:bg-gray-100';
+			break;
+		}
+		case 'text': {
+			designClasses = 'hover:bg-red-50 hover:text-red-500';
 			break;
 		}
 	}
