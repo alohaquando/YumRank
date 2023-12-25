@@ -46,15 +46,18 @@
 			showImage = true;
 
 			const reader = new FileReader();
-			reader.addEventListener('load', function() {
+			reader.addEventListener('load', function () {
 				image.setAttribute('src', reader.result);
 			});
 			reader.readAsDataURL(file);
+			reader.removeEventListener('load', function () {
+				image.setAttribute('src', reader.result);
+			});
 		}
 	}
 
 	function clearImage() {
-		showImage = false
+		showImage = false;
 		//
 		// const reader = new FileReader();
 		// reader.addEventListener("load", function () {
@@ -78,29 +81,28 @@
 >
 	<Title>Logo</Title>
 
-
 	<div
-		class="w-full h-64 rounded-3xl ring-1 ring-gray-300 text-center flex items-center justify-center  overflow-clip p-4">
-		<label
-			class=" ring-1 ring-gray-300  rounded-2xl aspect-square h-full flex flex-col space-y-4 items-center  justify-center hover:bg-red-50 transition relative"
-			for="logo">
-
-
-			{#if showImage}
-				<img bind:this={image} src=""
-						 class=" ring-1 ring-gray-300 rounded-2xl aspect-square h-full object-cover hover:brightness-75	transition"
-						 alt="Preview" />
-				<div class="absolute w-full h-full -top-4 left-0 p-2 flex justify-end z-10">
-					<IconButton design="tonal" on:click={() => {		clearImage()
-}}>
-						<Fa icon={faTimes} />
-					</IconButton>
-				</div>
-			{:else }
+		class="w-full h-64 rounded-3xl ring-1 ring-gray-300 text-center flex items-center justify-center overflow-clip p-4 relative"
+	>
+		{#if showImage}
+			<img
+				bind:this={image}
+				src=""
+				class="ring-1 ring-gray-300 rounded-2xl aspect-square h-full object-cover hover:brightness-75 transition"
+				alt="Preview"
+			/>
+			<div class="absolute top-0 right-0 p-2 flex justify-end z-10">
+				<IconButton on:click={clearImage}><Fa icon={faTimes} /></IconButton>
+			</div>
+		{:else}
+			<label
+				class="ring-1 ring-gray-300 rounded-2xl aspect-square h-full flex flex-col space-y-4 items-center justify-center hover:bg-red-50 transition"
+				for="logo"
+			>
 				<Fa class="text-6xl opacity-40 " icon={faImage} />
 				<Body class="opacity-40 px-8">Choose an image to upload</Body>
-			{/if}
-		</label>
+			</label>
+		{/if}
 	</div>
 
 	<input
@@ -111,7 +113,9 @@
 		placeholder="Upload logo"
 		type="file"
 		bind:this={input}
-		on:change={() => {onChange()}}
+		on:change={() => {
+			onChange();
+		}}
 	/>
 
 	<!--	<FileInput id="logo"-->
@@ -126,9 +130,22 @@
 	<Title>Info</Title>
 
 	<TextField bind:value={name} id="name" label="Name" name="name" placeholder="Name" type="text" />
-	<TextField bind:value={address} id="address" label="Address" name="address" placeholder="Address" type="text" />
-	<TextField bind:value={description} id="description" label="Description" name="description" placeholder="Description"
-						 type="text" />
+	<TextField
+		bind:value={address}
+		id="address"
+		label="Address"
+		name="address"
+		placeholder="Address"
+		type="text"
+	/>
+	<TextField
+		bind:value={description}
+		id="description"
+		label="Description"
+		name="description"
+		placeholder="Description"
+		type="text"
+	/>
 
 	<!-- Probably create component for the 3 input field -->
 
@@ -137,4 +154,3 @@
 	<FileInput id="menuImages" label="Menu Images" name="menuImages" bind:urls={menuImages} multiple /> -->
 	<Button disabled={loading} type="submit">{loading ? 'Loading...' : 'Create'}</Button>
 </form>
-
