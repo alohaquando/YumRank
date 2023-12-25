@@ -38,7 +38,7 @@
 	let designClasses: string;
 	switch (design) {
 		case 'filled': {
-			designClasses = 'bg-red-500 text-white hover:bg-red-600';
+			designClasses = 'bg-red-500 text-white hover:bg-red-600 disabled:bg-gray-100 di sabled:text-gray-400';
 			break;
 		}
 		case 'outlined': {

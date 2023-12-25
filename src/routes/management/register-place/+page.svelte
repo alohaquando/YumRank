@@ -4,7 +4,6 @@
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import FileInput from '$lib/components/inputs/FileInput.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import TextArea from '$lib/components/inputs/TextArea.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
 	import { enhance } from '$app/forms';
 
@@ -57,6 +56,8 @@
 		placeholder="Upload logo"
 		multiple={true}
 	/>
+
+	<FileInput/>
 
 	<Title>Info</Title>
 

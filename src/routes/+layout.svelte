@@ -41,7 +41,7 @@
 		'https://m.media-amazon.com/images/M/MV5BNDM1YjNkZjEtNTllMC00M2M3LTg4OGYtMjYyYTRmMzNjNjRjXkEyXkFqcGdeQXVyNDY5MjMyNTg@._V1_.jpg';
 
 	let debug: boolean = true;
-	let signIn: boolean = true;
+	let signIn = data.session;
 	let email: string = '';
 </script>
 

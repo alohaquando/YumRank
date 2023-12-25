@@ -39,7 +39,7 @@
 </div>
 
 <div class="bg-white sticky bottom-16 py-4 border-t" >
-	<Button width="full" href={$href}>
+	<Button width="full" href="/management/register-place">
 		<Fa icon={faPlus} slot="icon" />
 		Add a place
 	</Button>

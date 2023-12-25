@@ -2,7 +2,6 @@
 	import TabBarPlaceDetail from '$lib/components/navigation/TabBarPlaceDetail.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
-	import Display from '$lib/components/typography/Display.svelte';
 	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
@@ -36,7 +35,6 @@
 	let userFullName = 'Kristin Watson';
 	let time = '2023-01-01';
 	let reviewContent = 'The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.';
-	let rv_rating = 4;
 
 </script>
 
