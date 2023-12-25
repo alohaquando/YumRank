@@ -81,11 +81,48 @@ export interface Database {
           }
         ]
       }
+      notifications: {
+        Row: {
+          created_at: string
+          id: number
+          restaurant_id: number | null
+          sender_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          restaurant_id?: number | null
+          sender_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          restaurant_id?: number | null
+          sender_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "notifications_restaurant_id_fkey"
+            columns: ["restaurant_id"]
+            isOneToOne: false
+            referencedRelation: "restaurants"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "notifications_sender_id_fkey"
+            columns: ["sender_id"]
+            isOneToOne: false
+            referencedRelation: "profiles"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       posts: {
         Row: {
           context: string | null
           created_at: string
           id: number
+          post_image_urls: string[] | null
           restaurant_id: number | null
           title: string
         }
@@ -93,6 +130,7 @@ export interface Database {
           context?: string | null
           created_at?: string
           id?: number
+          post_image_urls?: string[] | null
           restaurant_id?: number | null
           title: string
         }
@@ -100,6 +138,7 @@ export interface Database {
           context?: string | null
           created_at?: string
           id?: number
+          post_image_urls?: string[] | null
           restaurant_id?: number | null
           title?: string
         }
@@ -187,6 +226,7 @@ export interface Database {
       restaurants: {
         Row: {
           address: string | null
+          avgRating: number | null
           created_at: string
           cuisine: string | null
           description: string | null
@@ -195,11 +235,13 @@ export interface Database {
           logo_url: string | null
           menu_images: string[] | null
           name: string
+          numReviews: number | null
           owner_id: string | null
           res_images: string[] | null
         }
         Insert: {
           address?: string | null
+          avgRating?: number | null
           created_at?: string
           cuisine?: string | null
           description?: string | null
@@ -208,11 +250,13 @@ export interface Database {
           logo_url?: string | null
           menu_images?: string[] | null
           name: string
+          numReviews?: number | null
           owner_id?: string | null
           res_images?: string[] | null
         }
         Update: {
           address?: string | null
+          avgRating?: number | null
           created_at?: string
           cuisine?: string | null
           description?: string | null
@@ -221,6 +265,7 @@ export interface Database {
           logo_url?: string | null
           menu_images?: string[] | null
           name?: string
+          numReviews?: number | null
           owner_id?: string | null
           res_images?: string[] | null
         }
