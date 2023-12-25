@@ -10,9 +10,9 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
   .select('*')
   .eq('name', params.name.replace('-', ' '));
 
-  let resownern = (restaurant && restaurant[0])?.owner_id as string;
+  const resowner = (restaurant && restaurant[0])?.owner_id as string;
 
-  if (resownern == session?.user.id) { 
+  if (resowner == session?.user.id) {
     // throw redirect(303, `/management/places/${params.name}`)
     return { restaurant, owner: true }
   }
