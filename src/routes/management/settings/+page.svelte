@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
     import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
     import Divider from '$lib/components/layouts/Divider.svelte';
     import ListItem from '$lib/components/lists/ListItem.svelte';
