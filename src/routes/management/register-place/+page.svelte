@@ -18,7 +18,7 @@
 	let name: string;
 	let address: string;
 	let description: string;
-	let logoUrl: string;
+	let logoUrl: undefined;
 	let restaurantImages: string[];
 	let menuImages: string[];
 	let loading = false;
@@ -41,9 +41,9 @@
 	method="post"
 	use:enhance={handleSubmit}
 >
-	<ImageInput name="logo" id="logo" label="Logo" supabase={supabase} bucket="resmenu"/>
+	<ImageInput bind:bucketUrls={logoUrl} name="logoUrl" id="logo" label="Logo" supabase={supabase} bucket="logo"/>
 
-	<ImageInput name="res-images" id="res-images" label="Images of your place" multiple supabase={supabase} bucket="resmenu"/>
+	<ImageInput bind:bucketUrls={restaurantImages} name="restaurantImages" id="resimages" label="Images of your place" multiple supabase={supabase} bucket="resimages"/>
 
 	<Title>Info</Title>
 
@@ -56,6 +56,9 @@
 		placeholder="Address"
 		type="text"
 	/>
+	
+	<p>{logoUrl}</p>
+	<p>{restaurantImages}</p>
 	<TextField
 		bind:value={description}
 		id="description"

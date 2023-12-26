@@ -6,17 +6,17 @@
 	import Body from '$lib/components/typography/Body.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
-	import { SupabaseClient } from '@supabase/supabase-js';
+	import type { SupabaseClient } from '@supabase/supabase-js';
 
 	export let id: string | undefined | null;
 	export let name: string | undefined | null;
 	export let multiple: boolean = false;
 	export let label: string | null | undefined = null;
-	export let bucket: 'resimages' | 'resmenu' | 'avatars' | 'logo' | 'postimages' | 'testing';
+	export let bucket: string;
 	export let supabase: SupabaseClient;
 	export let bucketUrls: string[] = [];
 
-	let srcs: unknown[] = [];
+	export let srcs: string[] = [];
 	let inputElement: HTMLInputElement;
 	let files: FileList | undefined;
 	let isUploading = false;
@@ -29,7 +29,9 @@
 			for (let i = 0; i < files.length; i++) {
 				const reader = new FileReader();
 				reader.onload = function() {
-					srcs.push(reader.result);
+					if (reader.result !== null) {
+						srcs.push(reader.result as string);
+					}
 					srcs = srcs;
 				};
 				reader.readAsDataURL(files[i]);
@@ -52,7 +54,7 @@
 			}
 
 			for (let i = 0; i < files.length; i++) {
-				const file = files[0];
+				const file = files[i];
 				const fileExt = file.name.split('.').pop();
 				const filePath = `${Math.random()}.${fileExt}`;
 
@@ -63,7 +65,7 @@
 				}
 
 				const { data } = supabase.storage.from(bucket).getPublicUrl(filePath);
-				bucketUrls.push(data);
+				bucketUrls.push(data.publicUrl);
 			}
 		} catch (error) {
 			if (error instanceof Error) {
@@ -108,7 +110,7 @@
 			<label for={id} class="cursor-pointer rounded-full transition hover:bg-red-50 hover:text-red-500">
 				<Button design="text" class="pointer-events-none">
 					<Fa icon={faImageRegular} slot="icon" />
-					Change
+					Add
 				</Button>
 			</label>
 			<Button design="text" on:click={() => clearSelected()}>
@@ -121,7 +123,7 @@
 			</Button>
 		</div>
 		{#each bucketUrls as url}
-			{url.publicUrl}
+			{url}
 			<br/>
 		{/each}
 	{/if}

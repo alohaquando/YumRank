@@ -28,10 +28,13 @@ export const actions = {
         address: address,
         is_verified: false,
         description: description,
-        restaurant_images: restaurantImages,
+        res_images: restaurantImages,
         menu_images: menuImages,
         created_at: new Date(),
       })
+
+      console.log(logoUrl)
+      console.log(restaurantImages)
   
       if (error) {
         return fail(500, {
