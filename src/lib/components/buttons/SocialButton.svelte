@@ -5,7 +5,7 @@
 	import { faApple, faFacebook, faGithub, faGoogle } from '@fortawesome/free-brands-svg-icons';
 	import type { IconDefinition } from '@fortawesome/sharp-light-svg-icons';
 	import Title from '$lib/components/typography/Title.svelte';
-	import GoogleG from '$lib/assets/logos/GoogleG.svelte';
+	import GoogleG from '$lib/assets/icons/GoogleG.svelte';
 
 	export let provider: 'facebook' | 'google' | 'apple' | 'github';
 	export let isNew: boolean = false;
@@ -52,10 +52,10 @@
 	}
 </script>
 
-<button type="submit"
+<button class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition self-stretch"
 				{name}
+				type="submit"
 				{value}
-	class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition self-stretch"
 >
 	<div class="{textStyleClasses} text-xl w-5 flex justify-center">
 		{#if provider === 'google'}

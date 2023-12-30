@@ -1,5 +1,5 @@
 <script lang="ts">
-	import LogoIcon from '$lib/assets/logos/LogoIcon.svelte';
+	import LogoIcon from '$lib/assets/icons/LogoIcon.svelte';
 
 	export let type: 'default' | 'management' = 'default';
 	export let href: string = '/';
