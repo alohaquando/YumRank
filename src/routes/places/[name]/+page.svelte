@@ -85,7 +85,7 @@
 	// let address = '503 Le Quy Don, Ward 8, District 3, HCMC';
 	// let date = '2023-01-01';
 	//
-	// let options = {
+	// let timeRangeOptions = {
 	// 	week: { value: 'week', title: 'week' },
 	// 	month: { value: 'month', title: 'month' },
 	// 	year: { value: 'year', title: 'year' }

@@ -2,7 +2,6 @@
 	import Rank from '$lib/components/building_blocks/Rank.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
-	import Body from '$lib/components/typography/Body.svelte';
 	import InfoChip from '$lib/components/chips/InfoChip.svelte';
 	import { faHeart, faStar, faUserCheck } from '@fortawesome/pro-regular-svg-icons';
 	// noinspection ES6UnusedImports
@@ -10,9 +9,7 @@
 
 	export let rank: number;
 	export let restaurantSrc: string;
-	export let dishSrc: string;
 	export let restaurantName: string;
-	export let dishName: string;
 	export let checkIns: number;
 	export let rating: number;
 	export let favorites: number;

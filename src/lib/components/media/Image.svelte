@@ -11,7 +11,7 @@
 	};
 </script>
 
-<div class="bg-red-50 {customClasses} ring-2 ring-gray-200 flex items-center justify-center">
+<div class="bg-red-50 {customClasses} border-2 border-gray-200 flex items-center justify-center">
 	{#if src != null}
 		<img
 			{alt}

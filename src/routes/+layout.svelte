@@ -8,6 +8,7 @@
 	import faviconPNG from '$lib/assets/icons/favicons/favicon.png';
 	import faviconSVG from '$lib/assets/icons/favicons/icon.svg';
 	import faviconApple from '$lib/assets/icons/favicons/apple-touch-icon.png';
+	import { page } from '$app/stores';
 
 	export let data;
 
@@ -51,6 +52,6 @@
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
 		<slot />
 	</div>
+	<NavBar bind:currentLocation={$page.url.pathname} class="fixed bottom-0 left-0 w-full" />
 
-	<NavBar class="fixed bottom-0 left-0 w-full" />
 </div>
