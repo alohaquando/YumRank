@@ -32,6 +32,7 @@
 	// 	ws.addEventListener('open', (event) => {
 	// 		webSocketEstablished = true;
 	// 		console.log('[websocket] connection open', event);
+
 	// 		logEvent('[websocket] connection open');
 
 	// 	});
