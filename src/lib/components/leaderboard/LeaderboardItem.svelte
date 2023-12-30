@@ -22,8 +22,8 @@
 </script>
 
 <a
-	{href}
 	class="flex space-x-4 w-full overflow-auto"
+	{href}
 >
 	<div class="pt-2">
 		<Rank {rank} />
@@ -32,24 +32,12 @@
 		<div class="relative">
 			<Image
 				alt={restaurantName}
-				class="{prominent ? 'w-full h-40' : 'w-16 h-16'} rounded-3xl"
+				class="{prominent ? 'w-full aspect-[2/1] h-auto' : 'w-20 h-20'} rounded-3xl"
 				src={restaurantSrc}
 			/>
-			{#if prominent}
-				<div
-					class="absolute w-20 h-20 bottom-0 right-0 ring-[0.5rem] ring-white rounded-full overflow-clip"
-				>
-					<Image
-						alt={dishName}
-						class="w-20 h-20"
-						src={dishSrc}
-					/>
-				</div>
-			{/if}
 		</div>
-		<div class="flex-col flex space-y-1.5">
+		<div class="flex-col flex space-y-3 {prominent ? '' : 'pt-4'}">
 			<Title class="overflow-ellipsis">{restaurantName}</Title>
-			<Body class="opacity-80">{dishName}</Body>
 			<div class="flex overflow-clip w-fit space-x-4">
 				<InfoChip>
 					<Fa
@@ -80,3 +68,60 @@
 <!--Example-->
 <!--<LeaderboardItem rank={1} href="/" restaurantName="Example Restaurant" dishName="Example Dish" checkIns={5468} rating={4.5} favorites={85} restaurantSrc="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3" dishSrc="https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>-->
 <!--<LeaderboardItem rank={6} href="/" restaurantName="Example Restaurant" dishName="Example Dish" checkIns={5468} rating={4.5} favorites={85} restaurantSrc="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3" dishSrc="https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>-->
+
+<!--With dish name-->
+<!--<a-->
+<!--	class="flex space-x-4 w-full overflow-auto"-->
+<!--	{href}-->
+<!--&gt;-->
+<!--	<div class="pt-2">-->
+<!--		<Rank {rank} />-->
+<!--	</div>-->
+<!--	<div class="flex grow {prominent ? 'flex-col space-y-3' : 'flex-row space-x-4'}">-->
+<!--		<div class="relative">-->
+<!--			<Image-->
+<!--				alt={restaurantName}-->
+<!--				class="{prominent ? 'w-full h-40' : 'w-16 h-16'} rounded-3xl"-->
+<!--				src={restaurantSrc}-->
+<!--			/>-->
+<!--			{#if prominent}-->
+<!--				<div-->
+<!--					class="absolute w-20 h-20 bottom-0 right-0 ring-[0.5rem] ring-white rounded-full overflow-clip"-->
+<!--				>-->
+<!--					<Image-->
+<!--						alt={dishName}-->
+<!--						class="w-20 h-20"-->
+<!--						src={dishSrc}-->
+<!--					/>-->
+<!--				</div>-->
+<!--			{/if}-->
+<!--		</div>-->
+<!--		<div class="flex-col flex space-y-1.5">-->
+<!--			<Title class="overflow-ellipsis">{restaurantName}</Title>-->
+<!--			<Body class="opacity-80">{dishName}</Body>-->
+<!--			<div class="flex overflow-clip w-fit space-x-4">-->
+<!--				<InfoChip>-->
+<!--					<Fa-->
+<!--						icon={faUserCheck}-->
+<!--						slot="icon"-->
+<!--					/>-->
+<!--					{checkIns}-->
+<!--				</InfoChip>-->
+<!--				<InfoChip>-->
+<!--					<Fa-->
+<!--						icon={faHeart}-->
+<!--						slot="icon"-->
+<!--					/>-->
+<!--					{favorites}-->
+<!--				</InfoChip>-->
+<!--				<InfoChip>-->
+<!--					<Fa-->
+<!--						icon={faStar}-->
+<!--						slot="icon"-->
+<!--					/>-->
+<!--					{rating}-->
+<!--				</InfoChip>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</div>-->
+<!--</a>-->
