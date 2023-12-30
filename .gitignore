@@ -7,5 +7,3 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 /src/routes/test-quan/
-.tailwindorder
-/.tailwindorder
