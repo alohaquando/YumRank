@@ -1,0 +1,36 @@
+<script lang="ts">
+	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
+	import TextField from '$lib/components/inputs/TextField.svelte';
+	import Body from '$lib/components/typography/Body.svelte';
+	import Divider from '$lib/components/layouts/Divider.svelte';
+	import FileInput from '$lib/components/inputs/FileInput.svelte';
+	import Image from '$lib/components/media/Image.svelte';
+	import { href, userFullName, userSrc } from '$lib/data-mock/data-mock';
+
+	export let form;
+	let email = "example@gmail.com";
+</script>
+
+<!--waiting for the back component-->
+<div class="pt-2">
+	<Button href="/me" design="outlined">Back</Button>
+</div>
+
+<LargePageTitle>Update profile</LargePageTitle>
+
+<div class="flex-col flex space-y-6">
+	<form class="flex-col flex space-y-6">
+		<Body>Email</Body>
+		<TextField id="email" name="email" type="email" value={email}/>
+		<Divider />
+		<Body>Full name</Body>
+		<TextField id="fullname" name="fullname" type="text" value={$userFullName}/>
+	</form>
+
+	<Body>Profile picture</Body>
+	<FileInput />
+		<Image class="aspect-square" src={$userSrc}>
+		</Image>
+<Button type="submit" width="full">Update</Button>
+</div>
