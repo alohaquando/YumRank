@@ -47,6 +47,7 @@
 		id="name"
 		label="Name"
 		name="name"
+		pattern="[a-zA-Z0-9 ]*"
 		placeholder="Name"
 		required
 		type="text"
