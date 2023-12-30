@@ -1,4 +1,6 @@
 <script lang="ts">
+	// noinspection ES6UnusedImports
+	import Fa from 'svelte-fa';
 	import { page } from '$app/stores';
 	import Title from '$lib/components/typography/Title.svelte';
 	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
@@ -24,7 +26,6 @@
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
 	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
 	import { faQrcode } from '@fortawesome/pro-thin-svg-icons';
-	import Fa from 'svelte-fa';
 
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
@@ -58,8 +59,6 @@
 	// 	});
 	// };
 
-	let options = ['week', 'month', 'year'];
-
 	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
 
 	export const requestData = async () => {
@@ -88,27 +87,16 @@
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
 
-	// let placeName = 'Wasabi by Morimoto';
-	// let restaurantSrcExample =
-	// 	'https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094833/the-red-cafe.png';
-	// let restaurantHref = '/';
-	// let placeImagesSrcs =
-	// 	'https://images.unsplash.com/photo-1540648639573-8c848de23f0a?q=80&w=1912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-	// let address = '503 Le Quy Don, Ward 8, District 3, HCMC';
-	// let timeStamp = '2023-01-01';
-	//
-	// let timeRangeOptions = {
-	// 	week: { value: 'week', title: 'week' },
-	// 	month: { value: 'month', title: 'month' },
-	// 	year: { value: 'year', title: 'year' }
-	// };
-	//
-	// let rank = 1;
-	// let checkInsExample = 8575;
-	// let favoritesExample = 1234;
-	// let ratingExample = 4.8;
-	//
 </script>
+
+<!--		<ul>-->
+<!--{#each log as event}-->
+<!--	{#if event.includes('image/png')}-->
+<!--		<img src={event} alt="QR" />-->
+<!--	{/if}-->
+<!--	<li>{event}</li>-->
+<!--{/each}-->
+<!--		</ul>-->
 
 <div>
 	{#if data.restaurant}
@@ -144,7 +132,7 @@
 					address={item.address}
 					checkInButtonOnClick={() => requestData()}
 					favoriteButtonOnClick={() => {
-						/* TODO: @Khai */
+						window.alert("Favorite button clicked")
 					}}
 					checkInButtonDisabled={data.owner}
 				/>
@@ -186,7 +174,8 @@
 				<Button
 					href="{item.name}/check-ins"
 					width="full"
-					design="outlined">View all check-ins</Button
+					design="outlined">View all check-ins
+				</Button
 				>
 			</div>
 
@@ -208,18 +197,11 @@
 				<Button
 					href="/place-detail/place-posts"
 					width="full"
-					design="outlined">View all posts</Button
+					design="outlined">View all posts
+				</Button
 				>
 			</div>
-
-			<!--		<ul>-->
-			<!--{#each log as event}-->
-			<!--	{#if event.includes('image/png')}-->
-			<!--		<img src={event} alt="QR" />-->
-			<!--	{/if}-->
-			<!--	<li>{event}</li>-->
-			<!--{/each}-->
-			<!--		</ul>-->
 		{/each}
 	{/if}
 </div>
+

@@ -22,9 +22,10 @@
 		src={placeSrc}
 		title={placeName}
 	/>
-	<div class="w-full h-[11rem] bg-red-50 rounded-2xl overflow-clip">
+	<div class="w-full aspect-[2/1] bg-red-50 rounded-2xl overflow-clip">
 		<Image
 			alt="Post"
+			class="h-full w-full"
 			on:error={handleError}
 			src={imageSrc}
 		/>

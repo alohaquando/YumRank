@@ -3,7 +3,7 @@ import { redirect } from '@sveltejs/kit';
 export const load = async ({ locals: { supabase, getSession, userConnections }, params }) => {
 	const session = await getSession();
 
-	console.log(userConnections);
+	// console.log(userConnections);
 
 	const { data: restaurant, error } = await supabase
 		.from('restaurants')
