@@ -8,7 +8,7 @@
 	let userFullName = 'Kristin Watson';
 	let time = '2023-01-01';
 	let content =
-		"The menu at Savor Delights is a testament to the chef's creativity and commitment to using fresh, high-quality ingredients.";
+		'The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.';
 	let rating = 4;
 </script>
 

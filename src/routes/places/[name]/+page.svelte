@@ -199,3 +199,74 @@
 		{/each}
 	{/if}
 </div>
+
+<!--Moved-->
+<!--<div class="flex flex-col space-y-8 py-8">-->
+<!--	<PlaceDetailTitleBlock-->
+<!--		{restaurantSrc}-->
+<!--		{restaurantName}-->
+<!--		{restaurantHref}-->
+<!--		{imageSrc}-->
+<!--		{content}-->
+<!--		{address}-->
+<!--	/>-->
+<!--</div>-->
+
+<!--<LargePageTitle>-->
+<!--	Ranking this-->
+<!--	<TitleDropdown-->
+<!--		name="time_selected"-->
+<!--		id="time_selected"-->
+<!--		slot="trailing"-->
+<!--		{options}-->
+<!--		value="week"-->
+<!--	/>-->
+<!--</LargePageTitle>-->
+
+<!--<StatsSummary-->
+<!--	{rank}-->
+<!--	{checkIns}-->
+<!--	{favorites}-->
+<!--	{rating}-->
+<!--/>-->
+
+<!--<div class="flex flex-col space-y-0 py-8">-->
+<!--	<Title>Check-ins • 45 check-ins</Title>-->
+<!--	<div class="flex flex-col space-y-8 py-8">-->
+<!--		{#each { length: 2 } as _, i}-->
+<!--			<Review-->
+<!--				{userSrc}-->
+<!--				{userFullName}-->
+<!--				{time}-->
+<!--				content={reviewContent}-->
+<!--				rating={4}-->
+<!--			/>-->
+<!--		{/each}-->
+<!--	</div>-->
+<!--	<Button-->
+<!--		href="/place-detail/place-checkin"-->
+<!--		width="full"-->
+<!--		design="outlined">View all</Button-->
+<!--	>-->
+<!--</div>-->
+
+<!--<div class="flex flex-col space-y-0 py-8">-->
+<!--	<Title>Posts</Title>-->
+<!--	<div class="flex flex-col space-y-9 py-8">-->
+<!--		{#each { length: 5 } as _, i}-->
+<!--			<Post-->
+<!--				{restaurantSrc}-->
+<!--				{restaurantName}-->
+<!--				{restaurantHref}-->
+<!--				{imageSrc}-->
+<!--				{content}-->
+<!--				{date}-->
+<!--			/>-->
+<!--		{/each}-->
+<!--	</div>-->
+<!--	<Button-->
+<!--		href="/place-detail/place-posts"-->
+<!--		width="full"-->
+<!--		design="outlined">View all</Button-->
+<!--	>-->
+<!--</div>-->
