@@ -38,7 +38,8 @@
 	let designClasses: string;
 	switch (design) {
 		case 'filled': {
-			designClasses = 'bg-red-500 text-white hover:bg-red-600 disabled:bg-gray-100 di sabled:text-gray-400';
+			designClasses =
+				'bg-red-500 text-white hover:bg-red-600 disabled:bg-gray-100 di sabled:text-gray-400';
 			break;
 		}
 		case 'outlined': {
@@ -46,7 +47,8 @@
 			break;
 		}
 		case 'tonal': {
-			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white disabled:text-gray-500 disabled:bg-gray-100';
+			designClasses =
+				'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white disabled:text-gray-500 disabled:bg-gray-100';
 			break;
 		}
 		case 'text': {

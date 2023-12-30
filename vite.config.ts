@@ -16,6 +16,6 @@ export default defineConfig({
 				createWSSGlobalInstance();
 				server.httpServer?.on('upgrade', onHttpServerUpgrade);
 			}
-		},
+		}
 	]
 });

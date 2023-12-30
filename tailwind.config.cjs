@@ -13,7 +13,7 @@ const config = {
 			]
 		},
 		fontMetrics: {
-			'Inter': {
+			Inter: {
 				capHeight: 1490,
 				ascent: 1984,
 				descent: -494,

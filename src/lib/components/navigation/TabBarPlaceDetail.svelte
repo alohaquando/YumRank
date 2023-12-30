@@ -4,7 +4,16 @@
 </script>
 
 <TabBar>
-	<ActionChip width="fit" href="/place-detail">Overview</ActionChip>
-	<ActionChip width="fit" href="/place-detail/place-checkin">Check-ins</ActionChip>
-	<ActionChip width="fit" href="/place-detail/place-posts">Posts</ActionChip>
+	<ActionChip
+		width="fit"
+		href="/place-detail">Overview</ActionChip
+	>
+	<ActionChip
+		width="fit"
+		href="/place-detail/place-checkin">Check-ins</ActionChip
+	>
+	<ActionChip
+		width="fit"
+		href="/place-detail/place-posts">Posts</ActionChip
+	>
 </TabBar>

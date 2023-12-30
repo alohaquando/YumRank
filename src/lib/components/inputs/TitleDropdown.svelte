@@ -55,6 +55,9 @@
 		class="flex flex-row border-gray-900 w-fit h-fit group-hover:text-red-500 group-hover:border-red-500 transition items-center {borderClasses}"
 	>
 		<svelte:component this={design === 'display' ? Display : Title}>{value}</svelte:component>
-		<Fa class={iconClasses} icon={faChevronDown} />
+		<Fa
+			class={iconClasses}
+			icon={faChevronDown}
+		/>
 	</div>
 </div>

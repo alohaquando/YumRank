@@ -1,6 +1,10 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 
-export async function uploadAndGetPublicUrlFromSelected(supabase: SupabaseClient, file: File, bucket: string) {
+export async function uploadAndGetPublicUrlFromSelected(
+	supabase: SupabaseClient,
+	file: File,
+	bucket: string
+) {
 	console.log(file);
 	return new Promise<string[]>((resolve, reject) => {
 		if (file.size === 0) {
@@ -8,9 +12,8 @@ export async function uploadAndGetPublicUrlFromSelected(supabase: SupabaseClient
 		} else {
 			const bucketUrls: string[] = [];
 			(async () => {
-
 				const fileExt = file.name.split('.').pop();
-				const fileName = `${(Math.random()).toString().split('.').pop()}.${fileExt}`;
+				const fileName = `${Math.random().toString().split('.').pop()}.${fileExt}`;
 
 				const { error } = await supabase.storage.from(bucket).upload(fileName, file);
 
@@ -27,7 +30,11 @@ export async function uploadAndGetPublicUrlFromSelected(supabase: SupabaseClient
 	});
 }
 
-export async function uploadAndGetPublicUrlsFromSelected(supabase: SupabaseClient, files: File[], bucket: string) {
+export async function uploadAndGetPublicUrlsFromSelected(
+	supabase: SupabaseClient,
+	files: File[],
+	bucket: string
+) {
 	console.log(files);
 	return new Promise<string[]>((resolve, reject) => {
 		if (files[0].size === 0) {
@@ -38,7 +45,7 @@ export async function uploadAndGetPublicUrlsFromSelected(supabase: SupabaseClien
 				for (let i = 0; i < files.length; i++) {
 					const file = files[i];
 					const fileExt = file.name.split('.').pop();
-					const fileName = `${(Math.random()).toString().split('.').pop()}.${fileExt}`;
+					const fileName = `${Math.random().toString().split('.').pop()}.${fileExt}`;
 
 					const { error } = await supabase.storage.from(bucket).upload(fileName, file);
 

@@ -19,7 +19,10 @@
 			history.back();
 		}}
 	>
-		<Fa icon={faChevronLeft} slot="icon" />
+		<Fa
+			icon={faChevronLeft}
+			slot="icon"
+		/>
 		Back
 	</ActionChip>
 
@@ -99,12 +102,18 @@
 
 	{#if !isScanned}
 		<AlertCard design="gray">
-			<Fa icon={faSpinner} slot="icon" />
+			<Fa
+				icon={faSpinner}
+				slot="icon"
+			/>
 			<Title slot="title">Waiting for guests to scan</Title>
 		</AlertCard>
 	{:else}
 		<AlertCard design="green">
-			<Fa icon={faCheck} slot="icon" />
+			<Fa
+				icon={faCheck}
+				slot="icon"
+			/>
 			<Title slot="title">Guest scanned successfully</Title>
 			<Body slot="body">This screen will close automatically in 5 seconds</Body>
 		</AlertCard>

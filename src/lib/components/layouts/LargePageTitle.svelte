@@ -13,7 +13,6 @@
 	}
 </script>
 
-
 <div class="flex flex-row flex-wrap space-x-2 mb-8 {flexClasses} {showBackButton ? '' : 'mt-12'}">
 	{#if showBackButton}
 		<BackButton />

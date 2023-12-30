@@ -18,7 +18,12 @@
 </script>
 
 <div class="py-8">
-	<TextField id="search" name="search" placeholder="Search" type="search" />
+	<TextField
+		id="search"
+		name="search"
+		placeholder="Search"
+		type="search"
+	/>
 </div>
 
 <Divider full />
@@ -45,11 +50,44 @@
 
 <div class="flex flex-col space-y-8 py-8">
 	<Display class="">Discover</Display>
-	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
-	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
-	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
-	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
-	<Post {content} {date} {imageSrc} {restaurantHref} {restaurantName} {restaurantSrc} />
-
-
+	<Post
+		{content}
+		{date}
+		{imageSrc}
+		{restaurantHref}
+		{restaurantName}
+		{restaurantSrc}
+	/>
+	<Post
+		{content}
+		{date}
+		{imageSrc}
+		{restaurantHref}
+		{restaurantName}
+		{restaurantSrc}
+	/>
+	<Post
+		{content}
+		{date}
+		{imageSrc}
+		{restaurantHref}
+		{restaurantName}
+		{restaurantSrc}
+	/>
+	<Post
+		{content}
+		{date}
+		{imageSrc}
+		{restaurantHref}
+		{restaurantName}
+		{restaurantSrc}
+	/>
+	<Post
+		{content}
+		{date}
+		{imageSrc}
+		{restaurantHref}
+		{restaurantName}
+		{restaurantSrc}
+	/>
 </div>

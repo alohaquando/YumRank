@@ -24,7 +24,10 @@
 	</div>
 	<slot name="trailing">
 		{#if href}
-			<Fa icon={faChevronRight} class="text-xs opacity-50" />
+			<Fa
+				icon={faChevronRight}
+				class="text-xs opacity-50"
+			/>
 		{/if}
 	</slot>
 

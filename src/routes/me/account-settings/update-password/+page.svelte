@@ -8,12 +8,15 @@
 	import Image from '$lib/components/media/Image.svelte';
 
 	export let form;
-	let email = "example@gmail.com";
+	let email = 'example@gmail.com';
 </script>
 
 <!--waiting for the back component-->
 <div class="pt-2">
-	<Button href="/me" design="outlined">Back</Button>
+	<Button
+		href="/me"
+		design="outlined">Back</Button
+	>
 </div>
 
 <LargePageTitle>Update password</LargePageTitle>
@@ -21,15 +24,33 @@
 <div class="flex-col flex space-y-6">
 	<form class="flex-col flex space-y-6">
 		<Body>Current password</Body>
-		<TextField id="password" name="password" type="password" placeholder="Current password"/>
+		<TextField
+			id="password"
+			name="password"
+			type="password"
+			placeholder="Current password"
+		/>
 		<Divider />
 		<Body>New password</Body>
-		<TextField id="newpass" name="newpass" type="password" placeholder="New password"/>
+		<TextField
+			id="newpass"
+			name="newpass"
+			type="password"
+			placeholder="New password"
+		/>
 		<Body>New password confirmation</Body>
-		<TextField id="newpass" name="newpass" type="password" placeholder="New password confirmation"/>
+		<TextField
+			id="newpass"
+			name="newpass"
+			type="password"
+			placeholder="New password confirmation"
+		/>
 	</form>
 
 	<div class="pt-8">
-	<Button type="submit" width="full">Update</Button>
+		<Button
+			type="submit"
+			width="full">Update</Button
+		>
 	</div>
 </div>

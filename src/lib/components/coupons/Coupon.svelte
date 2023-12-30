@@ -23,7 +23,10 @@
 		viewBox="0 0 336 148"
 		xmlns="http://www.w3.org/2000/svg"
 	>
-		<mask fill="#fff" id="a">
+		<mask
+			fill="#fff"
+			id="a"
+		>
 			<path
 				clip-rule="evenodd"
 				d="M0 18C0 8.059 8.059 0 18 0h300c9.941 0 18 8.059 18 18v35.047c0 1.59-.962 2.998-2.323 3.82C327.878 60.368 324 66.73 324 74c0 7.269 3.878 13.632 9.677 17.133 1.361.822 2.323 2.23 2.323 3.82V130c0 9.941-8.059 18-18 18H18c-9.941 0-18-8.059-18-18V94.953c0-1.59.962-2.998 2.323-3.82C8.123 87.632 12 81.27 12 74c0-7.269-3.878-13.632-9.677-17.133C.963 56.045 0 54.637 0 53.047V18Z"
@@ -66,12 +69,18 @@
 				</div>
 				{#if isDiscountSaved}
 					<ActionChip design="tonal">
-						<Fa icon={faCheck} slot="icon" />
+						<Fa
+							icon={faCheck}
+							slot="icon"
+						/>
 						Saved
 					</ActionChip>
 				{:else}
 					<ActionChip>
-						<Fa icon={faPlus} slot="icon" />
+						<Fa
+							icon={faPlus}
+							slot="icon"
+						/>
 						Save
 					</ActionChip>
 				{/if}

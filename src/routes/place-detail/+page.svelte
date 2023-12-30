@@ -31,11 +31,12 @@
 	let favorites = 1234;
 	let rating = 4.8;
 
-	let userSrc = 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
+	let userSrc =
+		'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 	let userFullName = 'Kristin Watson';
 	let time = '2023-01-01';
-	let reviewContent = 'The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.';
-
+	let reviewContent =
+		"The menu at Savor Delights is a testament to the chef's creativity and commitment to using fresh, high-quality ingredients.";
 </script>
 
 <TabBarPlaceDetail />
@@ -43,32 +44,71 @@
 <Divider full />
 
 <div class="flex flex-col space-y-8 py-8">
-	<PlaceDetailTitleBlock {restaurantSrc} {restaurantName} {restaurantHref} {imageSrc} {content} {address} />
+	<PlaceDetailTitleBlock
+		{restaurantSrc}
+		{restaurantName}
+		{restaurantHref}
+		{imageSrc}
+		{content}
+		{address}
+	/>
 </div>
 
 <LargePageTitle>
 	Ranking this
-	<TitleDropdown name="time_selected" id="time_selected" slot="trailing" {options} value="week" />
+	<TitleDropdown
+		name="time_selected"
+		id="time_selected"
+		slot="trailing"
+		{options}
+		value="week"
+	/>
 </LargePageTitle>
 
-<StatsSummary {rank} {checkIns} {favorites} {rating} />
+<StatsSummary
+	{rank}
+	{checkIns}
+	{favorites}
+	{rating}
+/>
 
 <div class="flex flex-col space-y-0 py-8">
 	<Title>Check-ins • 45 check-ins</Title>
 	<div class="flex flex-col space-y-8 py-8">
 		{#each { length: 2 } as _, i}
-			<Review {userSrc} {userFullName} {time} content={reviewContent} rating={4} />
+			<Review
+				{userSrc}
+				{userFullName}
+				{time}
+				content={reviewContent}
+				rating={4}
+			/>
 		{/each}
 	</div>
-	<Button href='/place-detail/place-checkin' width='full' design='outlined'>View all</Button>
+	<Button
+		href="/place-detail/place-checkin"
+		width="full"
+		design="outlined">View all</Button
+	>
 </div>
 
 <div class="flex flex-col space-y-0 py-8">
 	<Title>Posts</Title>
 	<div class="flex flex-col space-y-9 py-8">
 		{#each { length: 5 } as _, i}
-			<Post {restaurantSrc} {restaurantName} {restaurantHref} {imageSrc} {content} {date} />
+			<Post
+				{restaurantSrc}
+				{restaurantName}
+				{restaurantHref}
+				{imageSrc}
+				{content}
+				{date}
+			/>
 		{/each}
 	</div>
-	<Button href='/place-detail/place-posts' width='full' design='outlined'>View all</Button>
+	<Button
+		href="/place-detail/place-posts"
+		width="full"
+		design="outlined">View all</Button
+	>
 </div>

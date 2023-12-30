@@ -1,20 +1,17 @@
 import { redirect } from '@sveltejs/kit';
 
 export const load = async ({ locals: { supabase }, params }) => {
+	const { data: posts, error } = await supabase
+		.from('posts')
+		.select('context, title, restaurant:restaurants(name)')
+		.eq('restaurant_id', params.name.replace('-', ' '));
 
-    const { data: posts, error } = await supabase
-        .from('posts')
-        .select('context, title, restaurant:restaurants(name)') 
-        .eq('restaurant_id', params.name.replace('-', ' '));
-        
-    if (error) {
-        console.error(error);
-        return;
-    }
+	if (error) {
+		console.error(error);
+		return;
+	}
 
-    console.log(posts);
-  
-    return { posts };
+	console.log(posts);
+
+	return { posts };
 };
-
-

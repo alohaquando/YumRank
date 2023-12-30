@@ -28,9 +28,21 @@
 			<Title class="text-center line-clamp-2">{rankFlavorText}</Title>
 		</div>
 		<div class=" pl-4 grow flex flex-col space-y-1.5 justify-between py-2">
-			<StatsSummaryRow icon={faUserCheck} subtitle="new check-ins" title={checkIns?.toString()} />
-			<StatsSummaryRow icon={faHeart} subtitle="new favorites" title={favorites?.toString()} />
-			<StatsSummaryRow icon={faStar} subtitle="/ 5" title={rating?.toString()} />
+			<StatsSummaryRow
+				icon={faUserCheck}
+				subtitle="new check-ins"
+				title={checkIns?.toString()}
+			/>
+			<StatsSummaryRow
+				icon={faHeart}
+				subtitle="new favorites"
+				title={favorites?.toString()}
+			/>
+			<StatsSummaryRow
+				icon={faStar}
+				subtitle="/ 5"
+				title={rating?.toString()}
+			/>
 		</div>
 	</div>
 </div>

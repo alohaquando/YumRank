@@ -18,7 +18,10 @@
 		</div>
 
 		<div class="flex items-center">
-			<IconButton class="!rounded-2xl !h-12 !w-12" design="tonal">
+			<IconButton
+				class="!rounded-2xl !h-12 !w-12"
+				design="tonal"
+			>
 				<Fa icon={faUserCheck} />
 			</IconButton>
 		</div>

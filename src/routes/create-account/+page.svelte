@@ -83,8 +83,10 @@
 			{supabase}
 		/>
 
-		<Button class="w-full" disabled={loading} type="submit"
-		>{loading ? 'Loading...' : 'Update'}</Button
+		<Button
+			class="w-full"
+			disabled={loading}
+			type="submit">{loading ? 'Loading...' : 'Update'}</Button
 		>
 	</form>
 

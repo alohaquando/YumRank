@@ -12,7 +12,10 @@
 
 <div class="h-14 border-b border-gray-200 flex bg-white w-full {customClasses}">
 	<div class="container mx-auto flex items-center justify-between pr-6">
-		<Logo {href} {type} />
-<!--		<Image class="w-8 h-8 rounded-full ring-1 ring-gray-200" alt="Profile image" src={userSrc} />-->
+		<Logo
+			{href}
+			{type}
+		/>
+		<!--		<Image class="w-8 h-8 rounded-full ring-1 ring-gray-200" alt="Profile image" src={userSrc} />-->
 	</div>
 </div>

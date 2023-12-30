@@ -47,7 +47,10 @@
 
 <div class="flex flex-col w-full">
 	{#if label}
-		<label class="block mb-2 text-sm font-sans trim-both pb-4" for={id}>{label}</label>
+		<label
+			class="block mb-2 text-sm font-sans trim-both pb-4"
+			for={id}>{label}</label
+		>
 	{/if}
 	<input
 		{autocomplete}
@@ -78,7 +81,10 @@
 	{#if error}
 		<div class="flex space-x-2 items-center text-red-300 pt-4">
 			<Fa icon={faExclamationCircle} />
-			<label class="block mb-2 text-sm font-sans trim-both" for={id}>{errorMessage}</label>
+			<label
+				class="block mb-2 text-sm font-sans trim-both"
+				for={id}>{errorMessage}</label
+			>
 		</div>
 	{/if}
 </div>

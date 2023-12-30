@@ -14,7 +14,10 @@
 
 <!--waiting for the back component-->
 <div class="pt-2">
-	<Button design="outlined" href="/me">Back</Button>
+	<Button
+		design="outlined"
+		href="/me">Back</Button
+	>
 </div>
 
 <LargePageTitle>Update profile</LargePageTitle>
@@ -22,15 +25,30 @@
 <div class="flex-col flex space-y-6">
 	<form class="flex-col flex space-y-6">
 		<Body>Email</Body>
-		<TextField id="email" name="email" type="email" value={email} />
+		<TextField
+			id="email"
+			name="email"
+			type="email"
+			value={email}
+		/>
 		<Divider />
 		<Body>Full name</Body>
-		<TextField id="fullname" name="fullname" type="text" value={$userFullName} />
+		<TextField
+			id="fullname"
+			name="fullname"
+			type="text"
+			value={$userFullName}
+		/>
 	</form>
 
 	<Body>Profile picture</Body>
 	<FileInput />
-	<Image class="aspect-square" src={$userSrc}>
-	</Image>
-	<Button type="submit" width="full">Update</Button>
+	<Image
+		class="aspect-square"
+		src={$userSrc}
+	/>
+	<Button
+		type="submit"
+		width="full">Update</Button
+	>
 </div>

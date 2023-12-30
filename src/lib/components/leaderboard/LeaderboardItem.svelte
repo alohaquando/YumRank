@@ -21,7 +21,10 @@
 	let prominent: boolean = rank <= 5;
 </script>
 
-<a {href} class="flex space-x-4 w-full overflow-auto">
+<a
+	{href}
+	class="flex space-x-4 w-full overflow-auto"
+>
 	<div class="pt-2">
 		<Rank {rank} />
 	</div>
@@ -36,7 +39,11 @@
 				<div
 					class="absolute w-20 h-20 bottom-0 right-0 ring-[0.5rem] ring-white rounded-full overflow-clip"
 				>
-					<Image alt={dishName} class="w-20 h-20" src={dishSrc} />
+					<Image
+						alt={dishName}
+						class="w-20 h-20"
+						src={dishSrc}
+					/>
 				</div>
 			{/if}
 		</div>
@@ -45,15 +52,24 @@
 			<Body class="opacity-80">{dishName}</Body>
 			<div class="flex overflow-clip w-fit space-x-4">
 				<InfoChip>
-					<Fa icon={faUserCheck} slot="icon" />
+					<Fa
+						icon={faUserCheck}
+						slot="icon"
+					/>
 					{checkIns}
 				</InfoChip>
 				<InfoChip>
-					<Fa icon={faHeart} slot="icon" />
+					<Fa
+						icon={faHeart}
+						slot="icon"
+					/>
 					{favorites}
 				</InfoChip>
 				<InfoChip>
-					<Fa icon={faStar} slot="icon" />
+					<Fa
+						icon={faStar}
+						slot="icon"
+					/>
 					{rating}
 				</InfoChip>
 			</div>

@@ -52,10 +52,11 @@
 	}
 </script>
 
-<button class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition self-stretch"
-				{name}
-				type="submit"
-				{value}
+<button
+	class="{bgClasses} px-6 h-10 rounded-full w-full justify-start items-center gap-4 flex transition self-stretch"
+	{name}
+	type="submit"
+	{value}
 >
 	<div class="{textStyleClasses} text-xl w-5 flex justify-center">
 		{#if provider === 'google'}

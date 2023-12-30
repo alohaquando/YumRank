@@ -10,23 +10,51 @@
 	import Logo from '$lib/components/logos/Logo.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
 
-	export let form
+	export let form;
 </script>
 
 <LargePageTitle>Welcome back</LargePageTitle>
 
 <div class="flex flex-col space-y-8">
-	<form method="POST" action="?/signin">
-		<SocialButton provider="github" name="provider" value="github"/>
+	<form
+		method="POST"
+		action="?/signin"
+	>
+		<SocialButton
+			provider="github"
+			name="provider"
+			value="github"
+		/>
 	</form>
 
 	<Divider />
 
-	<form class="flex-col flex space-y-6 items-center" method="POST" action="?/signin">
-		<TextField id="email" name="email" placeholder="Email" type="email" value={form?.data?.email ?? ""}/>
-		<TextField id="password" name="password" placeholder="Password" type="password" />
-		<Button type="submit" width="full">Sign in</Button>
-		<ActionChip href="/" formaction="?/forgot">Reset my passwords</ActionChip>
+	<form
+		class="flex-col flex space-y-6 items-center"
+		method="POST"
+		action="?/signin"
+	>
+		<TextField
+			id="email"
+			name="email"
+			placeholder="Email"
+			type="email"
+			value={form?.data?.email ?? ''}
+		/>
+		<TextField
+			id="password"
+			name="password"
+			placeholder="Password"
+			type="password"
+		/>
+		<Button
+			type="submit"
+			width="full">Sign in</Button
+		>
+		<ActionChip
+			href="/"
+			formaction="?/forgot">Reset my passwords</ActionChip
+		>
 	</form>
 
 	<Divider />
@@ -36,15 +64,14 @@
 		<ActionChip href="/sign-up">Create an account</ActionChip>
 	</div>
 
-<!--	<Divider full />-->
+	<!--	<Divider full />-->
 
-<!--	<BasicCard>-->
-<!--		<Logo slot="start" type="management" />-->
-<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
-<!--		<Button href="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
-<!--	</BasicCard>-->
+	<!--	<BasicCard>-->
+	<!--		<Logo slot="start" type="management" />-->
+	<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
+	<!--		<Button href="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
+	<!--	</BasicCard>-->
 </div>
-
 
 <!--<form method="POST" action="?/signin">-->
 <!--	<input name="email" placeholder="email" type="email" value={form?.data?.email ?? ""}>-->

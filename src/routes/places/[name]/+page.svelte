@@ -100,9 +100,8 @@
 	// let userFullName = 'Kristin Watson';
 	// let time = '2023-01-01';
 	// let reviewContent = 'The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.';
-
-
 </script>
+
 <div>
 	{#if data.restaurant}
 		{#each data.restaurant as item}

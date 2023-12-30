@@ -14,13 +14,23 @@
 </script>
 
 <div class="flex flex-col space-y-4">
-	<TitleItem title={userFullName} src={userSrc} trailingText={time} />
+	<TitleItem
+		title={userFullName}
+		src={userSrc}
+		trailingText={time}
+	/>
 	<div class="flex-row flex space-x-2">
 		{#each { length: 5 } as _, i}
 			{#if i + 1 <= rating}
-				<Fa icon={faStarFilled} class="text-red-500" />
+				<Fa
+					icon={faStarFilled}
+					class="text-red-500"
+				/>
 			{:else}
-				<Fa icon={faStar} class="opacity-50" />
+				<Fa
+					icon={faStar}
+					class="opacity-50"
+				/>
 			{/if}
 		{/each}
 	</div>

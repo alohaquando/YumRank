@@ -24,7 +24,10 @@
 </script>
 
 <AlertCard {design}>
-	<Fa icon={success ? faCheck : faExclamationCircle} slot="icon" />
+	<Fa
+		icon={success ? faCheck : faExclamationCircle}
+		slot="icon"
+	/>
 	<Title slot="title">{title}</Title>
 	{#if message}
 		<Body slot="body">{message}</Body>

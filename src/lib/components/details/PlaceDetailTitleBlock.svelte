@@ -14,8 +14,8 @@
 	export let imageSrc: string | undefined | null;
 	export let desc: string | undefined | null;
 	export let address: string | undefined | null;
-	export let checkInButtonOnClick = () => {}
-	export let favoriteButtonOnClick = () => {}
+	export let checkInButtonOnClick = () => {};
+	export let favoriteButtonOnClick = () => {};
 	export let checkInButtonDisabled: boolean = false;
 	export let isFavorite: boolean = false;
 
@@ -23,13 +23,15 @@
 	const handleError = () => {
 		imgEle.classList.add('hidden');
 	};
-
-
 </script>
 
 <div class="flex-col flex space-y-2">
 	<div class="w-full h-[11rem] bg-red-50 rounded-2xl overflow-clip">
-		<Image alt="Post" on:error={handleError} src={imageSrc} />
+		<Image
+			alt="Post"
+			on:error={handleError}
+			src={imageSrc}
+		/>
 	</div>
 </div>
 
@@ -40,19 +42,36 @@
 </div>
 
 <div class="flex space-x-4">
-	<Button width="full" on:click={() => checkInButtonOnClick()} disabled={checkInButtonDisabled}>
-		<Fa icon={faUserCheck} slot="icon" />
+	<Button
+		width="full"
+		on:click={() => checkInButtonOnClick()}
+		disabled={checkInButtonDisabled}
+	>
+		<Fa
+			icon={faUserCheck}
+			slot="icon"
+		/>
 		Check in
 	</Button>
 
 	{#if isFavorite}
-		<IconButton design="tonal" class="transition" on:click={() => favoriteButtonOnClick()}>
-			<Fa icon={faHeartFilled} class="text-red-500" />
+		<IconButton
+			design="tonal"
+			class="transition"
+			on:click={() => favoriteButtonOnClick()}
+		>
+			<Fa
+				icon={faHeartFilled}
+				class="text-red-500"
+			/>
 		</IconButton>
 	{:else}
-		<IconButton design="outlined" class="transition" on:click={() => favoriteButtonOnClick()}>
+		<IconButton
+			design="outlined"
+			class="transition"
+			on:click={() => favoriteButtonOnClick()}
+		>
 			<Fa icon={faHeartOutlined} />
 		</IconButton>
 	{/if}
-
 </div>

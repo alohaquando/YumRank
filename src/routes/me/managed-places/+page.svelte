@@ -18,9 +18,7 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 </script>
 
-<LargePageTitle showBackButton>
-	Managed places
-</LargePageTitle>
+<LargePageTitle showBackButton>Managed places</LargePageTitle>
 
 <div class="flex-col space-y-10 pb-6">
 	{#each [1, 5, 8, 9, 12, 15] as i}
@@ -39,9 +37,14 @@
 </div>
 
 <div class="bg-white sticky bottom-16 py-4 border-t">
-	<Button href="/management/register-place" width="full">
-		<Fa icon={faPlus} slot="icon" />
+	<Button
+		href="/management/register-place"
+		width="full"
+	>
+		<Fa
+			icon={faPlus}
+			slot="icon"
+		/>
 		Add a place
 	</Button>
 </div>
-

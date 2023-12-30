@@ -1,8 +1,8 @@
 <script lang="ts">
 	export let design: 'default' | 'gray' | 'green' = 'default';
 
-	let customClasses = "";
-	export {customClasses as class }
+	let customClasses = '';
+	export { customClasses as class };
 
 	let designClasses: string;
 	// noinspection JSUnreachableSwitchBranches
@@ -32,7 +32,7 @@
 	{#if $$slots.body || $$slots.default}
 		<div class="self-stretch flex mt-6 text-center mx-auto w-full justify-center">
 			<slot name="body" />
-			<slot/>
+			<slot />
 		</div>
 	{/if}
 </div>

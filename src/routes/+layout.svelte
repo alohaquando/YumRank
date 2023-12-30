@@ -5,8 +5,6 @@
 	import { onMount } from 'svelte';
 	import NavBar from '$lib/components/navigation/NavBar.svelte';
 	import Header from '$lib/components/navigation/Header.svelte';
-	import RestaurantSwitcher from '$lib/components/navigation/RestaurantSwitcher.svelte';
-	import TabBarManagement from '$lib/components/navigation/TabBarManagement.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 	import bg from '$lib/assets/bg/bg.avif';
 	import Button from '$lib/components/buttons/Button.svelte';
@@ -28,7 +26,6 @@
 
 		return () => subscription.unsubscribe();
 	});
-
 
 	const publicUrl = supabase.storage
 		.from('avatars')
@@ -55,14 +52,25 @@
 	src={bg}
 />
 {#if debug}
-	<div class="fixed h-screen w-screen top-0 left-0  p-2  ">
-		<div class="space-y-4 w-fit p-4 rounded-2xl items-end justify-center bg-white flex-col flex ml-auto max-w-lg">
-			<Image class="w-8 h-8 rounded-full" src="{publicUrl.data.publicUrl}"/>
+	<div class="fixed h-screen w-screen top-0 left-0 p-2">
+		<div
+			class="space-y-4 w-fit p-4 rounded-2xl items-end justify-center bg-white flex-col flex ml-auto max-w-lg"
+		>
+			<Image
+				class="w-8 h-8 rounded-full"
+				src={publicUrl.data.publicUrl}
+			/>
 			<Body>Signed {signIn ? 'in as \n' + data.session?.user.user_metadata.user_name : 'out'}</Body>
 			{#if signIn}
-				<Button width="full" design="tonal">Sign out</Button>
-			{:else }
-				<Button width="full" design="tonal">Sign in</Button>
+				<Button
+					width="full"
+					design="tonal">Sign out</Button
+				>
+			{:else}
+				<Button
+					width="full"
+					design="tonal">Sign in</Button
+				>
 			{/if}
 		</div>
 	</div>

@@ -10,18 +10,27 @@
 
 <!--waiting for the back component-->
 <div class="pt-2">
-	<Button design="outlined" href="/me">Back</Button>
+	<Button
+		design="outlined"
+		href="/me">Back</Button
+	>
 </div>
 
 <LargePageTitle>Account Settings</LargePageTitle>
 
 <div class="space-y-5">
 	<ListItem href={$href}>
-		<Fa icon={faUserCircle} slot="leading" />
+		<Fa
+			icon={faUserCircle}
+			slot="leading"
+		/>
 		<Body slot="text">Update profile</Body>
 	</ListItem>
 	<ListItem href={$href}>
-		<Fa icon={ faKey } slot="leading" />
+		<Fa
+			icon={faKey}
+			slot="leading"
+		/>
 		<Body slot="text">Update password</Body>
 	</ListItem>
 </div>
