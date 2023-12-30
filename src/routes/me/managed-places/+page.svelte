@@ -11,7 +11,7 @@
 		rating,
 		favorites,
 		href
-	} from '$lib/data-mock/data-mock.ts';
+	} from '$lib/data/exampleData.ts';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Fa from 'svelte-fa';
 	import { faPlus } from '@fortawesome/pro-regular-svg-icons';
@@ -38,8 +38,8 @@
 	{/each}
 </div>
 
-<div class="bg-white sticky bottom-16 py-4 border-t" >
-	<Button width="full" href="/management/register-place">
+<div class="bg-white sticky bottom-16 py-4 border-t">
+	<Button href="/management/register-place" width="full">
 		<Fa icon={faPlus} slot="icon" />
 		Add a place
 	</Button>

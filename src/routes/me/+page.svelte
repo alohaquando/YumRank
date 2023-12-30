@@ -8,7 +8,7 @@
 
 	import SectionTitle from '$lib/components/layouts/SectionTitle.svelte';
 
-	import { href, restaurantLogoSrc, restaurantName, userFullName, userSrc } from '$lib/data-mock/data-mock';
+	import { href, restaurantLogoSrc, restaurantName, userFullName, userSrc } from '$lib/data/exampleData';
 	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';

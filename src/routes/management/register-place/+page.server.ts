@@ -1,5 +1,5 @@
 import { fail, redirect } from '@sveltejs/kit';
-import { uploadAndGetPublicUrlFromSelected, uploadAndGetPublicUrlsFromSelected } from '$lib/utils';
+import { uploadAndGetPublicUrlFromSelected, uploadAndGetPublicUrlsFromSelected } from '$lib/server/utils';
 
 export const load = async ({ locals: { supabase, getSession } }) => {
 	const session = await getSession();
