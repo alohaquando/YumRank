@@ -102,15 +102,17 @@
 	{#if data.restaurant}
 		{#each data.restaurant as item}
 			{#if data.owner}
-				<AlertCard class="mt-4">
+				<AlertCard>
 					<Fa
 						icon={faInfoCircle}
 						slot="icon"
 					/>
 					<Title slot="title">You are the manager of this site</Title>
+					<!-- TODO: Link button function -->
 					<Button
 						slot="body"
 						width="full"
+						href={$hrefExample}
 					>
 						<Fa
 							icon={faQrcode}

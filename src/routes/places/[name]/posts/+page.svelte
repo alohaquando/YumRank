@@ -1,28 +1,45 @@
 <script lang="ts">
-	import Title from '$lib/components/typography/Title.svelte';
-	import TabBarPlaceDetail from '$lib/components/navigation/TabBarPlaceDetail.svelte';
+	// noinspection ES6UnusedImports
+	import Fa from 'svelte-fa';
 	import Post from '$lib/components/posts/Post.svelte';
+	import {
+		dishSrcExample,
+		hrefExample,
+		placeNameExample,
+		placeSrcExample,
+		postContentExample,
+		timeStampExample
+	} from '$lib/data/exampleData';
+	import { faPlus } from '@fortawesome/pro-solid-svg-icons';
+	import Button from '$lib/components/buttons/Button.svelte';
+	import Divider from '$lib/components/layouts/Divider.svelte';
 
-	let restaurantName = 'Wasabi by Morimoto';
-	let restaurantSrc =
-		'https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094833/the-red-cafe.png';
-	let restaurantHref = '/';
-	let imageSrc =
-		'https://images.unsplash.com/photo-1608835291093-394b0c943a75?q=80&w=2072&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-	let content = 'Family-run restaurant and cafe, with a specialty in sweets and desserts.';
-	let date = '2023-01-01';
+	export let data;
 </script>
 
-<TabBarPlaceDetail />
-<div class="flex flex-col space-y-8 py-8">
-	{#each { length: 5 } as _, i}
+<div class="flex flex-col space-y-8">
+	{#if data.owner}
+		<Button
+			width="full"
+			href="/management/places/{data.placeName}/create-post"
+		>
+			<Fa
+				icon={faPlus}
+				slot="icon"
+			/>
+			Add a post
+		</Button>
+		<Divider></Divider>
+	{/if}
+	{#each { length: 3 } as _}
+		<!-- TODO: Get posts. @Khai -->
 		<Post
-			{restaurantName}
-			{restaurantSrc}
-			{restaurantHref}
-			{imageSrc}
-			{content}
-			{date}
+			placeSrc={$placeSrcExample}
+			placeName={$placeNameExample}
+			placeHref={$hrefExample}
+			content={$postContentExample}
+			timeStamp={$timeStampExample}
+			imageSrc={$dishSrcExample}
 		/>
 	{/each}
 </div>

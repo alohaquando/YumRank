@@ -14,7 +14,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 
 	if (resowner == session?.user.id) {
 		// throw redirect(303, `/management/places/${params.name}`)
-		return { restaurant, owner: true };
+		return { restaurant, owner: true, placeName: params.name };
 	}
 
 	if (error) {
@@ -22,5 +22,5 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 		return;
 	}
 
-	return { restaurant };
+	return { restaurant, owner: true, placeName: params.name };
 };
