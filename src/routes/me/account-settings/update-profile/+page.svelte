@@ -6,7 +6,7 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import FileInput from '$lib/components/inputs/FileInput.svelte';
 	import Image from '$lib/components/media/Image.svelte';
-	import { href, userFullName, userSrc } from '$lib/data/exampleData';
+	import { hrefExample, userFullNameExample, userSrcExample } from '$lib/data/exampleData';
 
 	export let form;
 	let email = 'example@gmail.com';
@@ -16,7 +16,8 @@
 <div class="pt-2">
 	<Button
 		design="outlined"
-		href="/me">Back</Button
+		href="/me">Back
+	</Button
 	>
 </div>
 
@@ -37,7 +38,7 @@
 			id="fullname"
 			name="fullname"
 			type="text"
-			value={$userFullName}
+			value={$userFullNameExample}
 		/>
 	</form>
 
@@ -45,10 +46,11 @@
 	<FileInput />
 	<Image
 		class="aspect-square"
-		src={$userSrc}
+		src={$userSrcExample}
 	/>
 	<Button
 		type="submit"
-		width="full">Update</Button
+		width="full">Update
+	</Button
 	>
 </div>

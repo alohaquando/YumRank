@@ -19,13 +19,13 @@
 
 <div class="flex flex-col space-y-8 items-center">
 	<form
-		method="POST"
 		action="?/signup"
 		class="w-full"
+		method="POST"
 	>
 		<SocialButton
-			provider="github"
 			name="provider"
+			provider="github"
 			value="github"
 		/>
 	</form>
@@ -40,9 +40,9 @@
 	{/if}
 
 	<form
+		action="?/signup"
 		class="flex-col flex space-y-6 items-center w-full"
 		method="POST"
-		action="?/signup"
 	>
 		<TextField
 			id="email"
@@ -59,7 +59,8 @@
 		/>
 		<Button
 			type="submit"
-			width="full">Sign up</Button
+			width="full">Sign up
+		</Button
 		>
 	</form>
 
@@ -75,6 +76,6 @@
 	<!--	<BasicCard>-->
 	<!--		<Logo slot="start" type="management" />-->
 	<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
-	<!--		<Button href="/management/sign-up" slot="end" width="full">Go to management portal</Button>-->
+	<!--		<Button hrefExample="/management/sign-up" slot="end" width="full">Go to management portal</Button>-->
 	<!--	</BasicCard>-->
 </div>

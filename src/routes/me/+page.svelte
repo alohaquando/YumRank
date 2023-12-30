@@ -15,11 +15,11 @@
 	import SectionTitle from '$lib/components/layouts/SectionTitle.svelte';
 
 	import {
-		href,
-		restaurantLogoSrc,
-		restaurantName,
-		userFullName,
-		userSrc
+		hrefExample,
+		placeLogoSrcExample,
+		placeNameExample,
+		userFullNameExample,
+		userSrcExample
 	} from '$lib/data/exampleData';
 	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
@@ -43,10 +43,11 @@
 			<span class="opacity-50">Not signed in</span>
 		</LargePageTitle>
 		<div class=" flex text-center flex-col space-y-6 py-6">
-			<Body class="">Sign in with a YumRank account to check-in to your favorites places!</Body>
+			<Body class="">Sign in with a YumRank account to check-in to your favoritesExample places!</Body>
 			<Button
 				class="w-full"
-				href="/sign-in">Sign in</Button
+				href="/sign-in">Sign in
+			</Button
 			>
 		</div>
 	</div>
@@ -56,9 +57,9 @@
 			<Image
 				class="h-10 w-10 rounded-full"
 				slot="leading"
-				src={$userSrc}
+				src={$userSrcExample}
 			/>
-			<span class="">{$userFullName}</span>
+			<span class="">{$userFullNameExample}</span>
 		</LargePageTitle>
 
 		<div>
@@ -68,15 +69,16 @@
 					<TitleItem
 						href="/"
 						trailingMoreIcon={true}
-						title={$restaurantName}
-						src={$restaurantLogoSrc}
+						title={$placeNameExample}
+						src={$placeLogoSrcExample}
 					/>
 				{/each}
 				<!--				<Body class="text-center opacity-50">You are not managing any places</Body>-->
 				<Button
 					design="outlined"
 					width="full"
-					href="/me/managed-places">View all</Button
+					href="/me/managed-places">View all
+				</Button
 				>
 			</div>
 		</div>
@@ -84,7 +86,7 @@
 		<div class="space-y-2 pt-8">
 			<Divider />
 
-			<ListItem href={$href}>
+			<ListItem href={$hrefExample}>
 				<Fa
 					icon={faHeart}
 					slot="leading"
@@ -94,7 +96,7 @@
 
 			<Divider />
 
-			<ListItem href={$href}>
+			<ListItem href={$hrefExample}>
 				<Fa
 					icon={faUserCircle}
 					slot="leading"
@@ -108,7 +110,8 @@
 			>
 				<Button
 					class="w-full"
-					type="submit">Sign out</Button
+					type="submit">Sign out
+				</Button
 				>
 			</form>
 		</div>

@@ -35,8 +35,8 @@
 <!--	>-->
 <!--		{#each { length: 5 } as _, i}-->
 <!--			<Coupon-->
-<!--				{restaurantName}-->
-<!--				{restaurantSrc}-->
+<!--				{placeName}-->
+<!--				{restaurantSrcExample}-->
 <!--				{discountValue}-->
 <!--				{discountCondition}-->
 <!--				{isDiscountSaved}-->

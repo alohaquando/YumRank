@@ -18,6 +18,6 @@
 	/>
 	<div class="flex-wrap flex space-y-1 items-baseline space-x-2">
 		<Title>{title}</Title>
-		<Body>{subtitle}</Body>
+		<Body class="overflow-ellipsis line-clamp-1">{subtitle}</Body>
 	</div>
 </div>

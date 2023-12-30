@@ -8,16 +8,16 @@
 
 	export let userSrc: string;
 	export let userFullName: string;
-	export let time: string;
+	export let timeStamp: string;
 	export let content: string;
 	export let rating: number;
 </script>
 
 <div class="flex flex-col space-y-4">
 	<TitleItem
-		title={userFullName}
 		src={userSrc}
-		trailingText={time}
+		title={userFullName}
+		trailingText={timeStamp}
 	/>
 	<div class="flex-row flex space-x-2">
 		{#each { length: 5 } as _, i}

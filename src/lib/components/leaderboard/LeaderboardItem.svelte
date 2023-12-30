@@ -63,8 +63,8 @@
 </a>
 
 <!--Example-->
-<!--<LeaderboardItem rank={1} href="/" restaurantName="Example Restaurant" dishName="Example Dish" checkIns={5468} rating={4.5} favorites={85} restaurantSrc="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3" dishSrc="https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>-->
-<!--<LeaderboardItem rank={6} href="/" restaurantName="Example Restaurant" dishName="Example Dish" checkIns={5468} rating={4.5} favorites={85} restaurantSrc="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3" dishSrc="https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>-->
+<!--<LeaderboardItem rank={1} href="/" placeName="Example Restaurant" dishName="Example Dish" checkIns={5468} rating={4.5} favorites={85} restaurantSrcExample="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3" dishSrcExample="https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>-->
+<!--<LeaderboardItem rank={6} href="/" placeName="Example Restaurant" dishName="Example Dish" checkIns={5468} rating={4.5} favorites={85} restaurantSrcExample="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1000&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cmVzdGF1cmFudHxlbnwwfHwwfHx8MA%3D%3" dishSrcExample="https://images.unsplash.com/photo-1529312266912-b33cfce2eefd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"/>-->
 
 <!--With dish name-->
 <!--<a-->
@@ -77,9 +77,9 @@
 <!--	<div class="flex grow {prominent ? 'flex-col space-y-3' : 'flex-row space-x-4'}">-->
 <!--		<div class="relative">-->
 <!--			<Image-->
-<!--				alt={restaurantName}-->
+<!--				alt={placeName}-->
 <!--				class="{prominent ? 'w-full h-40' : 'w-16 h-16'} rounded-3xl"-->
-<!--				src={restaurantSrc}-->
+<!--				src={restaurantSrcExample}-->
 <!--			/>-->
 <!--			{#if prominent}-->
 <!--				<div-->
@@ -88,13 +88,13 @@
 <!--					<Image-->
 <!--						alt={dishName}-->
 <!--						class="h-20 w-20"-->
-<!--						src={dishSrc}-->
+<!--						src={dishSrcExample}-->
 <!--					/>-->
 <!--				</div>-->
 <!--			{/if}-->
 <!--		</div>-->
 <!--		<div class="flex flex-col space-y-1.5">-->
-<!--			<Title class="overflow-ellipsis">{restaurantName}</Title>-->
+<!--			<Title class="overflow-ellipsis">{placeName}</Title>-->
 <!--			<Body class="opacity-80">{dishName}</Body>-->
 <!--			<div class="flex w-fit overflow-clip space-x-4">-->
 <!--				<InfoChip>-->

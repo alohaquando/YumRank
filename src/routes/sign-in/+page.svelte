@@ -17,12 +17,12 @@
 
 <div class="flex flex-col space-y-8">
 	<form
-		method="POST"
 		action="?/signin"
+		method="POST"
 	>
 		<SocialButton
-			provider="github"
 			name="provider"
+			provider="github"
 			value="github"
 		/>
 	</form>
@@ -30,9 +30,9 @@
 	<Divider />
 
 	<form
+		action="?/signin"
 		class="flex-col flex space-y-6 items-center"
 		method="POST"
-		action="?/signin"
 	>
 		<TextField
 			id="email"
@@ -49,11 +49,13 @@
 		/>
 		<Button
 			type="submit"
-			width="full">Sign in</Button
+			width="full">Sign in
+		</Button
 		>
 		<ActionChip
-			href="/"
-			formaction="?/forgot">Reset my passwords</ActionChip
+			formaction="?/forgot"
+			href="/">Reset my passwords
+		</ActionChip
 		>
 	</form>
 
@@ -69,7 +71,7 @@
 	<!--	<BasicCard>-->
 	<!--		<Logo slot="start" type="management" />-->
 	<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
-	<!--		<Button href="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
+	<!--		<Button hrefExample="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
 	<!--	</BasicCard>-->
 </div>
 

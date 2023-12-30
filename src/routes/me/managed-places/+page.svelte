@@ -3,14 +3,14 @@
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
 
 	import {
-		restaurantSrc,
-		dishSrc,
-		restaurantName,
-		dishName,
-		checkIns,
-		rating,
-		favorites,
-		href
+		placeSrcExample,
+		dishSrcExample,
+		placeNameExample,
+		dishNameExample,
+		checkInsExample,
+		ratingExample,
+		favoritesExample,
+		hrefExample
 	} from '$lib/data/exampleData.ts';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Fa from 'svelte-fa';
@@ -24,14 +24,14 @@
 	{#each [1, 5, 8, 9, 12, 15] as i}
 		<LeaderboardItem
 			rank={i}
-			restaurantSrc={$restaurantSrc}
-			dishSrc={$dishSrc}
-			restaurantName={$restaurantName}
-			dishName={$dishName}
-			checkIns={$checkIns}
-			rating={$rating}
-			favorites={$favorites}
-			href={$href}
+			restaurantSrc={$placeSrcExample}
+			dishSrc={$dishSrcExample}
+			restaurantName={$placeNameExample}
+			dishName={$dishNameExample}
+			checkIns={$checkInsExample}
+			rating={$ratingExample}
+			favorites={$favoritesExample}
+			href={$hrefExample}
 		/>
 	{/each}
 </div>

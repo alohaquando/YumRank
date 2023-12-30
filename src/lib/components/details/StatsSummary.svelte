@@ -4,10 +4,10 @@
 	import Rank from '$lib/components/building_blocks/Rank.svelte';
 	import StatsSummaryRow from '$lib/components/details/StatsSummaryRow.svelte';
 
-	export let rank: number = 1;
-	export let checkIns: number;
-	export let favorites: number;
-	export let rating: number;
+	export let rank: number = 0;
+	export let checkIns: number = 0;
+	export let favorites: number = 0;
+	export let rating: number = 0;
 
 	let rankFlavorText: string;
 	if (rank > 0 && rank <= 3) {

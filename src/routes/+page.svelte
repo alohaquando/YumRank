@@ -3,14 +3,14 @@
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
 	import {
-		restaurantSrc,
-		dishSrc,
-		restaurantName,
-		dishName,
-		checkIns,
-		rating,
-		favorites,
-		href
+		placeSrcExample,
+		dishSrcExample,
+		placeNameExample,
+		dishNameExample,
+		checkInsExample,
+		ratingExample,
+		favoritesExample,
+		hrefExample
 	} from '$lib/data/exampleData';
 </script>
 
@@ -28,12 +28,12 @@
 	{#each { length: 15 } as _, i}
 		<LeaderboardItem
 			rank={i + 1}
-			restaurantSrc={$restaurantSrc}
-			restaurantName={$restaurantName}
-			checkIns={$checkIns}
-			rating={$rating}
-			favorites={$favorites}
-			href={$href}
+			restaurantSrc={$placeSrcExample}
+			restaurantName={$placeNameExample}
+			checkIns={$checkInsExample}
+			rating={$ratingExample}
+			favorites={$favoritesExample}
+			href={$hrefExample}
 		/>
 	{/each}
 </div>

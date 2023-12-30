@@ -1,18 +1,25 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-	import TabBarPlaceDetail from '$lib/components/navigation/TabBarPlaceDetail.svelte';
-	import Divider from '$lib/components/layouts/Divider.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
 	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
 	import Review from '$lib/components/reviews/Review.svelte';
-	import Post from '$lib/components/posts/Post.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import {
+		ratingExample,
+		reviewContentExample,
+		timeStampExample,
+		userFullNameExample,
+		userSrcExample,
+		rankExample, placeSrcExample, placeNameExample, hrefExample, postContentExample, dishSrcExample
+	} from '$lib/data/exampleData';
+	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
+	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
+	import { faQrcode } from '@fortawesome/pro-thin-svg-icons';
 	import Fa from 'svelte-fa';
-	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
 
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
@@ -76,14 +83,14 @@
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
 
-	// let restaurantName = 'Wasabi by Morimoto';
-	// let restaurantSrc =
+	// let placeName = 'Wasabi by Morimoto';
+	// let restaurantSrcExample =
 	// 	'https://bcassetcdn.com/public/blog/wp-content/uploads/2019/07/18094833/the-red-cafe.png';
 	// let restaurantHref = '/';
-	// let imageSrc =
+	// let placeImagesSrcs =
 	// 	'https://images.unsplash.com/photo-1540648639573-8c848de23f0a?q=80&w=1912&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
 	// let address = '503 Le Quy Don, Ward 8, District 3, HCMC';
-	// let date = '2023-01-01';
+	// let timeStamp = '2023-01-01';
 	//
 	// let timeRangeOptions = {
 	// 	week: { value: 'week', title: 'week' },
@@ -92,82 +99,16 @@
 	// };
 	//
 	// let rank = 1;
-	// let checkIns = 8575;
-	// let favorites = 1234;
-	// let rating = 4.8;
+	// let checkInsExample = 8575;
+	// let favoritesExample = 1234;
+	// let ratingExample = 4.8;
 	//
-	// let userSrc = 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D';
-	// let userFullName = 'Kristin Watson';
-	// let time = '2023-01-01';
-	// let reviewContent = 'The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.';
+
 </script>
 
 <div>
 	{#if data.restaurant}
 		{#each data.restaurant as item}
-			<TabBarPlaceDetail />
-
-			<div class="flex flex-col space-y-8 py-8">
-				<PlaceDetailTitleBlock
-					restaurantName={item.name}
-					imageSrc={item.res_images != null ? item.res_images[0] : ''}
-					desc={item.description}
-					address={item.address}
-					checkInButtonOnClick={() => requestData()}
-					checkInButtonDisabled={data.owner}
-				/>
-			</div>
-
-			<LargePageTitle>
-				Ranking this
-				<TitleDropdown
-					name="time_selected"
-					id="time_selected"
-					slot="trailing"
-					{options}
-					value="week"
-				/>
-			</LargePageTitle>
-
-			<!--			<StatsSummary {rank} {checkIns} {favorites} {rating} />-->
-
-			<!--			<div class="flex flex-col space-y-0 py-8">-->
-			<!--				<Title>Check-ins • 45 check-ins</Title>-->
-			<!--				<div class="flex flex-col space-y-8 py-8">-->
-			<!--					{#each { length: 2 } as _, i}-->
-			<!--						<Review {userSrc} {userFullName} {time} content={reviewContent} rating={4} />-->
-			<!--					{/each}-->
-			<!--				</div>-->
-			<!--				<Button href='/place-detail/place-checkin' width='full' design='outlined'>View all</Button>-->
-			<!--			</div>-->
-
-			<!--			<div class="flex flex-col space-y-0 py-8">-->
-			<!--				<Title>Posts</Title>-->
-			<!--				<div class="flex flex-col space-y-9 py-8">-->
-			<!--					{#each { length: 5 } as _, i}-->
-			<!--						<Post {restaurantSrc} {restaurantName} {restaurantHref} {imageSrc} desc="" {date} />-->
-			<!--					{/each}-->
-			<!--				</div>-->
-			<!--				<Button href='/place-detail/place-posts' width='full' design='outlined'>View all</Button>-->
-			<!--			</div>-->
-
-			<p>{item.id}</p>
-			<p>{item.created_at}</p>
-			<p>{item.owner_id}</p>
-			<p>{item.name}</p>
-			<p>{item.description}</p>
-			<p>{item.is_verified}</p>
-			<p>{item.res_images}</p>
-			<p>{item.menu_images}</p>
-			<p>{item.cuisine}</p>
-			<p>{item.address}</p>
-			<p>{item.logo_url}</p>
-			{#if data.owner}
-				<Button on:click={() => requestData()}>Check Notification</Button>
-			{:else}
-				<Button on:click={() => requestData()}>Check-in</Button>
-			{/if}
-
 			{#if data.owner}
 				<AlertCard class="mt-4">
 					<Fa
@@ -188,6 +129,60 @@
 				</AlertCard>
 			{/if}
 
+			<div class="flex flex-col space-y-8 py-8">
+				<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
+				<!--TODO: favoriteButtonOnClick() @Khai -->
+				<PlaceDetailTitleBlock
+					placeName={item.name}
+					placeImagesSrcs={item.res_images}
+					placeLogoSrc={item.logo_url}
+					desc={item.description}
+					address={item.address}
+					checkInButtonOnClick={() => requestData()}
+					favoriteButtonOnClick={() => {/* TODO: @Khai */}}
+					checkInButtonDisabled={data.owner}
+				/>
+			</div>
+
+			<!-- TODO: Implement filter? @Khai -->
+			<LargePageTitle>
+				Ranking this
+				<TitleDropdown
+					name="time_selected"
+					id="time_selected"
+					slot="trailing"
+					value="week"
+				/>
+			</LargePageTitle>
+
+			<!-- TODO: Get rank and favorites count. @Khai -->
+			<StatsSummary checkIns={item.numReviews} rating={item.avgRating} rank={$rankExample} favorites={0} />
+
+			<div class="flex flex-col space-y-0 py-8">
+				<Title>Check-ins • {item.numReviews} check-ins</Title>
+				<div class="flex flex-col space-y-8 py-8">
+					{#each { length: 3 } as _}
+						<!-- TODO: Get check-ins. @Khai -->
+						<Review userSrc={$userSrcExample} userFullName={$userFullNameExample} timeStamp={$timeStampExample}
+										content={$reviewContentExample}
+										rating={$ratingExample} />
+					{/each}
+				</div>
+				<Button href='{item.name}/check-ins' width='full' design='outlined'>View all check-ins</Button>
+			</div>
+
+			<div class="flex flex-col space-y-0 py-8">
+				<Title>Posts</Title>
+				<div class="flex flex-col space-y-9 py-8">
+					{#each { length: 3 } as _}
+						<!-- TODO: Get posts. @Khai -->
+						<Post placeSrc={$placeSrcExample} placeName={$placeNameExample} placeHref={$hrefExample}
+									content={$postContentExample} timeStamp={$timeStampExample} imageSrc={$dishSrcExample} />
+					{/each}
+				</div>
+				<Button href='/place-detail/place-posts' width='full' design='outlined'>View all posts</Button>
+			</div>
+
 			<!--		<ul>-->
 			<!--{#each log as event}-->
 			<!--	{#if event.includes('image/png')}-->
@@ -199,74 +194,3 @@
 		{/each}
 	{/if}
 </div>
-
-<!--Moved-->
-<!--<div class="flex flex-col space-y-8 py-8">-->
-<!--	<PlaceDetailTitleBlock-->
-<!--		{restaurantSrc}-->
-<!--		{restaurantName}-->
-<!--		{restaurantHref}-->
-<!--		{imageSrc}-->
-<!--		{content}-->
-<!--		{address}-->
-<!--	/>-->
-<!--</div>-->
-
-<!--<LargePageTitle>-->
-<!--	Ranking this-->
-<!--	<TitleDropdown-->
-<!--		name="time_selected"-->
-<!--		id="time_selected"-->
-<!--		slot="trailing"-->
-<!--		{options}-->
-<!--		value="week"-->
-<!--	/>-->
-<!--</LargePageTitle>-->
-
-<!--<StatsSummary-->
-<!--	{rank}-->
-<!--	{checkIns}-->
-<!--	{favorites}-->
-<!--	{rating}-->
-<!--/>-->
-
-<!--<div class="flex flex-col space-y-0 py-8">-->
-<!--	<Title>Check-ins • 45 check-ins</Title>-->
-<!--	<div class="flex flex-col space-y-8 py-8">-->
-<!--		{#each { length: 2 } as _, i}-->
-<!--			<Review-->
-<!--				{userSrc}-->
-<!--				{userFullName}-->
-<!--				{time}-->
-<!--				content={reviewContent}-->
-<!--				rating={4}-->
-<!--			/>-->
-<!--		{/each}-->
-<!--	</div>-->
-<!--	<Button-->
-<!--		href="/place-detail/place-checkin"-->
-<!--		width="full"-->
-<!--		design="outlined">View all</Button-->
-<!--	>-->
-<!--</div>-->
-
-<!--<div class="flex flex-col space-y-0 py-8">-->
-<!--	<Title>Posts</Title>-->
-<!--	<div class="flex flex-col space-y-9 py-8">-->
-<!--		{#each { length: 5 } as _, i}-->
-<!--			<Post-->
-<!--				{restaurantSrc}-->
-<!--				{restaurantName}-->
-<!--				{restaurantHref}-->
-<!--				{imageSrc}-->
-<!--				{content}-->
-<!--				{date}-->
-<!--			/>-->
-<!--		{/each}-->
-<!--	</div>-->
-<!--	<Button-->
-<!--		href="/place-detail/place-posts"-->
-<!--		width="full"-->
-<!--		design="outlined">View all</Button-->
-<!--	>-->
-<!--</div>-->
