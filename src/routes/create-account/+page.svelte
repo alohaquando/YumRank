@@ -28,9 +28,9 @@
 	};
 
 	// const handleSignOut: SubmitFunction = () => {
-	// 	loading = true;
+	// 	isLoading = true;
 	// 	return async ({ update }) => {
-	// 		loading = false;
+	// 		isLoading = false;
 	// 		update();
 	// 	};
 	// };
@@ -43,8 +43,8 @@
 		action="?/update"
 		bind:this={profileForm}
 		class="form-widget flex-col flex space-y-8"
-		method="post"
 		enctype="multipart/form-data"
+		method="post"
 		use:enhance={handleSubmit}
 	>
 		<TextField
@@ -78,19 +78,19 @@
 
 		<Avatar
 			bind:url={avatarUrl}
-
+			on:upload={() => profileForm.requestSubmit()}
 			size={10}
 			{supabase}
 		/>
 
 		<Button class="w-full" disabled={loading} type="submit"
-			>{loading ? 'Loading...' : 'Update'}</Button
+		>{loading ? 'Loading...' : 'Update'}</Button
 		>
 	</form>
 
 	<!--	<form action="?/signout" method="post" use:enhance={handleSignOut}>-->
 	<!--		<div>-->
-	<!--			<Button disabled={loading} class="w-full">Sign Out</Button>-->
+	<!--			<Button disabled={isLoading} class="w-full">Sign Out</Button>-->
 	<!--		</div>-->
 	<!--	</form>-->
 </div>

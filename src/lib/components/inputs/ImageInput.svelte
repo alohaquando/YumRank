@@ -1,32 +1,28 @@
 <script lang="ts">
+	// noinspection ES6UnusedImports
 	import Fa from 'svelte-fa';
 	import { faImage, faImages } from '@fortawesome/pro-light-svg-icons';
-	import { faImage as faImageRegular, faTimes, faUp } from '@fortawesome/pro-regular-svg-icons';
+	import { faImage as faImageRegular, faTimes } from '@fortawesome/pro-regular-svg-icons';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
-	import type { SupabaseClient } from '@supabase/supabase-js';
 
 	export let id: string | undefined | null;
 	export let name: string | undefined | null;
 	export let multiple: boolean = false;
 	export let label: string | null | undefined = null;
-	export let bucket: string;
-	export let supabase: SupabaseClient;
-	export let bucketUrls: string[] = [];
+	export let required: boolean = false;
+
 
 	export let srcs: string[] = [];
 	let inputElement: HTMLInputElement;
 	let files: FileList | undefined;
-	let isUploading = false;
 
 	function onChange() {
-		if (!multiple) {
-			srcs = [];
-		}
+		srcs = [];
 		if (files) {
-			for (let i = 0; i < files.length; i++) {
+			for (let i = srcs.length; i < files.length + srcs.length; i++) {
 				const reader = new FileReader();
 				reader.onload = function() {
 					if (reader.result !== null) {
@@ -43,39 +39,6 @@
 		files = undefined;
 		srcs = [];
 		inputElement.value = '';
-	}
-
-	async function uploadSelected() {
-		try {
-			isUploading = true;
-
-			if (!files || files.length === 0) {
-				throw new Error('You must select an image to upload.');
-			}
-
-			for (let i = 0; i < files.length; i++) {
-				const file = files[i];
-				const fileExt = file.name.split('.').pop();
-				const filePath = `${Math.random()}.${fileExt}`;
-
-				const { error } = await supabase.storage.from(bucket).upload(filePath, file);
-
-				if (error) {
-					throw error;
-				}
-
-				const { data } = supabase.storage.from(bucket).getPublicUrl(filePath);
-				bucketUrls.push(data.publicUrl);
-			}
-		} catch (error) {
-			if (error instanceof Error) {
-				console.log(error);
-				alert(error.message);
-			}
-		} finally {
-			bucketUrls = bucketUrls;
-			isUploading = false;
-		}
 	}
 </script>
 
@@ -96,10 +59,10 @@
 		</label>
 	{:else}
 		<div
-			class="w-full grid grid-cols-4 grid-flow-row [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2 gap-4 ">
+			class="w-full grid grid-cols-4 grid-flow-row [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2 gap-4 relative">
 			{#each srcs as src}
 				<img
-					class="aspect-square h-full w-full rounded-2xl object-scale-down ring-1 ring-gray-300"
+					class="aspect-square h-auto w-full rounded-2xl object-scale-down ring-1 ring-gray-300"
 					src={src}
 					alt=""
 				/>
@@ -110,22 +73,14 @@
 			<label for={id} class="cursor-pointer rounded-full transition hover:bg-red-50 hover:text-red-500">
 				<Button design="text" class="pointer-events-none">
 					<Fa icon={faImageRegular} slot="icon" />
-					Add
+					Change
 				</Button>
 			</label>
 			<Button design="text" on:click={() => clearSelected()}>
 				<Fa icon={faTimes} slot="icon" />
 				Remove
 			</Button>
-			<Button design="tonal" on:click={() => uploadSelected()} disabled={isUploading}>
-				<Fa icon={faUp} slot="icon" />
-				{isUploading ? "Uploading..." : "Test upload"}
-			</Button>
 		</div>
-		{#each bucketUrls as url}
-			{url}
-			<br/>
-		{/each}
 	{/if}
 
 </div>
@@ -141,8 +96,6 @@
 	on:change={() => {
 			onChange();
 		}}
-	on:submit={() => {
-			uploadSelected();
-		}}
+	{required}
 	type="file"
 />

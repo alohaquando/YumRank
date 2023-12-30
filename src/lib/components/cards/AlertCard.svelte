@@ -29,9 +29,10 @@
 		<slot name="icon" />
 		<slot name="title" />
 	</div>
-	{#if $$slots.body}
-		<div class="self-stretch flex mt-6 text-center mx-auto w-full">
+	{#if $$slots.body || $$slots.default}
+		<div class="self-stretch flex mt-6 text-center mx-auto w-full justify-center">
 			<slot name="body" />
+			<slot/>
 		</div>
 	{/if}
 </div>

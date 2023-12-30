@@ -45,6 +45,8 @@
 	// 	});
 	// };
 
+	let options = ['week', 'month', 'year'];
+
 	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
 
 	export const requestData = async () => {
@@ -99,54 +101,55 @@
 	// let reviewContent = 'The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.';
 
 
-
 </script>
-
 <div>
 	{#if data.restaurant}
 		{#each data.restaurant as item}
-
-
 			<TabBarPlaceDetail />
 
-
-
 			<div class="flex flex-col space-y-8 py-8">
-				<PlaceDetailTitleBlock restaurantName={item.name}
-															 imageSrc={item.res_images != null ? item.res_images[0] : ""}
-															 desc={item.description}
-															 address={item.address}
-															 checkInButtonOnClick={() => requestData()}
-															 checkInButtonDisabled={data.owner} />
+				<PlaceDetailTitleBlock
+					restaurantName={item.name}
+					imageSrc={item.res_images != null ? item.res_images[0] : ''}
+					desc={item.description}
+					address={item.address}
+					checkInButtonOnClick={() => requestData()}
+					checkInButtonDisabled={data.owner}
+				/>
 			</div>
 
 			<LargePageTitle>
 				Ranking this
-				<TitleDropdown name="time_selected" id="time_selected" slot="trailing" {options} value="week" />
+				<TitleDropdown
+					name="time_selected"
+					id="time_selected"
+					slot="trailing"
+					{options}
+					value="week"
+				/>
 			</LargePageTitle>
 
-<!--			<StatsSummary {rank} {checkIns} {favorites} {rating} />-->
+			<!--			<StatsSummary {rank} {checkIns} {favorites} {rating} />-->
 
-<!--			<div class="flex flex-col space-y-0 py-8">-->
-<!--				<Title>Check-ins • 45 check-ins</Title>-->
-<!--				<div class="flex flex-col space-y-8 py-8">-->
-<!--					{#each { length: 2 } as _, i}-->
-<!--						<Review {userSrc} {userFullName} {time} content={reviewContent} rating={4} />-->
-<!--					{/each}-->
-<!--				</div>-->
-<!--				<Button href='/place-detail/place-checkin' width='full' design='outlined'>View all</Button>-->
-<!--			</div>-->
+			<!--			<div class="flex flex-col space-y-0 py-8">-->
+			<!--				<Title>Check-ins • 45 check-ins</Title>-->
+			<!--				<div class="flex flex-col space-y-8 py-8">-->
+			<!--					{#each { length: 2 } as _, i}-->
+			<!--						<Review {userSrc} {userFullName} {time} content={reviewContent} rating={4} />-->
+			<!--					{/each}-->
+			<!--				</div>-->
+			<!--				<Button href='/place-detail/place-checkin' width='full' design='outlined'>View all</Button>-->
+			<!--			</div>-->
 
-<!--			<div class="flex flex-col space-y-0 py-8">-->
-<!--				<Title>Posts</Title>-->
-<!--				<div class="flex flex-col space-y-9 py-8">-->
-<!--					{#each { length: 5 } as _, i}-->
-<!--						<Post {restaurantSrc} {restaurantName} {restaurantHref} {imageSrc} desc="" {date} />-->
-<!--					{/each}-->
-<!--				</div>-->
-<!--				<Button href='/place-detail/place-posts' width='full' design='outlined'>View all</Button>-->
-<!--			</div>-->
-
+			<!--			<div class="flex flex-col space-y-0 py-8">-->
+			<!--				<Title>Posts</Title>-->
+			<!--				<div class="flex flex-col space-y-9 py-8">-->
+			<!--					{#each { length: 5 } as _, i}-->
+			<!--						<Post {restaurantSrc} {restaurantName} {restaurantHref} {imageSrc} desc="" {date} />-->
+			<!--					{/each}-->
+			<!--				</div>-->
+			<!--				<Button href='/place-detail/place-posts' width='full' design='outlined'>View all</Button>-->
+			<!--			</div>-->
 
 			<p>{item.id}</p>
 			<p>{item.created_at}</p>
@@ -167,16 +170,23 @@
 
 			{#if data.owner}
 				<AlertCard class="mt-4">
-					<Fa icon={faInfoCircle} slot="icon" />
+					<Fa
+						icon={faInfoCircle}
+						slot="icon"
+					/>
 					<Title slot="title">You are the manager of this site</Title>
-					<Button slot="body" width="full">
-						<Fa icon={faQrcode} slot="icon" />
+					<Button
+						slot="body"
+						width="full"
+					>
+						<Fa
+							icon={faQrcode}
+							slot="icon"
+						/>
 						Generate QR code for check-in
 					</Button>
 				</AlertCard>
 			{/if}
-
-
 
 			<!--		<ul>-->
 			<!--{#each log as event}-->
@@ -189,5 +199,3 @@
 		{/each}
 	{/if}
 </div>
-
-
