@@ -29,9 +29,7 @@
 		<LeaderboardItem
 			rank={i + 1}
 			restaurantSrc={$restaurantSrc}
-			dishSrc={$dishSrc}
 			restaurantName={$restaurantName}
-			dishName={$dishName}
 			checkIns={$checkIns}
 			rating={$rating}
 			favorites={$favorites}

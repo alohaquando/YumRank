@@ -19,7 +19,7 @@
 </script>
 
 <a
-	class="flex space-x-4 w-full overflow-auto"
+	class="flex w-full overflow-auto space-x-4"
 	{href}
 >
 	<div class="pt-2">
@@ -35,7 +35,7 @@
 		</div>
 		<div class="flex-col flex space-y-3 {prominent ? '' : 'pt-4'}">
 			<Title class="overflow-ellipsis">{restaurantName}</Title>
-			<div class="flex overflow-clip w-fit space-x-4">
+			<div class="flex w-fit overflow-clip space-x-4">
 				<InfoChip>
 					<Fa
 						icon={faUserCheck}
@@ -68,7 +68,7 @@
 
 <!--With dish name-->
 <!--<a-->
-<!--	class="flex space-x-4 w-full overflow-auto"-->
+<!--	class="flex w-full overflow-auto space-x-4"-->
 <!--	{href}-->
 <!--&gt;-->
 <!--	<div class="pt-2">-->
@@ -83,20 +83,20 @@
 <!--			/>-->
 <!--			{#if prominent}-->
 <!--				<div-->
-<!--					class="absolute w-20 h-20 bottom-0 right-0 ring-[0.5rem] ring-white rounded-full overflow-clip"-->
+<!--					class="absolute right-0 bottom-0 h-20 w-20 overflow-clip rounded-full ring-white ring-[0.5rem]"-->
 <!--				>-->
 <!--					<Image-->
 <!--						alt={dishName}-->
-<!--						class="w-20 h-20"-->
+<!--						class="h-20 w-20"-->
 <!--						src={dishSrc}-->
 <!--					/>-->
 <!--				</div>-->
 <!--			{/if}-->
 <!--		</div>-->
-<!--		<div class="flex-col flex space-y-1.5">-->
+<!--		<div class="flex flex-col space-y-1.5">-->
 <!--			<Title class="overflow-ellipsis">{restaurantName}</Title>-->
 <!--			<Body class="opacity-80">{dishName}</Body>-->
-<!--			<div class="flex overflow-clip w-fit space-x-4">-->
+<!--			<div class="flex w-fit overflow-clip space-x-4">-->
 <!--				<InfoChip>-->
 <!--					<Fa-->
 <!--						icon={faUserCheck}-->
