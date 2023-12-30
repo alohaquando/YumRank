@@ -18,19 +18,19 @@
 	</ActionChip
 	>
 	<ActionChip
-		design={currentLocation.endsWith(placeName + '/check-ins') ? 'tonal' : 'outlined'}
+		design={currentLocation.includes(placeName + '/check-ins') ? 'tonal' : 'outlined'}
 		href="/places/{placeName}/check-ins"
 		width="fit">Check-ins
 	</ActionChip
 	>
 	<ActionChip
-		design={currentLocation.endsWith(placeName + '/posts') ? 'tonal' : 'outlined'}
+		design={currentLocation.includes(placeName + '/posts') ? 'tonal' : 'outlined'}
 		href="/places/{placeName}/posts"
 		width="fit">Posts
 	</ActionChip>
 	{#if isOwner}
 		<ActionChip
-			design={currentLocation.endsWith(placeName + '/settings') ? 'tonal' : 'outlined'}
+			design={currentLocation.includes(placeName + '/settings') ? 'tonal' : 'outlined'}
 			href="/places/{placeName}/settings"
 			width="fit">Settings
 		</ActionChip>

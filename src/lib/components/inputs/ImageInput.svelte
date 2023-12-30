@@ -13,17 +13,19 @@
 	export let multiple: boolean = false;
 	export let label: string | null | undefined = null;
 	export let required: boolean = false;
+	export let overrideShowFilesInitially: boolean = false;
 
 	export let srcs: string[] = [];
 	let inputElement: HTMLInputElement;
 	let files: FileList | undefined;
 
 	function onChange() {
+		overrideShowFilesInitially = false;
 		srcs = [];
 		if (files) {
 			for (let i = srcs.length; i < files.length + srcs.length; i++) {
 				const reader = new FileReader();
-				reader.onload = function () {
+				reader.onload = function() {
 					if (reader.result !== null) {
 						srcs.push(reader.result as string);
 					}
@@ -35,6 +37,7 @@
 	}
 
 	function clearSelected() {
+		overrideShowFilesInitially = false;
 		files = undefined;
 		srcs = [];
 		inputElement.value = '';
@@ -47,7 +50,7 @@
 	{#if label}
 		<Title class="py-2 text-left">{label}</Title>
 	{/if}
-	{#if files === undefined}
+	{#if files === undefined && !overrideShowFilesInitially}
 		<label
 			class="flex aspect-square h-48 flex-col items-center justify-center rounded-2xl border-2 border-dotted border-gray-300 transition space-y-4 hover:bg-red-50"
 			for={id}

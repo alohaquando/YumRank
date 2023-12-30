@@ -21,7 +21,7 @@
 	{#if data.owner}
 		<Button
 			width="full"
-			href="/management/places/{data.placeName}/create-post"
+			href="/places/{data.placeName}/posts/add-post"
 		>
 			<Fa
 				icon={faPlus}

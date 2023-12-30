@@ -8,7 +8,8 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	const { data: restaurant, error } = await supabase
 		.from('restaurants')
 		.select('*')
-		.eq('name', params.name.replace('-', ' '));
+		.eq('name', params.name.replace('-', ' '))
+		.single();
 
 	const resowner = (restaurant && restaurant[0])?.owner_id as string;
 

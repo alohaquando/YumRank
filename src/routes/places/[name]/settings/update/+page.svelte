@@ -1,70 +1,100 @@
-<script>
+<script lang="ts">
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
+	import type { SubmitFunction } from '@sveltejs/kit';
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import { enhance } from '$app/forms';
+	import ImageInput from '$lib/components/inputs/ImageInput.svelte';
+	import ErrorCard from '$lib/components/cards/FormStatusCard.svelte';
+	import LoadingOverlay from '$lib/components/layouts/LoadingOverlay.svelte';
 
-	let name = 'Example';
-	let address = 'Example';
-	let description = 'Example';
-	let logo = 'https://via.placeholder.com/120x120';
-	let placePicture = 'https://via.placeholder.com/342x246';
-	let submittedLogo = '';
-	let submittedPlacePicture = '';
+	export let data;
+	export let form;
 
-	function updateInformation() {
-		// Call your update function here
-	}
+	let { session, supabase } = data;
+	$: ({ session, supabase } = data);
 
-	function handleLogoUpload(event) {
-		const file = event.target.files[0];
-		const reader = new FileReader();
+	let isLoading = false;
 
-		reader.onload = () => {
-			submittedLogo = reader.result;
+	const handleSubmit: SubmitFunction = () => {
+		isLoading = true;
+		return async ({ update }) => {
+			await update();
+			isLoading = false;
 		};
-
-		reader.readAsDataURL(file);
-	}
+	};
 </script>
 
-<LargePageTitle showBackButton>Update information</LargePageTitle>
+<LoadingOverlay bind:isLoading />
 
-<div class="flex flex-col gap-8">
+<LargePageTitle showBackButton>Update your place</LargePageTitle>
+<!--TODO: Add update function-->
+<form
+	action=""
+	class="flex flex-col form-widget space-y-10"
+	enctype="multipart/form-data"
+	method="POST"
+	use:enhance={handleSubmit}
+>
+	{#if form}
+		<ErrorCard
+			title="Failed to update place"
+			message={form.message}
+			failed={form.failed}
+		/>
+	{/if}
+
 	<TextField
-		bind:value={name}
-		label="Name"
 		id="name"
-		placeholder="Enter your name"
+		label="Name"
 		name="name"
+		pattern="[a-zA-Z0-9 ]*"
+		placeholder="Name"
+		required
+		type="text"
+		value={data.restaurant.name}
 	/>
+
 	<TextField
-		bind:value={address}
-		label="Address"
 		id="address"
-		placeholder="Enter address"
+		label="Address"
 		name="address"
+		placeholder="Address"
+		required
+		type="text"
+		value={data.restaurant.address}
 	/>
+
 	<TextField
-		bind:value={description}
-		label="Description"
 		id="description"
-		placeholder="Enter description"
+		label="Description"
 		name="description"
+		placeholder="Description"
+		required
+		type="text"
+		value={data.restaurant.description}
 	/>
-	<TextField
-		bind:value={logo}
+
+	<ImageInput
+		id="logo"
 		label="Logo"
-		type="file"
-		on:change={handleLogoUpload}
+		name="logoUrl"
+		overrideShowFilesInitially
+		srcs={[data.restaurant.logo_url]}
 	/>
-	<TextField
-		bind:value={placePicture}
-		label="Picture of your place"
-		type="file"
+
+	<ImageInput
+		id="resimages"
+		label="Images of your place"
+		multiple
+		name="restaurantImages"
+		overrideShowFilesInitially
+		srcs={data.restaurant.res_images}
 	/>
 
 	<Button
-		class="w-full"
-		on:click={updateInformation}>Submit</Button
+		disabled={isLoading}
+		type="submit"
+		width="full">{isLoading ? 'Loading...' : 'Create'}</Button
 	>
-</div>
+</form>

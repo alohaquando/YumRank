@@ -6,13 +6,15 @@
 	import ListItem from '$lib/components/lists/ListItem.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
 	import { faInfoCircle, faTrash } from '@fortawesome/pro-solid-svg-icons';
+
+	export let data;
 </script>
 
 <LargePageTitle showBackButton>Place Settings</LargePageTitle>
 
 <ListItem
 	class="text-black"
-	href="/management/settings/update"
+	href="/places/{data.placeName}/settings/update"
 >
 	<Fa
 		icon={faInfoCircle}
@@ -26,7 +28,7 @@
 <ListItem
 	class="text-red-500"
 	on:click={() => {
-		window.alert('hi');
+		window.alert('Delete clicked');
 	}}
 >
 	<Fa

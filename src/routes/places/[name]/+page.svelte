@@ -100,110 +100,107 @@
 
 <div>
 	{#if data.restaurant}
-		{#each data.restaurant as item}
-			{#if data.owner}
-				<AlertCard>
+		{#if data.owner}
+			<AlertCard>
+				<Fa
+					icon={faInfoCircle}
+					slot="icon"
+				/>
+				<Title slot="title">You are the manager of this site</Title>
+				<Button
+					slot="body"
+					width="full"
+					href="/places/{data.placeName}/check-ins/generate-qr"
+				>
 					<Fa
-						icon={faInfoCircle}
+						icon={faQrcode}
 						slot="icon"
 					/>
-					<Title slot="title">You are the manager of this site</Title>
-					<!-- TODO: Link button function -->
-					<Button
-						slot="body"
-						width="full"
-						href={$hrefExample}
-					>
-						<Fa
-							icon={faQrcode}
-							slot="icon"
-						/>
-						Generate QR code for check-in
-					</Button>
-				</AlertCard>
-			{/if}
+					Generate QR code for check-in
+				</Button>
+			</AlertCard>
+		{/if}
 
-			<div class="flex flex-col space-y-8 py-8">
-				<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
-				<!--TODO: favoriteButtonOnClick() @Khai -->
-				<PlaceDetailTitleBlock
-					placeName={item.name}
-					placeImagesSrcs={item.res_images}
-					placeLogoSrc={item.logo_url}
-					desc={item.description}
-					address={item.address}
-					checkInButtonOnClick={() => requestData()}
-					favoriteButtonOnClick={() => {
+		<div class="flex flex-col space-y-8 py-8">
+			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
+			<!--TODO: favoriteButtonOnClick() @Khai -->
+			<PlaceDetailTitleBlock
+				placeName={data.restaurant.name}
+				placeImagesSrcs={data.restaurant.res_images}
+				placeLogoSrc={data.restaurant.logo_url}
+				desc={data.restaurant.description}
+				address={data.restaurant.address}
+				checkInButtonOnClick={() => requestData()}
+				favoriteButtonOnClick={() => {
 						window.alert("Favorite button clicked")
 					}}
-					checkInButtonDisabled={data.owner}
-				/>
-			</div>
-
-			<!-- TODO: Implement filter? @Khai -->
-			<LargePageTitle>
-				Ranking this
-				<TitleDropdown
-					name="time_selected"
-					id="time_selected"
-					slot="trailing"
-					value="week"
-				/>
-			</LargePageTitle>
-
-			<!-- TODO: Get rank and favorites count. @Khai -->
-			<StatsSummary
-				checkIns={item.numReviews}
-				rating={item.avgRating}
-				rank={$rankExample}
-				favorites={0}
+				checkInButtonDisabled={data.owner}
 			/>
+		</div>
 
-			<div class="flex flex-col space-y-0 py-8">
-				<Title>Check-ins • {item.numReviews} check-ins</Title>
-				<div class="flex flex-col space-y-8 py-8">
-					{#each { length: 3 } as _}
-						<!-- TODO: Get check-ins. @Khai -->
-						<Review
-							userSrc={$userSrcExample}
-							userFullName={$userFullNameExample}
-							timeStamp={$timeStampExample}
-							content={$reviewContentExample}
-							rating={$ratingExample}
-						/>
-					{/each}
-				</div>
-				<Button
-					href="{item.name}/check-ins"
-					width="full"
-					design="outlined">View all check-ins
-				</Button
-				>
-			</div>
+		<!-- TODO: Implement filter? @Khai -->
+		<LargePageTitle>
+			Ranking this
+			<TitleDropdown
+				name="time_selected"
+				id="time_selected"
+				slot="trailing"
+				value="week"
+			/>
+		</LargePageTitle>
 
-			<div class="flex flex-col space-y-0 py-8">
-				<Title>Posts</Title>
-				<div class="flex flex-col space-y-9 py-8">
-					{#each { length: 3 } as _}
-						<!-- TODO: Get posts. @Khai -->
-						<Post
-							placeSrc={$placeSrcExample}
-							placeName={$placeNameExample}
-							placeHref={$hrefExample}
-							content={$postContentExample}
-							timeStamp={$timeStampExample}
-							imageSrc={$dishSrcExample}
-						/>
-					{/each}
-				</div>
-				<Button
-					href="/place-detail/place-posts"
-					width="full"
-					design="outlined">View all posts
-				</Button
-				>
+		<!-- TODO: Get rank and favorites count. @Khai -->
+		<StatsSummary
+			checkIns={data.restaurant.numReviews}
+			rating={data.restaurant.avgRating}
+			rank={$rankExample}
+			favorites={0}
+		/>
+
+		<div class="flex flex-col space-y-0 py-8">
+			<Title>Check-ins • {data.restaurant.numReviews} check-ins</Title>
+			<div class="flex flex-col space-y-8 py-8">
+				{#each { length: 3 } as _}
+					<!-- TODO: Get check-ins. @Khai -->
+					<Review
+						userSrc={$userSrcExample}
+						userFullName={$userFullNameExample}
+						timeStamp={$timeStampExample}
+						content={$reviewContentExample}
+						rating={$ratingExample}
+					/>
+				{/each}
 			</div>
-		{/each}
+			<Button
+				href="{data.restaurant.name}/check-ins"
+				width="full"
+				design="outlined">View all check-ins
+			</Button
+			>
+		</div>
+
+		<div class="flex flex-col space-y-0 py-8">
+			<Title>Posts</Title>
+			<div class="flex flex-col space-y-9 py-8">
+				{#each { length: 3 } as _}
+					<!-- TODO: Get posts. @Khai -->
+					<Post
+						placeSrc={$placeSrcExample}
+						placeName={$placeNameExample}
+						placeHref={$hrefExample}
+						content={$postContentExample}
+						timeStamp={$timeStampExample}
+						imageSrc={$dishSrcExample}
+					/>
+				{/each}
+			</div>
+			<Button
+				href="{data.restaurant.name}/posts"
+				width="full"
+				design="outlined">View all posts
+			</Button
+			>
+		</div>
 	{/if}
 </div>
 

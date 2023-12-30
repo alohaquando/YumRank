@@ -22,7 +22,7 @@
 	{#if data.owner}
 		<Button
 			width="full"
-			href={$hrefExample}
+			href="/places/{data.placeName}/check-ins/generate-qr"
 		>
 			<Fa
 				icon={faQrcode}

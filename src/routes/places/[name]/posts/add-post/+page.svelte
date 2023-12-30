@@ -27,7 +27,7 @@
 
 <LoadingOverlay bind:isLoading />
 
-<LargePageTitle showBackButton>Add a place</LargePageTitle>
+<LargePageTitle showBackButton>Add a post</LargePageTitle>
 <form
 	action="?/create"
 	class="flex flex-col form-widget space-y-10"
@@ -43,42 +43,8 @@
 		/>
 	{/if}
 
-	<TextField
-		id="name"
-		label="Name"
-		name="name"
-		pattern="[a-zA-Z0-9 ]*"
-		placeholder="Name"
-		required
-		type="text"
-	/>
-
-	<TextField
-		id="address"
-		label="Address"
-		name="address"
-		placeholder="Address"
-		required
-		type="text"
-	/>
-
-	<TextField
-		id="description"
-		label="Description"
-		name="description"
-		placeholder="Description"
-		required
-		type="text"
-	/>
-
 	<ImageInput
-		id="logo"
-		label="Logo"
-		name="logoUrl"
-	/>
-
-	<ImageInput
-		id="resimages"
+		id="post_images"
 		label="Images of your place"
 		multiple
 		name="restaurantImages"
