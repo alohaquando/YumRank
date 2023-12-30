@@ -4,6 +4,7 @@
 	import Fa from 'svelte-fa';
 	import { faChevronDown } from '@fortawesome/pro-solid-svg-icons';
 	import Title from '$lib/components/typography/Title.svelte';
+	import { timeRangeOptions } from '$lib/data/timeRangeOptions';
 
 	export let design: 'display' | 'title' = 'display';
 	export let value: string;
@@ -18,7 +19,7 @@
 	type Options<K extends string> = {
 		[key in K]: ThemeOption;
 	};
-	export let options: Options<string> = {};
+	export let options: Options<string> = timeRangeOptions;
 
 	let borderClasses: string;
 	let iconClasses: string;

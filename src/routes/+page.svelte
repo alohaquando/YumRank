@@ -2,7 +2,6 @@
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
-	import { timeRangeOptions } from '$lib/data/timeRangeOptions';
 	import {
 		restaurantSrc,
 		dishSrc,
@@ -20,7 +19,6 @@
 	<TitleDropdown
 		id="time_selected"
 		name="time_selected"
-		options={timeRangeOptions}
 		slot="trailing"
 		value="week"
 	/>
