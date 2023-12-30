@@ -43,12 +43,14 @@
 			<span class="opacity-50">Not signed in</span>
 		</LargePageTitle>
 		<div class=" flex text-center flex-col space-y-6 py-6">
-			<Body class="">Sign in with a YumRank account to check-in to your favoritesExample places!</Body>
+			<Body class=""
+				>Sign in with a YumRank account to check-in to your favoritesExample places!</Body
+			>
 			<Button
 				class="w-full"
-				href="/sign-in">Sign in
-			</Button
-			>
+				href="/sign-in"
+				>Sign in
+			</Button>
 		</div>
 	</div>
 {:else}
@@ -77,9 +79,9 @@
 				<Button
 					design="outlined"
 					width="full"
-					href="/me/managed-places">View all
-				</Button
-				>
+					href="/me/managed-places"
+					>View all
+				</Button>
 			</div>
 		</div>
 
@@ -110,9 +112,9 @@
 			>
 				<Button
 					class="w-full"
-					type="submit">Sign out
-				</Button
-				>
+					type="submit"
+					>Sign out
+				</Button>
 			</form>
 		</div>
 	</div>

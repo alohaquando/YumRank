@@ -22,6 +22,10 @@ export const userSrcExample = readable(
 export const userFullNameExample = readable('Lee Ik-jun');
 export const rankExample = readable(4);
 export const timeStampExample = readable('2023-01-01');
-export const reviewContentExample = readable('The menu at Savor Delights is a testament to the chef\'s creativity and commitment to using fresh, high-quality ingredients.');
+export const reviewContentExample = readable(
+	"The menu at Savor Delights is a testament to the chef's creativity and commitment to using fresh, high-quality ingredients."
+);
 
-export const postContentExample = readable('✨ Come try our new and inventive dish, the Galaxy Starlight Bagel');
+export const postContentExample = readable(
+	'✨ Come try our new and inventive dish, the Galaxy Starlight Bagel'
+);

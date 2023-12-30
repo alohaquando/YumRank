@@ -16,9 +16,9 @@
 <div class="pt-2">
 	<Button
 		design="outlined"
-		href="/me">Back
-	</Button
-	>
+		href="/me"
+		>Back
+	</Button>
 </div>
 
 <LargePageTitle>Update profile</LargePageTitle>
@@ -50,7 +50,7 @@
 	/>
 	<Button
 		type="submit"
-		width="full">Update
-	</Button
-	>
+		width="full"
+		>Update
+	</Button>
 </div>

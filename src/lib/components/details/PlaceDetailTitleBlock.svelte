@@ -20,18 +20,17 @@
 	export let isFavorite: boolean = false;
 	export let checkInButtonOnClick: () => void;
 	export let favoriteButtonOnClick: () => void;
-
-
 </script>
 
 <div
-	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none w-screen px-6 -translate-x-6 snap-x snap-mandatory scroll-px-6">
+	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none w-screen px-6 -translate-x-6 snap-x snap-mandatory scroll-px-6"
+>
 	{#if placeImagesSrcs !== undefined && placeImagesSrcs !== null}
 		{#each placeImagesSrcs as src}
 			<Image
 				alt="Images of {placeName}"
 				class="w-[86vw] h-64 aspect-[2/1] rounded-3xl snap-start snap-always	"
-				src={src}
+				{src}
 			/>
 		{/each}
 	{/if}

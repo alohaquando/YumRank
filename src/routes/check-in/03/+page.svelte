@@ -34,8 +34,7 @@
 			width="full"
 		>
 			Complete check-in
-		</Button
-		>
+		</Button>
 	</div>
 	<div class="mt-4">
 		<Button
@@ -44,7 +43,6 @@
 			width="full"
 		>
 			Cancel
-		</Button
-		>
+		</Button>
 	</div>
 </div>

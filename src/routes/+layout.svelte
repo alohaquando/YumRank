@@ -52,6 +52,8 @@
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
 		<slot />
 	</div>
-	<NavBar bind:currentLocation={$page.url.pathname} class="fixed bottom-0 left-0 w-full" />
-
+	<NavBar
+		bind:currentLocation={$page.url.pathname}
+		class="fixed bottom-0 left-0 w-full"
+	/>
 </div>

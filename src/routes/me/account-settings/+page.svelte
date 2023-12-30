@@ -12,9 +12,9 @@
 <div class="pt-2">
 	<Button
 		design="outlined"
-		href="/me">Back
-	</Button
-	>
+		href="/me"
+		>Back
+	</Button>
 </div>
 
 <LargePageTitle>Account Settings</LargePageTitle>

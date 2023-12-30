@@ -13,7 +13,12 @@
 		timeStampExample,
 		userFullNameExample,
 		userSrcExample,
-		rankExample, placeSrcExample, placeNameExample, hrefExample, postContentExample, dishSrcExample
+		rankExample,
+		placeSrcExample,
+		placeNameExample,
+		hrefExample,
+		postContentExample,
+		dishSrcExample
 	} from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
@@ -103,7 +108,6 @@
 	// let favoritesExample = 1234;
 	// let ratingExample = 4.8;
 	//
-
 </script>
 
 <div>
@@ -139,7 +143,9 @@
 					desc={item.description}
 					address={item.address}
 					checkInButtonOnClick={() => requestData()}
-					favoriteButtonOnClick={() => {/* TODO: @Khai */}}
+					favoriteButtonOnClick={() => {
+						/* TODO: @Khai */
+					}}
 					checkInButtonDisabled={data.owner}
 				/>
 			</div>
@@ -156,19 +162,32 @@
 			</LargePageTitle>
 
 			<!-- TODO: Get rank and favorites count. @Khai -->
-			<StatsSummary checkIns={item.numReviews} rating={item.avgRating} rank={$rankExample} favorites={0} />
+			<StatsSummary
+				checkIns={item.numReviews}
+				rating={item.avgRating}
+				rank={$rankExample}
+				favorites={0}
+			/>
 
 			<div class="flex flex-col space-y-0 py-8">
 				<Title>Check-ins • {item.numReviews} check-ins</Title>
 				<div class="flex flex-col space-y-8 py-8">
 					{#each { length: 3 } as _}
 						<!-- TODO: Get check-ins. @Khai -->
-						<Review userSrc={$userSrcExample} userFullName={$userFullNameExample} timeStamp={$timeStampExample}
-										content={$reviewContentExample}
-										rating={$ratingExample} />
+						<Review
+							userSrc={$userSrcExample}
+							userFullName={$userFullNameExample}
+							timeStamp={$timeStampExample}
+							content={$reviewContentExample}
+							rating={$ratingExample}
+						/>
 					{/each}
 				</div>
-				<Button href='{item.name}/check-ins' width='full' design='outlined'>View all check-ins</Button>
+				<Button
+					href="{item.name}/check-ins"
+					width="full"
+					design="outlined">View all check-ins</Button
+				>
 			</div>
 
 			<div class="flex flex-col space-y-0 py-8">
@@ -176,11 +195,21 @@
 				<div class="flex flex-col space-y-9 py-8">
 					{#each { length: 3 } as _}
 						<!-- TODO: Get posts. @Khai -->
-						<Post placeSrc={$placeSrcExample} placeName={$placeNameExample} placeHref={$hrefExample}
-									content={$postContentExample} timeStamp={$timeStampExample} imageSrc={$dishSrcExample} />
+						<Post
+							placeSrc={$placeSrcExample}
+							placeName={$placeNameExample}
+							placeHref={$hrefExample}
+							content={$postContentExample}
+							timeStamp={$timeStampExample}
+							imageSrc={$dishSrcExample}
+						/>
 					{/each}
 				</div>
-				<Button href='/place-detail/place-posts' width='full' design='outlined'>View all posts</Button>
+				<Button
+					href="/place-detail/place-posts"
+					width="full"
+					design="outlined">View all posts</Button
+				>
 			</div>
 
 			<!--		<ul>-->

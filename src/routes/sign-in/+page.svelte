@@ -49,14 +49,14 @@
 		/>
 		<Button
 			type="submit"
-			width="full">Sign in
-		</Button
-		>
+			width="full"
+			>Sign in
+		</Button>
 		<ActionChip
 			formaction="?/forgot"
-			href="/">Reset my passwords
-		</ActionChip
-		>
+			href="/"
+			>Reset my passwords
+		</ActionChip>
 	</form>
 
 	<Divider />

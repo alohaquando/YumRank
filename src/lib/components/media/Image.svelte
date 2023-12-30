@@ -25,8 +25,11 @@
 			on:error={handleError}
 			{src}
 		/>
-	{:else }
-		<Fa icon={faImage} class="text-4xl text-red-300" />
+	{:else}
+		<Fa
+			icon={faImage}
+			class="text-4xl text-red-300"
+		/>
 	{/if}
 	<slot />
 </div>

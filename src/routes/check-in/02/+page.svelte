@@ -24,16 +24,16 @@
 		<div class="mt-4">
 			<Button
 				class="w-full"
-				href="/check-in/03">This is correct, continue
-			</Button
-			>
+				href="/check-in/03"
+				>This is correct, continue
+			</Button>
 		</div>
 		<div class="mt-4">
 			<Button
 				class="w-full"
-				design="outlined">Scan again
-			</Button
-			>
+				design="outlined"
+				>Scan again
+			</Button>
 		</div>
 	</div>
 </div>

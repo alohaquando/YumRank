@@ -59,9 +59,9 @@
 		/>
 		<Button
 			type="submit"
-			width="full">Sign up
-		</Button
-		>
+			width="full"
+			>Sign up
+		</Button>
 	</form>
 
 	<Divider />
