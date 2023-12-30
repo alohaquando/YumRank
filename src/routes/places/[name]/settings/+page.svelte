@@ -1,11 +1,11 @@
 <script lang="ts">
+	// noinspection ES6UnusedImports
+	import Fa from 'svelte-fa';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
-	import Fa from 'svelte-fa';
 	import { faInfoCircle, faTrash } from '@fortawesome/pro-solid-svg-icons';
-	import IconButton from '$lib/components/buttons/IconButton.svelte';
 </script>
 
 <LargePageTitle showBackButton>Place Settings</LargePageTitle>

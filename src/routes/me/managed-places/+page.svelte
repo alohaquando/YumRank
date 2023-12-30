@@ -38,7 +38,7 @@
 
 <div class="bg-white sticky bottom-16 py-4 border-t">
 	<Button
-		href="/management/register-place"
+		href="/add-place"
 		width="full"
 	>
 		<Fa

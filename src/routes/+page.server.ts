@@ -9,7 +9,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	}
 
 	if (session && !session.user.user_metadata.user_name) {
-		throw redirect(307, '/create-account');
+		throw redirect(307, '/complete-account');
 	}
 
 	const restaurants = await supabase.from('restaurants').select('*');
