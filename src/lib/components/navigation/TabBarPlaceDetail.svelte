@@ -3,6 +3,7 @@
 	import TabBar from '$lib/components/navigation/TabBar.svelte';
 
 	export let placeName: string;
+	placeName = placeName.replace(' ', '%20');
 	export let currentLocation: string;
 	export let isOwner = false;
 </script>

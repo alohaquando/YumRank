@@ -14,8 +14,7 @@
 	} from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
-	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
-	import { faQrcode } from '@fortawesome/pro-thin-svg-icons';
+	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
 

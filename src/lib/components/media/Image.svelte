@@ -43,7 +43,7 @@
 	{:else}
 		<Fa
 			icon={faImage}
-			class="text-4xl text-red-300"
+			class="text-xl text-red-300"
 		/>
 	{/if}
 	<slot />

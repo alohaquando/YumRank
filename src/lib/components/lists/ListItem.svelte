@@ -9,14 +9,14 @@
 </script>
 
 <svelte:element
-	this={href ? 'a' : 'button'}
-	class="flex min-h-[56px] items-center justify-between w-full relative group {href
-		? ''
+	class="flex min-h-[56px] items-center justify-between w-full relative group transition {href
+		? 'hover:text-red-500'
 		: '!font-medium'} {customClasses}"
 	{href}
 	on:click
 	role="button"
 	tabindex="0"
+	this={href ? 'a' : 'button'}
 >
 	<div class="flex items-center space-x-2">
 		<slot name="leading" />

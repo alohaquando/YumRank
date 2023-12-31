@@ -12,7 +12,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 		.single();
 
 	const placeOwner = restaurant?.owner_id as string;
-
+	
 	if (placesError) {
 		console.error(placesError);
 		return;
