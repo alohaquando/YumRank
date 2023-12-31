@@ -13,21 +13,21 @@
 	<Button
 		design="outlined"
 		href="/me"
-		>Back
+	>Back
 	</Button>
 </div>
 
 <LargePageTitle>Account Settings</LargePageTitle>
 
-<div class="space-y-5">
-	<ListItem href={$hrefExample}>
+<div class="">
+	<ListItem href="/me/account-settings/update-profile">
 		<Fa
 			icon={faUserCircle}
 			slot="leading"
 		/>
 		<Body slot="text">Update profile</Body>
 	</ListItem>
-	<ListItem href={$hrefExample}>
+	<ListItem href="/me/account-settings/update-password">
 		<Fa
 			icon={faKey}
 			slot="leading"

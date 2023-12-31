@@ -6,22 +6,12 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import FileInput from '$lib/components/inputs/FileInput.svelte';
 	import Image from '$lib/components/media/Image.svelte';
-	import { hrefExample, userFullNameExample, userSrcExample } from '$lib/data/exampleData';
+	import { userFullNameExample, userSrcExample } from '$lib/data/exampleData';
 
 	export let form;
-	let email = 'example@gmail.com';
 </script>
 
-<!--waiting for the back component-->
-<div class="pt-2">
-	<Button
-		design="outlined"
-		href="/me"
-		>Back
-	</Button>
-</div>
-
-<LargePageTitle>Update profile</LargePageTitle>
+<LargePageTitle showBackButton>Update profile</LargePageTitle>
 
 <div class="flex-col flex space-y-6">
 	<form class="flex-col flex space-y-6">
@@ -30,7 +20,6 @@
 			id="email"
 			name="email"
 			type="email"
-			value={email}
 		/>
 		<Divider />
 		<Body>Full name</Body>
@@ -51,6 +40,6 @@
 	<Button
 		type="submit"
 		width="full"
-		>Update
+	>Update
 	</Button>
 </div>

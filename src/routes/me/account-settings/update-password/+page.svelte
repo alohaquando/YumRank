@@ -10,16 +10,7 @@
 	export let form;
 	let email = 'example@gmail.com';
 </script>
-
-<!--waiting for the back component-->
-<div class="pt-2">
-	<Button
-		href="/me"
-		design="outlined">Back</Button
-	>
-</div>
-
-<LargePageTitle>Update password</LargePageTitle>
+<LargePageTitle showBackButton>Update password</LargePageTitle>
 
 <div class="flex-col flex space-y-6">
 	<form class="flex-col flex space-y-6">
@@ -27,30 +18,31 @@
 		<TextField
 			id="password"
 			name="password"
-			type="password"
 			placeholder="Current password"
+			type="password"
 		/>
 		<Divider />
 		<Body>New password</Body>
 		<TextField
 			id="newpass"
 			name="newpass"
-			type="password"
 			placeholder="New password"
+			type="password"
 		/>
 		<Body>New password confirmation</Body>
 		<TextField
 			id="newpass"
 			name="newpass"
-			type="password"
 			placeholder="New password confirmation"
+			type="password"
 		/>
 	</form>
 
 	<div class="pt-8">
 		<Button
 			type="submit"
-			width="full">Update</Button
+			width="full">Update
+		</Button
 		>
 	</div>
 </div>

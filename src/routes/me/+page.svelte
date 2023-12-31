@@ -97,7 +97,7 @@
 
 			<Divider />
 
-			<ListItem href="/me/favorite-places">
+			<ListItem href="/me/account-settings">
 				<Fa
 					icon={faUserCircle}
 					slot="leading"
