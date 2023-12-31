@@ -9,7 +9,6 @@
 	import { faHeart as faHeartOutlined, faUserCheck } from '@fortawesome/pro-regular-svg-icons';
 	import { faHeart as faHeartFilled } from '@fortawesome/pro-solid-svg-icons';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import PlaceItems from '$lib/components/place/PlaceItems.svelte';
 
 	export let placeName: string | undefined | null;
 	export let placeImagesSrcs: string[] | undefined | null;
@@ -23,20 +22,22 @@
 </script>
 
 <div
-	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none w-screen px-6 -translate-x-6 snap-x snap-mandatory scroll-px-6"
+	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none snap-x snap-mandatory scroll-px-6 absolute left-0 w-screen px-6 md:relative md:flex-none md:w-full md:p-0 md:grid md:grid-flow-row md:grid-cols-4 md:gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
 >
 	{#if placeImagesSrcs !== undefined && placeImagesSrcs !== null}
 		{#each placeImagesSrcs as src}
 			<Image
 				alt="Images of {placeName}"
-				class="w-[86vw] h-64 aspect-[2/1] rounded-3xl snap-start snap-always	"
+				class="w-[86vw] h-64 aspect-[2/1] rounded-3xl snap-start snap-always md:w-auto md:h-auto"
 				{src}
 			/>
 		{/each}
 	{/if}
 </div>
 
-<div class="flex w-full space-x-4 justify-between">
+<div class="h-56 md:hidden" />
+
+<div class="flex w-full justify-between">
 	<div class="flex-col flex space-y-1.5 pt-2">
 		<Headline class="overflow-ellipsis">{placeName}</Headline>
 		<Title class="overflow-ellipsis">{address}</Title>

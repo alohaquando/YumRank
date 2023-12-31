@@ -10,9 +10,10 @@
 	export let data;
 </script>
 
-
-<TabBarPlaceDetail currentLocation={$page.url.pathname} isOwner={data.owner} placeName={data.placeName} />
+<TabBarPlaceDetail
+	currentLocation={$page.url.pathname}
+	isOwner={data.owner}
+	placeName={data.placeName}
+/>
 <div class="h-20" />
 <slot />
-
-

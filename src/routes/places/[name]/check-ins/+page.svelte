@@ -30,7 +30,7 @@
 			/>
 			Generate QR code for check-in
 		</Button>
-		<Divider></Divider>
+		<Divider />
 	{/if}
 	{#each { length: 5 } as _}
 		<!-- TODO: Get check-ins. @Khai -->

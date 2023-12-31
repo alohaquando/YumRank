@@ -86,7 +86,6 @@
 		// const data = await res.json();
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
-
 </script>
 
 <!--		<ul>-->
@@ -132,8 +131,8 @@
 				address={data.restaurant.address}
 				checkInButtonOnClick={() => requestData()}
 				favoriteButtonOnClick={() => {
-						window.alert("Favorite button clicked")
-					}}
+					window.alert('Favorite button clicked');
+				}}
 				checkInButtonDisabled={data.owner}
 			/>
 		</div>
@@ -174,9 +173,9 @@
 			<Button
 				href="{data.restaurant.name}/check-ins"
 				width="full"
-				design="outlined">View all check-ins
-			</Button
-			>
+				design="outlined"
+				>View all check-ins
+			</Button>
 		</div>
 
 		<div class="flex flex-col space-y-0 py-8">
@@ -197,10 +196,9 @@
 			<Button
 				href="{data.restaurant.name}/posts"
 				width="full"
-				design="outlined">View all posts
-			</Button
-			>
+				design="outlined"
+				>View all posts
+			</Button>
 		</div>
 	{/if}
 </div>
-

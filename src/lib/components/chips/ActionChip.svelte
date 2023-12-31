@@ -31,7 +31,7 @@
 	}
 
 	let designClasses: string;
-	$:switch (design) {
+	$: switch (design) {
 		case 'filled': {
 			designClasses = 'bg-red-500 text-white hover:bg-red-600';
 			break;
@@ -52,6 +52,7 @@
 </script>
 
 <svelte:element
+	this={href ? 'a' : 'button'}
 	class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}"
 	{disabled}
 	{formaction}
@@ -59,7 +60,6 @@
 	on:click
 	role="button"
 	tabindex="0"
-	this={href ? 'a' : 'button'}
 	{type}
 >
 	{#if $$slots.icon}

@@ -29,7 +29,7 @@
 			/>
 			Add a post
 		</Button>
-		<Divider></Divider>
+		<Divider />
 	{/if}
 	{#each { length: 3 } as _}
 		<!-- TODO: Get posts. @Khai -->
