@@ -13,17 +13,18 @@
 </script>
 
 <svelte:element
-	this={href ? 'a' : 'div'}
 	class="flex flex-nowrap flex-row space-x-4 items-center place-content-between"
 	{href}
+	this={href ? 'a' : 'div'}
 >
 	<div class="flex flex-row space-x-2 items-center">
 		<Image
 			alt={title}
 			class="w-8 h-8 rounded-xl ring-1 ring-gray-200"
 			{src}
+			viewable={false}
 		/>
-		<Title class="truncate">{title}</Title>
+		<Title class="truncate hover:text-red-500 transition duration-100">{title}</Title>
 	</div>
 	<div />
 	{#if trailingText}

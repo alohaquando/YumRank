@@ -12,9 +12,16 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 		throw redirect(307, '/complete-account');
 	}
 
-	const restaurants = await supabase.from('restaurants').select('*');
+	const { data: restaurants, error } = await supabase.from('restaurants').select('*');
+	
+	if (error) {
+		console.error(error);
+		return;
+	}
 
-	return { restaurants };
+	return {
+		restaurants
+	};
 };
 
 export const actions = {

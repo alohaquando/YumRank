@@ -6,31 +6,40 @@
 	export let placeSrc: string | undefined | null;
 	export let placeName: string | undefined | null;
 	export let placeHref: string | undefined | null;
-	export let imageSrc: string | undefined | null;
+	export let imageSrcs: string | undefined | null;
 	export let content: string | undefined | null;
 	export let timeStamp: string | undefined | null;
-
-	let imgEle: HTMLElement;
-	const handleError = () => {
-		imgEle.classList.add('hidden');
-	};
 </script>
 
-<div class="flex-col flex space-y-4">
+<div class="flex-col flex space-y-4 ">
 	<TitleItem
 		href={placeHref}
 		src={placeSrc}
 		title={placeName}
 	/>
-	<div class="w-full aspect-[2/1] bg-red-50 rounded-2xl overflow-clip">
-		<Image
-			alt="Post"
-			class="h-full w-full"
-			on:error={handleError}
-			src={imageSrc}
-		/>
+	<!--	<div class="w-full aspect-[2/1] bg-red-50 rounded-2xl overflow-clip">-->
+	<!--		<Image-->
+	<!--			alt="Post"-->
+	<!--			class="h-full w-full"-->
+	<!--			src={imageSrc}-->
+	<!--		/>-->
+	<!--	</div>-->
+	<div
+		class=" relative flex-none w-full p-0 grid grid-flow-row grid-cols-2 md:grid-cols-4 gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2 "
+	>
+		{#if imageSrcs !== undefined && imageSrcs !== null}
+			{#each imageSrcs as src}
+				<Image
+					alt="Images of {placeName}"
+					class="aspect-[2/1] rounded-3xl snap-start snap-always w-auto h-auto"
+					{src}
+				/>
+			{/each}
+		{/if}
 	</div>
-	<div class="flex-col flex space-y-3">
+
+
+	<div class="flex-col flex space-y-3 ">
 		<Body>{content}</Body>
 		<Body class="opacity-50">{timeStamp}</Body>
 	</div>

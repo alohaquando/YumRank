@@ -31,6 +31,7 @@
 				alt={restaurantName}
 				class="{prominent ? 'w-full aspect-[2/1] h-auto' : 'w-20 h-20'} rounded-3xl"
 				src={restaurantSrc}
+				viewable={false}
 			/>
 		</div>
 		<div class="flex-col flex space-y-3 {prominent ? '' : 'pt-4'}">
