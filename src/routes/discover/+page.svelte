@@ -1,20 +1,25 @@
 <script lang="ts">
+	// noinspection ES6UnusedImports
+	import Fa from 'svelte-fa';
 	import Divider from '$lib/components/layouts/Divider.svelte';
-	import TextField from '$lib/components/inputs/TextField.svelte';
 	import Display from '$lib/components/typography/Display.svelte';
 	import Post from '$lib/components/posts/Post.svelte';
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
+	import { faSearch } from '@fortawesome/pro-regular-svg-icons';
+	import Button from '$lib/components/buttons/Button.svelte';
 
 	export let data;
 </script>
 
 <div class="py-8">
-	<TextField
-		id="search"
-		name="search"
-		placeholder="Search"
-		type="search"
-	/>
+	<Button
+		design="outlined"
+		href="/discover/search"
+		width="full"
+	>
+		<Fa icon={faSearch} slot="icon" />
+		Search
+	</Button>
 </div>
 
 <Divider full />

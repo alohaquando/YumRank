@@ -4,6 +4,8 @@
 	export let size: 'md' | 'lg' = 'md';
 	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
 	export let disabled: boolean = false;
+
+	export let href: string | undefined = undefined;
 	let customClasses = '';
 	export { customClasses as class };
 
@@ -36,11 +38,15 @@
 	}
 </script>
 
-<button
-	on:click
-	{disabled}
-	{type}
+<svelte:element
 	class="flex justify-center items-center rounded-full transition {sizeClasses} {designClasses} {customClasses}"
+	{disabled}
+	{href}
+	on:click
+	role="button"
+	tabindex="0"
+	this={href?'a':'button'}
+	{type}
 >
 	<slot />
-</button>
+</svelte:element>

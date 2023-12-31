@@ -42,6 +42,7 @@
 			<IconButton
 				class="!rounded-2xl !h-12 !w-12"
 				design="tonal"
+				href="/checking-in"
 			>
 				<Fa icon={faUserCheck} />
 			</IconButton>

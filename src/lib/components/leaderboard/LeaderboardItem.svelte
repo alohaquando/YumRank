@@ -15,6 +15,8 @@
 	export let favorites: number;
 	export let href: string;
 
+	export let showRank: boolean = true;
+
 	let prominent: boolean = rank <= 5;
 </script>
 
@@ -22,9 +24,11 @@
 	class="flex w-full overflow-auto space-x-4"
 	{href}
 >
-	<div class="pt-2">
-		<Rank {rank} />
-	</div>
+	{#if showRank}
+		<div class="pt-2">
+			<Rank {rank} />
+		</div>
+	{/if}
 	<div class="flex grow {prominent ? 'flex-col space-y-3' : 'flex-row space-x-4'}">
 		<div class="relative">
 			<Image
