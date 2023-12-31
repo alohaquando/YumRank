@@ -7,6 +7,8 @@
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import FileInput from '$lib/components/inputs/FileInput.svelte';
+	import ImageInput from '$lib/components/inputs/ImageInput.svelte';
 
 	export let data;
 	export let form;
@@ -76,12 +78,21 @@
 			value={form?.username ?? username}
 		/>
 
-		<Avatar
-			bind:url={avatarUrl}
-			on:upload={() => profileForm.requestSubmit()}
-			size={10}
-			{supabase}
+		<ImageInput
+			id="avatar_url"
+			label="Profile picture"
+			multiple
+			name="avatar_url"
+			overrideShowFilesInitially
+			srcs={[session.user.user_metadata.avatar_url] ?? ''}
 		/>
+
+		<!--		<Avatar-->
+		<!--			bind:url={avatarUrl}-->
+		<!--			on:upload={() => profileForm.requestSubmit()}-->
+		<!--			size={10}-->
+		<!--			{supabase}-->
+		<!--		/>-->
 
 		<Button
 			class="w-full"

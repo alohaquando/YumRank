@@ -17,6 +17,7 @@
 	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
+	import Headline from '$lib/components/typography/Headline.svelte';
 
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
@@ -111,7 +112,7 @@
 			</AlertCard>
 		{/if}
 
-		<div class="flex flex-col space-y-8 py-8">
+		<div class="flex flex-col space-y-8 py-4">
 			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
 			<!--TODO: favoriteButtonOnClick() @Khai -->
 			<PlaceDetailTitleBlock
@@ -145,11 +146,12 @@
 			rating={data.restaurant.avgRating}
 			rank={$rankExample}
 			favorites={0}
+			class="mb-8"
 		/>
 
-		<div class="flex flex-col space-y-0 py-8">
+		<div class="flex flex-col space-y-0 py-4">
 			{#if data.checkIns}
-				<Title>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1 ? 's' : ''}</Title>
+				<Headline>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1 ? 's' : ''}</Headline>
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
 						{#each data.checkIns.slice(0, 3) as checkIn}
@@ -175,10 +177,10 @@
 			{/if}
 		</div>
 
-		<div class="flex flex-col space-y-0 py-8">
+		<div class="flex flex-col space-y-0 py-4">
 
 			{#if data.posts}
-				<Title>Posts • {data.posts.length} post{data.posts.length !== 1 ? 's' : ''}</Title>
+				<Headline>Posts • {data.posts.length} post{data.posts.length !== 1 ? 's' : ''}</Headline>
 				<div class="flex flex-col space-y-9 py-8">
 					{#if data.posts.length > 0}
 						{#each data.posts.slice(0, 3) as post}

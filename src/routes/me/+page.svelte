@@ -87,7 +87,7 @@
 		<div class="space-y-2 pt-8">
 			<Divider />
 
-			<ListItem href={$hrefExample}>
+			<ListItem href="/me/favorite-places">
 				<Fa
 					icon={faHeart}
 					slot="leading"
@@ -97,7 +97,7 @@
 
 			<Divider />
 
-			<ListItem href={$hrefExample}>
+			<ListItem href="/me/favorite-places">
 				<Fa
 					icon={faUserCircle}
 					slot="leading"

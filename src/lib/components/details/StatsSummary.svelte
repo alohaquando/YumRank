@@ -9,6 +9,9 @@
 	export let favorites: number = 0;
 	export let rating: number = 0;
 
+	let customClasses;
+	export { customClasses as class };
+
 	let rankFlavorText: string;
 	if (rank > 0 && rank <= 3) {
 		rankFlavorText = 'This is the place to be!';
@@ -21,13 +24,13 @@
 	}
 </script>
 
-<div class="relative drop-shadow-sm w-full py-5 px-4 rounded-2xl border border-gray-200">
-	<div class="w-full h-full flex flex-row divide-x divide-dashed">
-		<div class="w-36 pr-4 flex flex-col space-y-2 items-center justify-center">
+<div class="relative drop-shadow-sm w-full py-5 px-4 rounded-2xl border border-gray-200 {customClasses}">
+	<div class="flex h-full w-full flex-row divide-x divide-dashed">
+		<div class="flex w-36 flex-col items-center justify-center pr-4 space-y-2">
 			<Rank {rank} />
 			<Title class="text-center line-clamp-2">{rankFlavorText}</Title>
 		</div>
-		<div class=" pl-4 grow flex flex-col space-y-1.5 justify-between py-2">
+		<div class="flex grow flex-col justify-between py-2 pl-4 space-y-1.5">
 			<StatsSummaryRow
 				icon={faUserCheck}
 				subtitle="new check-ins"
