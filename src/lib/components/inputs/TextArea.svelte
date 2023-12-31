@@ -9,22 +9,6 @@
 	export let label: string | undefined = undefined;
 	export let error: boolean = false;
 	export let errorMessage: string | undefined = 'Please check this input again';
-	export let type:
-		| 'color'
-		| 'date'
-		| 'datetime-local'
-		| 'email'
-		| 'month'
-		| 'number'
-		| 'password'
-		| 'range'
-		| 'reset'
-		| 'search'
-		| 'tel'
-		| 'text'
-		| 'time'
-		| 'url'
-		| 'week' = 'text';
 	export let required: boolean = false;
 	export let disabled: boolean = false;
 	export let readonly: boolean = false;
@@ -55,6 +39,7 @@
 	<textarea
 		{autocomplete}
 		{autofocus}
+		bind:value={value}
 		class="{stateClasses} rounded-3xl min-h-[9rem] h-36 border border-gray-300 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
 		focus:ring-black/70 focus:ring-2
 		disabled:bg-black/5
@@ -64,7 +49,6 @@
 		{disabled}
 		{form}
 		{id}
-		{max}
 		{maxlength}
 		{min}
 		{minlength}
@@ -75,8 +59,7 @@
 		{readonly}
 		{required}
 		{size}
-		{type}
-		{value}
+		type="text"
 	/>
 	{#if error}
 		<div class="flex space-x-2 items-center text-red-300 pt-4">

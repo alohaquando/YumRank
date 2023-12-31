@@ -121,7 +121,7 @@
 				placeLogoSrc={data.restaurant.logo_url}
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
-				checkInButtonOnClick={() => requestData()}
+				checkInButtonHref="/places/{data.restaurant.name}/checking-in/confirm"
 				favoriteButtonOnClick={() => {
 					window.alert('Favorite button clicked');
 				}}

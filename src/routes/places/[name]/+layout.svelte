@@ -10,10 +10,12 @@
 	export let data;
 </script>
 
-<TabBarPlaceDetail
-	currentLocation={$page.url.pathname}
-	isOwner={data.owner}
-	placeName={data.placeName}
-/>
-<div class="h-20" />
+{#if !($page.url.pathname.includes('checking-in'))}
+	<TabBarPlaceDetail
+		currentLocation={$page.url.pathname}
+		isOwner={data.owner}
+		placeName={data.placeName}
+	/>
+	<div class="h-20" />
+{/if}
 <slot />
