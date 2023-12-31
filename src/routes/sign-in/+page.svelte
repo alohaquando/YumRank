@@ -5,10 +5,7 @@
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ActionChip from '$lib/components/chips/ActionChip.svelte';
-	import BasicCard from '$lib/components/cards/BasicCard.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
-	import Logo from '$lib/components/logos/Logo.svelte';
-	import Body from '$lib/components/typography/Body.svelte';
 
 	export let form;
 </script>
@@ -50,12 +47,12 @@
 		<Button
 			type="submit"
 			width="full"
-			>Sign in
+		>Sign in
 		</Button>
 		<ActionChip
 			formaction="?/forgot"
-			href="/"
-			>Reset my passwords
+			href="/reset-password"
+		>Reset my password
 		</ActionChip>
 	</form>
 
