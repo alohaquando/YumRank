@@ -3,12 +3,7 @@
 	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
 	import {
-		placeSrcExample,
-		placeNameExample,
-		checkInsExample,
-		ratingExample,
-		favoritesExample,
-		hrefExample
+		favoritesExample
 	} from '$lib/data/exampleData';
 
 	export let data;
@@ -28,6 +23,7 @@
 <div class="flex flex-col space-y-10">
 	{#if data.restaurants}
 		{#each data.restaurants as restaurant, i}
+			<!--	TODO: Get actual ranking AND favorite count -->
 			<LeaderboardItem
 				rank={i + 1}
 				restaurantSrc={restaurant.res_images != null ? restaurant.res_images[0]: ""}
