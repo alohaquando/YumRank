@@ -20,7 +20,9 @@
 	};
 
 	const imageOnClick = () => {
-		showImageDialog = !showImageDialog;
+		if (viewable) {
+			showImageDialog = !showImageDialog;
+		}
 	};
 </script>
 
