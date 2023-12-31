@@ -2,17 +2,11 @@
 	// noinspection ES6UnusedImports
 	import Fa from 'svelte-fa';
 	import Review from '$lib/components/reviews/Review.svelte';
-	import {
-		hrefExample,
-		ratingExample,
-		reviewContentExample,
-		timeStampExample,
-		userFullNameExample,
-		userSrcExample
-	} from '$lib/data/exampleData';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import { faQrcode } from '@fortawesome/pro-solid-svg-icons';
 	import Divider from '$lib/components/layouts/Divider.svelte';
+	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
+	import Body from '$lib/components/typography/Body.svelte';
 
 	export let data;
 </script>
@@ -32,14 +26,22 @@
 		</Button>
 		<Divider />
 	{/if}
-	{#each { length: 5 } as _}
-		<!-- TODO: Get check-ins. @Khai -->
-		<Review
-			userSrc={$userSrcExample}
-			userFullName={$userFullNameExample}
-			timeStamp={$timeStampExample}
-			content={$reviewContentExample}
-			rating={$ratingExample}
-		/>
-	{/each}
+	{#if data.checkIns}
+		<div class="flex flex-col space-y-8 py-8">
+			{#if data.checkIns.length > 0}
+				{#each data.checkIns as checkIn}
+					<!-- TODO: Test -->
+					<Review
+						userSrc={checkIn.profiles.avatar_url}
+						userFullName={checkIn.profiles.full_name}
+						timeStamp={convertTimestampToLocale(checkIn.created_at)}
+						content={checkIn.text}
+						rating={checkIn.rating}
+					/>
+				{/each}
+			{:else }
+				<Body class="text-center opacity-50">No check-ins yet</Body>
+			{/if}
+		</div>
+	{/if}
 </div>

@@ -10,22 +10,14 @@
 	import Review from '$lib/components/reviews/Review.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import {
-		ratingExample,
-		reviewContentExample,
-		timeStampExample,
-		userFullNameExample,
-		userSrcExample,
-		rankExample,
-		placeSrcExample,
-		placeNameExample,
-		hrefExample,
-		postContentExample,
-		dishSrcExample
+		rankExample
 	} from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
 	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
 	import { faQrcode } from '@fortawesome/pro-thin-svg-icons';
+	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
+	import Body from '$lib/components/typography/Body.svelte';
 
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
@@ -148,7 +140,7 @@
 			/>
 		</LargePageTitle>
 
-		<!-- TODO: Get rank and favorites count. @Khai -->
+		<!-- TODO: Get rank and favorites count. @Khai-->
 		<StatsSummary
 			checkIns={data.restaurant.numReviews}
 			rating={data.restaurant.avgRating}
@@ -157,48 +149,61 @@
 		/>
 
 		<div class="flex flex-col space-y-0 py-8">
-			<Title>Check-ins • {data.restaurant.numReviews} check-ins</Title>
-			<div class="flex flex-col space-y-8 py-8">
-				{#each { length: 3 } as _}
-					<!-- TODO: Get check-ins. @Khai -->
-					<Review
-						userSrc={$userSrcExample}
-						userFullName={$userFullNameExample}
-						timeStamp={$timeStampExample}
-						content={$reviewContentExample}
-						rating={$ratingExample}
-					/>
-				{/each}
-			</div>
-			<Button
-				href="{data.restaurant.name}/check-ins"
-				width="full"
-				design="outlined"
-				>View all check-ins
-			</Button>
+			{#if data.checkIns}
+				<Title>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1 ? 's' : ''}</Title>
+				<div class="flex flex-col space-y-8 py-8">
+					{#if data.checkIns.length > 0}
+						{#each data.checkIns.slice(0, 3) as checkIn}
+							<!-- TODO: Test -->
+							<Review
+								userSrc={checkIn.profiles.avatar_url}
+								userFullName={checkIn.profiles.full_name}
+								timeStamp={convertTimestampToLocale(checkIn.created_at)}
+								content={checkIn.text}
+								rating={checkIn.rating}
+							/>
+						{/each}
+						<Button
+							href="{data.restaurant.name}/check-ins"
+							width="full"
+							design="outlined"
+						>View all check-ins
+						</Button>
+					{:else }
+						<Body class="text-center opacity-50">No check-ins yet</Body>
+					{/if}
+				</div>
+			{/if}
 		</div>
 
 		<div class="flex flex-col space-y-0 py-8">
-			<Title>Posts</Title>
-			<div class="flex flex-col space-y-9 py-8">
-				{#each { length: 3 } as _}
-					<!-- TODO: Get posts. @Khai -->
-					<Post
-						placeSrc={$placeSrcExample}
-						placeName={$placeNameExample}
-						placeHref={$hrefExample}
-						content={$postContentExample}
-						timeStamp={$timeStampExample}
-						imageSrc={$dishSrcExample}
-					/>
-				{/each}
-			</div>
-			<Button
-				href="{data.restaurant.name}/posts"
-				width="full"
-				design="outlined"
-				>View all posts
-			</Button>
+
+			{#if data.posts}
+				<Title>Posts • {data.posts.length} post{data.posts.length !== 1 ? 's' : ''}</Title>
+				<div class="flex flex-col space-y-9 py-8">
+					{#if data.posts.length > 0}
+						{#each data.posts.slice(0, 3) as post}
+							<!-- TODO: Test -->
+							<Post
+								content={post.context}
+								imageSrcs={post.post_image_urls}
+								placeHref="places/{post.restaurants.name}"
+								placeName={post.restaurants.name}
+								placeSrc={post.restaurants.logo_url}
+								timeStamp={convertTimestampToLocale(post.created_at)}
+							/>
+						{/each}
+						<Button
+							href="{data.restaurant.name}/posts"
+							width="full"
+							design="outlined"
+						>View all posts
+						</Button>
+					{:else}
+						<Body class="text-center opacity-50">No posts yet</Body>
+					{/if}
+				</div>
+			{/if}
 		</div>
 	{/if}
 </div>
