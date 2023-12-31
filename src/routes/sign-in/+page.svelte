@@ -5,28 +5,57 @@
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ActionChip from '$lib/components/chips/ActionChip.svelte';
-	import BasicCard from '$lib/components/cards/BasicCard.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
-	import Logo from '$lib/components/logos/Logo.svelte';
-	import Body from '$lib/components/typography/Body.svelte';
 
-	export let form
+	export let form;
 </script>
 
 <LargePageTitle>Welcome back</LargePageTitle>
 
 <div class="flex flex-col space-y-8">
-	<form method="POST" action="?/signin">
-		<SocialButton provider="github" name="provider" value="github"/>
+
+	<!--	TODO: Show error message -->
+	<form
+		action="?/signin"
+		method="POST"
+	>
+		<SocialButton
+			name="provider"
+			provider="github"
+			value="github"
+		/>
 	</form>
 
 	<Divider />
 
-	<form class="flex-col flex space-y-6 items-center" method="POST" action="?/signin">
-		<TextField id="email" name="email" placeholder="Email" type="email" value={form?.data?.email ?? ""}/>
-		<TextField id="password" name="password" placeholder="Password" type="password" />
-		<Button type="submit" width="full">Sign in</Button>
-		<ActionChip href="/" formaction="?/forgot">Reset my passwords</ActionChip>
+	<form
+		action="?/signin"
+		class="flex-col flex space-y-6 items-center"
+		method="POST"
+	>
+		<TextField
+			id="email"
+			name="email"
+			placeholder="Email"
+			type="email"
+			value={form?.data?.email ?? ''}
+		/>
+		<TextField
+			id="password"
+			name="password"
+			placeholder="Password"
+			type="password"
+		/>
+		<Button
+			type="submit"
+			width="full"
+		>Sign in
+		</Button>
+		<ActionChip
+			formaction="?/forgot"
+			href="/reset-password"
+		>Reset my password
+		</ActionChip>
 	</form>
 
 	<Divider />
@@ -36,15 +65,14 @@
 		<ActionChip href="/sign-up">Create an account</ActionChip>
 	</div>
 
-<!--	<Divider full />-->
+	<!--	<Divider full />-->
 
-<!--	<BasicCard>-->
-<!--		<Logo slot="start" type="management" />-->
-<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
-<!--		<Button href="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
-<!--	</BasicCard>-->
+	<!--	<BasicCard>-->
+	<!--		<Logo slot="start" type="management" />-->
+	<!--		<Body slot="center">Manage your restaurant on YumRank for Restaurant</Body>-->
+	<!--		<Button hrefExample="/management/sign-in" slot="end" width="full">Go to management portal</Button>-->
+	<!--	</BasicCard>-->
 </div>
-
 
 <!--<form method="POST" action="?/signin">-->
 <!--	<input name="email" placeholder="email" type="email" value={form?.data?.email ?? ""}>-->

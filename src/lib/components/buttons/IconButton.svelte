@@ -2,8 +2,10 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
+	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'filled';
 	export let disabled: boolean = false;
+
+	export let href: string | undefined = undefined;
 	let customClasses = '';
 	export { customClasses as class };
 
@@ -33,14 +35,22 @@
 			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
 			break;
 		}
+		case 'text': {
+			designClasses = ' hover:bg-red-100 hover:text-red-500';
+			break;
+		}
 	}
 </script>
 
-<button
-	on:click
-	{disabled}
-	{type}
+<svelte:element
 	class="flex justify-center items-center rounded-full transition {sizeClasses} {designClasses} {customClasses}"
+	{disabled}
+	{href}
+	on:click
+	role="button"
+	tabindex="0"
+	this={href?'a':'button'}
+	{type}
 >
 	<slot />
-</button>
+</svelte:element>

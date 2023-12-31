@@ -9,22 +9,25 @@
 </script>
 
 <svelte:element
-	this={href ? 'a' : 'button'}
-	class="flex min-h-[56px] items-center justify-between w-full relative group {href
-		? ''
+	class="flex min-h-[56px] items-center justify-between w-full relative group transition {href
+		? 'hover:text-red-500'
 		: '!font-medium'} {customClasses}"
 	{href}
 	on:click
 	role="button"
 	tabindex="0"
+	this={href ? 'a' : 'button'}
 >
-	<div class="flex items-center space-x-2">
+	<div class="flex items-center space-x-4">
 		<slot name="leading" />
 		<slot name="text" />
 	</div>
 	<slot name="trailing">
 		{#if href}
-			<Fa icon={faChevronRight} class="text-xs opacity-50" />
+			<Fa
+				icon={faChevronRight}
+				class="text-xs opacity-50"
+			/>
 		{/if}
 	</slot>
 

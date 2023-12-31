@@ -1,6 +1,9 @@
 <script lang="ts">
 	export let design: 'default' | 'gray' | 'green' = 'default';
 
+	let customClasses = '';
+	export { customClasses as class };
+
 	let designClasses: string;
 	// noinspection JSUnreachableSwitchBranches
 	switch (design) {
@@ -20,15 +23,16 @@
 </script>
 
 <div
-	class="rounded-[40px] py-8 px-6 flex-col items-center justify-center flex text-center border {designClasses} "
+	class="rounded-[40px] py-8 px-6 flex-col items-center justify-center flex text-center border {designClasses} {customClasses}"
 >
 	<div class="flex items-center space-x-2">
 		<slot name="icon" />
 		<slot name="title" />
 	</div>
-	{#if $$slots.body}
-		<div class="self-stretch flex mt-4 text-center mx-auto">
+	{#if $$slots.body || $$slots.default}
+		<div class="self-stretch flex mt-6 text-center mx-auto w-full justify-center">
 			<slot name="body" />
+			<slot />
 		</div>
 	{/if}
 </div>

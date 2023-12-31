@@ -9,27 +9,28 @@
 		faUserCircle as faUserCircleSolid
 	} from '@fortawesome/pro-solid-svg-icons';
 	import type { IconDefinition } from '@fortawesome/sharp-light-svg-icons';
+	import { NavDestinations } from '$lib/data/NavDestinations';
 
 	export let active: boolean = false;
-	export let destination: 'home' | 'discover' | 'me' = 'home';
+	export let destination: NavDestinations = NavDestinations.home;
 
 	let chosenIcon: IconDefinition;
 	let label: string;
 	let href: string;
-	switch (destination) {
-		case 'home': {
+	$: switch (destination) {
+		case NavDestinations.home: {
 			active ? (chosenIcon = faHomeSolid) : (chosenIcon = faHome);
 			label = 'Home';
 			href = '/';
 			break;
 		}
-		case 'discover': {
+		case NavDestinations.discover: {
 			active ? (chosenIcon = faGlobeSolid) : (chosenIcon = faGlobe);
 			label = 'Discover';
 			href = '/discover';
 			break;
 		}
-		case 'me': {
+		case NavDestinations.me: {
 			active ? (chosenIcon = faUserCircleSolid) : (chosenIcon = faUserCircle);
 			label = 'Me';
 			href = '/me';
@@ -38,7 +39,7 @@
 	}
 
 	let stateClasses: string;
-	switch (active) {
+	$: switch (active) {
 		case false: {
 			stateClasses = 'text-gray-400';
 			break;

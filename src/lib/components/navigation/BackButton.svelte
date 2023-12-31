@@ -5,9 +5,19 @@
 
 	export let href: string | undefined | null = undefined;
 </script>
+
 <div class="w-full py-6">
-	<ActionChip design="text" {href} on:click={() => {history.back()}}>
-		<Fa icon={faChevronLeft} slot="icon" />
+	<ActionChip
+		design="text"
+		{href}
+		on:click={() => {
+			history.back();
+		}}
+	>
+		<Fa
+			icon={faChevronLeft}
+			slot="icon"
+		/>
 		Back
 	</ActionChip>
 </div>

@@ -4,7 +4,7 @@
 
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
+	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'filled';
 	export let disabled: boolean = false;
 	export let width: 'fit' | 'full' = 'fit';
 	export let href: string | undefined | null = undefined;
@@ -36,9 +36,10 @@
 	}
 
 	let designClasses: string;
-	switch (design) {
+	$: switch (design) {
 		case 'filled': {
-			designClasses = 'bg-red-500 text-white hover:bg-red-600';
+			designClasses =
+				'bg-red-500 text-white hover:bg-red-600 disabled:bg-gray-100 disabled:text-gray-400';
 			break;
 		}
 		case 'outlined': {
@@ -46,22 +47,27 @@
 			break;
 		}
 		case 'tonal': {
-			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
+			designClasses =
+				'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white disabled:text-gray-500 disabled:bg-gray-100';
+			break;
+		}
+		case 'text': {
+			designClasses = 'hover:bg-red-50 hover:text-red-500';
 			break;
 		}
 	}
 </script>
 
 <svelte:element
-	this={href ? 'a' : 'button'}
-	on:keydown
-	on:click
-	tabindex="0"
-	role="button"
-	{href}
-	{disabled}
-	{type}
 	class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}"
+	{disabled}
+	{href}
+	on:click
+	on:keydown
+	role="button"
+	tabindex="0"
+	this={href ? 'a' : 'button'}
+	{type}
 >
 	{#if $$slots.icon}
 		<div>

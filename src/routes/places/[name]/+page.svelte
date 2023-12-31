@@ -1,6 +1,24 @@
 <script lang="ts">
-	import Button from '$lib/components/buttons/Button.svelte';
+	// noinspection ES6UnusedImports
+	import Fa from 'svelte-fa';
 	import { page } from '$app/stores';
+	import Title from '$lib/components/typography/Title.svelte';
+	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
+	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
+	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
+	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
+	import Review from '$lib/components/reviews/Review.svelte';
+	import Button from '$lib/components/buttons/Button.svelte';
+	import {
+		rankExample
+	} from '$lib/data/exampleData';
+	import Post from '$lib/components/posts/Post.svelte';
+	import AlertCard from '$lib/components/cards/AlertCard.svelte';
+	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
+	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
+	import Body from '$lib/components/typography/Body.svelte';
+	import Headline from '$lib/components/typography/Headline.svelte';
+
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
 	let log: string[] = [];
@@ -19,6 +37,7 @@
 	// 	ws.addEventListener('open', (event) => {
 	// 		webSocketEstablished = true;
 	// 		console.log('[websocket] connection open', event);
+
 	// 		logEvent('[websocket] connection open');
 
 	// 	});
@@ -61,40 +80,131 @@
 	};
 </script>
 
+<!--		<ul>-->
+<!--{#each log as event}-->
+<!--	{#if event.includes('image/png')}-->
+<!--		<img src={event} alt="QR" />-->
+<!--	{/if}-->
+<!--	<li>{event}</li>-->
+<!--{/each}-->
+<!--		</ul>-->
+
 <div>
 	{#if data.restaurant}
-		{#each data.restaurant as item}
-			<p>{item.id}</p>
-			<p>{item.created_at}</p>
-			<p>{item.owner_id}</p>
-			<p>{item.name}</p>
-			<p>{item.description}</p>
-			<p>{item.is_verified}</p>
-			<p>{item.res_images}</p>
-			<p>{item.menu_images}</p>
-			<p>{item.cuisine}</p>
-			<p>{item.address}</p>
-			<p>{item.logo_url}</p>
-		{/each}
 		{#if data.owner}
-			<Button on:click={() => requestData()}>Check Notification</Button>
-		{:else}
-			<Button on:click={() => requestData()}>Check-in</Button>
+			<AlertCard>
+				<Fa
+					icon={faInfoCircle}
+					slot="icon"
+				/>
+				<Title slot="title">You are the manager of this site</Title>
+				<Button
+					slot="body"
+					width="full"
+					href="/places/{data.placeName}/check-ins/generate-qr"
+				>
+					<Fa
+						icon={faQrcode}
+						slot="icon"
+					/>
+					Generate QR code for check-in
+				</Button>
+			</AlertCard>
 		{/if}
 
-		<ul>
-			{#each log as event}
-				{#if event.includes('image/png')}
-					<img src={event} alt="QR" />
-				{/if}
-				<li>{event}</li>
-			{/each}
-		</ul>
+		<div class="flex flex-col space-y-8 py-4">
+			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
+			<!--TODO: favoriteButtonOnClick() @Khai -->
+			<PlaceDetailTitleBlock
+				placeName={data.restaurant.name}
+				placeImagesSrcs={data.restaurant.res_images}
+				placeLogoSrc={data.restaurant.logo_url}
+				desc={data.restaurant.description}
+				address={data.restaurant.address}
+				checkInButtonHref="/places/{data.restaurant.name}/checking-in/confirm"
+				favoriteButtonOnClick={() => {
+					window.alert('Favorite button clicked');
+				}}
+				checkInButtonDisabled={data.owner}
+			/>
+		</div>
+
+		<!-- TODO: Implement filter? @Khai -->
+		<LargePageTitle>
+			Ranking this
+			<TitleDropdown
+				name="time_selected"
+				id="time_selected"
+				slot="trailing"
+				value="week"
+			/>
+		</LargePageTitle>
+
+		<!-- TODO: Get rank and favorites count. @Khai-->
+		<StatsSummary
+			checkIns={data.restaurant.numReviews}
+			rating={data.restaurant.avgRating}
+			rank={$rankExample}
+			favorites={0}
+			class="mb-8"
+		/>
+
+		<div class="flex flex-col space-y-0 py-4">
+			{#if data.checkIns}
+				<Headline>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1 ? 's' : ''}</Headline>
+				<div class="flex flex-col space-y-8 py-8">
+					{#if data.checkIns.length > 0}
+						{#each data.checkIns.slice(0, 3) as checkIn}
+							<!-- TODO: Test -->
+							<Review
+								userSrc={checkIn.profiles.avatar_url}
+								userFullName={checkIn.profiles.full_name}
+								timeStamp={convertTimestampToLocale(checkIn.created_at)}
+								content={checkIn.text}
+								rating={checkIn.rating}
+							/>
+						{/each}
+						<Button
+							href="{data.restaurant.name}/check-ins"
+							width="full"
+							design="outlined"
+						>View all check-ins
+						</Button>
+					{:else }
+						<Body class="text-center opacity-50">No check-ins yet</Body>
+					{/if}
+				</div>
+			{/if}
+		</div>
+
+		<div class="flex flex-col space-y-0 py-4">
+
+			{#if data.posts}
+				<Headline>Posts • {data.posts.length} post{data.posts.length !== 1 ? 's' : ''}</Headline>
+				<div class="flex flex-col space-y-9 py-8">
+					{#if data.posts.length > 0}
+						{#each data.posts.slice(0, 3) as post}
+							<!-- TODO: Test -->
+							<Post
+								content={post.content}
+								imageSrcs={post.post_image_urls}
+								placeHref="places/{post.restaurants.name}"
+								placeName={post.restaurants.name}
+								placeSrc={post.restaurants.logo_url}
+								timeStamp={convertTimestampToLocale(post.created_at)}
+							/>
+						{/each}
+						<Button
+							href="{data.restaurant.name}/posts"
+							width="full"
+							design="outlined"
+						>View all posts
+						</Button>
+					{:else}
+						<Body class="text-center opacity-50">No posts yet</Body>
+					{/if}
+				</div>
+			{/if}
+		</div>
 	{/if}
 </div>
-
-<style>
-	p {
-		font-family: sans-serif;
-	}
-</style>

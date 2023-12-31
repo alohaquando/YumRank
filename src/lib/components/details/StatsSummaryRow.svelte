@@ -11,9 +11,13 @@
 </script>
 
 <div class="flex flex-row space-x-2 items-baseline">
-	<Fa class="w-5" {icon} slot="icon" />
+	<Fa
+		class="w-5"
+		{icon}
+		slot="icon"
+	/>
 	<div class="flex-wrap flex space-y-1 items-baseline space-x-2">
 		<Title>{title}</Title>
-		<Body>{subtitle}</Body>
+		<Body class="overflow-ellipsis line-clamp-1">{subtitle}</Body>
 	</div>
 </div>

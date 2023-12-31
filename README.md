@@ -1,43 +1,18 @@
-# create-svelte
+# YumRank
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+Web-app for RMIT VN, SEPM course.
 
-## Creating a project
+---
 
-If you're seeing this, you've probably already done this step. Congrats!
+#### Deployment
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target
+> environment.
 
-# create a new project in my-app
-npm create svelte@latest my-app
-```
+#### Supabase
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
-
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
-```
-
-You can preview the production build with `npm run preview`.
-
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
-
-
-supabase init
-supabase link --project-ref <your-project-id>
-supabase gen types typescript --linked > src/lib/database.d.ts
+> supabase init
+>
+> supabase link --project-ref <your-project-id>
+>
+> supabase gen types typescript --linked > src/lib/database.d.ts

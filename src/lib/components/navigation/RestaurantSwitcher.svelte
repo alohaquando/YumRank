@@ -9,9 +9,19 @@
 	export let restaurantSrc: string | undefined | null = '';
 </script>
 
-<button class="w-full" on:click type="button">
+<button
+	class="w-full"
+	on:click
+	type="button"
+>
 	<TabBar class="justify-between">
-		<TitleItem {title} src={restaurantSrc} />
-		<Fa icon={faChevronDown} class="pr-2" />
+		<TitleItem
+			{title}
+			src={restaurantSrc}
+		/>
+		<Fa
+			icon={faChevronDown}
+			class="pr-2"
+		/>
 	</TabBar>
 </button>
