@@ -29,7 +29,12 @@
 </script>
 
 <svelte:head>
-	<title>YumRank</title>
+	<title>{$page.url.pathname.split('/').pop() !== '' ? $page.url.pathname.split('/')
+		.pop()
+		?.replace(/%20|-/g, ' ')
+		.replace(/^\w/, function(match) {
+			return match.toUpperCase();
+		}) : 'YumRank'}</title>
 	<link
 		href={faviconPNG}
 		rel="icon"
@@ -48,7 +53,6 @@
 
 <div class="relative mx-auto min-h-screen bg-white pb-20">
 	<Header class="sticky top-0 z-50" />
-
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
 		<slot />
 	</div>
@@ -57,3 +61,4 @@
 		class="fixed bottom-0 left-0 w-full"
 	/>
 </div>
+
