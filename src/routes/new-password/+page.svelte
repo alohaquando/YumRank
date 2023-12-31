@@ -29,8 +29,8 @@
 
 	<Button
 		type="submit"
-		width="full">
+		width="full"
+	>
 		Finish
 	</Button>
 </form>
-

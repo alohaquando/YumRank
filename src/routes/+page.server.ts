@@ -13,7 +13,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	}
 
 	const { data: restaurants, error } = await supabase.from('restaurants').select('*');
-	
+
 	if (error) {
 		console.error(error);
 		return;

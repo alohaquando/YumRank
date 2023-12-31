@@ -39,7 +39,7 @@
 						rating={checkIn.rating}
 					/>
 				{/each}
-			{:else }
+			{:else}
 				<Body class="text-center opacity-50">No check-ins yet</Body>
 			{/if}
 		</div>

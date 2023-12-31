@@ -13,7 +13,6 @@
 <LargePageTitle>Welcome back</LargePageTitle>
 
 <div class="flex flex-col space-y-8">
-
 	<!--	TODO: Show error message -->
 	<form
 		action="?/signin"
@@ -49,12 +48,12 @@
 		<Button
 			type="submit"
 			width="full"
-		>Sign in
+			>Sign in
 		</Button>
 		<ActionChip
 			formaction="?/forgot"
 			href="/reset-password"
-		>Reset my password
+			>Reset my password
 		</ActionChip>
 	</form>
 

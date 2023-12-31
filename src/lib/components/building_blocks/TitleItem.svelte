@@ -13,9 +13,9 @@
 </script>
 
 <svelte:element
+	this={href ? 'a' : 'div'}
 	class="flex flex-nowrap flex-row space-x-4 items-center place-content-between"
 	{href}
-	this={href ? 'a' : 'div'}
 >
 	<div class="flex flex-row space-x-2 items-center">
 		<Image

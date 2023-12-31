@@ -16,10 +16,10 @@
 	export let multiple: boolean = false;
 </script>
 
-<div class="flex flex-col w-full">
+<div class="flex w-full flex-col">
 	{#if label}
 		<label
-			class="block mb-2 text-sm font-sans trim-both pb-4"
+			class="mb-2 block pb-4 font-sans text-sm trim-both"
 			for={id}>{label}</label
 		>
 	{/if}
@@ -42,10 +42,10 @@
 		bind:value
 	/>
 	{#if error}
-		<div class="flex space-x-2 items-center text-red-300 pt-4">
+		<div class="flex items-center pt-4 text-red-300 space-x-2">
 			<Fa icon={faExclamationCircle} />
 			<label
-				class="block mb-2 text-sm font-sans trim-both"
+				class="mb-2 block font-sans text-sm trim-both"
 				for={id}>{errorMessage}</label
 			>
 		</div>

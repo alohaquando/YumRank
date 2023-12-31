@@ -8,9 +8,9 @@
 <LargePageTitle showBackButton>Reset my password</LargePageTitle>
 
 <form class="flex-col flex space-y-8">
-
-	<Body class="opacity-50">Enter your email address below. If the email address is registered, a password reset link
-	will be sent to it.
+	<Body class="opacity-50"
+		>Enter your email address below. If the email address is registered, a password reset link will
+		be sent to it.
 	</Body>
 
 	<TextField
@@ -23,8 +23,8 @@
 
 	<Button
 		type="submit"
-		width="full">
+		width="full"
+	>
 		Reset my password
 	</Button>
 </form>
-

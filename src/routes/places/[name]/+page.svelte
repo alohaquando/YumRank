@@ -9,9 +9,7 @@
 	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
 	import Review from '$lib/components/reviews/Review.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import {
-		rankExample
-	} from '$lib/data/exampleData';
+	import { rankExample } from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
 	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
@@ -151,7 +149,11 @@
 
 		<div class="flex flex-col space-y-0 py-4">
 			{#if data.checkIns}
-				<Headline>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1 ? 's' : ''}</Headline>
+				<Headline
+					>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
+						? 's'
+						: ''}</Headline
+				>
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
 						{#each data.checkIns.slice(0, 3) as checkIn}
@@ -168,9 +170,9 @@
 							href="{data.restaurant.name}/check-ins"
 							width="full"
 							design="outlined"
-						>View all check-ins
+							>View all check-ins
 						</Button>
-					{:else }
+					{:else}
 						<Body class="text-center opacity-50">No check-ins yet</Body>
 					{/if}
 				</div>
@@ -178,7 +180,6 @@
 		</div>
 
 		<div class="flex flex-col space-y-0 py-4">
-
 			{#if data.posts}
 				<Headline>Posts • {data.posts.length} post{data.posts.length !== 1 ? 's' : ''}</Headline>
 				<div class="flex flex-col space-y-9 py-8">
@@ -198,7 +199,7 @@
 							href="{data.restaurant.name}/posts"
 							width="full"
 							design="outlined"
-						>View all posts
+							>View all posts
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No posts yet</Body>

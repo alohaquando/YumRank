@@ -3,13 +3,11 @@ export const load = async ({ locals: { supabase, getSession }, params }) => {
 	// 	.from('restaurants')
 	// 	.select('id')
 	// 	.eq('name', params.name.replace('-', ' '));
-
 	// const { data: review, error } = await supabase
 	// 	.from('reviews')
 	// 	.select('*')
 	// 	.eq('restaurant_id', restaurant_id)
 	// 	.eq('id', params.reviewId);
-
 	// if (error) {
 	// 	console.error(error);
 	// 	return;

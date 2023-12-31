@@ -27,7 +27,7 @@
 			<!--	TODO: Get actual ranking AND favorite count -->
 			<LeaderboardItem
 				rank={i + 1}
-				restaurantSrc={place.res_images != null ? place.res_images[0]: ""}
+				restaurantSrc={place.res_images != null ? place.res_images[0] : ''}
 				restaurantName={place.name}
 				checkIns={place.numReviews}
 				rating={place.avgRating}

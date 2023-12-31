@@ -26,13 +26,14 @@
 	};
 </script>
 
-
 <div class="bg-red-50 {customClasses} border border-gray-200 flex items-center justify-center">
 	{#if src != null}
 		<img
 			{alt}
 			bind:this={imgEle}
-			class=" {customClasses} object-cover object-center transition duration-200 { viewable ? 'hover:brightness-90 cursor-pointer' : ''}"
+			class=" {customClasses} object-cover object-center transition duration-200 {viewable
+				? 'hover:brightness-90 cursor-pointer'
+				: ''}"
 			loading={eager ? 'eager' : 'lazy'}
 			on:error={handleError}
 			on:click={imageOnClick}
@@ -50,19 +51,24 @@
 </div>
 
 {#if showImageDialog}
-	<div transition:fade={{ duration: 100 }}
-			 class="fixed top-0 left-0 z-50 h-screen w-screen bg-white ring will-change-transform">
-		<div
-			class="flex h-full w-full flex-col items-center justify-center gap-8">
+	<div
+		transition:fade={{ duration: 100 }}
+		class="fixed top-0 left-0 z-50 h-screen w-screen bg-white ring will-change-transform"
+	>
+		<div class="flex h-full w-full flex-col items-center justify-center gap-8">
 			<img
 				{alt}
 				bind:this={imgEle}
 				class="rounded-3xl w-[96%]"
-				loading='lazy'
+				loading="lazy"
 				{src}
 			/>
-			<IconButton design="outlined" on:click={imageOnClick} class="order-last md:order-first">
-				<Fa icon={faTimes}></Fa>
+			<IconButton
+				design="outlined"
+				on:click={imageOnClick}
+				class="order-last md:order-first"
+			>
+				<Fa icon={faTimes} />
 			</IconButton>
 		</div>
 	</div>

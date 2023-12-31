@@ -31,15 +31,21 @@
 			title={data.myProfile?.full_name}
 		/>
 
-		<div class="flex items-center  space-x-4">
-			<Rating bind:rating={rating} />
+		<div class="flex items-center space-x-4">
+			<Rating bind:rating />
 
-
-			{#if (rating > 0)}
+			{#if rating > 0}
 				<Title class="text-xl">{rating} star{rating === 1 ? '' : 's'}</Title>
 			{/if}
 
-			<input bind:value={rating} class="hidden" id="rating" name="rating" required type="number">
+			<input
+				bind:value={rating}
+				class="hidden"
+				id="rating"
+				name="rating"
+				required
+				type="number"
+			/>
 		</div>
 
 		<TextArea
@@ -49,7 +55,7 @@
 			placeholder="Write about your experience here..."
 			required
 		/>
-		
+
 		<div class="flex-col flex space-y-4 pt-8">
 			<!-- TODO: Implement -->
 			<Button
@@ -70,6 +76,4 @@
 			</Button>
 		</div>
 	</form>
-
-
 </div>

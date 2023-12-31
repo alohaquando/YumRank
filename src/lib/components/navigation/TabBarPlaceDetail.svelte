@@ -13,26 +13,26 @@
 		design={currentLocation.endsWith(placeName) ? 'tonal' : 'outlined'}
 		href="/places/{placeName}"
 		width="fit"
-	>Overview
+		>Overview
 	</ActionChip>
 	<ActionChip
 		design={currentLocation.includes(placeName + '/check-ins') ? 'tonal' : 'outlined'}
 		href="/places/{placeName}/check-ins"
 		width="fit"
-	>Check-ins
+		>Check-ins
 	</ActionChip>
 	<ActionChip
 		design={currentLocation.includes(placeName + '/posts') ? 'tonal' : 'outlined'}
 		href="/places/{placeName}/posts"
 		width="fit"
-	>Posts
+		>Posts
 	</ActionChip>
 	{#if isOwner}
 		<ActionChip
 			design={currentLocation.includes(placeName + '/settings') ? 'tonal' : 'outlined'}
 			href="/places/{placeName}/settings"
 			width="fit"
-		>Settings
+			>Settings
 		</ActionChip>
 	{/if}
 </TabBar>

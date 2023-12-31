@@ -25,7 +25,7 @@
 		if (files) {
 			for (let i = srcs.length; i < files.length + srcs.length; i++) {
 				const reader = new FileReader();
-				reader.onload = function() {
+				reader.onload = function () {
 					if (reader.result !== null) {
 						srcs.push(reader.result as string);
 					}

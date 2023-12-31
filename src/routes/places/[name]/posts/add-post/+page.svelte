@@ -33,9 +33,12 @@
 
 <LargePageTitle showBackButton>Add a post</LargePageTitle>
 
-<div class="flex flex-col pb-8 space-y-4 pointer-events-none ">
+<div class="flex flex-col pb-8 space-y-4 pointer-events-none">
 	<Body class="opacity-75">Posting as</Body>
-	<TitleItem src={data.restaurant.logo_url} title={data.placeName}></TitleItem>
+	<TitleItem
+		src={data.restaurant.logo_url}
+		title={data.placeName}
+	/>
 	<Divider />
 </div>
 
@@ -65,9 +68,8 @@
 		id="content"
 		label="Content"
 		name="content"
-		placeholder="Share something interesting...">
-
-	</TextArea>
+		placeholder="Share something interesting..."
+	/>
 
 	<Button
 		disabled={isLoading}

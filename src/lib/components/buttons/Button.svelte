@@ -59,6 +59,7 @@
 </script>
 
 <svelte:element
+	this={href ? 'a' : 'button'}
 	class="flex justify-center items-center rounded-full transition space-x-2 {sizeClasses} {designClasses} {widthClasses} {customClasses}"
 	{disabled}
 	{href}
@@ -66,7 +67,6 @@
 	on:keydown
 	role="button"
 	tabindex="0"
-	this={href ? 'a' : 'button'}
 	{type}
 >
 	{#if $$slots.icon}

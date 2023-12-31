@@ -24,7 +24,9 @@
 	}
 </script>
 
-<div class="relative drop-shadow-sm w-full py-5 px-4 rounded-2xl border border-gray-200 {customClasses}">
+<div
+	class="relative drop-shadow-sm w-full py-5 px-4 rounded-2xl border border-gray-200 {customClasses}"
+>
 	<div class="flex h-full w-full flex-row divide-x divide-dashed">
 		<div class="flex w-36 flex-col items-center justify-center pr-4 space-y-2">
 			<Rank {rank} />

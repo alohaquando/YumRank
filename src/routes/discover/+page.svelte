@@ -17,7 +17,10 @@
 		href="/discover/search"
 		width="full"
 	>
-		<Fa icon={faSearch} slot="icon" />
+		<Fa
+			icon={faSearch}
+			slot="icon"
+		/>
 		Search
 	</Button>
 </div>
@@ -39,7 +42,6 @@
 		{/each}
 	{/if}
 </div>
-
 
 <!--<div class="py-8">-->
 

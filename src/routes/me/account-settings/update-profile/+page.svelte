@@ -38,9 +38,8 @@
 
 	<Button
 		type="submit"
-		width="full">
+		width="full"
+	>
 		Update
 	</Button>
 </form>
-
-

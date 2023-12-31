@@ -18,7 +18,6 @@
 	import ListItem from '$lib/components/lists/ListItem.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
 
-
 	export let data;
 
 	let { supabase, session } = data;
@@ -45,12 +44,17 @@
 </script>
 
 <svelte:head>
-	<title>{$page.url.pathname.split('/').pop() !== '' ? $page.url.pathname.split('/')
-		.pop()
-		?.replace(/%20|-/g, ' ')
-		.replace(/^\w/, function(match) {
-			return match.toUpperCase();
-		}) : 'YumRank'}</title>
+	<title
+		>{$page.url.pathname.split('/').pop() !== ''
+			? $page.url.pathname
+					.split('/')
+					.pop()
+					?.replace(/%20|-/g, ' ')
+					.replace(/^\w/, function (match) {
+						return match.toUpperCase();
+					})
+			: 'YumRank'}</title
+	>
 	<link
 		href={faviconPNG}
 		rel="icon"
@@ -69,8 +73,11 @@
 
 <div class="relative mx-auto min-h-screen bg-white pb-20">
 	<!--	TODO: Implement notification badging -->
-	<Header bind:badgeNotificationButton={badgeNotificationButton} class="sticky top-0 z-50"
-					notificationButtonOnClick={toggleNotificationDialog} />
+	<Header
+		bind:badgeNotificationButton
+		class="sticky top-0 z-50"
+		notificationButtonOnClick={toggleNotificationDialog}
+	/>
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
 		<slot />
 	</div>
@@ -80,20 +87,31 @@
 	/>
 </div>
 
-
 {#if showNotificationsDialog && data.session}
-	<div transition:fade={{ duration: 100 }}
-			 class="fixed top-0 left-0 z-50 h-screen w-screen bg-white ring will-change-transform ">
+	<div
+		transition:fade={{ duration: 100 }}
+		class="fixed top-0 left-0 z-50 h-screen w-screen bg-white ring will-change-transform"
+	>
 		<div class="container mx-auto px-6 sm:max-w-[48rem] pt-6">
-			<IconButton design="outlined" on:click={toggleNotificationDialog} class="order-last md:order-first">
-				<Fa icon={faTimes}></Fa>
+			<IconButton
+				design="outlined"
+				on:click={toggleNotificationDialog}
+				class="order-last md:order-first"
+			>
+				<Fa icon={faTimes} />
 			</IconButton>
 			<LargePageTitle>Notifications</LargePageTitle>
-			<div class="flex flex-col space-y-4 ">
+			<div class="flex flex-col space-y-4">
 				<!-- TODO: Implement notifications -->
 				{#each { length: 15 } as _}
-					<ListItem href="/" on:click={toggleNotificationDialog}>
-						<Fa icon={faBell} slot="leading" />
+					<ListItem
+						href="/"
+						on:click={toggleNotificationDialog}
+					>
+						<Fa
+							icon={faBell}
+							slot="leading"
+						/>
 						<Body slot="text">[notification.text]</Body>
 						<Body slot="trailing">[notification.timeStamp]</Body>
 					</ListItem>
@@ -102,4 +120,3 @@
 		</div>
 	</div>
 {/if}
-

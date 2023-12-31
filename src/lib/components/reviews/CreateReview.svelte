@@ -11,4 +11,3 @@
 	export let userSrc: string;
 	export let userFullName: string;
 </script>
-

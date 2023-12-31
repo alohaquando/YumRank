@@ -8,14 +8,15 @@ export const load = async ({ locals: { supabase }, parent }) => {
 	}
 
 	const userId = session.user.id;
-	const {
-		data: myProfile,
-		error: profileError
-	} = await supabase.from('profiles').select('full_name, avatar_url').eq('id', userId).single();
-	const {
-		data: myPlaces,
-		error: myPlacesError
-	} = await supabase.from('restaurants').select('*').eq('owner_id', userId);
+	const { data: myProfile, error: profileError } = await supabase
+		.from('profiles')
+		.select('full_name, avatar_url')
+		.eq('id', userId)
+		.single();
+	const { data: myPlaces, error: myPlacesError } = await supabase
+		.from('restaurants')
+		.select('*')
+		.eq('owner_id', userId);
 
 	if (profileError) {
 		console.error(profileError);
@@ -27,4 +28,3 @@ export const load = async ({ locals: { supabase }, parent }) => {
 
 	return { session, myPlaces, myProfile };
 };
-

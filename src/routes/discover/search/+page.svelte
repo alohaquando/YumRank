@@ -6,7 +6,8 @@
 		favoritesExample,
 		hrefExample,
 		placeNameExample,
-		placeSrcExample, ratingExample
+		placeSrcExample,
+		ratingExample
 	} from '$lib/data/exampleData';
 	import Body from '$lib/components/typography/Body.svelte';
 </script>
@@ -25,14 +26,16 @@
 	<!--	TODO: Implement search-->
 	<!--	NOTE: Keep rank as a number higher than 5 for the correct layout -->
 	{#each { length: 3 } as _}
-		<LeaderboardItem showRank={false}
-										 rank={6}
-										 restaurantSrc={$placeSrcExample}
-										 restaurantName={$placeNameExample}
-										 checkIns={$checkInsExample}
-										 rating={$ratingExample}
-										 favorites={$favoritesExample}
-										 href="/places/{$hrefExample}"></LeaderboardItem>
+		<LeaderboardItem
+			showRank={false}
+			rank={6}
+			restaurantSrc={$placeSrcExample}
+			restaurantName={$placeNameExample}
+			checkIns={$checkInsExample}
+			rating={$ratingExample}
+			favorites={$favoritesExample}
+			href="/places/{$hrefExample}"
+		/>
 	{/each}
 	<!--	TODO: Implement empty state -->
 	<!--	<Body class="opacity-50 text-center">No results</Body>-->

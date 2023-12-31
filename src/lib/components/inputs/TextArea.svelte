@@ -39,7 +39,7 @@
 	<textarea
 		{autocomplete}
 		{autofocus}
-		bind:value={value}
+		bind:value
 		class="{stateClasses} rounded-3xl min-h-[9rem] h-36 border border-gray-300 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
 		focus:ring-black/70 focus:ring-2
 		disabled:bg-black/5

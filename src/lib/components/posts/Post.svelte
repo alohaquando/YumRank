@@ -13,7 +13,7 @@
 
 <!-- TODO: Delete, Edit  -->
 
-<div class="flex-col flex space-y-4 ">
+<div class="flex-col flex space-y-4">
 	<TitleItem
 		href={placeHref}
 		src={placeSrc}
@@ -27,7 +27,7 @@
 	<!--		/>-->
 	<!--	</div>-->
 	<div
-		class=" relative flex-none w-full p-0 grid grid-flow-row grid-cols-2 md:grid-cols-4 gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2 "
+		class=" relative flex-none w-full p-0 grid grid-flow-row grid-cols-2 md:grid-cols-4 gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
 	>
 		{#if imageSrcs !== undefined && imageSrcs !== null}
 			{#each imageSrcs as src}
@@ -40,7 +40,7 @@
 		{/if}
 	</div>
 
-	<div class="flex-col flex space-y-3 ">
+	<div class="flex-col flex space-y-3">
 		<Body>{content}</Body>
 		<Body class="opacity-50">{timeStamp}</Body>
 	</div>

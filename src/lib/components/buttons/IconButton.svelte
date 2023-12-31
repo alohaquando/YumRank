@@ -43,13 +43,13 @@
 </script>
 
 <svelte:element
+	this={href ? 'a' : 'button'}
 	class="flex justify-center items-center rounded-full transition {sizeClasses} {designClasses} {customClasses}"
 	{disabled}
 	{href}
 	on:click
 	role="button"
 	tabindex="0"
-	this={href?'a':'button'}
 	{type}
 >
 	<slot />

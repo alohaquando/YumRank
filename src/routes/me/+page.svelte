@@ -3,17 +3,11 @@
 	import Fa from 'svelte-fa';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Image from '$lib/components/media/Image.svelte';
-	import {
-		faFaceSmileWink,
-		faHeart,
-		faUserCircle
-	} from '@fortawesome/pro-regular-svg-icons';
+	import { faFaceSmileWink, faHeart, faUserCircle } from '@fortawesome/pro-regular-svg-icons';
 	import Body from '$lib/components/typography/Body.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import SectionTitle from '$lib/components/layouts/SectionTitle.svelte';
-	import {
-		hrefExample
-	} from '$lib/data/exampleData';
+	import { hrefExample } from '$lib/data/exampleData';
 	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';
@@ -38,13 +32,12 @@
 		</LargePageTitle>
 		<div class=" flex text-center flex-col space-y-6 py-6">
 			<Body class=""
-			>Sign in with a YumRank account to check-in to your favoritesExample places!
-			</Body
-			>
+				>Sign in with a YumRank account to check-in to your favoritesExample places!
+			</Body>
 			<Button
 				class="w-full"
 				href="/sign-in"
-			>Sign in
+				>Sign in
 			</Button>
 		</div>
 	</div>
@@ -79,7 +72,7 @@
 					design="outlined"
 					width="full"
 					href="/me/managed-places"
-				>View all
+					>View all
 				</Button>
 			</div>
 		</div>
@@ -114,7 +107,7 @@
 				<Button
 					class="w-full"
 					type="submit"
-				>Sign out
+					>Sign out
 				</Button>
 			</form>
 		</div>

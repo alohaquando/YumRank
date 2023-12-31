@@ -8,7 +8,6 @@
 <LargePageTitle showBackButton>Update password</LargePageTitle>
 
 <form class="flex-col flex space-y-8">
-
 	<TextField
 		error={false}
 		errorMessage="This does not match your current password"
@@ -43,8 +42,8 @@
 
 	<Button
 		type="submit"
-		width="full">
+		width="full"
+	>
 		Update
 	</Button>
 </form>
-

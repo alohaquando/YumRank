@@ -22,30 +22,30 @@
 			slot="icon"
 		/>
 		<Title slot="title">Open your camera app</Title>
-		<Body class="px-8" slot="body">You can use the camera app on your phone to scan the QR code provided by the service
-		member
+		<Body
+			class="px-8"
+			slot="body"
+			>You can use the camera app on your phone to scan the QR code provided by the service member
 		</Body>
 	</AlertCard>
 
 	<Divider />
 
 	<div class="flex flex-col space-y-4">
-		<Headline>
-			Manual check-in
-		</Headline>
-		<Body>
-		Search for the place you're in and check-in from there
-		</Body>
+		<Headline>Manual check-in</Headline>
+		<Body>Search for the place you're in and check-in from there</Body>
 		<div class="pt-2">
 			<Button
 				design="outlined"
 				href="/discover/search"
 				width="full"
 			>
-				<Fa icon={faSearch} slot="icon" />
+				<Fa
+					icon={faSearch}
+					slot="icon"
+				/>
 				Search
 			</Button>
 		</div>
 	</div>
 </div>
-

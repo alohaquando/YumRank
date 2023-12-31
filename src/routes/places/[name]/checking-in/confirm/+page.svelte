@@ -28,7 +28,7 @@
 		<Button
 			class="w-full"
 			href="/places/{data.restaurant.name}/checking-in/leave-review"
-		>Continue
+			>Continue
 		</Button>
 
 		<Button
