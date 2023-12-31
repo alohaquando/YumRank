@@ -12,7 +12,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 		.single();
 
 	const placeOwner = restaurant?.owner_id as string;
-	
+
 	if (placesError) {
 		console.error(placesError);
 		return;
@@ -36,7 +36,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 
 	const { data: posts, error: postError } = await supabase
 		.from('posts')
-		.select(`title, context, created_at, post_image_urls,restaurants (name, logo_url)`)
+		.select(`content, created_at, post_image_urls,restaurants (name, logo_url)`)
 		.eq('restaurant_id', placeId);
 
 	if (postError) {

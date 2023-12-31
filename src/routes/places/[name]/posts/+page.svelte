@@ -31,7 +31,7 @@
 				{#each data.posts as post}
 					<!-- TODO: Test -->
 					<Post
-						content={post.context}
+						content={post.content}
 						imageSrcs={post.post_image_urls}
 						placeHref="places/{post.restaurants.name}"
 						placeName={post.restaurants.name}
