@@ -22,16 +22,16 @@
 
 <div class="flex flex-col space-y-10">
 	{#if data.restaurants}
-		{#each data.restaurants as restaurant, i}
+		{#each data.restaurants as place, i}
 			<!--	TODO: Get actual ranking AND favorite count -->
 			<LeaderboardItem
 				rank={i + 1}
-				restaurantSrc={restaurant.res_images != null ? restaurant.res_images[0]: ""}
-				restaurantName={restaurant.name}
-				checkIns={restaurant.numReviews}
-				rating={restaurant.avgRating}
+				restaurantSrc={place.res_images != null ? place.res_images[0]: ""}
+				restaurantName={place.name}
+				checkIns={place.numReviews}
+				rating={place.avgRating}
 				favorites={$favoritesExample}
-				href="/places/{restaurant.name}"
+				href="/places/{place.name}"
 			/>
 		{/each}
 	{/if}
