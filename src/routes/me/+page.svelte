@@ -105,6 +105,8 @@
 				<Body slot="text">Account settings</Body>
 			</ListItem>
 
+			<!-- TODO: Confirm dialog -->
+
 			<form
 				action="?/signout"
 				method="POST"

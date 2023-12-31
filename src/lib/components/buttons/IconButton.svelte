@@ -2,7 +2,7 @@
 <script lang="ts">
 	export let type: 'button' | 'submit' | 'reset' | null | undefined = 'button';
 	export let size: 'md' | 'lg' = 'md';
-	export let design: 'filled' | 'outlined' | 'tonal' = 'filled';
+	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'filled';
 	export let disabled: boolean = false;
 
 	export let href: string | undefined = undefined;
@@ -33,6 +33,10 @@
 		}
 		case 'tonal': {
 			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
+			break;
+		}
+		case 'text': {
+			designClasses = ' hover:bg-red-100 hover:text-red-500';
 			break;
 		}
 	}

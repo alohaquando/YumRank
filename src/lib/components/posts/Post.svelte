@@ -11,6 +11,8 @@
 	export let timeStamp: string | undefined | null;
 </script>
 
+<!-- TODO: Delete, Edit  -->
+
 <div class="flex-col flex space-y-4 ">
 	<TitleItem
 		href={placeHref}
@@ -37,7 +39,6 @@
 			{/each}
 		{/if}
 	</div>
-
 
 	<div class="flex-col flex space-y-3 ">
 		<Body>{content}</Body>

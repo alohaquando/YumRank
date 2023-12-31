@@ -25,6 +25,8 @@
 
 <Divider />
 
+<!-- TODO: Confirm dialog -->
+
 <ListItem
 	class="text-red-500"
 	on:click={() => {

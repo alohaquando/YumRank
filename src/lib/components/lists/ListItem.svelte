@@ -18,7 +18,7 @@
 	tabindex="0"
 	this={href ? 'a' : 'button'}
 >
-	<div class="flex items-center space-x-2">
+	<div class="flex items-center space-x-4">
 		<slot name="leading" />
 		<slot name="text" />
 	</div>
