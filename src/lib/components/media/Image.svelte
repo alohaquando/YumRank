@@ -59,7 +59,7 @@
 			<img
 				{alt}
 				bind:this={imgEle}
-				class="rounded-3xl w-[96%]"
+				class="rounded-3xl max-h-[80vh] object-scale-down portrait:max-w-[96vw]"
 				loading="lazy"
 				{src}
 			/>
