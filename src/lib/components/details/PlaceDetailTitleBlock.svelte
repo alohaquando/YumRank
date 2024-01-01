@@ -17,7 +17,7 @@
 	export let address: string | undefined | null;
 	export let checkInButtonDisabled: boolean = false;
 	export let isFavorite: boolean = false;
-	export let checkInButtonHref: string;
+	export let checkInButtonOnClick: () => void;
 	export let favoriteButtonOnClick: () => void;
 </script>
 
@@ -53,7 +53,7 @@
 <div class="flex space-x-4">
 	<Button
 		disabled={checkInButtonDisabled}
-		href={checkInButtonHref}
+		on:click={checkInButtonOnClick}
 		width="full"
 	>
 		<Fa
