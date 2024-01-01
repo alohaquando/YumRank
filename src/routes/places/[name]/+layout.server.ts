@@ -2,7 +2,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	const session = await getSession();
 
 	// console.log(userConnections);
-
+	
 	const placeName = params.name.replace('-', ' ');
 
 	const { data: restaurant, error: placesError } = await supabase
@@ -11,6 +11,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 		.eq('name', placeName)
 		.single();
 
+	
 	const placeOwner = restaurant?.owner_id as string;
 
 	if (placesError) {
@@ -44,7 +45,6 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	}
 
 	if (placeOwner == session?.user.id) {
-		// throw redirect(303, `/management/places/${params.name}`)
 		return { restaurant, owner: true, placeName: params.name, checkIns, posts };
 	} else {
 		return { restaurant, owner: false, placeName: params.name, checkIns, posts };

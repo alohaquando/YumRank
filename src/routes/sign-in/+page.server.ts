@@ -24,17 +24,13 @@ export const actions = {
 			if (error) {
 				if (error instanceof AuthApiError && error.status === 400) {
 					return fail(400, {
-						error: 'Invalid credentials.',
-						data: {
-							email
-						}
+						message: 'Invalid credentials.',
+						failed: true,	
 					});
 				}
 				return fail(500, {
-					error: 'Server error. Try again later.',
-					data: {
-						email
-					}
+					message: 'Server error. Try again later.',
+					fail: true
 				});
 			}
 
@@ -61,9 +57,7 @@ export const actions = {
 		} else {
 			return fail(400, {
 				error: 'Please enter an email and password',
-				data: {
-					email
-				}
+				failed: true
 			});
 		}
 	},

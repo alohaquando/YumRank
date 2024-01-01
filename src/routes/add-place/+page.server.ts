@@ -16,6 +16,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 
 export const actions = {
 	create: async ({ request, locals: { supabase, getSession } }) => {
+		const session = await getSession();
 		const formData = await request.formData();
 		const name = formData.get('name') as string;
 		const logoImage = formData.get('logoUrl') as File;
@@ -40,6 +41,7 @@ export const actions = {
 
 		const { error } = await supabase.from('restaurants').insert({
 			name: name,
+			owner_id: session?.user.id,
 			logo_url: logoUrl[0],
 			address: address,
 			is_verified: false,

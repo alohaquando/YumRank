@@ -120,6 +120,7 @@
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
 				checkInButtonOnClick={() => {}}
+				isFavorite={false}
 				favoriteButtonOnClick={() => {
 					window.alert('Favorite button clicked');
 				}}

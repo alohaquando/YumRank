@@ -6,6 +6,7 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import ActionChip from '$lib/components/chips/ActionChip.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
+	import ErrorCard from '$lib/components/cards/FormStatusCard.svelte';
 
 	export let form;
 </script>
@@ -14,6 +15,13 @@
 
 <div class="flex flex-col space-y-8">
 	<!--	TODO: Show error message -->
+	{#if form}
+		<ErrorCard
+			title="Failed to sign in"
+			message={form.message}
+			failed={form.failed}
+		/>
+	{/if}
 	<form
 		action="?/signin"
 		method="POST"
@@ -37,7 +45,6 @@
 			name="email"
 			placeholder="Email"
 			type="email"
-			value={form?.data?.email ?? ''}
 		/>
 		<TextField
 			id="password"
