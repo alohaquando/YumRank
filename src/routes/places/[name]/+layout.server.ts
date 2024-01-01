@@ -45,7 +45,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	}
 
 	if (placeOwner == session?.user.id) {
-		return { restaurant, owner: true, placeName: params.name, checkIns, posts };
+		return { restaurant, owner: true, placeName: params.name, checkIns, posts, placeId};
 	} else {
 		return { restaurant, owner: false, placeName: params.name, checkIns, posts };
 	}
