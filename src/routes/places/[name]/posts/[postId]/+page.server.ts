@@ -1,10 +1,11 @@
 export const load = async ({ locals: { supabase }, params }) => {
     const restaurantQuery = await supabase
         .from('restaurants')
-        .select('id')
+        .select('id, name')
         .eq('name', params.name.replace('-', ' '));
 
     const restaurant_id = restaurantQuery?.data?.[0]?.id;
+    const restaurant_name = restaurantQuery?.data?.[0]?.name;
 
     if (!restaurant_id) {
         console.error('Restaurant ID not found');
@@ -24,5 +25,5 @@ export const load = async ({ locals: { supabase }, params }) => {
 
     console.log(post);
     
-    return { post };
+    return { post, restaurant_name };
 };
