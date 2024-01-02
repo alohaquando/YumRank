@@ -28,7 +28,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 
 	const { data: checkIns, error: checkInsError } = await supabase
 		.from('reviews')
-		.select('text, rating, created_at, profiles(full_name, avatar_url)')
+		.select('id, text, rating, created_at, profiles(full_name, avatar_url)')
 		.eq('restaurant_id', placeId);
 
 	if (checkInsError) {
@@ -37,7 +37,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 
 	const { data: posts, error: postError } = await supabase
 		.from('posts')
-		.select(`content, created_at, post_image_urls,restaurants (name, logo_url)`)
+		.select(`id, content, created_at, post_image_urls,restaurants (name, logo_url)`)
 		.eq('restaurant_id', placeId);
 
 	if (postError) {
