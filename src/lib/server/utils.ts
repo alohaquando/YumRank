@@ -61,3 +61,7 @@ export async function uploadAndGetPublicUrlsFromSelected(
 		}
 	});
 }
+
+export async function deleteFromBucket(supabase: SupabaseClient, bucket: string, fileName: string) {
+	const { data, error } = await supabase.storage.from(bucket).remove([`${fileName}`]);
+}

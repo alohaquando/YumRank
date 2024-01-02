@@ -4,14 +4,30 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import CreateReview from '$lib/components/reviews/CreateReview.svelte';
+	import { enhance } from '$app/forms';
 	import Rating from '$lib/components/reviews/Rating.svelte';
 	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import TextArea from '$lib/components/inputs/TextArea.svelte';
 	import Title from '$lib/components/typography/Title.svelte';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 	export let data;
+	export let form;
+	let { session, supabase } = data;
+	$: ({ session, supabase } = data);
+
+	let isLoading = false;
+
 	let rating: number = 0;
 	let reviewText: string = '';
+
+	const handleSubmit: SubmitFunction = () => {
+		isLoading = true;
+		return async ({ update }) => {
+			await update();
+			isLoading = false;
+		};
+	};
 </script>
 
 <LargePageTitle>How was your experience at</LargePageTitle>
@@ -25,7 +41,7 @@
 
 	<Divider />
 
-	<form class="flex flex-col space-y-6 pt-4">
+	<form action="?/create" class="flex flex-col space-y-6 pt-4" method="POST" use:enhance={handleSubmit}>
 		<TitleItem
 			src={data.myProfile?.avatar_url}
 			title={data.myProfile?.full_name}
@@ -61,7 +77,6 @@
 			<Button
 				class="w-full"
 				disabled={rating === 0 || reviewText === ''}
-				on:click={() => {}}
 				type="submit"
 			>
 				Submit

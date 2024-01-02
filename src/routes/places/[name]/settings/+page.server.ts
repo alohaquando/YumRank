@@ -35,8 +35,3 @@ export const actions = {
         }
 	}
 };
-
-// export function _deletePlace(id: String) {
-
-    
-// }
