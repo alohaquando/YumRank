@@ -16,6 +16,7 @@
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
+	import { onMount } from 'svelte';
 
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
@@ -76,6 +77,49 @@
 		// const data = await res.json();
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
+
+	let isFavorite = false; 
+
+	onMount(async () => {
+		await checkFavoriteStatus();
+	});
+
+	async function checkFavoriteStatus() {
+		const response = await fetch(`places/${urlParams}?/status`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+
+		if (response.ok) {
+			const data = await response.json();
+			isFavorite = data.isFavorite;
+		} else {
+			const data = await response.json();
+			alert(data.message);
+		}
+	}
+
+	async function handleFavoriteToggle() {
+		const endpoint = isFavorite
+			? `places/${urlParams}?/favorite`
+			: `places/${urlParams}?/unfavorite`;
+		const response = await fetch(endpoint, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ placeId: data.restaurant.id })
+		});
+
+		if (!response.ok) {
+			const data = await response.json();
+			alert(data.message);
+		} else {
+			isFavorite = !isFavorite; // Toggle isFavorite state
+		}
+	}
 </script>
 
 <!--		<ul>-->
@@ -120,10 +164,8 @@
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
 				checkInButtonOnClick={() => {}}
-				isFavorite={false}
-				favoriteButtonOnClick={() => {
-					window.alert('Favorite button clicked');
-				}}
+				bind:isFavorite={isFavorite}
+				favoriteButtonOnClick={handleFavoriteToggle}
 				checkInButtonDisabled={data.owner}
 			/>
 		</div>
@@ -151,9 +193,9 @@
 		<div class="flex flex-col space-y-0 py-4">
 			{#if data.checkIns}
 				<Headline
-				>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
-					? 's'
-					: ''}</Headline
+					>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
+						? 's'
+						: ''}</Headline
 				>
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
@@ -172,7 +214,7 @@
 							href="{data.restaurant.name}/check-ins"
 							width="full"
 							design="outlined"
-						>View all check-ins
+							>View all check-ins
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No check-ins yet</Body>
@@ -201,7 +243,7 @@
 							href="{data.restaurant.name}/posts"
 							width="full"
 							design="outlined"
-						>View all posts
+							>View all posts
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No posts yet</Body>

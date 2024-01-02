@@ -24,27 +24,14 @@
 	<div class="flex flex-col space-y-0 py-4">
 		{#if data.review} 
             <Review
-                userSrc={data.review[0].profiles.avatar_url}
-                userFullName={data.review[0].profiles.full_name}
+                userSrc={data.review.profiles.avatar_url}
+                userFullName={data.review.profiles.full_name}
                 reviewHref=""
                 timeStamp={convertTimestampToLocale(data.review.created_at)}
-                content={data.review[0].text}
-                rating={data.review[0].rating}
+                content={data.review.text}
+                rating={data.review.rating}
             />
 
-            <Button
-				href="{data.restaurant.name}/posts"
-				width="full"
-				design="outlined"
-				>Update
-			</Button>
-
-			<Button
-				href="{data.restaurant.name}/posts"
-				width="full"
-				design="outlined"
-				>Delete
-			</Button>
 		{:else}
 			<Body class="text-center opacity-50">Not exist</Body>
 		{/if}

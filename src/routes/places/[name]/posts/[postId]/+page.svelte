@@ -48,6 +48,7 @@
 
 <Divider />
 
+<!-- SEPERATED THIS WITH POST DETAIL -->
 {#if data.post}
 	<LargePageTitle showBackButton>Update post</LargePageTitle>
 	<form
