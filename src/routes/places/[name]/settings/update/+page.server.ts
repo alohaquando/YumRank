@@ -44,8 +44,10 @@ export const actions = {
 
         if (restaurantImages.length > 0 && restaurantImages[0].type !== 'application/octet-stream') {
             restaurantImagesUrls = await uploadAndGetPublicUrlsFromSelected(supabase, restaurantImages, 'resimages');
-            const [, , , , , , , , filename] = oldRestaurantImagesUrls.split('/');
-            await deleteFromBucket(supabase, 'resimages',filename);
+            for (const url of oldRestaurantImagesUrls) {
+                const [, , , , , , , , filename] = url.split('/');
+                await deleteFromBucket(supabase, 'resimages',filename);
+            }
         }
 
         const upsertData = {

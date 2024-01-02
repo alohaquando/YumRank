@@ -28,7 +28,7 @@
 <LoadingOverlay bind:isLoading />
 
 <LargePageTitle showBackButton>Update your place</LargePageTitle>
-<!--TODO: Add update function-->
+
 <form
 	action="?/update"
 	class="flex flex-col form-widget space-y-10"

@@ -23,7 +23,6 @@ export const actions = {
 		const address = formData.get('address') as string;
 		const description = formData.get('description') as string;
 		const restaurantImages = formData.getAll('restaurantImages') as File[];
-		const menuImages = formData.getAll('menuImages') as string[];
 
 		if (logoImage.size === 0 || restaurantImages[0].size === 0) {
 			return fail(500, {
@@ -47,7 +46,6 @@ export const actions = {
 			is_verified: false,
 			description: description,
 			res_images: restaurantImagesUrls,
-			menu_images: menuImages,
 			created_at: new Date()
 		});
 

@@ -162,6 +162,7 @@
 							<Review
 								userSrc={checkIn.profiles.avatar_url}
 								userFullName={checkIn.profiles.full_name}
+								reviewHref="/places/{checkIn.restaurants.name}/check-ins/{checkIn.id}"
 								timeStamp={convertTimestampToLocale(checkIn.created_at)}
 								content={checkIn.text}
 								rating={checkIn.rating}
@@ -190,7 +191,7 @@
 							<Post
 								content={post.content}
 								imageSrcs={post.post_image_urls}
-								placeHref="/places/{post.restaurants.name}/posts/{post.id}"
+								postHref="/places/{post.restaurants.name}/posts/{post.id}"
 								placeName={post.restaurants.name}
 								placeSrc={post.restaurants.logo_url}
 								timeStamp={convertTimestampToLocale(post.created_at)}

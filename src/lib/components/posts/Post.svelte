@@ -5,7 +5,7 @@
 
 	export let placeSrc: string | undefined | null;
 	export let placeName: string | undefined | null;
-	export let placeHref: string | undefined | null;
+	export let postHref: string | undefined | null;
 	export let imageSrcs: string | undefined | null;
 	export let content: string | undefined | null;
 	export let timeStamp: string | undefined | null;
@@ -15,7 +15,7 @@
 
 <div class="flex-col flex space-y-4">
 	<TitleItem
-		href={placeHref}
+		href={postHref}
 		src={placeSrc}
 		title={placeName}
 	/>

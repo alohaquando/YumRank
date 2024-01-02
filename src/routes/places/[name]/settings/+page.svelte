@@ -9,7 +9,6 @@
 	import Button from '$lib/components/buttons/Button.svelte';
 
 	export let data;
-
 </script>
 
 <LargePageTitle showBackButton>Place Settings</LargePageTitle>
@@ -41,14 +40,13 @@ on:click={() => data.placeName && deleteRestaurant(data.placeName)}
 </ListItem> -->
 
 <form
-		action="?/delete"
-		class="form-widget flex-col flex space-y-8"
-		enctype="multipart/form-data"
-		method="post"
+	action="?/delete"
+	class="form-widget flex-col flex space-y-8"
+	enctype="multipart/form-data"
+	method="POST"
+>
+	<Button
+		class="w-full"
+		type="submit">Delete</Button
 	>
-		<Button
-			class="w-full"
-			
-			type="submit">Delete</Button
-		>
-	</form>
+</form>

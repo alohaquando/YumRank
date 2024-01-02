@@ -46,7 +46,7 @@
 		bind:this={profileForm}
 		class="form-widget flex-col flex space-y-8"
 		enctype="multipart/form-data"
-		method="post"
+		method="POST"
 		use:enhance={handleSubmit}
 	>
 		<TextField
@@ -101,7 +101,7 @@
 		>
 	</form>
 
-	<!--	<form action="?/signout" method="post" use:enhance={handleSignOut}>-->
+	<!--	<form action="?/signout" method="POST" use:enhance={handleSignOut}>-->
 	<!--		<div>-->
 	<!--			<Button disabled={isLoading} class="w-full">Sign Out</Button>-->
 	<!--		</div>-->

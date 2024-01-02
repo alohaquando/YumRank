@@ -41,7 +41,12 @@
 
 	<Divider />
 
-	<form action="?/create" class="flex flex-col space-y-6 pt-4" method="POST" use:enhance={handleSubmit}>
+	<form
+		action="?/create"
+		class="flex flex-col space-y-6 pt-4"
+		method="POST"
+		use:enhance={handleSubmit}
+	>
 		<TitleItem
 			src={data.myProfile?.avatar_url}
 			title={data.myProfile?.full_name}

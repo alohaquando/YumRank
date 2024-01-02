@@ -57,18 +57,18 @@
 		/>
 	{/if}
 
-	<ImageInput
-		id="post_images"
-		label="Images"
-		multiple
-		name="post_images"
-	/>
-
 	<TextArea
 		id="content"
 		label="Content"
 		name="content"
 		placeholder="Share something interesting..."
+	/>
+
+	<ImageInput
+		id="postImages"
+		label="Images"
+		multiple
+		name="postImages"
 	/>
 
 	<Button

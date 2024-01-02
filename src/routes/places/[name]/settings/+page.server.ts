@@ -1,4 +1,6 @@
 import { fail, redirect } from '@sveltejs/kit';
+import { deleteFromBucket } from '$lib/server/utils';
+
 export const load = async ({ parent, locals: {supabase} }) => {
 	const session = await parent();
 
@@ -13,9 +15,20 @@ export const actions = {
 	delete: async ({ locals: { supabase }, params }) => {
         const placeIdData = await supabase
 		.from('restaurants')
-		.select('id')
+		.select('id, logo_url, res_images')
 		.eq('name', params.name)
 		.single();
+        
+        const oldLogoUrl = placeIdData?.data?.logo_url;
+        const oldRestaurantImagesUrls = placeIdData?.data?.res_images;
+
+        const [, , , , , , , , logo] = oldLogoUrl.split('/');
+        const delLogo = await deleteFromBucket(supabase, 'logo', logo);
+
+        for (const url of oldRestaurantImagesUrls) {
+            const [, , , , , , , , resImages] = url.split('/');
+            await deleteFromBucket(supabase, 'resimages', resImages);
+        }
         
 	    const placeId = placeIdData?.data?.id;
 		const { error } = await supabase
