@@ -34,18 +34,6 @@ export interface Database {
   }
   public: {
     Tables: {
-      cuisine: {
-        Row: {
-          name: string
-        }
-        Insert: {
-          name: string
-        }
-        Update: {
-          name?: string
-        }
-        Relationships: []
-      }
       discounts: {
         Row: {
           condition: string | null
@@ -258,7 +246,6 @@ export interface Database {
           address: string | null
           avgRating: number | null
           created_at: string
-          cuisine: string | null
           description: string | null
           favourite_count: number | null
           id: number
@@ -273,7 +260,6 @@ export interface Database {
           address?: string | null
           avgRating?: number | null
           created_at?: string
-          cuisine?: string | null
           description?: string | null
           favourite_count?: number | null
           id?: number
@@ -288,7 +274,6 @@ export interface Database {
           address?: string | null
           avgRating?: number | null
           created_at?: string
-          cuisine?: string | null
           description?: string | null
           favourite_count?: number | null
           id?: number
@@ -300,13 +285,6 @@ export interface Database {
           res_images?: string[] | null
         }
         Relationships: [
-          {
-            foreignKeyName: "restaurants_cuisine_fkey"
-            columns: ["cuisine"]
-            isOneToOne: false
-            referencedRelation: "cuisine"
-            referencedColumns: ["name"]
-          },
           {
             foreignKeyName: "restaurants_owner_id_fkey"
             columns: ["owner_id"]
