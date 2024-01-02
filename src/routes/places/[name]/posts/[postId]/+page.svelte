@@ -28,7 +28,7 @@
 				imageSrcs={data.post[0].post_image_urls}
 				placeHref=""
 				placeName={data.restaurant_name}
-				placeSrc=''
+				placeSrc={data.restaurant_logo}
 				timeStamp={convertTimestampToLocale(data.post[0].created_at)}
 			/>
 
