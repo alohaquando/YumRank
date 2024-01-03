@@ -11,14 +11,18 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 };
 
 export const actions = {
-    favorite: async ({ request, locals: { supabase, getSession } }) => {
+    favorite: async ({ params, locals: { supabase, getSession } }) => {
       const session = await getSession();
-      const { placeId } = await request.json();
+      const { data: restaurant, error: placesError } = await supabase
+      .from('restaurants')
+      .select('id')
+      .eq('name', params.name.replace('-', ' '))
+      .single();
   
       const { error } = await supabase
         .from('favorites')
         .insert([
-          { user_id: session?.user.id, place_id: placeId },
+          { user_id: session?.user.id, place_id: restaurant?.id },
         ]);
   
       if (error) {
@@ -31,15 +35,19 @@ export const actions = {
         return { status: 200 };
       }
     },
-    unfavorite: async ({ request, locals: { supabase, getSession } }) => {
+    unfavorite: async ({ params, locals: { supabase, getSession } }) => {
       const session = await getSession();
-      const { placeId } = await request.json();
+      const { data: restaurant, error: placesError } = await supabase
+      .from('restaurants')
+      .select('id')
+      .eq('name', params.name.replace('-', ' '))
+      .single();
   
       const { error } = await supabase
         .from('favorites')
         .delete()
         .eq('user_id', session?.user.id)
-        .eq('place_id', placeId);
+        .eq('place_id', restaurant?.id);
   
       if (error) {
         console.error(error);
@@ -52,6 +60,7 @@ export const actions = {
       }
     },
     status: async ({ params, locals: { supabase, getSession } }) => {
+        console.log('bruh');
       const session = await getSession();
       
       const placeName = params.name.replace('-', ' ');

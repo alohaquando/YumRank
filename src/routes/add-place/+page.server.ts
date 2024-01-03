@@ -46,6 +46,9 @@ export const actions = {
 			is_verified: false,
 			description: description,
 			res_images: restaurantImagesUrls,
+			avgRating: 0,
+			numReviews: 0,
+			favorite_count: 0,
 			created_at: new Date()
 		});
 

@@ -78,14 +78,14 @@
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
 
-	let isFavorite = false; 
+	let isFavorite = true; 
 
 	onMount(async () => {
 		await checkFavoriteStatus();
 	});
 
 	async function checkFavoriteStatus() {
-		const response = await fetch(`places/${urlParams}?/status`, {
+		const response = await fetch(`${urlParams}?/status`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json'
@@ -95,16 +95,19 @@
 		if (response.ok) {
 			const data = await response.json();
 			isFavorite = data.isFavorite;
+			
 		} else {
 			const data = await response.json();
-			alert(data.message);
+			console.log(data.message);
 		}
 	}
 
 	async function handleFavoriteToggle() {
+		
 		const endpoint = isFavorite
-			? `places/${urlParams}?/favorite`
-			: `places/${urlParams}?/unfavorite`;
+			? `${urlParams}?/unfavorite`
+			: `${urlParams}?/favorite`;
+		
 		const response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {
@@ -114,8 +117,8 @@
 		});
 
 		if (!response.ok) {
+			console.log(response);
 			const data = await response.json();
-			alert(data.message);
 		} else {
 			isFavorite = !isFavorite; // Toggle isFavorite state
 		}
