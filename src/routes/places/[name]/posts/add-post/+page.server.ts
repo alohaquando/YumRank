@@ -19,7 +19,7 @@ export const actions = {
 		const formData = await request.formData();
         const content = formData.get('content') as string;
         const postImages = formData.getAll('postImages') as File[];
-        console.log(postImages);
+    
 		if (!content) {
 			return fail(500, {
 				failed: true,
@@ -32,7 +32,6 @@ export const actions = {
 			postImages,
 			'postimages'
 		);
-        console.log(postImagesUrls);
 
         const { data: restaurant, error: placesError } = await supabase
             .from('restaurants')

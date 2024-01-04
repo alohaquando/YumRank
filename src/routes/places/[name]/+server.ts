@@ -1,3 +1,4 @@
+import { currentPlaceName } from '$lib/data/currentPlaceName.js';
 import { json } from '@sveltejs/kit';
 import qrCode from 'qrcode';
 

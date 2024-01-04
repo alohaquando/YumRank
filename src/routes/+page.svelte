@@ -27,7 +27,7 @@
 				restaurantName={place.name}
 				checkIns={place.numReviews}
 				rating={place.avgRating}
-				favorites={$favoritesExample}
+				favorites={place.favorite_count}
 				href="/places/{place.name}"
 			/>
 		{/each}

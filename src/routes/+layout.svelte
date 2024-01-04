@@ -22,6 +22,7 @@
 
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
+	let notifications: any[] = [];
 
 	onMount(() => {
 		const {
@@ -31,6 +32,21 @@
 				invalidate('supabase:auth');
 			}
 		});
+		async () => {
+			if (data.session) {
+				console.log('Fetching notifications');
+				const { data: noti, error } = await supabase
+					.from('notifications')
+					.select('*')
+					.eq('sender_id', data.session.user.id);
+
+				if (error) {
+					console.error(error);
+				} else {
+					notifications = noti;
+				}
+			}
+		};
 
 		return () => subscription.unsubscribe();
 	});
@@ -103,7 +119,8 @@
 			<LargePageTitle>Notifications</LargePageTitle>
 			<div class="flex flex-col space-y-4">
 				<!-- TODO: Implement notifications -->
-				{#each { length: 15 } as _}
+
+				{#each notifications as notification}
 					<ListItem
 						href="/"
 						on:click={toggleNotificationDialog}
@@ -112,8 +129,8 @@
 							icon={faBell}
 							slot="leading"
 						/>
-						<Body slot="text">[notification.text]</Body>
-						<Body slot="trailing">[notification.timeStamp]</Body>
+						<Body slot="text">{notification.sender_id}</Body>
+						<Body slot="trailing">{notification.restaurant_id}</Body>
 					</ListItem>
 				{/each}
 			</div>

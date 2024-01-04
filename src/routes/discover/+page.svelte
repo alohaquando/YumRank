@@ -34,7 +34,7 @@
 			<Post
 				content={post.content}
 				imageSrcs={post.post_image_urls}
-				placeHref="places/{post.restaurants.name}"
+				postHref="places/{post.restaurants.name}/posts/{post.id}"
 				placeName={post.restaurants.name}
 				placeSrc={post.restaurants.logo_url}
 				timeStamp={convertTimestampToLocale(post.created_at)}
