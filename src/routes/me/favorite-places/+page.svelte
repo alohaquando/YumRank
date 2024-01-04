@@ -11,14 +11,10 @@
 
 <LargePageTitle showBackButton>Favorite places</LargePageTitle>
 
-<!-- TODO: Replace with correct data -->
-<Body class="py-8"
-	>NOTE: This is myManagedPlaces and NOT myFavorites. Please replace with correct data, then delete
-	this line. Thanks 🥺
-</Body>
+
 <div class="flex flex-col space-y-6">
-	{#if data.myPlaces}
-		{#each data.myPlaces as place}
+	{#if data.places}
+		{#each data.places as place}
 			<TitleItem
 				href="/places/{place.name}"
 				trailingMoreIcon={true}

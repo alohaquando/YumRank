@@ -15,7 +15,7 @@ export const actions = {
       const session = await getSession();
       const { data: restaurant, error: placesError } = await supabase
       .from('restaurants')
-      .select('id')
+      .select('id, favorite_count')
       .eq('name', params.name.replace('-', ' '))
       .single();
   
@@ -32,6 +32,10 @@ export const actions = {
           message: `${error.message}`,
         });
       } else {
+        const { data: update, error: updateError } = await supabase
+          .from('restaurants')
+          .update({ favorite_count: restaurant?.favorite_count + 1})
+          .eq('id', restaurant?.id);
         return { status: 200 };
       }
     },
@@ -39,7 +43,7 @@ export const actions = {
       const session = await getSession();
       const { data: restaurant, error: placesError } = await supabase
       .from('restaurants')
-      .select('id')
+      .select('id, favorite_count')
       .eq('name', params.name.replace('-', ' '))
       .single();
   
@@ -56,6 +60,10 @@ export const actions = {
           message: `${error.message}`,
         });
       } else {
+        const { data: update, error: updateError } = await supabase
+          .from('restaurants')
+          .update({ favorite_count: restaurant?.favorite_count - 1})
+          .eq('id', restaurant?.id);
         return { status: 200 };
       }
     },

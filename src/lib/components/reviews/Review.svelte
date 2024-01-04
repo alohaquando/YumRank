@@ -14,8 +14,6 @@
 	export let rating: number;
 </script>
 
-<!-- TODO: Delete, Edit  -->
-
 <div class="flex flex-col space-y-4">
 	<TitleItem
 		href={reviewHref}

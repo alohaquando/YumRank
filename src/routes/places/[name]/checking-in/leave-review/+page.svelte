@@ -12,7 +12,7 @@
 	import type { SubmitFunction } from '@sveltejs/kit';
 
 	export let data;
-	export let form;
+	
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
 

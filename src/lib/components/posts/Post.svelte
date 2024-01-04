@@ -11,7 +11,6 @@
 	export let timeStamp: string | undefined | null;
 </script>
 
-<!-- TODO: Delete, Edit  -->
 
 <div class="flex-col flex space-y-4">
 	<TitleItem

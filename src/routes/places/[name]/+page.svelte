@@ -189,7 +189,7 @@
 			checkIns={data.restaurant.numReviews}
 			rating={data.restaurant.avgRating}
 			rank={$rankExample}
-			favorites={0}
+			favorites={data.restaurant.favorite_count}
 			class="mb-8"
 		/>
 

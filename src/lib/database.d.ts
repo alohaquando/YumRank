@@ -69,7 +69,7 @@ export interface Database {
           }
         ]
       }
-      favourite: {
+      favorites: {
         Row: {
           id: number
           place_id: number
@@ -87,14 +87,14 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "favourite_place_id_fkey"
+            foreignKeyName: "favorites_place_id_fkey"
             columns: ["place_id"]
             isOneToOne: false
             referencedRelation: "restaurants"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "favourite_user_id_fkey"
+            foreignKeyName: "favorites_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -247,7 +247,7 @@ export interface Database {
           avgRating: number | null
           created_at: string
           description: string | null
-          favourite_count: number | null
+          favorite_count: number | null
           id: number
           is_verified: boolean | null
           logo_url: string | null
@@ -261,7 +261,7 @@ export interface Database {
           avgRating?: number | null
           created_at?: string
           description?: string | null
-          favourite_count?: number | null
+          favorite_count?: number | null
           id?: number
           is_verified?: boolean | null
           logo_url?: string | null
@@ -275,7 +275,7 @@ export interface Database {
           avgRating?: number | null
           created_at?: string
           description?: string | null
-          favourite_count?: number | null
+          favorite_count?: number | null
           id?: number
           is_verified?: boolean | null
           logo_url?: string | null
