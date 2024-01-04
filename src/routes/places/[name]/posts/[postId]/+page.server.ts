@@ -20,7 +20,8 @@ export const load = async ({ locals: { supabase }, params }) => {
         .from('posts')
         .select('*')
         .eq('restaurant_id', restaurant_id)
-        .eq('id', BigInt(params.postId));
+        .eq('id', BigInt(params.postId))
+        .single();
 
     if (error) {
         console.error(error);

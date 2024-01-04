@@ -33,12 +33,12 @@
 	<div class="flex flex-col space-y-0 py-4">
 		{#if data.post}
 			<Post
-				content={data.post[0].content}
-				imageSrcs={data.post[0].post_image_urls}
+				content={data.post.content}
+				imageSrcs={data.post.post_image_urls}
 				postHref=""
 				placeName={data.restaurant_name}
 				placeSrc={data.restaurant_logo}
-				timeStamp={convertTimestampToLocale(data.post[0].created_at)}
+				timeStamp={convertTimestampToLocale(data.post.created_at)}
 			/>
 		{:else}
 			<Body class="text-center opacity-50">No posts yet</Body>
@@ -73,17 +73,17 @@
 			placeholder="Content"
 			required
 			type="text"
-			value={data.post[0].content}
+			value={data.post.content}
 		/>
 
-		<ImageInput
+		<!-- <ImageInput
 			id="postImages"
 			label="Images of your post"
 			multiple
 			name="postImages"
 			overrideShowFilesInitially
-			srcs={data.post[0].post_image_urls}
-		/>
+			srcs={data.post.post_image_urls}
+		/> -->
 
 		<Button
 			disabled={isLoading}
