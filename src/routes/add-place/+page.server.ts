@@ -17,6 +17,7 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 export const actions = {
 	create: async ({ request, locals: { supabase, getSession } }) => {
 		const session = await getSession();
+
 		const formData = await request.formData();
 		const name = formData.get('name') as string;
 		const logoImage = formData.get('logoUrl') as File;

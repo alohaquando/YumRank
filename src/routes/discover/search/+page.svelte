@@ -7,7 +7,6 @@
 	let searchResults: any[] = []; // Store search results
 
 	async function fetchData() {
-
 		try {
 			const response = await fetch(`/discover/search?q=${searchTerm}`);
 			const data = await response.json();
@@ -32,10 +31,10 @@
 <div class="py-8">
 	<TextField
 		autofocus
+		bind:value={searchTerm}
 		id="search"
 		name="search"
-		bind:value={searchTerm}
-		on:input={() => {}}
+		on:input={fetchData}
 		placeholder="Search"
 		type="search"
 	/>
