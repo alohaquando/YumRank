@@ -65,7 +65,15 @@ export const actions = {
 		}
 	  
 		// Calculate the new average rating
-		const avgRating = reviews.reduce((total, review) => total + review.rating, 0) / reviews.length;
+		let avgRating = reviews.reduce((total, review) => total + review.rating, 0) / reviews.length;
+
+		// Round avgRating to two decimal places
+		avgRating = Math.round(avgRating * 100) / 100;
+
+		// Convert avgRating to a string with two decimal places
+		avgRating = Number(avgRating.toFixed(2));
+
+		console.log(avgRating);
 	  
 		// Increment the number of reviews
 		const numReviews = reviews.length;
