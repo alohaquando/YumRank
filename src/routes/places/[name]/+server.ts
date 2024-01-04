@@ -43,7 +43,7 @@ export const GET = async ({
 					}
 				}
 				qrCode.toDataURL(
-					`localhost:5173/places/${params.name}/create-review`,
+					`localhost:5173/places/${params.name}/checking-in/leave-review`,
 					(err: any, qrDataURL: string) => {
 						if (err) {
 							client.send('Error generating QR code');
@@ -68,5 +68,6 @@ export const GET = async ({
 	}
 	return json({ restaurant });
 };
+
 
 

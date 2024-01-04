@@ -34,6 +34,7 @@
 					<Review
 						userSrc={checkIn.profiles.avatar_url}
 						userFullName={checkIn.profiles.full_name}
+						reviewHref="/places/{checkIn.restaurants.name}/check-ins/{checkIn.id}"	
 						timeStamp={convertTimestampToLocale(checkIn.created_at)}
 						content={checkIn.text}
 						rating={checkIn.rating}
