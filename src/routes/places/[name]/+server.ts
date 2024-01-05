@@ -43,8 +43,12 @@ export const GET = async ({
 						userIds.push(userId);
 					}
 				}
+				let qrData = {
+					expirationTime: new Date(Date.now() + 2 * 60 * 1000).toISOString() // 2 minutes from now
+				};
+
 				qrCode.toDataURL(
-					`localhost:5173/places/${params.name}/checking-in/leave-review`,
+					JSON.stringify(qrData),
 					(err: any, qrDataURL: string) => {
 						if (err) {
 							client.send('Error generating QR code');

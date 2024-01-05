@@ -17,6 +17,7 @@
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	let webSocketEstablished = false;
 	let ws: WebSocket | null = null;
@@ -78,11 +79,15 @@
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
 
-	let isFavorite = true; 
+	let isFavorite = true;
 
 	onMount(async () => {
 		await checkFavoriteStatus();
 	});
+
+	async function checkIn() {
+		goto(`/places/${urlParams}/checking-in/confirm`);
+	}
 
 	async function checkFavoriteStatus() {
 		const response = await fetch(`${urlParams}?/status`, {
@@ -95,7 +100,6 @@
 		if (response.ok) {
 			const data = await response.json();
 			isFavorite = data.isFavorite;
-			
 		} else {
 			const data = await response.json();
 			console.log(data.message);
@@ -103,11 +107,8 @@
 	}
 
 	async function handleFavoriteToggle() {
-		
-		const endpoint = isFavorite
-			? `${urlParams}?/unfavorite`
-			: `${urlParams}?/favorite`;
-		
+		const endpoint = isFavorite ? `${urlParams}?/unfavorite` : `${urlParams}?/favorite`;
+
 		const response = await fetch(endpoint, {
 			method: 'POST',
 			headers: {
@@ -125,14 +126,14 @@
 	}
 </script>
 
-<!-- <ul>
+<ul>
 	{#each log as event}
 		{#if event.includes('image/png')}
 			<img src={event} alt="QR" />
 		{/if}
 		<li>{event}</li>
 	{/each}
-</ul> -->
+</ul>
 
 <div>
 	{#if data.restaurant}
@@ -166,8 +167,8 @@
 				placeLogoSrc={data.restaurant.logo_url}
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
-				checkInButtonOnClick={() => {}}
-				bind:isFavorite={isFavorite}
+				checkInButtonOnClick={() => checkIn()}
+				bind:isFavorite
 				favoriteButtonOnClick={handleFavoriteToggle}
 				checkInButtonDisabled={data.owner}
 			/>
