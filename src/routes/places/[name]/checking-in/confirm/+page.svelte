@@ -42,13 +42,14 @@
 		let code = jsQR(imageData.data, imageData.width, imageData.height);
 		if (code) {
 			scanning = false;
-			const { data: expTime, error } = await supabase
-				.from('qrscanning')
-				.select('qr_code_exp')
-				.eq('user_id', session?.user.id ?? '')
-				.eq('restaurant_id', data.restaurant.id)
-				.single();
-			console.log(imageData.expirationTime);
+			// const { data: expTime, error } = await supabase
+			// 	.from('qrscanning')
+			// 	.select('qr_code_exp')
+			// 	.eq('user_id', session?.user.id ?? '')
+			// 	.eq('restaurant_id', data.restaurant.id)
+			// 	.single();
+			const exp = JSON.parse(code.data)
+			console.log(exp.expirationTime);
 			// if (expTime?.qr_code_exp && parseInt(expTime.qr_code_exp) > imageData.expirationTime) {
 			// 	goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
 			// }
