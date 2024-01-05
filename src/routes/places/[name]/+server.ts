@@ -62,7 +62,6 @@ export const GET = async ({
 									);
 								}
 							}
-
 							// Send the message only to the owner
 							// if (ownerWs) ownerWs.send(`lol`);
 						}

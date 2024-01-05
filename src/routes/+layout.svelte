@@ -23,6 +23,44 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 	let notifications: any[] = [];
+	let webSocketEstablished = false;
+	let ws: WebSocket | null = null;
+	let log: string[] = [];
+
+
+	const logEvent = (str: string) => {
+		log = [...log, str];
+	};
+
+	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
+
+	export const requestData = async () => {
+		if (webSocketEstablished) return;
+		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+
+		ws.addEventListener('open', (event) => {
+			webSocketEstablished = true;
+			console.log('[websocket] connection open', event);
+		});
+		ws.addEventListener('close', (event) => {
+			console.log('[websocket] connection closed', event);
+		});
+		ws.addEventListener('message', (event) => {
+			console.log('[websocket] message received', event);
+			logEvent(event.data);
+		});
+		const res = await fetch(`/places/new little place`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		});
+		// const data = await res.json();
+		// logEvent(`[GET] data received: ${data.ownerId}`);
+	};
+
+
 
 	onMount(() => {
 		const {
@@ -55,6 +93,7 @@
 	let badgeNotificationButton = false;
 
 	let toggleNotificationDialog = () => {
+		requestData();
 		if (showNotificationsDialog) {
 			// Change status to seen
 		}
@@ -122,6 +161,15 @@
 			<LargePageTitle>Notifications</LargePageTitle>
 			<div class="flex flex-col space-y-4">
 				<!-- TODO: Implement notifications -->
+				<ul>
+					{#each log as event}
+						{#if event.includes('image/png')}
+							<img src={event} alt="QR" />
+						{:else}
+							<p>{event}</p>
+						{/if}
+					{/each}
+				</ul>
 
 				{#each notifications as notification}
 					<ListItem

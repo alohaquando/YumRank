@@ -86,6 +86,7 @@
 	});
 
 	async function checkIn() {
+		requestData();
 		goto(`/places/${urlParams}/checking-in/confirm`);
 	}
 
@@ -126,14 +127,15 @@
 	}
 </script>
 
-<ul>
+<!-- <ul>
 	{#each log as event}
 		{#if event.includes('image/png')}
 			<img src={event} alt="QR" />
+		{:else}
+			<p>{event}</p>
 		{/if}
-		<li>{event}</li>
 	{/each}
-</ul>
+</ul> -->
 
 <div>
 	{#if data.restaurant}

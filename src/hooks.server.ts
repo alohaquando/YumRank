@@ -58,6 +58,7 @@ function startupWebsocketServer() {
 		if (wssInitialized) return;
 		console.log('[wss:kit] setup');
 		const wss = (globalThis as ExtendedGlobal)[GlobalThisWSS];
+
 		if (wss !== undefined) {
 			wss.on('connection', async (ws, request) => {
 				const cookie = request.headers.cookie;
@@ -65,6 +66,12 @@ function startupWebsocketServer() {
 				const token = decodedCookie?.['sb-spkuounwjckbvmdirseo-auth-token'];
 				const parsedToken = token ? JSON.parse(token) : null;
 				const userId = parsedToken?.user.id;
+
+				if (userConnections.has(userId)) {
+					// Close the new connection
+					const existingWs = userConnections.get(userId);
+					existingWs.close();
+				}
 
 				userConnections.set(userId, ws);
 

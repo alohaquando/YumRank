@@ -50,7 +50,7 @@
 				.eq('restaurant_id', data.restaurant.id)
 				.single();
 			const exp = JSON.parse(code.data)
-			console.log(typeof(exp.expirationTime));
+			console.log(exp.expirationTime);
 			if (expTime?.qr_code_exp && expTime.qr_code_exp > exp.expirationTime) {
 				goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
 			} else {
