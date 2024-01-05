@@ -20,7 +20,6 @@
 <div class="flex flex-col space-y-10">
 	{#if data.restaurants}
 		{#each data.restaurants as place, i}
-			<!--	TODO: Get actual ranking AND favorite count -->
 			<LeaderboardItem
 				rank={i + 1}
 				restaurantSrc={place.res_images != null ? place.res_images[0] : ''}

@@ -125,14 +125,14 @@
 	}
 </script>
 
-<ul>
+<!-- <ul>
 	{#each log as event}
 		{#if event.includes('image/png')}
 			<img src={event} alt="QR" />
 		{/if}
 		<li>{event}</li>
 	{/each}
-</ul>
+</ul> -->
 
 <div>
 	{#if data.restaurant}
@@ -166,7 +166,7 @@
 				placeLogoSrc={data.restaurant.logo_url}
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
-				checkInButtonOnClick={() =>  requestData()}
+				checkInButtonOnClick={() => {}}
 				bind:isFavorite={isFavorite}
 				favoriteButtonOnClick={handleFavoriteToggle}
 				checkInButtonDisabled={data.owner}
@@ -188,7 +188,7 @@
 		<StatsSummary
 			checkIns={data.restaurant.numReviews}
 			rating={data.restaurant.avgRating}
-			rank={$rankExample}
+			rank={data.placeRanking}
 			favorites={data.restaurant.favorite_count}
 			class="mb-8"
 		/>

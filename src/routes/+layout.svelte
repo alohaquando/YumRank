@@ -55,6 +55,9 @@
 	let badgeNotificationButton = false;
 
 	let toggleNotificationDialog = () => {
+		if (showNotificationsDialog) {
+			// Change status to seen
+		}
 		showNotificationsDialog = !showNotificationsDialog;
 	};
 </script>
