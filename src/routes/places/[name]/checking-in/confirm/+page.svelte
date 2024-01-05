@@ -16,6 +16,7 @@
 	import { goto } from '$app/navigation';
 	import { onMount, afterUpdate, tick } from 'svelte';
 	import jsQR from 'jsqr';
+	import { parse } from 'svelte/compiler';
 
 	export let data;
 	let { session, supabase } = data;
@@ -49,8 +50,8 @@
 				.eq('restaurant_id', data.restaurant.id)
 				.single();
 			const exp = JSON.parse(code.data)
-			console.log(exp.expirationTime);
-			if (expTime?.qr_code_exp && parseInt(expTime.qr_code_exp) > exp.expirationTime) {
+			console.log(typeof(exp.expirationTime));
+			if (expTime?.qr_code_exp && expTime.qr_code_exp > exp.expirationTime) {
 				goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
 			} else {
 				console.log('expired');
