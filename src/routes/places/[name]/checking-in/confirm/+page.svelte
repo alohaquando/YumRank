@@ -14,7 +14,7 @@
 	import Title from '$lib/components/typography/Title.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
 	import { goto } from '$app/navigation';
-	import { onMount } from 'svelte';
+	import { onMount, afterUpdate, tick } from 'svelte';
 	import jsQR from 'jsqr';
 
 	export let data;
@@ -24,51 +24,62 @@
 	let video: any;
 	let canvas: any;
 	let context: any;
+	let stream;
+	let scanning = false;
 
-	onMount(async () => {
-		video = document.getElementById('video');
-		canvas = document.getElementById('canvas');
-		context = canvas.getContext('2d');
+	async function openCamera() {
+		stream = await navigator.mediaDevices.getUserMedia({ video: true });
+		video.srcObject = stream;
+		video.play();
+		scanning = true;
+		scanQR();
+	}
 
-		if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-			navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-				video.srcObject = stream;
-				video.play();
-			});
-		}
-	});
 	async function scanQR() {
+		if (!scanning) return;
 		context.drawImage(video, 0, 0, 640, 480);
 		let imageData = context.getImageData(0, 0, canvas.width, canvas.height);
 		let code = jsQR(imageData.data, imageData.width, imageData.height);
 		if (code) {
-			console.log(code.data);
-			// let { data, error } = await supabase.from('places').select('*').eq('qr_code', code.data);
-			// if (data && data.length > 0) {
-			// 	goto('/check-in');
+			scanning = false;
+			const { data: expTime, error } = await supabase
+				.from('qrscanning')
+				.select('qr_code_exp')
+				.eq('user_id', session?.user.id ?? '')
+				.eq('restaurant_id', data.restaurant.id)
+				.single();
+			console.log(imageData.expirationTime);
+			// if (expTime?.qr_code_exp && parseInt(expTime.qr_code_exp) > imageData.expirationTime) {
+			// 	goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
 			// }
+		} else {
+			requestAnimationFrame(scanQR);
 		}
 	}
+	onMount(async () => {
+		await tick(); // Wait for the DOM to be updated
+		video = document.getElementById('video');
+		canvas = document.getElementById('canvas');
+		context = canvas.getContext('2d');
+	});
 </script>
 
 <LargePageTitle showBackButton>Checking in at</LargePageTitle>
 
 <div class="flex-col flex space-y-4">
+	<!-- svelte-ignore a11y-media-has-caption -->
 	<video
 		id="video"
 		width="640"
 		height="480"
-		style="display:none;"
-	>
-		<track kind="captions" />
-	</video>
+	/>
 	<canvas
 		id="canvas"
 		width="640"
 		height="480"
 		style="display:none;"
 	/>
-	<button on:click={scanQR}>Open Camera</button>
+	<Button on:click={openCamera}>Open Camera</Button>
 
 	<PlaceItems
 		address={data.restaurant.address}
