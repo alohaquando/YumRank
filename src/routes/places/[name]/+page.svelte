@@ -9,15 +9,16 @@
 	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
 	import Review from '$lib/components/reviews/Review.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import { rankExample } from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
-	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
+	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
+
 
 	// let webSocketEstablished = false;
 	// let ws: WebSocket | null = null;
@@ -59,11 +60,9 @@
 	// 	// logEvent(`[GET] data received: ${data.ownerId}`);
 	// };
 
-	let isFavorite = true;
-
-	onMount(async () => {
-		await checkFavoriteStatus();
-	});
+	// onMount(async () => {
+	// 	await checkFavoriteStatus();
+	// });
 
 	async function checkIn() {
 		const { data: checkin, error } = await supabase
@@ -83,41 +82,41 @@
 		}
 	}
 
-	async function checkFavoriteStatus() {
-		const response = await fetch(`${urlParams}?/status`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
+	// async function checkFavoriteStatus() {
+	// 	const response = await fetch(`${urlParams}?/status`, {
+	// 		method: 'GET',
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 		}
+	// 	});
+	//
+	// 	if (response.ok) {
+	// 		const data = await response.json();
+	// 		isFavorite = data.isFavorite;
+	// 	} else {
+	// 		const data = await response.json();
+	// 		console.log(data.message);
+	// 	}
+	// }
 
-		if (response.ok) {
-			const data = await response.json();
-			isFavorite = data.isFavorite;
-		} else {
-			const data = await response.json();
-			console.log(data.message);
-		}
-	}
-
-	async function handleFavoriteToggle() {
-		const endpoint = isFavorite ? `${urlParams}?/unfavorite` : `${urlParams}?/favorite`;
-
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ placeId: data.restaurant.id })
-		});
-
-		if (!response.ok) {
-			console.log(response);
-			const data = await response.json();
-		} else {
-			isFavorite = !isFavorite; // Toggle isFavorite state
-		}
-	}
+	// async function handleFavoriteToggle() {
+	// 	const endpoint = isFavorite ? `${urlParams}?/unfavorite` : `${urlParams}?/favorite`;
+	//
+	// 	const response = await fetch(endpoint, {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 		},
+	// 		body: JSON.stringify({ placeId: data.restaurant.id })
+	// 	});
+	//
+	// 	if (!response.ok) {
+	// 		console.log(response);
+	// 		const data = await response.json();
+	// 	} else {
+	// 		isFavorite = !isFavorite; // Toggle isFavorite state
+	// 	}
+	// }
 </script>
 
 <!-- <ul>
@@ -153,18 +152,27 @@
 			</AlertCard>
 		{/if}
 
+		<form
+			action="?/test"
+			method="POST"
+			use:enhance
+			id="favoriteForm"
+			class="hidden"
+		>
+		</form>
+
 		<div class="flex flex-col space-y-8 py-4">
 			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
-			<!--TODO: favoriteButtonOnClick() @Khai -->
 			<PlaceDetailTitleBlock
 				placeName={data.restaurant.name}
 				placeImagesSrcs={data.restaurant.res_images}
 				placeLogoSrc={data.restaurant.logo_url}
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
+				favoriteButtonForm="favoriteForm"
 				checkInButtonOnClick={() => checkIn()}
-				bind:isFavorite
-				favoriteButtonOnClick={handleFavoriteToggle}
+				bind:isFavorite={data.isFavorite}
+				favoriteButtonOnClick={() => {}}
 				checkInButtonDisabled={data.owner}
 			/>
 		</div>

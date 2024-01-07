@@ -4,6 +4,7 @@
 	export let size: 'md' | 'lg' = 'md';
 	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'filled';
 	export let disabled: boolean = false;
+	export let form: string | undefined | null = undefined;
 
 	export let href: string | undefined = undefined;
 	let customClasses = '';
@@ -22,7 +23,7 @@
 	}
 
 	let designClasses: string;
-	switch (design) {
+	$: switch (design) {
 		case 'filled': {
 			designClasses = 'bg-red-500 text-white hover:bg-red-600';
 			break;
@@ -43,13 +44,14 @@
 </script>
 
 <svelte:element
-	this={href ? 'a' : 'button'}
 	class="flex justify-center items-center rounded-full transition {sizeClasses} {designClasses} {customClasses}"
 	{disabled}
+	{form}
 	{href}
 	on:click
 	role="button"
 	tabindex="0"
+	this={href ? 'a' : 'button'}
 	{type}
 >
 	<slot />

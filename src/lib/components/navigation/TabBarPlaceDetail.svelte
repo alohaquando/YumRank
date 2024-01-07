@@ -7,9 +7,6 @@
 
 	export let currentLocation: string;
 	export let isOwner = false;
-
-	console.log(currentLocation);
-	console.log(placeName);
 </script>
 
 <TabBar>

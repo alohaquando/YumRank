@@ -17,6 +17,7 @@
 	export let address: string | undefined | null;
 	export let checkInButtonDisabled: boolean = false;
 	export let isFavorite: boolean = false;
+	export let favoriteButtonForm: string;
 	export let checkInButtonOnClick: () => void;
 	export let favoriteButtonOnClick: () => void;
 </script>
@@ -63,24 +64,16 @@
 		Check in
 	</Button>
 
-	{#if isFavorite}
-		<IconButton
-			design="tonal"
-			class="transition"
-			on:click={() => favoriteButtonOnClick()}
-		>
-			<Fa
-				icon={faHeartFilled}
-				class="text-red-500"
-			/>
-		</IconButton>
-	{:else}
-		<IconButton
-			design="outlined"
-			class="transition"
-			on:click={() => favoriteButtonOnClick()}
-		>
-			<Fa icon={faHeartOutlined} />
-		</IconButton>
-	{/if}
+
+	<IconButton
+		class="transition"
+		design={isFavorite ? 'tonal' : 'outlined'}
+		form={favoriteButtonForm}
+		on:click={() => favoriteButtonOnClick()}
+		type="submit">
+		<Fa
+			class={isFavorite ? 'text-red-500' : ''}
+			icon={isFavorite ? faHeartFilled : faHeartOutlined}
+		/>
+	</IconButton>
 </div>
