@@ -5,19 +5,19 @@
 	import Title from '$lib/components/typography/Title.svelte';
 	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
-	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
 	import Review from '$lib/components/reviews/Review.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import { rankExample } from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
-	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
+	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
+	import type { SubmitFunction } from '@sveltejs/kit';
+
 
 	// let webSocketEstablished = false;
 	// let ws: WebSocket | null = null;
@@ -32,6 +32,15 @@
 	// };
 
 	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
+
+	let isFavoriteLoading = false;
+	const handleFavoriteToggle: SubmitFunction = () => {
+		isFavoriteLoading = true;
+		return async ({ update }) => {
+			await update();
+			isFavoriteLoading = false;
+		};
+	};
 
 	// export const requestData = async () => {
 	// 	if (webSocketEstablished) return;
@@ -59,14 +68,8 @@
 	// 	// logEvent(`[GET] data received: ${data.ownerId}`);
 	// };
 
-	let isFavorite = true;
-
-	onMount(async () => {
-		await checkFavoriteStatus();
-	});
-
 	async function checkIn() {
-		const {data: checkin, error} = await supabase
+		const { error } = await supabase
 			.from('notifications')
 			.insert([
 				{
@@ -80,42 +83,6 @@
 			console.log(error);
 		} else {
 			goto(`/places/${urlParams}/checking-in/confirm`);
-		}
-	}
-
-	async function checkFavoriteStatus() {
-		const response = await fetch(`${urlParams}?/status`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-
-		if (response.ok) {
-			const data = await response.json();
-			isFavorite = data.isFavorite;
-		} else {
-			const data = await response.json();
-			console.log(data.message);
-		}
-	}
-
-	async function handleFavoriteToggle() {
-		const endpoint = isFavorite ? `${urlParams}?/unfavorite` : `${urlParams}?/favorite`;
-
-		const response = await fetch(endpoint, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ placeId: data.restaurant.id })
-		});
-
-		if (!response.ok) {
-			console.log(response);
-			const data = await response.json();
-		} else {
-			isFavorite = !isFavorite; // Toggle isFavorite state
 		}
 	}
 </script>
@@ -139,48 +106,37 @@
 					slot="icon"
 				/>
 				<Title slot="title">You are the manager of this site</Title>
-				<Button
-					slot="body"
-					width="full"
-					href="/places/{data.placeName}/check-ins/generate-qr"
-				>
-					<Fa
-						icon={faQrcode}
-						slot="icon"
-					/>
-					Generate QR code for check-in
-				</Button>
 			</AlertCard>
 		{/if}
 
+		<form
+			action={data.isFavorite ? '?/unfavorite' : '?/favorite'}
+			method="POST"
+			use:enhance={handleFavoriteToggle}
+			id="favoriteForm"
+			class="hidden"
+		>
+		</form>
+
 		<div class="flex flex-col space-y-8 py-4">
-			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
-			<!--TODO: favoriteButtonOnClick() @Khai -->
 			<PlaceDetailTitleBlock
 				placeName={data.restaurant.name}
 				placeImagesSrcs={data.restaurant.res_images}
 				placeLogoSrc={data.restaurant.logo_url}
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
+				favoriteButtonForm="favoriteForm"
 				checkInButtonOnClick={() => checkIn()}
-				bind:isFavorite
-				favoriteButtonOnClick={handleFavoriteToggle}
+				bind:isFavorite={data.isFavorite}
+				bind:isFavoriteLoading={isFavoriteLoading}
 				checkInButtonDisabled={data.owner}
 			/>
 		</div>
 
-		<!-- TODO: Implement filter? @Khai -->
 		<LargePageTitle>
-			Ranking this
-			<TitleDropdown
-				name="time_selected"
-				id="time_selected"
-				slot="trailing"
-				value="week"
-			/>
+			Ranking
 		</LargePageTitle>
 
-		<!-- TODO: Get rank and favorites count. @Khai-->
 		<StatsSummary
 			checkIns={data.restaurant.numReviews}
 			rating={data.restaurant.avgRating}
@@ -192,14 +148,13 @@
 		<div class="flex flex-col space-y-0 py-4">
 			{#if data.checkIns}
 				<Headline
-					>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
-						? 's'
-						: ''}</Headline
+				>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
+					? 's'
+					: ''}</Headline
 				>
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
 						{#each data.checkIns.slice(0, 3) as checkIn}
-							<!-- TODO: Test -->
 							<Review
 								userSrc={checkIn.profiles.avatar_url}
 								userFullName={checkIn.profiles.full_name}
@@ -213,7 +168,7 @@
 							href="{data.restaurant.name}/check-ins"
 							width="full"
 							design="outlined"
-							>View all check-ins
+						>View all check-ins
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No check-ins yet</Body>
@@ -242,7 +197,7 @@
 							href="{data.restaurant.name}/posts"
 							width="full"
 							design="outlined"
-							>View all posts
+						>View all posts
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No posts yet</Body>

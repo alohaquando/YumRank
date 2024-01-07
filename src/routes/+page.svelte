@@ -1,20 +1,12 @@
 <script lang="ts">
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
-	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
-	import { favoritesExample } from '$lib/data/exampleData';
 
 	export let data;
 </script>
 
 <LargePageTitle>
-	Popular this
-	<TitleDropdown
-		id="time_selected"
-		name="time_selected"
-		slot="trailing"
-		value="week"
-	/>
+	Popular right now
 </LargePageTitle>
 
 <div class="flex flex-col space-y-10">
