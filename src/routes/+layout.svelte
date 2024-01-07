@@ -23,44 +23,6 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 	let notifications: any[] = [];
-	let webSocketEstablished = false;
-	let ws: WebSocket | null = null;
-	let log: string[] = [];
-
-
-	const logEvent = (str: string) => {
-		log = [...log, str];
-	};
-
-	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
-
-	export const requestData = async () => {
-		if (webSocketEstablished) return;
-		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
-
-		ws.addEventListener('open', (event) => {
-			webSocketEstablished = true;
-			console.log('[websocket] connection open', event);
-		});
-		ws.addEventListener('close', (event) => {
-			console.log('[websocket] connection closed', event);
-		});
-		ws.addEventListener('message', (event) => {
-			console.log('[websocket] message received', event);
-			logEvent(event.data);
-		});
-		const res = await fetch(`/places/new little place`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		// const data = await res.json();
-		// logEvent(`[GET] data received: ${data.ownerId}`);
-	};
-
-
 
 	onMount(() => {
 		const {
@@ -70,21 +32,6 @@
 				invalidate('supabase:auth');
 			}
 		});
-		async () => {
-			if (data.session) {
-				console.log('Fetching notifications');
-				const { data: noti, error } = await supabase
-					.from('notifications')
-					.select('*')
-					.eq('sender_id', data.session.user.id);
-
-				if (error) {
-					console.error(error);
-				} else {
-					notifications = noti;
-				}
-			}
-		};
 
 		return () => subscription.unsubscribe();
 	});
@@ -92,12 +39,43 @@
 	let showNotificationsDialog = false;
 	let badgeNotificationButton = false;
 
-	let toggleNotificationDialog = () => {
-		requestData();
-		if (showNotificationsDialog) {
-			// Change status to seen
-		}
+	let toggleNotificationDialog = async () => {
+		let seen: boolean;
 		showNotificationsDialog = !showNotificationsDialog;
+		if (data.session) {
+			console.log('Fetching notifications');
+
+			// Fetch the restaurant IDs where the user is the owner
+			const { data: restaurants, error: restaurantError } = await supabase
+				.from('restaurants')
+				.select('id')
+				.eq('owner_id', data.session.user.id);
+
+			if (restaurantError) {
+				console.error(restaurantError);
+			} else {
+				// Get the restaurant IDs
+				const restaurantIds = restaurants.map((restaurant) => restaurant.id);
+
+				// Fetch the notifications where the restaurant_id is in the restaurant IDs
+				const { data: noti, error: notiError } = await supabase
+					.from('notifications')
+					.select('*')
+					.in('restaurant_id', restaurantIds);
+				if (showNotificationsDialog) {
+					const { data: status, error: notiError } = await supabase
+						.from('notifications')
+						.update({ seen: true })
+						.in('restaurant_id', restaurantIds);
+				}
+
+				if (notiError) {
+					console.error(notiError);
+				} else {
+					notifications = noti;
+				}
+			}
+		}
 	};
 </script>
 
@@ -160,29 +138,36 @@
 			</IconButton>
 			<LargePageTitle>Notifications</LargePageTitle>
 			<div class="flex flex-col space-y-4">
-				<!-- TODO: Implement notifications -->
-				<ul>
-					{#each log as event}
-						{#if event.includes('image/png')}
-							<img src={event} alt="QR" />
-						{:else}
-							<p>{event}</p>
-						{/if}
-					{/each}
-				</ul>
-
 				{#each notifications as notification}
-					<ListItem
-						href="/"
-						on:click={toggleNotificationDialog}
-					>
-						<Fa
-							icon={faBell}
-							slot="leading"
-						/>
-						<Body slot="text">{notification.sender_id}</Body>
-						<Body slot="trailing">{notification.restaurant_id}</Body>
-					</ListItem>
+					{#if notification.type == 'checkin'}
+						<ListItem
+							href="/"
+							on:click={toggleNotificationDialog}
+						>
+							<Fa
+								icon={faBell}
+								slot="leading"
+							/>
+
+							<Body slot="text"
+								>{notification.sender_id} want to leave a review to {notification.restaurant_id}</Body
+							>
+						</ListItem>
+					{:else}
+						<ListItem
+							href="/"
+							on:click={toggleNotificationDialog}
+						>
+							<Fa
+								icon={faBell}
+								slot="leading"
+							/>
+
+							<Body slot="text"
+								>{notification.sender_id} left a review to {notification.restaurant_id}</Body
+							>
+						</ListItem>
+					{/if}
 				{/each}
 			</div>
 		</div>

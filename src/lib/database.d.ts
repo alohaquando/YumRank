@@ -34,41 +34,6 @@ export interface Database {
   }
   public: {
     Tables: {
-      discounts: {
-        Row: {
-          condition: string | null
-          created_at: string
-          id: number
-          number: number | null
-          restaurant_id: number | null
-          type: Database["public"]["Enums"]["discount_type"] | null
-        }
-        Insert: {
-          condition?: string | null
-          created_at?: string
-          id?: number
-          number?: number | null
-          restaurant_id?: number | null
-          type?: Database["public"]["Enums"]["discount_type"] | null
-        }
-        Update: {
-          condition?: string | null
-          created_at?: string
-          id?: number
-          number?: number | null
-          restaurant_id?: number | null
-          type?: Database["public"]["Enums"]["discount_type"] | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "discounts_restaurant_id_fkey"
-            columns: ["restaurant_id"]
-            isOneToOne: false
-            referencedRelation: "restaurants"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
       favorites: {
         Row: {
           id: number
@@ -107,19 +72,25 @@ export interface Database {
           created_at: string
           id: number
           restaurant_id: number | null
+          seen: boolean | null
           sender_id: string | null
+          type: string | null
         }
         Insert: {
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          seen?: boolean | null
           sender_id?: string | null
+          type?: string | null
         }
         Update: {
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          seen?: boolean | null
           sender_id?: string | null
+          type?: string | null
         }
         Relationships: [
           {
@@ -204,22 +175,16 @@ export interface Database {
       }
       qrscanning: {
         Row: {
-          created_at: string
-          qr_code_data: string | null
           qr_code_exp: string | null
           restaurant_id: number
           user_id: string
         }
         Insert: {
-          created_at?: string
-          qr_code_data?: string | null
           qr_code_exp?: string | null
           restaurant_id: number
           user_id: string
         }
         Update: {
-          created_at?: string
-          qr_code_data?: string | null
           qr_code_exp?: string | null
           restaurant_id?: number
           user_id?: string
