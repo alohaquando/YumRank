@@ -7,6 +7,8 @@
 
 	export let currentLocation: string;
 	export let isOwner = false;
+
+	$: placeName = placeName.replace(/ /g, '%20');
 </script>
 
 <TabBar>
