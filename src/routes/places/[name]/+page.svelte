@@ -66,7 +66,7 @@
 	});
 
 	async function checkIn() {
-		const {data: checkin, error} = await supabase
+		const { data: checkin, error } = await supabase
 			.from('notifications')
 			.insert([
 				{
@@ -139,17 +139,17 @@
 					slot="icon"
 				/>
 				<Title slot="title">You are the manager of this site</Title>
-				<Button
-					slot="body"
-					width="full"
-					href="/places/{data.placeName}/check-ins/generate-qr"
-				>
-					<Fa
-						icon={faQrcode}
-						slot="icon"
-					/>
-					Generate QR code for check-in
-				</Button>
+				<!--				<Button-->
+				<!--					slot="body"-->
+				<!--					width="full"-->
+				<!--					href="/places/{data.placeName}/check-ins/generate-qr"-->
+				<!--				>-->
+				<!--					<Fa-->
+				<!--						icon={faQrcode}-->
+				<!--						slot="icon"-->
+				<!--					/>-->
+				<!--					Generate QR code for check-in-->
+				<!--				</Button>-->
 			</AlertCard>
 		{/if}
 
@@ -192,9 +192,9 @@
 		<div class="flex flex-col space-y-0 py-4">
 			{#if data.checkIns}
 				<Headline
-					>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
-						? 's'
-						: ''}</Headline
+				>Check-ins • {data.checkIns.length} check-in{data.checkIns.length !== 1
+					? 's'
+					: ''}</Headline
 				>
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
@@ -213,7 +213,7 @@
 							href="{data.restaurant.name}/check-ins"
 							width="full"
 							design="outlined"
-							>View all check-ins
+						>View all check-ins
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No check-ins yet</Body>
@@ -242,7 +242,7 @@
 							href="{data.restaurant.name}/posts"
 							width="full"
 							design="outlined"
-							>View all posts
+						>View all posts
 						</Button>
 					{:else}
 						<Body class="text-center opacity-50">No posts yet</Body>
