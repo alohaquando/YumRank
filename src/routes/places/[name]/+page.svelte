@@ -5,7 +5,6 @@
 	import Title from '$lib/components/typography/Title.svelte';
 	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
-	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
 	import Review from '$lib/components/reviews/Review.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
@@ -15,9 +14,9 @@
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
-	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
 	import { enhance } from '$app/forms';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
 
 	// let webSocketEstablished = false;
@@ -33,6 +32,15 @@
 	// };
 
 	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
+
+	let isFavoriteLoading = false;
+	const handleFavoriteToggle: SubmitFunction = () => {
+		isFavoriteLoading = true;
+		return async ({ update }) => {
+			await update();
+			isFavoriteLoading = false;
+		};
+	};
 
 	// export const requestData = async () => {
 	// 	if (webSocketEstablished) return;
@@ -60,12 +68,8 @@
 	// 	// logEvent(`[GET] data received: ${data.ownerId}`);
 	// };
 
-	// onMount(async () => {
-	// 	await checkFavoriteStatus();
-	// });
-
 	async function checkIn() {
-		const { data: checkin, error } = await supabase
+		const { error } = await supabase
 			.from('notifications')
 			.insert([
 				{
@@ -81,42 +85,6 @@
 			goto(`/places/${urlParams}/checking-in/confirm`);
 		}
 	}
-
-	// async function checkFavoriteStatus() {
-	// 	const response = await fetch(`${urlParams}?/status`, {
-	// 		method: 'GET',
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		}
-	// 	});
-	//
-	// 	if (response.ok) {
-	// 		const data = await response.json();
-	// 		isFavorite = data.isFavorite;
-	// 	} else {
-	// 		const data = await response.json();
-	// 		console.log(data.message);
-	// 	}
-	// }
-
-	// async function handleFavoriteToggle() {
-	// 	const endpoint = isFavorite ? `${urlParams}?/unfavorite` : `${urlParams}?/favorite`;
-	//
-	// 	const response = await fetch(endpoint, {
-	// 		method: 'POST',
-	// 		headers: {
-	// 			'Content-Type': 'application/json'
-	// 		},
-	// 		body: JSON.stringify({ placeId: data.restaurant.id })
-	// 	});
-	//
-	// 	if (!response.ok) {
-	// 		console.log(response);
-	// 		const data = await response.json();
-	// 	} else {
-	// 		isFavorite = !isFavorite; // Toggle isFavorite state
-	// 	}
-	// }
 </script>
 
 <!-- <ul>
@@ -138,31 +106,19 @@
 					slot="icon"
 				/>
 				<Title slot="title">You are the manager of this site</Title>
-				<!--				<Button-->
-				<!--					slot="body"-->
-				<!--					width="full"-->
-				<!--					href="/places/{data.placeName}/check-ins/generate-qr"-->
-				<!--				>-->
-				<!--					<Fa-->
-				<!--						icon={faQrcode}-->
-				<!--						slot="icon"-->
-				<!--					/>-->
-				<!--					Generate QR code for check-in-->
-				<!--				</Button>-->
 			</AlertCard>
 		{/if}
 
 		<form
-			action="?/test"
+			action={data.isFavorite ? '?/unfavorite' : '?/favorite'}
 			method="POST"
-			use:enhance
+			use:enhance={handleFavoriteToggle}
 			id="favoriteForm"
 			class="hidden"
 		>
 		</form>
 
 		<div class="flex flex-col space-y-8 py-4">
-			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
 			<PlaceDetailTitleBlock
 				placeName={data.restaurant.name}
 				placeImagesSrcs={data.restaurant.res_images}
@@ -172,23 +128,15 @@
 				favoriteButtonForm="favoriteForm"
 				checkInButtonOnClick={() => checkIn()}
 				bind:isFavorite={data.isFavorite}
-				favoriteButtonOnClick={() => {}}
+				bind:isFavoriteLoading={isFavoriteLoading}
 				checkInButtonDisabled={data.owner}
 			/>
 		</div>
 
-		<!-- TODO: Implement filter? @Khai -->
 		<LargePageTitle>
-			Ranking this
-			<TitleDropdown
-				name="time_selected"
-				id="time_selected"
-				slot="trailing"
-				value="week"
-			/>
+			Ranking
 		</LargePageTitle>
 
-		<!-- TODO: Get rank and favorites count. @Khai-->
 		<StatsSummary
 			checkIns={data.restaurant.numReviews}
 			rating={data.restaurant.avgRating}
@@ -207,7 +155,6 @@
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
 						{#each data.checkIns.slice(0, 3) as checkIn}
-							<!-- TODO: Test -->
 							<Review
 								userSrc={checkIn.profiles.avatar_url}
 								userFullName={checkIn.profiles.full_name}

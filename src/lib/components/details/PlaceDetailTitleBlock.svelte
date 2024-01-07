@@ -9,6 +9,8 @@
 	import { faHeart as faHeartOutlined, faUserCheck } from '@fortawesome/pro-regular-svg-icons';
 	import { faHeart as faHeartFilled } from '@fortawesome/pro-solid-svg-icons';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import type { IconDefinition } from '@fortawesome/sharp-light-svg-icons';
+	import { faSpinnerThird } from '@fortawesome/pro-duotone-svg-icons';
 
 	export let placeName: string | undefined | null;
 	export let placeImagesSrcs: string[] | undefined | null;
@@ -17,9 +19,20 @@
 	export let address: string | undefined | null;
 	export let checkInButtonDisabled: boolean = false;
 	export let isFavorite: boolean = false;
+	export let isFavoriteLoading: boolean = false;
 	export let favoriteButtonForm: string;
 	export let checkInButtonOnClick: () => void;
-	export let favoriteButtonOnClick: () => void;
+
+	let favoriteIcon: IconDefinition;
+	$: if (isFavoriteLoading) {
+		favoriteIcon = faSpinnerThird;
+	} else {
+		if (isFavorite) {
+			favoriteIcon = faHeartFilled;
+		} else {
+			favoriteIcon = faHeartOutlined;
+		}
+	}
 </script>
 
 <div
@@ -64,16 +77,15 @@
 		Check in
 	</Button>
 
-
 	<IconButton
-		class="transition"
+		class="transition group {isFavoriteLoading ? 'animate-spin' : ''}"
 		design={isFavorite ? 'tonal' : 'outlined'}
+		disabled={isFavoriteLoading}
 		form={favoriteButtonForm}
-		on:click={() => favoriteButtonOnClick()}
 		type="submit">
 		<Fa
-			class={isFavorite ? 'text-red-500' : ''}
-			icon={isFavorite ? faHeartFilled : faHeartOutlined}
+			class="{isFavorite ? 'text-red-500 group-hover:text-white' : ''} {isFavoriteLoading ? '!text-gray-500 group-hover:!text-gray-500' : ''}"
+			icon={favoriteIcon}
 		/>
 	</IconButton>
 </div>

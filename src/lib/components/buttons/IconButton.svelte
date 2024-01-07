@@ -29,11 +29,11 @@
 			break;
 		}
 		case 'outlined': {
-			designClasses = 'outline outline-1 outline-gray-300 hover:bg-red-50';
+			designClasses = 'outline outline-1 outline-gray-300 hover:bg-red-50 disabled:bg-gray-50 disabled:text-gray-300';
 			break;
 		}
 		case 'tonal': {
-			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
+			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white disabled:bg-gray-100 disabled:text-gray-300';
 			break;
 		}
 		case 'text': {
