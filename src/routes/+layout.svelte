@@ -61,7 +61,7 @@
 				// Fetch the notifications where the restaurant_id is in the restaurant IDs
 				const { data: noti, error: notiError } = await supabase
 					.from('notifications')
-					.select('*, restaurants (name)')
+					.select('*, restaurants (name), profiles (username)')
 					.in('restaurant_id', restaurantIds);
 				if (showNotificationsDialog) {
 					const { data: status, error: notiError } = await supabase
@@ -151,7 +151,7 @@
 							/>
 
 							<Body slot="text"
-								>{notification.sender_id} want to leave a review to {notification.restaurant_id}</Body
+								>{notification.profiles.username} want to leave a review to {notification.restaurants.name}</Body
 							>
 						</ListItem>
 					{:else}

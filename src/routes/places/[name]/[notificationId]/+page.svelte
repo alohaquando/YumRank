@@ -28,7 +28,7 @@
 	</ActionChip>
 
 	<Headline class="text-center max-w-md mx-auto"
-		>Inform the {data.noti?.profiles?.username} to scan the QR code to check-in</Headline
+		>Inform {data.noti?.profiles?.username} to scan the QR code to check-in {data.noti?.restaurants?.name}</Headline
 	>
 
 	<svg
