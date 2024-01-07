@@ -10,6 +10,7 @@
 
 	let secondsLeft = 84;
 	let isScanned = false;
+    export let data;
 </script>
 
 <div class="flex flex-col space-y-6 pt-4">
@@ -27,7 +28,7 @@
 	</ActionChip>
 
 	<Headline class="text-center max-w-md mx-auto"
-		>Inform the guest to scan the QR code to check-in</Headline
+		>Inform the {data.noti?.profiles?.username} to scan the QR code to check-in</Headline
 	>
 
 	<svg

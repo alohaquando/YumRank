@@ -38,6 +38,7 @@
 
 	let showNotificationsDialog = false;
 	let badgeNotificationButton = false;
+	let restaurantName: Number[];
 
 	let toggleNotificationDialog = async () => {
 		let seen: boolean;
@@ -60,7 +61,7 @@
 				// Fetch the notifications where the restaurant_id is in the restaurant IDs
 				const { data: noti, error: notiError } = await supabase
 					.from('notifications')
-					.select('*')
+					.select('*, restaurants (name)')
 					.in('restaurant_id', restaurantIds);
 				if (showNotificationsDialog) {
 					const { data: status, error: notiError } = await supabase
@@ -139,9 +140,9 @@
 			<LargePageTitle>Notifications</LargePageTitle>
 			<div class="flex flex-col space-y-4">
 				{#each notifications as notification}
-					{#if notification.type == 'checkin'}
+					{#if notification.type == 'checkin'} 
 						<ListItem
-							href="/"
+							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
 						>
 							<Fa

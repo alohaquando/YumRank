@@ -7,7 +7,6 @@ export const load = async ({ locals: { supabase }, parent }) => {
 		throw redirect(303, '/sign-in');
 	}
 
-
 	const userId = session.user.id;
 	const { data: myProfile, error: profileError } = await supabase
 		.from('profiles')
