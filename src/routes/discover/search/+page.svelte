@@ -3,24 +3,25 @@
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
 
+	interface searchResult extends Response {
+		logo_url: string;
+		name: string;
+		numReviews: number;
+		avgRating: number;
+		favorite_count: number;
+	}
+
 	let searchTerm = '';
-	let searchResults: any[] = []; // Store search results
+	let searchResults: searchResult[] = []; // Store search results
 
 	async function fetchData() {
 		try {
 			const response = await fetch(`/discover/search?q=${searchTerm}`);
-			const data = await response.json();
-			searchResults = data; // Store fetched search results
-			console.log('Search results:', searchResults);
+			searchResults = await response.json(); // Store fetched search results
 		} catch (error) {
 			console.error('Error fetching data:', error);
 		}
 	}
-
-	// Function to handle search input changes
-	// function handleInputChange(event) {
-	// 	searchTerm = event.target.value;
-	// }
 
 	// Fetch data when the component is mounted
 	onMount(() => {

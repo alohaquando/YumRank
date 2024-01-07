@@ -3,9 +3,13 @@
 	import TabBar from '$lib/components/navigation/TabBar.svelte';
 
 	export let placeName: string;
-	placeName = placeName.replace(' ', '%20');
+	placeName = placeName.replace(/ /g, '%20');
+
 	export let currentLocation: string;
 	export let isOwner = false;
+
+	console.log(currentLocation);
+	console.log(placeName);
 </script>
 
 <TabBar>
@@ -13,26 +17,26 @@
 		design={currentLocation.endsWith(placeName) ? 'tonal' : 'outlined'}
 		href="/places/{placeName}"
 		width="fit"
-		>Overview
+	>Overview
 	</ActionChip>
 	<ActionChip
 		design={currentLocation.includes(placeName + '/check-ins') ? 'tonal' : 'outlined'}
 		href="/places/{placeName}/check-ins"
 		width="fit"
-		>Check-ins
+	>Check-ins
 	</ActionChip>
 	<ActionChip
 		design={currentLocation.includes(placeName + '/posts') ? 'tonal' : 'outlined'}
 		href="/places/{placeName}/posts"
 		width="fit"
-		>Posts
+	>Posts
 	</ActionChip>
 	{#if isOwner}
 		<ActionChip
 			design={currentLocation.includes(placeName + '/settings') ? 'tonal' : 'outlined'}
 			href="/places/{placeName}/settings"
 			width="fit"
-			>Settings
+		>Settings
 		</ActionChip>
 	{/if}
 </TabBar>
