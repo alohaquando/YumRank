@@ -86,50 +86,26 @@
 		Back
 	</ActionChip>
 
-	<Headline class="text-center max-w-md mx-auto"
-		>Inform {data.noti?.profiles?.username} to scan the QR code to check-in {data.noti?.restaurants
-			?.name}</Headline
-	>
+	{#if data.noti.type === 'checkin'}
+		<Headline class="text-center max-w-md mx-auto">
+			Inform {data.noti?.profiles?.username} to scan the QR code to check-in {data.noti?.restaurants?.name}
+		</Headline>
 
-	<ul>
-		{#each log as event}
-			{#if event.includes('image/png')}
-				<img
-					src={event}
-					alt="QR"
-				/>
-			{/if}
-		{/each}
-	</ul>
+		<ul>
+			{#each log as event}
+				{#if event.includes('image/png')}
+					<img src={event} alt="QR" />
+				{/if}
+			{/each}
+		</ul>
 
-	<!-- <Body
-		xmlns="http://www.w3.org/2000/svg"
-		fill="none"
-		class="px-12 max-w-md mx-auto"
-		viewBox="0 0 342 342"
-	/> -->
-
-	<Button
-		on:click={() => newQR()}
-		class="!text-sm opacity-70 text-center">Generate</Button
-	>
-
-	<!-- {#if !isScanned}
-		<AlertCard design="gray">
-			<Fa
-				icon={faSpinner}
-				slot="icon"
-			/>
-			<Title slot="title">Waiting for guests to scan</Title>
-		</AlertCard>
+		<Button on:click={() => newQR()} class="!text-sm opacity-70 text-center">Generate</Button>
 	{:else}
-		<AlertCard design="green">
-			<Fa
-				icon={faCheck}
-				slot="icon"
-			/>
-			<Title slot="title">Guest scanned successfully</Title>
-			<Body slot="body">This screen will close automatically in 5 seconds</Body>
-		</AlertCard>
-	{/if} -->
+	<Headline class="text-center max-w-md mx-auto"
+	>{data.noti?.profiles?.username} left a review for {data.noti?.restaurants
+		?.name}</Headline
+>
+	{/if}
+
+	
 </div>

@@ -157,7 +157,7 @@
 						</ListItem>
 					{:else}
 						<ListItem
-							href="/"
+							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
 						>
 							<Fa
@@ -166,7 +166,7 @@
 							/>
 
 							<Body slot="text"
-							>{notification.sender_id} left a review for {notification.restaurant_id}</Body
+							>{notification.profiles.username} left a review for {notification.restaurants.name}</Body
 							>
 						</ListItem>
 					{/if}
