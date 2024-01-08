@@ -53,7 +53,7 @@
 			const exp = JSON.parse(code.data)
 			console.log(exp.expirationTime);
 			if (expTime) {
-				if (exp.expirationTime > new Date(Date.now()).toISOString) {
+				if (exp.expirationTime > new Date(Date.now()).toISOString()) {
 					goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
 				} else {
 					console.log('expired');
