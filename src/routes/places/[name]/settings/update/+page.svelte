@@ -45,11 +45,13 @@
 	{/if}
 
 	<TextField
+		disabled
 		id="name"
 		label="Name"
 		name="name"
 		pattern="[a-zA-Z0-9 ]*"
 		placeholder="Name"
+		readonly
 		required
 		type="text"
 		value={data.restaurant.name}

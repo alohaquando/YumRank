@@ -34,7 +34,9 @@
 			<Post
 				content={post.content}
 				imageSrcs={post.post_image_urls}
-				postHref="places/{post.restaurants.name}/posts/{post.id}"
+				postHref="places/{post.restaurants.name}"
+				postEditHref="places/{post.restaurants.name}/posts/{post.id}/edit"
+				showMenuButton={data.session?.user.id === post.restaurants.owner_id}
 				placeName={post.restaurants.name}
 				placeSrc={post.restaurants.logo_url}
 				timeStamp={convertTimestampToLocale(post.created_at)}

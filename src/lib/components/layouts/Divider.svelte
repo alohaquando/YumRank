@@ -3,7 +3,7 @@
 
 	let widthClasses: string;
 	if (full) {
-		widthClasses = ' -translate-x-6 w-screen container';
+		widthClasses = ' -translate-x-6 w-screen container sm:container sm:-translate-x-0';
 	} else {
 		widthClasses = 'w-full';
 	}

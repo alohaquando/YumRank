@@ -22,22 +22,18 @@
 </script>
 
 <div class="h-16 border-t border-gray-200 flex bg-white {customClasses}">
-	<div class="container mx-auto px-6 space-x-3 flex justify-between">
-		<div class="flex">
-			<NavItem
-				active={currentNavDestination === NavDestinations.home}
-				destination={NavDestinations.home}
-			/>
-			<NavItem
-				active={currentNavDestination === NavDestinations.discover}
-				destination={NavDestinations.discover}
-			/>
-			<NavItem
-				active={currentNavDestination === NavDestinations.me}
-				destination={NavDestinations.me}
-			/>
-		</div>
-
-		
+	<div class="container mx-auto px-16 flex justify-between md:justify-center md:space-x-8">
+		<NavItem
+			active={currentNavDestination === NavDestinations.home}
+			destination={NavDestinations.home}
+		/>
+		<NavItem
+			active={currentNavDestination === NavDestinations.discover}
+			destination={NavDestinations.discover}
+		/>
+		<NavItem
+			active={currentNavDestination === NavDestinations.me}
+			destination={NavDestinations.me}
+		/>
 	</div>
 </div>
