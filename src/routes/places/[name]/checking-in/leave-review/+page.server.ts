@@ -83,6 +83,17 @@ export const actions = {
 		  .from('restaurants')
 		  .update({ avgRating, numReviews})
 		  .eq('id', placeId);
+
+		  const { data: notifications } = await supabase
+		  .from('notifications')
+		  .insert([
+			  {
+				  restaurant_id: placeId,
+				  sender_id: session?.user.id,
+				  type: 'review',
+				  seen: false
+			  }
+		  ]);
 		  	
 		console.log(update);
 		

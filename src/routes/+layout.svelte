@@ -165,7 +165,7 @@
 							/>
 
 							<Body slot="text"
-							>{notification.sender_id} left a review to {notification.restaurant_id}</Body
+							>{notification.sender_id} left a review for {notification.restaurant_id}</Body
 							>
 						</ListItem>
 					{/if}
