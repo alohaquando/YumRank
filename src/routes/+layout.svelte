@@ -62,7 +62,8 @@
 				const { data: noti, error: notiError } = await supabase
 					.from('notifications')
 					.select('*, restaurants (name), profiles (username)')
-					.in('restaurant_id', restaurantIds);
+					.in('restaurant_id', restaurantIds)
+					.order('created_at', { ascending: false });
 				if (showNotificationsDialog) {
 					const { data: status, error: notiError } = await supabase
 						.from('notifications')
