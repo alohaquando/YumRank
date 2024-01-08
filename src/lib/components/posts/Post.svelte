@@ -6,7 +6,7 @@
 	export let placeSrc: string | undefined | null;
 	export let placeName: string | undefined | null;
 	export let postHref: string | undefined | null;
-	export let imageSrcs: string | undefined | null;
+	export let imageSrcs: string | string[];
 	export let content: string | undefined | null;
 	export let timeStamp: string | undefined | null;
 </script>
@@ -26,7 +26,7 @@
 	<!--		/>-->
 	<!--	</div>-->
 	<div
-		class=" relative flex-none w-full p-0 grid grid-flow-row grid-cols-2 md:grid-cols-4 gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
+		class=" relative flex-none w-full p-0 grid grid-flow-row grid-cols-2 gap-2 {imageSrcs.length > 1 ? 'md:grid-cols-4' : 'md:grid-cols-2'} [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
 	>
 		{#if imageSrcs !== undefined && imageSrcs !== null}
 			{#each imageSrcs as src}

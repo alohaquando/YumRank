@@ -82,15 +82,15 @@
 
 <svelte:head>
 	<title
-		>{$page.url.pathname.split('/').pop() !== ''
-			? $page.url.pathname
-					.split('/')
-					.pop()
-					?.replace(/%20|-/g, ' ')
-					.replace(/^\w/, function (match) {
-						return match.toUpperCase();
-					})
-			: 'YumRank'}</title
+	>{$page.url.pathname.split('/').pop() !== ''
+		? $page.url.pathname
+			.split('/')
+			.pop()
+			?.replace(/%20|-/g, ' ')
+			.replace(/^\w/, function(match) {
+				return match.toUpperCase();
+			})
+		: 'YumRank'}</title
 	>
 	<link
 		href={faviconPNG}
@@ -112,7 +112,7 @@
 	<!--	TODO: Implement notification badging -->
 	<Header
 		bind:badgeNotificationButton
-		class="sticky top-0 z-50"
+		class="fixed top-0 z-50"
 		notificationButtonOnClick={toggleNotificationDialog}
 	/>
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
@@ -140,7 +140,7 @@
 			<LargePageTitle>Notifications</LargePageTitle>
 			<div class="flex flex-col space-y-4">
 				{#each notifications as notification}
-					{#if notification.type == 'checkin'} 
+					{#if notification.type == 'checkin'}
 						<ListItem
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
@@ -151,7 +151,7 @@
 							/>
 
 							<Body slot="text"
-								>{notification.sender_id} want to leave a review to {notification.restaurant_id}</Body
+							>{notification.sender_id} want to leave a review to {notification.restaurant_id}</Body
 							>
 						</ListItem>
 					{:else}
@@ -165,7 +165,7 @@
 							/>
 
 							<Body slot="text"
-								>{notification.sender_id} left a review to {notification.restaurant_id}</Body
+							>{notification.sender_id} left a review to {notification.restaurant_id}</Body
 							>
 						</ListItem>
 					{/if}

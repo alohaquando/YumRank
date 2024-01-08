@@ -8,7 +8,8 @@
 	let customClasses = '';
 	export { customClasses as class };
 
-	export let notificationButtonOnClick = () => {};
+	export let notificationButtonOnClick = () => {
+	};
 	export let badgeNotificationButton: boolean = true;
 </script>
 
@@ -34,3 +35,5 @@
 		</div>
 	</div>
 </div>
+
+<div class="h-14" />

@@ -36,7 +36,7 @@
 </script>
 
 <div
-	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none snap-x snap-mandatory scroll-px-6 absolute left-0 w-screen px-6 md:relative md:flex-none md:w-full md:p-0 md:grid md:grid-flow-row md:grid-cols-4 md:gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
+	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none snap-x snap-mandatory scroll-px-6 absolute left-0 w-screen px-6 md:relative md:flex-none md:w-full md:p-0 md:grid md:grid-flow-row {placeImagesSrcs.length > 1 ? 'md:grid-cols-4' : 'md:grid-cols-2'} md:gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
 >
 	{#if placeImagesSrcs !== undefined && placeImagesSrcs !== null}
 		{#each placeImagesSrcs as src}
