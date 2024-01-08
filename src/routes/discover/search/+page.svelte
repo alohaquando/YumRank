@@ -1,42 +1,60 @@
-<script>
+<script lang="ts">
+	import { onMount } from 'svelte';
 	import TextField from '$lib/components/inputs/TextField.svelte';
 	import LeaderboardItem from '$lib/components/leaderboard/LeaderboardItem.svelte';
-	import {
-		checkInsExample,
-		favoritesExample,
-		hrefExample,
-		placeNameExample,
-		placeSrcExample,
-		ratingExample
-	} from '$lib/data/exampleData';
-	import Body from '$lib/components/typography/Body.svelte';
+
+	interface searchResult extends Response {
+		logo_url: string;
+		name: string;
+		numReviews: number;
+		avgRating: number;
+		favorite_count: number;
+	}
+
+	let searchTerm = '';
+	let searchResults: searchResult[] = []; // Store search results
+
+	async function fetchData() {
+		try {
+			const response = await fetch(`/discover/search?q=${searchTerm}`);
+			searchResults = await response.json(); // Store fetched search results
+		} catch (error) {
+			console.error('Error fetching data:', error);
+		}
+	}
+
+	// Fetch data when the component is mounted
+	onMount(() => {
+		fetchData();
+	});
 </script>
 
 <div class="py-8">
 	<TextField
 		autofocus
+		bind:value={searchTerm}
 		id="search"
 		name="search"
-		on:change={() => {}}
+		on:input={fetchData}
 		placeholder="Search"
 		type="search"
 	/>
 </div>
 <div class="flex flex-col space-y-6">
-	<!--	TODO: Implement search-->
-	<!--	NOTE: Keep rank as a number higher than 5 for the correct layout -->
-	{#each { length: 3 } as _}
+	{#each searchResults as result}
 		<LeaderboardItem
 			showRank={false}
 			rank={6}
-			restaurantSrc={$placeSrcExample}
-			restaurantName={$placeNameExample}
-			checkIns={$checkInsExample}
-			rating={$ratingExample}
-			favorites={$favoritesExample}
-			href="/places/{$hrefExample}"
+			restaurantSrc={result.logo_url}
+			restaurantName={result.name}
+			checkIns={result.numReviews}
+			rating={result.avgRating}
+			favorites={result.favorite_count}
+			href={`/places/${result.name}`}
 		/>
 	{/each}
-	<!--	TODO: Implement empty state -->
-	<!--	<Body class="opacity-50 text-center">No results</Body>-->
+	{#if searchResults.length === 0}
+		<!-- Display a message when there are no search results -->
+		<p>No results found</p>
+	{/if}
 </div>

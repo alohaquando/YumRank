@@ -7,16 +7,16 @@
 	import Fa from 'svelte-fa';
 
 	export let userSrc: string;
+	export let reviewHref: string | undefined | null;
 	export let userFullName: string;
 	export let timeStamp: string;
 	export let content: string;
 	export let rating: number;
 </script>
 
-<!-- TODO: Delete, Edit  -->
-
 <div class="flex flex-col space-y-4">
 	<TitleItem
+		href={reviewHref}
 		src={userSrc}
 		title={userFullName}
 		trailingText={timeStamp}

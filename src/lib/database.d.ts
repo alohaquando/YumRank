@@ -34,54 +34,7 @@ export interface Database {
   }
   public: {
     Tables: {
-      cuisine: {
-        Row: {
-          name: string
-        }
-        Insert: {
-          name: string
-        }
-        Update: {
-          name?: string
-        }
-        Relationships: []
-      }
-      discounts: {
-        Row: {
-          condition: string | null
-          created_at: string
-          id: number
-          number: number | null
-          restaurant_id: number | null
-          type: Database["public"]["Enums"]["discount_type"] | null
-        }
-        Insert: {
-          condition?: string | null
-          created_at?: string
-          id?: number
-          number?: number | null
-          restaurant_id?: number | null
-          type?: Database["public"]["Enums"]["discount_type"] | null
-        }
-        Update: {
-          condition?: string | null
-          created_at?: string
-          id?: number
-          number?: number | null
-          restaurant_id?: number | null
-          type?: Database["public"]["Enums"]["discount_type"] | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "discounts_restaurant_id_fkey"
-            columns: ["restaurant_id"]
-            isOneToOne: false
-            referencedRelation: "restaurants"
-            referencedColumns: ["id"]
-          }
-        ]
-      }
-      favourite: {
+      favorites: {
         Row: {
           id: number
           place_id: number
@@ -99,14 +52,14 @@ export interface Database {
         }
         Relationships: [
           {
-            foreignKeyName: "favourite_place_id_fkey"
+            foreignKeyName: "favorites_place_id_fkey"
             columns: ["place_id"]
             isOneToOne: false
             referencedRelation: "restaurants"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "favourite_user_id_fkey"
+            foreignKeyName: "favorites_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "profiles"
@@ -119,19 +72,25 @@ export interface Database {
           created_at: string
           id: number
           restaurant_id: number | null
+          seen: boolean | null
           sender_id: string | null
+          type: string | null
         }
         Insert: {
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          seen?: boolean | null
           sender_id?: string | null
+          type?: string | null
         }
         Update: {
           created_at?: string
           id?: number
           restaurant_id?: number | null
+          seen?: boolean | null
           sender_id?: string | null
+          type?: string | null
         }
         Relationships: [
           {
@@ -155,21 +114,21 @@ export interface Database {
           content: string | null
           created_at: string
           id: number
-          post_image_urls: string[] | null
+          post_image_urls: string[]
           restaurant_id: number | null
         }
         Insert: {
           content?: string | null
           created_at?: string
           id?: number
-          post_image_urls?: string[] | null
+          post_image_urls: string[]
           restaurant_id?: number | null
         }
         Update: {
           content?: string | null
           created_at?: string
           id?: number
-          post_image_urls?: string[] | null
+          post_image_urls?: string[]
           restaurant_id?: number | null
         }
         Relationships: [
@@ -216,22 +175,16 @@ export interface Database {
       }
       qrscanning: {
         Row: {
-          created_at: string
-          qr_code_data: string | null
           qr_code_exp: string | null
           restaurant_id: number
           user_id: string
         }
         Insert: {
-          created_at?: string
-          qr_code_data?: string | null
           qr_code_exp?: string | null
           restaurant_id: number
           user_id: string
         }
         Update: {
-          created_at?: string
-          qr_code_data?: string | null
           qr_code_exp?: string | null
           restaurant_id?: number
           user_id?: string
@@ -258,11 +211,9 @@ export interface Database {
           address: string | null
           avgRating: number | null
           created_at: string
-          cuisine: string | null
           description: string | null
-          favourite_count: number | null
+          favorite_count: number | null
           id: number
-          is_verified: boolean | null
           logo_url: string | null
           name: string
           numReviews: number | null
@@ -273,11 +224,9 @@ export interface Database {
           address?: string | null
           avgRating?: number | null
           created_at?: string
-          cuisine?: string | null
           description?: string | null
-          favourite_count?: number | null
+          favorite_count?: number | null
           id?: number
-          is_verified?: boolean | null
           logo_url?: string | null
           name: string
           numReviews?: number | null
@@ -288,11 +237,9 @@ export interface Database {
           address?: string | null
           avgRating?: number | null
           created_at?: string
-          cuisine?: string | null
           description?: string | null
-          favourite_count?: number | null
+          favorite_count?: number | null
           id?: number
-          is_verified?: boolean | null
           logo_url?: string | null
           name?: string
           numReviews?: number | null
@@ -300,13 +247,6 @@ export interface Database {
           res_images?: string[] | null
         }
         Relationships: [
-          {
-            foreignKeyName: "restaurants_cuisine_fkey"
-            columns: ["cuisine"]
-            isOneToOne: false
-            referencedRelation: "cuisine"
-            referencedColumns: ["name"]
-          },
           {
             foreignKeyName: "restaurants_owner_id_fkey"
             columns: ["owner_id"]

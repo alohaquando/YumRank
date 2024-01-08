@@ -17,13 +17,13 @@ export const load = async ({ locals: { supabase, getSession } }) => {
 export const actions = {
 	create: async ({ request, locals: { supabase, getSession } }) => {
 		const session = await getSession();
+
 		const formData = await request.formData();
 		const name = formData.get('name') as string;
 		const logoImage = formData.get('logoUrl') as File;
 		const address = formData.get('address') as string;
 		const description = formData.get('description') as string;
 		const restaurantImages = formData.getAll('restaurantImages') as File[];
-		const menuImages = formData.getAll('menuImages') as string[];
 
 		if (logoImage.size === 0 || restaurantImages[0].size === 0) {
 			return fail(500, {
@@ -47,7 +47,9 @@ export const actions = {
 			is_verified: false,
 			description: description,
 			res_images: restaurantImagesUrls,
-			menu_images: menuImages,
+			avgRating: 0,
+			numReviews: 0,
+			favorite_count: 0,
 			created_at: new Date()
 		});
 

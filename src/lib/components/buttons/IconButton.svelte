@@ -4,6 +4,7 @@
 	export let size: 'md' | 'lg' = 'md';
 	export let design: 'filled' | 'outlined' | 'tonal' | 'text' = 'filled';
 	export let disabled: boolean = false;
+	export let form: string | undefined | null = undefined;
 
 	export let href: string | undefined = undefined;
 	let customClasses = '';
@@ -22,17 +23,17 @@
 	}
 
 	let designClasses: string;
-	switch (design) {
+	$: switch (design) {
 		case 'filled': {
 			designClasses = 'bg-red-500 text-white hover:bg-red-600';
 			break;
 		}
 		case 'outlined': {
-			designClasses = 'outline outline-1 outline-gray-300 hover:bg-red-50';
+			designClasses = 'outline outline-1 outline-gray-300 hover:bg-red-50 disabled:bg-gray-50 disabled:text-gray-300';
 			break;
 		}
 		case 'tonal': {
-			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white';
+			designClasses = 'bg-red-100 text-red-500 hover:bg-red-500 hover:text-white disabled:bg-gray-100 disabled:text-gray-300';
 			break;
 		}
 		case 'text': {
@@ -43,13 +44,14 @@
 </script>
 
 <svelte:element
-	this={href ? 'a' : 'button'}
 	class="flex justify-center items-center rounded-full transition {sizeClasses} {designClasses} {customClasses}"
 	{disabled}
+	{form}
 	{href}
 	on:click
 	role="button"
 	tabindex="0"
+	this={href ? 'a' : 'button'}
 	{type}
 >
 	<slot />

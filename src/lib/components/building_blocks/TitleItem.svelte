@@ -12,28 +12,33 @@
 	export let href: string | undefined | null = undefined;
 </script>
 
-<svelte:element
-	this={href ? 'a' : 'div'}
-	class="flex flex-nowrap flex-row space-x-4 items-center place-content-between"
-	{href}
->
-	<div class="flex flex-row space-x-2 items-center">
-		<Image
-			alt={title}
-			class="w-8 h-8 rounded-xl ring-1 ring-gray-200"
-			{src}
-			viewable={false}
-		/>
-		<Title class="truncate hover:text-red-500 transition duration-100">{title}</Title>
-	</div>
-	<div />
-	{#if trailingText}
-		<Body class="opacity-50 truncate">{trailingText}</Body>
-	{/if}
-	{#if trailingMoreIcon}
-		<Fa
-			icon={faChevronRight}
-			class="text-xs opacity-50"
-		/>
-	{/if}
-</svelte:element>
+<div class="flex flex-nowrap flex-row space-x-4 items-center place-content-between w-full">
+	<svelte:element
+		class="flex flex-nowrap flex-row space-x-4 items-center place-content-between w-full"
+		{href}
+		this={href ? 'a' : 'div'}
+	>
+		<div class="flex flex-row space-x-2 items-center">
+			<Image
+				alt={title}
+				class="w-8 h-8 rounded-xl ring-1 ring-gray-200"
+				{src}
+				viewable={false}
+			/>
+			<Title class="truncate hover:text-red-500 transition duration-100">{title}</Title>
+		</div>
+		<div />
+		{#if trailingText}
+			<Body class="opacity-50 truncate">{trailingText}</Body>
+		{/if}
+		{#if trailingMoreIcon}
+			<Fa
+				icon={faChevronRight}
+				class="text-xs opacity-50"
+			/>
+		{/if}
+
+	</svelte:element>
+
+	<slot />
+</div>

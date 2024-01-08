@@ -22,6 +22,7 @@
 
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
+	let notifications: any[] = [];
 
 	onMount(() => {
 		const {
@@ -37,9 +38,46 @@
 
 	let showNotificationsDialog = false;
 	let badgeNotificationButton = false;
+	let restaurantName: Number[];
 
-	let toggleNotificationDialog = () => {
+	let toggleNotificationDialog = async () => {
+		let seen: boolean;
 		showNotificationsDialog = !showNotificationsDialog;
+		if (data.session) {
+			console.log('Fetching notifications');
+
+			// Fetch the restaurant IDs where the user is the owner
+			const { data: restaurants, error: restaurantError } = await supabase
+				.from('restaurants')
+				.select('id')
+				.eq('owner_id', data.session.user.id);
+
+			if (restaurantError) {
+				console.error(restaurantError);
+			} else {
+				// Get the restaurant IDs
+				const restaurantIds = restaurants.map((restaurant) => restaurant.id);
+
+				// Fetch the notifications where the restaurant_id is in the restaurant IDs
+				const { data: noti, error: notiError } = await supabase
+					.from('notifications')
+					.select('*, restaurants (name), profiles (username)')
+					.in('restaurant_id', restaurantIds)
+					.order('created_at', { ascending: false });
+				if (showNotificationsDialog) {
+					const { data: status, error: notiError } = await supabase
+						.from('notifications')
+						.update({ seen: true })
+						.in('restaurant_id', restaurantIds);
+				}
+
+				if (notiError) {
+					console.error(notiError);
+				} else {
+					notifications = noti;
+				}
+			}
+		}
 	};
 </script>
 
@@ -75,7 +113,7 @@
 	<!--	TODO: Implement notification badging -->
 	<Header
 		bind:badgeNotificationButton
-		class="sticky top-0 z-50"
+		class="fixed top-0 z-50"
 		notificationButtonOnClick={toggleNotificationDialog}
 	/>
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
@@ -102,19 +140,36 @@
 			</IconButton>
 			<LargePageTitle>Notifications</LargePageTitle>
 			<div class="flex flex-col space-y-4">
-				<!-- TODO: Implement notifications -->
-				{#each { length: 15 } as _}
-					<ListItem
-						href="/"
-						on:click={toggleNotificationDialog}
-					>
-						<Fa
-							icon={faBell}
-							slot="leading"
-						/>
-						<Body slot="text">[notification.text]</Body>
-						<Body slot="trailing">[notification.timeStamp]</Body>
-					</ListItem>
+				{#each notifications as notification}
+					{#if notification.type == 'checkin'}
+						<ListItem
+							href="/places/{notification.restaurants.name}/{notification.id}"
+							on:click={toggleNotificationDialog}
+						>
+							<Fa
+								icon={faBell}
+								slot="leading"
+							/>
+
+							<Body slot="text"
+								>{notification.profiles.username} want to leave a review to {notification.restaurants.name}</Body
+							>
+						</ListItem>
+					{:else}
+						<ListItem
+							href="/places/{notification.restaurants.name}/{notification.id}"
+							on:click={toggleNotificationDialog}
+						>
+							<Fa
+								icon={faBell}
+								slot="leading"
+							/>
+
+							<Body slot="text"
+							>{notification.profiles.username} left a review for {notification.restaurants.name}</Body
+							>
+						</ListItem>
+					{/if}
 				{/each}
 			</div>
 		</div>

@@ -5,29 +5,44 @@
 	import Title from '$lib/components/typography/Title.svelte';
 	import PlaceDetailTitleBlock from '$lib/components/details/PlaceDetailTitleBlock.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
-	import TitleDropdown from '$lib/components/inputs/TitleDropdown.svelte';
 	import StatsSummary from '$lib/components/details/StatsSummary.svelte';
 	import Review from '$lib/components/reviews/Review.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
-	import { rankExample } from '$lib/data/exampleData';
 	import Post from '$lib/components/posts/Post.svelte';
 	import AlertCard from '$lib/components/cards/AlertCard.svelte';
-	import { faInfoCircle, faQrcode } from '@fortawesome/pro-solid-svg-icons';
+	import { faInfoCircle } from '@fortawesome/pro-solid-svg-icons';
 	import convertTimestampToLocale from '$lib/data/convertTimestampToLocale';
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
+	import { goto } from '$app/navigation';
+	import { enhance } from '$app/forms';
+	import type { SubmitFunction } from '@sveltejs/kit';
 
-	let webSocketEstablished = false;
-	let ws: WebSocket | null = null;
-	let log: string[] = [];
+
+	// let webSocketEstablished = false;
+	// let ws: WebSocket | null = null;
+	// let log: string[] = [];
 
 	export let data;
+	let { session, supabase } = data;
+	$: ({ session, supabase } = data);
 
-	const logEvent = (str: string) => {
-		log = [...log, str];
+	// const logEvent = (str: string) => {
+	// 	log = [...log, str];
+	// };
+
+	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
+
+	let isFavoriteLoading = false;
+	const handleFavoriteToggle: SubmitFunction = () => {
+		isFavoriteLoading = true;
+		return async ({ update }) => {
+			await update();
+			isFavoriteLoading = false;
+		};
 	};
 
-	// export const establishWebSocket = () => {
+	// export const requestData = async () => {
 	// 	if (webSocketEstablished) return;
 	// 	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
 	// 	ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
@@ -35,57 +50,52 @@
 	// 	ws.addEventListener('open', (event) => {
 	// 		webSocketEstablished = true;
 	// 		console.log('[websocket] connection open', event);
-
-	// 		logEvent('[websocket] connection open');
-
 	// 	});
 	// 	ws.addEventListener('close', (event) => {
 	// 		console.log('[websocket] connection closed', event);
-	// 		logEvent('[websocket] connection closed');
 	// 	});
 	// 	ws.addEventListener('message', (event) => {
 	// 		console.log('[websocket] message received', event);
-	// 		logEvent(`${event.data}`);
+	// 		logEvent(event.data);
 	// 	});
+	// 	const res = await fetch(`/places/${urlParams}`, {
+	// 		method: 'GET',
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 		}
+	// 	});
+	// 	// const data = await res.json();
+	// 	// logEvent(`[GET] data received: ${data.ownerId}`);
 	// };
 
-	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
-
-	export const requestData = async () => {
-		if (webSocketEstablished) return;
-		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
-
-		ws.addEventListener('open', (event) => {
-			webSocketEstablished = true;
-			console.log('[websocket] connection open', event);
-		});
-		ws.addEventListener('close', (event) => {
-			console.log('[websocket] connection closed', event);
-		});
-		ws.addEventListener('message', (event) => {
-			console.log('[websocket] message received', event);
-			logEvent(event.data);
-		});
-		const res = await fetch(`/places/${urlParams}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		// const data = await res.json();
-		// logEvent(`[GET] data received: ${data.ownerId}`);
-	};
+	async function checkIn() {
+		const { error } = await supabase
+			.from('notifications')
+			.insert([
+				{
+					restaurant_id: data.restaurant.id,
+					sender_id: session?.user.id,
+					type: 'checkin',
+					seen: false
+				}
+			]);
+		if (error) {
+			console.log(error);
+		} else {
+			goto(`/places/${urlParams}/checking-in/confirm`);
+		}
+	}
 </script>
 
-<!--		<ul>-->
-<!--{#each log as event}-->
-<!--	{#if event.includes('image/png')}-->
-<!--		<img src={event} alt="QR" />-->
-<!--	{/if}-->
-<!--	<li>{event}</li>-->
-<!--{/each}-->
-<!--		</ul>-->
+<!-- <ul>
+	{#each log as event}
+		{#if event.includes('image/png')}
+			<img src={event} alt="QR" />
+		{:else}
+			<p>{event}</p>
+		{/if}
+	{/each}
+</ul> -->
 
 <div>
 	{#if data.restaurant}
@@ -96,55 +106,42 @@
 					slot="icon"
 				/>
 				<Title slot="title">You are the manager of this site</Title>
-				<Button
-					slot="body"
-					width="full"
-					href="/places/{data.placeName}/check-ins/generate-qr"
-				>
-					<Fa
-						icon={faQrcode}
-						slot="icon"
-					/>
-					Generate QR code for check-in
-				</Button>
 			</AlertCard>
 		{/if}
 
+		<form
+			action={data.isFavorite ? '?/unfavorite' : '?/favorite'}
+			method="POST"
+			use:enhance={handleFavoriteToggle}
+			id="favoriteForm"
+			class="hidden"
+		>
+		</form>
+
 		<div class="flex flex-col space-y-8 py-4">
-			<!--TODO: bind:isFavorite={...} to the PlaceDetailTitleBlock @Khai-->
-			<!--TODO: favoriteButtonOnClick() @Khai -->
 			<PlaceDetailTitleBlock
 				placeName={data.restaurant.name}
 				placeImagesSrcs={data.restaurant.res_images}
 				placeLogoSrc={data.restaurant.logo_url}
 				desc={data.restaurant.description}
 				address={data.restaurant.address}
-				checkInButtonOnClick={() => {}}
-				isFavorite={false}
-				favoriteButtonOnClick={() => {
-					window.alert('Favorite button clicked');
-				}}
+				favoriteButtonForm="favoriteForm"
+				checkInButtonOnClick={() => checkIn()}
+				bind:isFavorite={data.isFavorite}
+				bind:isFavoriteLoading={isFavoriteLoading}
 				checkInButtonDisabled={data.owner}
 			/>
 		</div>
 
-		<!-- TODO: Implement filter? @Khai -->
 		<LargePageTitle>
-			Ranking this
-			<TitleDropdown
-				name="time_selected"
-				id="time_selected"
-				slot="trailing"
-				value="week"
-			/>
+			Ranking
 		</LargePageTitle>
 
-		<!-- TODO: Get rank and favorites count. @Khai-->
 		<StatsSummary
 			checkIns={data.restaurant.numReviews}
 			rating={data.restaurant.avgRating}
-			rank={$rankExample}
-			favorites={0}
+			rank={data.placeRanking}
+			favorites={data.restaurant.favorite_count}
 			class="mb-8"
 		/>
 
@@ -158,10 +155,10 @@
 				<div class="flex flex-col space-y-8 py-8">
 					{#if data.checkIns.length > 0}
 						{#each data.checkIns.slice(0, 3) as checkIn}
-							<!-- TODO: Test -->
 							<Review
 								userSrc={checkIn.profiles.avatar_url}
 								userFullName={checkIn.profiles.full_name}
+								reviewHref="/places/{checkIn.restaurants.name}/check-ins/{checkIn.id}"
 								timeStamp={convertTimestampToLocale(checkIn.created_at)}
 								content={checkIn.text}
 								rating={checkIn.rating}
@@ -190,7 +187,9 @@
 							<Post
 								content={post.content}
 								imageSrcs={post.post_image_urls}
-								placeHref="places/{post.restaurants.name}"
+								postHref="places/{post.restaurants.name}"
+								postEditHref="places/{post.restaurants.name}/posts/{post.id}/edit"
+								showMenuButton={data.session?.user.id === post.restaurants.owner_id}
 								placeName={post.restaurants.name}
 								placeSrc={post.restaurants.logo_url}
 								timeStamp={convertTimestampToLocale(post.created_at)}

@@ -1,3 +1,4 @@
+import { currentPlaceName } from '$lib/data/currentPlaceName.js';
 import { json } from '@sveltejs/kit';
 import qrCode from 'qrcode';
 
@@ -42,24 +43,18 @@ export const GET = async ({
 						userIds.push(userId);
 					}
 				}
+				let qrData = {
+					expirationTime: new Date(Date.now() + 2 * 60 * 1000).toISOString() // 2 minutes from now
+				};
+
 				qrCode.toDataURL(
-					`localhost:5173/places/${params.name}/create-review`,
+					JSON.stringify(qrData),
 					(err: any, qrDataURL: string) => {
 						if (err) {
 							client.send('Error generating QR code');
 						} else {
-							// Send the QR code to all clients except the owner
-							if (client !== ownerWs) {
-								client.send(qrDataURL);
-								for (const userId of userIds) {
-									ownerWs?.send(
-										`${userId} want to leave a review for ${params.name.replace('-', ' ')}`
-									);
-								}
-							}
-
-							// Send the message only to the owner
-							// if (ownerWs) ownerWs.send(`lol`);
+							client.send(qrDataURL);
+							
 						}
 					}
 				);
@@ -68,3 +63,6 @@ export const GET = async ({
 	}
 	return json({ restaurant });
 };
+
+
+

@@ -9,6 +9,8 @@
 	import { faHeart as faHeartOutlined, faUserCheck } from '@fortawesome/pro-regular-svg-icons';
 	import { faHeart as faHeartFilled } from '@fortawesome/pro-solid-svg-icons';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import type { IconDefinition } from '@fortawesome/sharp-light-svg-icons';
+	import { faSpinnerThird } from '@fortawesome/pro-duotone-svg-icons';
 
 	export let placeName: string | undefined | null;
 	export let placeImagesSrcs: string[] | undefined | null;
@@ -17,12 +19,24 @@
 	export let address: string | undefined | null;
 	export let checkInButtonDisabled: boolean = false;
 	export let isFavorite: boolean = false;
+	export let isFavoriteLoading: boolean = false;
+	export let favoriteButtonForm: string;
 	export let checkInButtonOnClick: () => void;
-	export let favoriteButtonOnClick: () => void;
+
+	let favoriteIcon: IconDefinition;
+	$: if (isFavoriteLoading) {
+		favoriteIcon = faSpinnerThird;
+	} else {
+		if (isFavorite) {
+			favoriteIcon = faHeartFilled;
+		} else {
+			favoriteIcon = faHeartOutlined;
+		}
+	}
 </script>
 
 <div
-	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none snap-x snap-mandatory scroll-px-6 absolute left-0 w-screen px-6 md:relative md:flex-none md:w-full md:p-0 md:grid md:grid-flow-row md:grid-cols-4 md:gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
+	class="flex flex-row overflow-x-scroll gap-x-4 scrollbar-none snap-x snap-mandatory scroll-px-6 absolute left-0 w-screen px-6 md:relative md:flex-none md:w-full md:p-0 md:grid md:grid-flow-row {placeImagesSrcs.length > 1 ? 'md:grid-cols-4' : 'md:grid-cols-2'} md:gap-2 [&>*:first-child]:col-span-2 [&>*:first-child]:row-span-2"
 >
 	{#if placeImagesSrcs !== undefined && placeImagesSrcs !== null}
 		{#each placeImagesSrcs as src}
@@ -63,24 +77,15 @@
 		Check in
 	</Button>
 
-	{#if isFavorite}
-		<IconButton
-			design="tonal"
-			class="transition"
-			on:click={() => favoriteButtonOnClick()}
-		>
-			<Fa
-				icon={faHeartFilled}
-				class="text-red-500"
-			/>
-		</IconButton>
-	{:else}
-		<IconButton
-			design="outlined"
-			class="transition"
-			on:click={() => favoriteButtonOnClick()}
-		>
-			<Fa icon={faHeartOutlined} />
-		</IconButton>
-	{/if}
+	<IconButton
+		class="transition group {isFavoriteLoading ? 'animate-spin' : ''}"
+		design={isFavorite ? 'tonal' : 'outlined'}
+		disabled={isFavoriteLoading}
+		form={favoriteButtonForm}
+		type="submit">
+		<Fa
+			class="{isFavorite ? 'text-red-500 group-hover:text-white' : ''} {isFavoriteLoading ? '!text-gray-500 group-hover:!text-gray-500' : ''}"
+			icon={favoriteIcon}
+		/>
+	</IconButton>
 </div>

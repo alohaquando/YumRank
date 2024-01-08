@@ -53,8 +53,10 @@
 		>
 	{/if}
 	<input
+		{...{ type }}
 		{autocomplete}
 		{autofocus}
+		bind:value
 		class="{stateClasses} rounded-full border border-gray-300 px-4 py-2.5 placeholder-black/50 block w-full transition outline-none text-black font-sans trim-both
 		focus:ring-black/70 focus:ring-2
 		disabled:bg-black/5
@@ -70,13 +72,12 @@
 		{minlength}
 		{name}
 		on:change
+		on:input
 		{pattern}
 		{placeholder}
 		{readonly}
 		{required}
 		{size}
-		{type}
-		{value}
 	/>
 	{#if error}
 		<div class="flex items-center pt-4 text-red-300 space-x-2">

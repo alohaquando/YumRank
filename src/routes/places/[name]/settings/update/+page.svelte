@@ -11,8 +11,8 @@
 	export let data;
 	export let form;
 
-	let { session, supabase } = data;
-	$: ({ session, supabase } = data);
+	let { session, supabase, restaurant } = data;
+	$: ({ session, supabase, restaurant } = data);
 
 	let isLoading = false;
 
@@ -28,9 +28,9 @@
 <LoadingOverlay bind:isLoading />
 
 <LargePageTitle showBackButton>Update your place</LargePageTitle>
-<!--TODO: Add update function-->
+
 <form
-	action=""
+	action="?/update"
 	class="flex flex-col form-widget space-y-10"
 	enctype="multipart/form-data"
 	method="POST"
@@ -45,11 +45,13 @@
 	{/if}
 
 	<TextField
+		disabled
 		id="name"
 		label="Name"
 		name="name"
 		pattern="[a-zA-Z0-9 ]*"
 		placeholder="Name"
+		readonly
 		required
 		type="text"
 		value={data.restaurant.name}
@@ -95,6 +97,6 @@
 	<Button
 		disabled={isLoading}
 		type="submit"
-		width="full">{isLoading ? 'Loading...' : 'Create'}</Button
+		width="full">{isLoading ? 'Loading...' : 'Update'}</Button
 	>
 </form>

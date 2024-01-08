@@ -49,11 +49,4 @@ export const actions = {
 			throw redirect(303, '/');
 		}
 	},
-	signout: async ({ locals: { supabase, getSession } }) => {
-		const session = await getSession();
-		if (session) {
-			await supabase.auth.signOut();
-			throw redirect(303, '/');
-		}
-	}
 };

@@ -4,48 +4,48 @@
 @tailwind utilities;
 
 @layer base {
-	/* Font - Inter */
-	@font-face {
-		font-family: 'Inter';
-		font-weight: 400;
-		font-display: swap;
-		src: url('$lib/assets/fonts/Inter-Regular.woff2') format('woff2');
-	}
-	@font-face {
-		font-family: 'Inter';
-		font-weight: 500;
-		font-display: swap;
-		src: url('$lib/assets/fonts/Inter-Medium.woff2') format('woff2');
-	}
-	@font-face {
-		font-family: 'Inter';
-		font-weight: 600;
-		font-display: swap;
-		src: url('$lib/assets/fonts/Inter-SemiBold.woff2') format('woff2');
-	}
-	@font-face {
-		font-family: 'Inter';
-		font-weight: 700;
-		font-display: swap;
-		src: url('$lib/assets/fonts/Inter-SemiBold.woff2') format('woff2');
-	}
+    /* Font - Inter */
+    @font-face {
+        font-family: 'Inter';
+        font-weight: 400;
+        font-display: swap;
+        src: url('$lib/assets/fonts/Inter-Regular.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-weight: 500;
+        font-display: swap;
+        src: url('$lib/assets/fonts/Inter-Medium.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-weight: 600;
+        font-display: swap;
+        src: url('$lib/assets/fonts/Inter-SemiBold.woff2') format('woff2');
+    }
+    @font-face {
+        font-family: 'Inter';
+        font-weight: 700;
+        font-display: swap;
+        src: url('$lib/assets/fonts/Inter-SemiBold.woff2') format('woff2');
+    }
 
-	:root {
-		@apply overflow-x-clip;
-		touch-action: manipulation;
-		-webkit-tap-highlight-color: transparent;
-		-webkit-font-smoothing: antialiased;
-		-moz-osx-font-smoothing: grayscale;
-	}
+    :root {
+        @apply overflow-x-clip;
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
 }
 
 @layer utilities {
-	.scrollbar-none::-webkit-scrollbar {
-		display: none;
-	}
+    .scrollbar-none::-webkit-scrollbar {
+        display: none;
+    }
 
-	.scrollbar-none {
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
-	}
+    .scrollbar-none {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
 }

@@ -9,7 +9,7 @@
 	export let favorites: number = 0;
 	export let rating: number = 0;
 
-	let customClasses;
+	let customClasses = '';
 	export { customClasses as class };
 
 	let rankFlavorText: string;
@@ -35,12 +35,12 @@
 		<div class="flex grow flex-col justify-between py-2 pl-4 space-y-1.5">
 			<StatsSummaryRow
 				icon={faUserCheck}
-				subtitle="new check-ins"
+				subtitle="check-ins"
 				title={checkIns?.toString()}
 			/>
 			<StatsSummaryRow
 				icon={faHeart}
-				subtitle="new favorites"
+				subtitle="favorites"
 				title={favorites?.toString()}
 			/>
 			<StatsSummaryRow
