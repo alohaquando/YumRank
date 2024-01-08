@@ -1,34 +1,43 @@
 import { fail, redirect } from '@sveltejs/kit';
 import { deleteFromBucket, uploadAndGetPublicUrlFromSelected, uploadAndGetPublicUrlsFromSelected } from '$lib/server/utils';
 
-export const load = async ({ locals: { supabase }, params }) => {
+export const load = async ({ locals: { supabase }, params, parent }) => {
+    const {session} = await parent();
     const restaurantQuery = await supabase
         .from('restaurants')
-        .select('id, name, logo_url')
+        .select('id, name, logo_url, owner_id')
         .eq('name', params.name.replace('-', ' '));
 
     const restaurant_id = restaurantQuery?.data?.[0]?.id;
     const restaurant_name = restaurantQuery?.data?.[0]?.name;
     const restaurant_logo = restaurantQuery?.data?.[0]?.logo_url;
+    const restaurant_owner = restaurantQuery?.data?.[0]?.owner_id;
 
     if (!restaurant_id) {
         console.error('Restaurant ID not found');
         return { post: null }; // or handle the scenario where restaurant_id is not found
     }
 
-    const { data: post, error } = await supabase
+    
+    if (session.user.id !== restaurant_owner) {
+        return { error: 'User is not the owner of this restaurant' };
+        redirect(303, `/places/${params.name}/posts/`);
+    } else {
+        const { data: post, error } = await supabase
         .from('posts')
         .select('*')
         .eq('restaurant_id', restaurant_id)
         .eq('id', BigInt(params.postId))
         .single();
 
-    if (error) {
-        console.error(error);
-        return;
+        if (error) {
+            console.error(error);
+            return;
+        }
+        
+        return { post, restaurant_name, restaurant_logo };
     }
-    
-    return { post, restaurant_name, restaurant_logo };
+
 };
 
 export const actions = {

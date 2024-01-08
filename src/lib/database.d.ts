@@ -114,21 +114,21 @@ export interface Database {
           content: string | null
           created_at: string
           id: number
-          post_image_urls: string[] | null
+          post_image_urls: string[]
           restaurant_id: number | null
         }
         Insert: {
           content?: string | null
           created_at?: string
           id?: number
-          post_image_urls?: string[] | null
+          post_image_urls: string[]
           restaurant_id?: number | null
         }
         Update: {
           content?: string | null
           created_at?: string
           id?: number
-          post_image_urls?: string[] | null
+          post_image_urls?: string[]
           restaurant_id?: number | null
         }
         Relationships: [
