@@ -8,9 +8,10 @@
 	import Body from '$lib/components/typography/Body.svelte';
 	import Headline from '$lib/components/typography/Headline.svelte';
 	import { page } from '$app/stores';
+	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
 
-	let isScanned = false;
+	// let isScanned = false;
 	export let data;
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
@@ -26,7 +27,6 @@
 	const urlParts = $page.url.pathname.split('/');
 	urlParts.pop(); // Remove the last part
 	const urlParams = urlParts.slice(2).join('/');
-	console.log(urlParams);
 
 	export const requestData = async () => {
 		if (webSocketEstablished) return;
@@ -53,6 +53,23 @@
 		// const data = await res.json();
 		// logEvent(`[GET] data received: ${data.ownerId}`);
 	};
+
+	async function newQR() {
+		const upsertData = {
+            restaurant_id: data.noti?.restaurant_id,
+			user_id: data.noti?.sender_id,
+			qr_code_exp: new Date(Date.now() + 2 * 60 * 1000).toISOString(),
+        };
+		const { error } = await supabase
+			.from('qrscanning')
+			.upsert(upsertData, { onConflict: ['restaurant_id', 'user_id'] });
+
+		if (error) {
+			console.log(error);
+		} else {
+			requestData();
+		}
+	}
 </script>
 
 <div class="flex flex-col space-y-6 pt-4">
@@ -93,11 +110,11 @@
 	/> -->
 
 	<Button
-		on:click={() => requestData()}
+		on:click={() => newQR()}
 		class="!text-sm opacity-70 text-center">Generate</Button
 	>
 
-	{#if !isScanned}
+	<!-- {#if !isScanned}
 		<AlertCard design="gray">
 			<Fa
 				icon={faSpinner}
@@ -114,5 +131,5 @@
 			<Title slot="title">Guest scanned successfully</Title>
 			<Body slot="body">This screen will close automatically in 5 seconds</Body>
 		</AlertCard>
-	{/if}
+	{/if} -->
 </div>

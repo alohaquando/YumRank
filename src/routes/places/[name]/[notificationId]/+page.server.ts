@@ -12,8 +12,6 @@ export const load = async ({ locals: { supabase }, parent, params }) => {
     .select('*, restaurants (name), profiles (username)')
     .eq('id', params.notificationId)
     .single();
-
-    console.log(noti);
 	
     
 	return { noti };

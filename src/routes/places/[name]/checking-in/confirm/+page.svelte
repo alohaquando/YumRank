@@ -52,10 +52,14 @@
 				.single();
 			const exp = JSON.parse(code.data)
 			console.log(exp.expirationTime);
-			if (expTime?.qr_code_exp && expTime.qr_code_exp > exp.expirationTime) {
-				goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
+			if (expTime) {
+				if (exp.expirationTime > new Date(Date.now()).toISOString) {
+					goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
+				} else {
+					console.log('expired');
+				}
 			} else {
-				console.log('expired');
+				console.log('no data');
 			}
 		} else {
 			requestAnimationFrame(scanQR);

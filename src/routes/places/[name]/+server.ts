@@ -54,6 +54,7 @@ export const GET = async ({
 							client.send('Error generating QR code');
 						} else {
 							client.send(qrDataURL);
+							
 						}
 					}
 				);

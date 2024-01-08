@@ -214,7 +214,6 @@ export interface Database {
           description: string | null
           favorite_count: number | null
           id: number
-          is_verified: boolean | null
           logo_url: string | null
           name: string
           numReviews: number | null
@@ -228,7 +227,6 @@ export interface Database {
           description?: string | null
           favorite_count?: number | null
           id?: number
-          is_verified?: boolean | null
           logo_url?: string | null
           name: string
           numReviews?: number | null
@@ -242,7 +240,6 @@ export interface Database {
           description?: string | null
           favorite_count?: number | null
           id?: number
-          is_verified?: boolean | null
           logo_url?: string | null
           name?: string
           numReviews?: number | null

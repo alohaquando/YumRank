@@ -12,9 +12,9 @@ export const load = async ({ parent }) => {
 };
 
 export const actions = {
-    update: async ({ request, locals: { supabase } }) => {
+    update: async ({ request, locals: { supabase }, params }) => {
         const formData = await request.formData();
-        const name = formData.get('name') as string;
+        // const name = formData.get('name') as string;
         const logoImage = formData.get('logoUrl') as File;
         const address = formData.get('address') as string;
         const description = formData.get('description') as string;
@@ -23,7 +23,7 @@ export const actions = {
         const { data: currentData, error: fetchError } = await supabase
             .from('restaurants')
             .select('logo_url, res_images')
-            .eq('name', name)
+            .eq('name', params.name)
             .single();
 
         if (fetchError) {
@@ -51,7 +51,7 @@ export const actions = {
         }
 
         const upsertData = {
-            name,
+            name: params.name,
             address,
             description,
             logo_url: Array.isArray(logoUrl) ? logoUrl[0] : undefined,
@@ -71,7 +71,7 @@ export const actions = {
                 message: `${error.message}`
             });
         } else {
-            throw redirect(303, `/places/${name}`);
+            throw redirect(303, `/places/${params.name}`);
         }
     }
 };
