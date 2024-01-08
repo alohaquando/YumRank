@@ -16,11 +16,12 @@
 	import { goto } from '$app/navigation';
 	import { onMount, afterUpdate, tick } from 'svelte';
 	import jsQR from 'jsqr';
-	import { parse } from 'svelte/compiler';
+	import { page } from '$app/stores';
 
 	export let data;
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
+
 
 	let video: any;
 	let canvas: any;
