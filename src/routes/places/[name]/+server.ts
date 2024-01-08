@@ -53,17 +53,7 @@ export const GET = async ({
 						if (err) {
 							client.send('Error generating QR code');
 						} else {
-							// Send the QR code to all clients except the owner
-							if (client !== ownerWs) {
-								client.send(qrDataURL);
-								for (const userId of userIds) {
-									ownerWs?.send(
-										`${userId} want to leave a review for ${params.name.replace('-', ' ')}`
-									);
-								}
-							}
-							// Send the message only to the owner
-							// if (ownerWs) ownerWs.send(`lol`);
+							client.send(qrDataURL);
 						}
 					}
 				);
