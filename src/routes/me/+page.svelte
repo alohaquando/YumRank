@@ -11,6 +11,7 @@
 	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';
+	import Map from '$lib/components/map/Map.svelte';
 
 	export let data;
 </script>
@@ -32,12 +33,12 @@
 		</LargePageTitle>
 		<div class=" flex text-center flex-col space-y-6 py-6">
 			<Body class=""
-				>Sign in with a YumRank account to check-in to your favoritesExample places!
+			>Sign in with a YumRank account to check-in to your favoritesExample places!
 			</Body>
 			<Button
 				class="w-full"
 				href="/sign-in"
-				>Sign in
+			>Sign in
 			</Button>
 		</div>
 	</div>
@@ -52,6 +53,24 @@
 			/>
 			<span class="">{data.myProfile.full_name}</span>
 		</LargePageTitle>
+
+		<div>
+			<SectionTitle>Check-ins</SectionTitle>
+			<div class="flex flex-col space-y-6">
+				<Body class="opacity-50 text-center">
+				You haven't check-in anywhere yet. <br />
+				Check-in to a place to see your it on the map
+				</Body>
+				<Map />
+				<Button
+					class="w-full"
+					href="/me/map"
+				>View my check-ins
+				</Button>
+				<Divider />
+			</div>
+		</div>
+
 
 		<div>
 			<SectionTitle>Managed places</SectionTitle>
@@ -72,7 +91,7 @@
 					design="outlined"
 					width="full"
 					href="/me/managed-places"
-					>View all
+				>View all
 				</Button>
 			</div>
 		</div>
@@ -107,7 +126,7 @@
 				<Button
 					class="w-full"
 					type="submit"
-					>Sign out
+				>Sign out
 				</Button>
 			</form>
 		</div>

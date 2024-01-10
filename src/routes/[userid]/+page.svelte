@@ -2,6 +2,10 @@
 	import { onMount } from 'svelte';
 	import Map from '$lib/components/map/Map.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
+	import Image from '$lib/components/media/Image.svelte';
+
+	let placeName: string;
+	let allPlace = [];
 
 	// import Button from '$lib/components/buttons/Button.svelte';
 
@@ -34,47 +38,38 @@
 		}
 	}
 
-	// function getLocation() {
-	// 	console.log('hi');
-	// 	return new Promise((resolve, reject) => {
-	// 		if (typeof navigator !== 'undefined' && navigator.geolocation) {
-	// 			navigator.geolocation.getCurrentPosition(
-	// 				(position) => {
-	// 					const { latitude, longitude } = position.coords;
-	// 					console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-	// 					resolve({ latitude, longitude });
-	// 				},
-	// 				(error) => {
-	// 					console.error(`Geolocation Error: ${error.message}`);
-	// 					reject(error);
-	// 				}
-	// 			);
-	// 		} else {
-	// 			console.error('Geolocation is not supported by this browser.');
-	// 			reject(new Error('Geolocation is not supported.'));
-	// 		}
-	// 	});
-	// }
+	export let data;
+	let markersData = [];
+
 
 	onMount(async () => {
-		console.log('hi');
 		try {
-
-			const placesQuery = await searchTextQuery('107 ');
-			console.log(placesQuery);
+			for (const review of data.myReviews) {
+				const mapsInfo = await searchTextQuery(review.restaurants.address);
+				const latitude = mapsInfo[0].location.latitude;
+				const longitude = mapsInfo[0].location.longitude;
+				const restaurantName = review.restaurants.name;
+				const merged = { ...review, latitude, longitude, restaurantName };
+				markersData.push(merged);
+			}
 		} catch (error) {
 			console.error('An error occurred:', error);
 		}
 	});
 
-	export let data;
+
 </script>
 
 <LargePageTitle showBackButton>
-	My check-ins
+	<Image
+		class="h-10 w-10 rounded-full"
+		slot="leading"
+		src={data.profile.avatar_url}
+	/>
+	{data.profile.full_name}'s check-ins
 </LargePageTitle>
 
 
 <div class="h-[65vh] py-2">
-	<Map heightClasses="h-full" />
+	<Map heightClasses="h-full" {markersData} />
 </div>

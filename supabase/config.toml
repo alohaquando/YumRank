@@ -70,7 +70,7 @@ enabled = true
 site_url = "http://127.0.0.1:3000"
 # A list of *exact* URLs that auth providers are permitted to redirect to post authentication.
 additional_redirect_urls = ["https://127.0.0.1:3000"]
-# How long tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
+# How initialLong tokens are valid for, in seconds. Defaults to 3600 (1 hour), maximum 604,800 (1 week).
 jwt_expiry = 3600
 # If disabled, the refresh token will never expire.
 enable_refresh_token_rotation = true
@@ -100,7 +100,7 @@ enable_signup = true
 # If enabled, users need to confirm their phone number before signing in.
 enable_confirmations = false
 # Template for sending OTP to users
-template = "Your code is {{ .Code }} ."  
+template = "Your code is {{ .Code }} ."
 
 # Use pre-defined map of phone number to OTP for testing.
 [auth.sms.test_otp]
