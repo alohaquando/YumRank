@@ -44,7 +44,6 @@ export const actions = {
 			owner_id: session?.user.id,
 			logo_url: logoUrl[0],
 			address: address,
-			is_verified: false,
 			description: description,
 			res_images: restaurantImagesUrls,
 			avgRating: 0,

@@ -21,7 +21,7 @@ export const actions = {
 		const formData = await request.formData();
 		const fullName = formData.get('fullName') as string;
 		const username = formData.get('username') as string;
-		const avatarUrl = formData.get('avatarUrl') as string;
+		const avatarUrl = formData.get('avatar_url') as string;
 
 		const session = await getSession();
 
@@ -48,5 +48,5 @@ export const actions = {
 		} else {
 			throw redirect(303, '/');
 		}
-	},
+	}
 };
