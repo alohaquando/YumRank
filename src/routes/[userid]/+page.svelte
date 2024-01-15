@@ -3,6 +3,7 @@
 	import Map from '$lib/components/map/Map.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import Image from '$lib/components/media/Image.svelte';
+	import Body from '$lib/components/typography/Body.svelte';
 
 	let placeName: string;
 	let allPlace = [];
@@ -75,5 +76,10 @@
 <div class="h-[65vh] py-2">
 	{#if dataloaded}
 	<Map heightClasses="h-full" {markersData} />
+	{:else}
+	<Body class="opacity-50 text-center">
+		You haven't check-in anywhere yet. <br />
+		Check-in to a place to see your it on the map
+	</Body>
 	{/if}
 </div>

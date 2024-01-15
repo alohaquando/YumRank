@@ -63,7 +63,7 @@
 				<Map markersData={[]} />
 				<Button
 					class="w-full"
-					href="/me/map"
+					href='/{data.session.user.id}'
 				>View my check-ins
 				</Button>
 				<Divider />
