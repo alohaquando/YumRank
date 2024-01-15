@@ -6,6 +6,7 @@
 
 	let placeName: string;
 	let allPlace = [];
+	let dataloaded = false;
 
 	// import Button from '$lib/components/buttons/Button.svelte';
 
@@ -52,6 +53,7 @@
 				const merged = { ...review, latitude, longitude, restaurantName };
 				await markersData.push(merged);
 			}
+			dataloaded = true;
 		} catch (error) {
 			console.error('An error occurred:', error);
 		}
@@ -71,5 +73,7 @@
 
 
 <div class="h-[65vh] py-2">
+	{#if dataloaded}
 	<Map heightClasses="h-full" {markersData} />
+	{/if}
 </div>
