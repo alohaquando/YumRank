@@ -56,7 +56,7 @@
 
 
 		const { Map } = await google.maps.importLibrary('maps');
-		// const { AdvancedMarkerElement } = await google.maps.importLibrary('marker');
+		const { AdvancedMarkerElement } = await google.maps.importLibrary('marker') as google.maps.MarkerLibrary;
 
 		const map = new Map(mapElement, {
 			center: { lat: initialLat, lng: initialLong },
@@ -78,7 +78,7 @@
 					await goto(`/places/${markersData[i].restaurantName}/check-ins/${markersData[i].id}`);
 				});
 			}
-		}, 100);
+		}, 200);
 	});
 </script>
 
