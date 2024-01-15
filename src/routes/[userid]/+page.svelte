@@ -11,31 +11,31 @@
 
 
 	async function searchTextQuery(query: string) {
-		const url = 'https://places.googleapis.com/v1/places:searchText';
-		const apiKey = 'AIzaSyBGJm4FHAYg8fs_xcFKPbXn5E9xXz-HDyU';
-
-		try {
-			const response = await fetch(url, {
-				method: 'POST',
-				headers: {
-					'Content-Type': 'application/json',
-					'X-Goog-Api-Key': apiKey,
-					'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.priceLevel,places.location'
-				},
-				body: JSON.stringify({
-					textQuery: query
-				})
-			});
-
-			if (!response.ok) {
-				throw new Error(`HTTP error! status: ${response.status}`);
-			}
-
-			const data = await response.json();
-			return data.places;
-		} catch (error) {
-			throw new Error(`An error occurred in searchTextQuery: ${error}`);
-		}
+		// const url = 'https://places.googleapis.com/v1/places:searchText';
+		// const apiKey = 'AIzaSyDBgr00CpiBUpMMNAkQDOKnapGq9Pj98dQ';
+		//
+		// try {
+		// 	const response = await fetch(url, {
+		// 		method: 'POST',
+		// 		headers: {
+		// 			'Content-Type': 'application/json',
+		// 			'X-Goog-Api-Key': apiKey,
+		// 			'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.priceLevel,places.location'
+		// 		},
+		// 		body: JSON.stringify({
+		// 			textQuery: query
+		// 		})
+		// 	});
+		//
+		// 	if (!response.ok) {
+		// 		throw new Error(`HTTP error! status: ${response.status}`);
+		// 	}
+		//
+		// 	const data = await response.json();
+		// 	return data.places;
+		// } catch (error) {
+		// 	throw new Error(`An error occurred in searchTextQuery: ${error}`);
+		// }
 	}
 
 	export let data;
@@ -71,5 +71,5 @@
 
 
 <div class="h-[65vh] py-2">
-	<Map heightClasses="h-full" {markersData} />
+	<Map heightClasses="h-full" markersData={[]} />
 </div>

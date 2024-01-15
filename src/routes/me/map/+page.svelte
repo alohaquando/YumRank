@@ -8,7 +8,7 @@
 
 	async function searchTextQuery(query: string) {
 		const url = 'https://places.googleapis.com/v1/places:searchText';
-		const apiKey = 'AIzaSyBGJm4FHAYg8fs_xcFKPbXn5E9xXz-HDyU';
+		const apiKey = 'AIzaSyAmfUrL4XL1BvkX3ua_vy0F-p84phgX8fI';
 
 		try {
 			const response = await fetch(url, {
@@ -76,5 +76,5 @@
 
 
 <div class="h-[65vh] py-2">
-	<Map heightClasses="h-full" />
+	<Map heightClasses="h-full" markersData={[]} />
 </div>

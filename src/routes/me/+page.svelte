@@ -7,7 +7,6 @@
 	import Body from '$lib/components/typography/Body.svelte';
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import SectionTitle from '$lib/components/layouts/SectionTitle.svelte';
-	import { hrefExample } from '$lib/data/exampleData';
 	import TitleItem from '$lib/components/building_blocks/TitleItem.svelte';
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';
@@ -61,7 +60,7 @@
 				You haven't check-in anywhere yet. <br />
 				Check-in to a place to see your it on the map
 				</Body>
-				<Map />
+				<Map markersData={[]} />
 				<Button
 					class="w-full"
 					href="/me/map"
