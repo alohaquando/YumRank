@@ -16,7 +16,7 @@ export const actions = {
 		const provider = formData.get('provider') as Provider;
 
 		if (email && password) {
-			const { error } = await supabase.auth.signInWithPassword({
+			const { data:user, error } = await supabase.auth.signInWithPassword({
 				email,
 				password
 			});

@@ -145,6 +145,7 @@
 						<ListItem
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
+							
 						>
 							<Fa
 								icon={faBell}
@@ -159,6 +160,8 @@
 						<ListItem
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
+							class="{true ? "opacity-50" : ""}"
+						
 						>
 							<Fa
 								icon={faBell}

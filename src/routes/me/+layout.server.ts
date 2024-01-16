@@ -18,6 +18,17 @@ export const load = async ({ locals: { supabase }, parent }) => {
 		.select('*')
 		.eq('owner_id', userId);
 
+	const { data: myReviews, error: reviewError } = await supabase
+	.from('reviews')
+	.select('restaurant_id, id, rating, restaurants (name, address) ')
+	.eq('user_id', userId);
+
+
+	if (reviewError) {
+		console.error(reviewError);
+		return;
+	}
+
 	if (profileError) {
 		console.error(profileError);
 	}
@@ -26,5 +37,5 @@ export const load = async ({ locals: { supabase }, parent }) => {
 		console.error(myPlacesError);
 	}
 
-	return { session, myPlaces, myProfile };
+	return { session, myPlaces, myProfile, myReviews };
 };
