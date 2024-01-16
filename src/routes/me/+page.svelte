@@ -1,6 +1,7 @@
 <script lang="ts">
 	// noinspection ES6UnusedImports
 	import Fa from 'svelte-fa';
+	import { onMount } from 'svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 	import { faFaceSmileWink, faHeart, faUserCircle } from '@fortawesome/pro-regular-svg-icons';
@@ -12,7 +13,60 @@
 	import ListItem from '$lib/components/lists/ListItem.svelte';
 	import Map from '$lib/components/map/Map.svelte';
 
+	let placeName: string;
+	let allPlace = [];
+	let dataloaded = false;
+
+	// import Button from '$lib/components/buttons/Button.svelte';
+
+
+	async function searchTextQuery(query: string) {
+		const url = 'https://places.googleapis.com/v1/places:searchText';
+		const apiKey = 'AIzaSyBGJm4FHAYg8fs_xcFKPbXn5E9xXz-HDyU';
+
+		try {
+			const response = await fetch(url, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					'X-Goog-Api-Key': apiKey,
+					'X-Goog-FieldMask': 'places.displayName,places.formattedAddress,places.priceLevel,places.location'
+				},
+				body: JSON.stringify({
+					textQuery: query
+				})
+			});
+
+			if (!response.ok) {
+				throw new Error(`HTTP error! status: ${response.status}`);
+			}
+
+			const data = await response.json();
+			return data.places;
+		} catch (error) {
+			throw new Error(`An error occurred in searchTextQuery: ${error}`);
+		}
+	}
+
 	export let data;
+	let markersData = [];
+
+
+	onMount(async () => {
+		try {
+			for (const review of data.myReviews) {
+				const mapsInfo = await searchTextQuery(review.restaurants.address);
+				const latitude = mapsInfo[0].location.latitude;
+				const longitude = mapsInfo[0].location.longitude;
+				const restaurantName = review.restaurants.name;
+				const merged = { ...review, latitude, longitude, restaurantName };
+				await markersData.push(merged);
+			}
+			dataloaded = true;
+		} catch (error) {
+			console.error('An error occurred:', error);
+		}
+	});
 </script>
 
 <!-- IF not signed in -->
@@ -53,14 +107,10 @@
 			<span class="">{data.myProfile.full_name}</span>
 		</LargePageTitle>
 
-		<div>
-			<SectionTitle>Check-ins</SectionTitle>
+		{#if dataloaded}
 			<div class="flex flex-col space-y-6">
-				<Body class="opacity-50 text-center">
-				You haven't check-in anywhere yet. <br />
-				Check-in to a place to see your it on the map
-				</Body>
-				<Map markersData={[]} />
+				<SectionTitle>Check-ins</SectionTitle>
+				<Map markersData={markersData} />
 				<Button
 					class="w-full"
 					href='/{data.session.user.id}'
@@ -68,7 +118,21 @@
 				</Button>
 				<Divider />
 			</div>
+		{:else}
+		<div class="flex flex-col space-y-6">
+			<Body class="opacity-50 text-center">
+			You haven't check-in anywhere yet. <br />
+			Check-in to a place to see your it on the map
+			</Body>
+			<Map markersData={[]} />
+			<Button
+				class="w-full"
+				href='/{data.session.user.id}'
+			>View my check-ins
+			</Button>
+			<Divider />
 		</div>
+		{/if}
 
 
 		<div>

@@ -30,7 +30,7 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 	// Get all checkIns
 	const { data: checkIns, error: checkInsError } = await supabase
 		.from('reviews')
-		.select('id, text, rating, created_at, profiles(full_name, avatar_url), restaurants(name)')
+		.select('id, text, rating, created_at, profiles(id, full_name, avatar_url), restaurants(name)')
 		.eq('restaurant_id', placeId);
 
 	if (checkInsError) {
