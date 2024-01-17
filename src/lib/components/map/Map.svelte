@@ -78,7 +78,7 @@
 					await goto(`/places/${markersData[i].restaurantName}/check-ins/${markersData[i].id}`);
 				});
 			}
-		}, 200);
+		}, 1);
 	});
 </script>
 

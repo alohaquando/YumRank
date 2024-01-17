@@ -21,6 +21,7 @@
 </script>
 
 <div>
+	<LargePageTitle showBackButton>Review's detail</LargePageTitle>
 	<div class="flex flex-col space-y-0 py-4">
 		{#if data.review} 
             <Review

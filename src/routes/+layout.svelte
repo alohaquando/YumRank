@@ -23,11 +23,39 @@
 	let { supabase, session } = data;
 	$: ({ supabase, session } = data);
 	let notifications: any[] = [];
+	let showNotificationsDialog = false;
+	let badgeNotificationButton = false;
+	let restaurantName: Number[];
 
 	onMount(() => {
-		const {
-			data: { subscription }
-		} = supabase.auth.onAuthStateChange(async (event, _session) => {
+		if (data.session) {
+			// Fetch the restaurant IDs where the user is the owner
+			supabase
+				.from('restaurants')
+				.select('id')
+				.eq('owner_id', data.session.user.id)
+				.then(({ data: restaurants, error: restaurantError }) => {
+					if (restaurantError) {
+						console.error(restaurantError);
+					} else {
+						// Get the restaurant IDs
+						const restaurantIds = restaurants.map((restaurant) => restaurant.id);
+
+						// Fetch the notifications where the restaurant_id is in the restaurant IDs
+						supabase
+							.from('notifications')
+							.select('*, restaurants (name), profiles (username)')
+							.in('restaurant_id', restaurantIds)
+							.then(({ data: noti, error: notiError }) => {
+								if (noti?.some((notification) => !notification.seen)) {
+									badgeNotificationButton = true;
+								}
+							})
+					}
+				});
+		}
+
+		const { data: { subscription } } = supabase.auth.onAuthStateChange((event, _session) => {
 			if (_session?.expires_at !== session?.expires_at) {
 				invalidate('supabase:auth');
 			}
@@ -36,13 +64,9 @@
 		return () => subscription.unsubscribe();
 	});
 
-	let showNotificationsDialog = false;
-	let badgeNotificationButton = false;
-	let restaurantName: Number[];
+
 
 	let toggleNotificationDialog = async () => {
-		let seen: boolean;
-		showNotificationsDialog = !showNotificationsDialog;
 		if (data.session) {
 			console.log('Fetching notifications');
 
@@ -77,7 +101,9 @@
 					notifications = noti;
 				}
 			}
-		}
+		} 
+		showNotificationsDialog = !showNotificationsDialog;
+		badgeNotificationButton = false;
 	};
 </script>
 
@@ -145,6 +171,7 @@
 						<ListItem
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
+							class="{notification.seen ? 'opacity-50' : ''}"
 							
 						>
 							<Fa
@@ -160,7 +187,7 @@
 						<ListItem
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
-							class="{true ? "opacity-50" : ""}"
+							class="{notification.seen ? 'opacity-50' : ''}"
 						
 						>
 							<Fa
