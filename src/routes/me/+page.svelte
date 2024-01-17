@@ -107,7 +107,7 @@
 			<span class="">{data.myProfile.full_name}</span>
 		</LargePageTitle>
 
-		{#if dataloaded}
+		{#if data.myReviews.length > 0}
 			<div class="flex flex-col space-y-6">
 				<SectionTitle>Check-ins</SectionTitle>
 				<Map markersData={markersData} />
