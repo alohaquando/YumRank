@@ -65,7 +65,7 @@
 			mapId: 'lol'
 		});
 
-		setTimeout(() => {
+		// setTimeout(() => {
 			for (let i = 0; i < markersData.length; i++) {
 				console.log(markersData[i].latitude, markersData[i].longitude, markersData[i].rating);
 				const marker = new AdvancedMarkerElement({
@@ -78,7 +78,7 @@
 					await goto(`/places/${markersData[i].restaurantName}/check-ins/${markersData[i].id}`);
 				});
 			}
-		}, 1);
+		// }, 1);
 	});
 </script>
 

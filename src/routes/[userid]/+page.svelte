@@ -46,14 +46,15 @@
 
 	onMount(async () => {
 		try {
-			for (const review of data.myReviews) {
+			const promises = data.myReviews.map(async (review) => {
 				const mapsInfo = await searchTextQuery(review.restaurants.address);
 				const latitude = mapsInfo[0].location.latitude;
 				const longitude = mapsInfo[0].location.longitude;
 				const restaurantName = review.restaurants.name;
-				const merged = { ...review, latitude, longitude, restaurantName };
-				await markersData.push(merged);
-			}
+				return { ...review, latitude, longitude, restaurantName };
+			});
+
+			markersData = await Promise.all(promises);
 			dataloaded = true;
 		} catch (error) {
 			console.error('An error occurred:', error);

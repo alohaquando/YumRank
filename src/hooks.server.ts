@@ -4,7 +4,6 @@ import type { Handle } from '@sveltejs/kit';
 import type { ExtendedGlobal } from '$lib/server/webSocketUtils';
 import { building } from '$app/environment';
 import { GlobalThisWSS } from '$lib/server/webSocketUtils';
-import type { Session } from '@supabase/supabase-js';
 import { parse } from 'cookie';
 
 // This can be extracted into a separate file
