@@ -136,7 +136,6 @@
 </svelte:head>
 
 <div class="relative mx-auto min-h-screen bg-white pb-20">
-	<!--	TODO: Implement notification badging -->
 	<Header
 		bind:badgeNotificationButton
 		class="fixed top-0 z-50"
