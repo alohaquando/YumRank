@@ -79,8 +79,8 @@
 	<Map heightClasses="h-full" {markersData} />
 	{:else}
 	<Body class="opacity-50 text-center">
-		You haven't check-in anywhere yet. <br />
-		Check-in to a place to see your it on the map
+		{data.profile.full_name} haven't check-in anywhere yet. <br />
+		Notify them to check-in to a place to see your it on the map
 	</Body>
 	{/if}
 </div>
