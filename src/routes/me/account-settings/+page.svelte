@@ -10,18 +10,12 @@
 <LargePageTitle showBackButton>Account Settings</LargePageTitle>
 
 <div class="">
-	<ListItem href="/me/account-settings/update-profile">
+	<ListItem href="/complete-account">
 		<Fa
 			icon={faUserCircle}
 			slot="leading"
 		/>
 		<Body slot="text">Update profile</Body>
 	</ListItem>
-	<ListItem href="/me/account-settings/update-password">
-		<Fa
-			icon={faKey}
-			slot="leading"
-		/>
-		<Body slot="text">Update password</Body>
-	</ListItem>
+	
 </div>

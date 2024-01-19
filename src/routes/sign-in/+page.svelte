@@ -57,11 +57,7 @@
 			width="full"
 			>Sign in
 		</Button>
-		<ActionChip
-			formaction="?/forgot"
-			href="/reset-password"
-			>Reset my password
-		</ActionChip>
+		
 	</form>
 
 	<Divider />

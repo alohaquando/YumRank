@@ -42,7 +42,9 @@ export const actions = {
 			if (avatarUrl && avatarUrl.type !== 'application/octet-stream') {
 				avatar = await uploadAndGetPublicUrlFromSelected(supabase, avatarUrl, 'avatars');
 				const [, , , , , , , , filename] = oldAvatar.split('/');
-				await deleteFromBucket(supabase, 'avatars', filename);
+				const delAva = await deleteFromBucket(supabase, 'avatars', filename);
+				console.log(delAva);
+
 			}
 		} else {
 			if (avatarUrl && avatarUrl.type !== 'application/octet-stream') {
