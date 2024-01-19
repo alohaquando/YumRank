@@ -1,5 +1,4 @@
 import { fail } from '@sveltejs/kit';
-export const prerender = true;
 export const load = async ({ locals: { supabase, getSession, userConnections }, params }) => {
 	const session = await getSession();
 

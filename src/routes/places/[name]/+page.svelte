@@ -187,8 +187,8 @@
 							<Post
 								content={post.content}
 								imageSrcs={post.post_image_urls}
-								postHref="places/{post.restaurants.name}"
-								postEditHref="places/{post.restaurants.name}/posts/{post.id}/edit"
+								postHref="/places/{post.restaurants.name}"
+								postEditHref="/places/{post.restaurants.name}/posts/{post.id}/edit"
 								showMenuButton={data.owner}
 								placeName={post.restaurants.name}
 								placeSrc={post.restaurants.logo_url}
