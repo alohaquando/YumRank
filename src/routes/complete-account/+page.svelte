@@ -42,7 +42,7 @@
 </script>
 
 <LoadingOverlay bind:isLoading />
-<LargePageTitle>Complete your account</LargePageTitle>
+<LargePageTitle showBackButton>Complete your account</LargePageTitle>
 
 <div class="form-widget flex-col flex space-y-6">
 	<form
