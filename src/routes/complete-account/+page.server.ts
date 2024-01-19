@@ -29,7 +29,7 @@ export const actions = {
 			id: session?.user.id,
 			full_name: fullName,
 			username,
-			avatar_url: avatarUrl,
+			avatar_url: Array.isArray(avatarUrl) ? avatarUrl[0] : undefined,
 			updated_at: new Date()
 		});
 		const update = await supabase.auth.updateUser({
