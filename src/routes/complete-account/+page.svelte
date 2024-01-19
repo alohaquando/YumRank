@@ -8,7 +8,9 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import Button from '$lib/components/buttons/Button.svelte';
 	import FileInput from '$lib/components/inputs/FileInput.svelte';
+	import ErrorCard from '$lib/components/cards/FormStatusCard.svelte';
 	import ImageInput from '$lib/components/inputs/ImageInput.svelte';
+	import LoadingOverlay from '$lib/components/layouts/LoadingOverlay.svelte';
 
 	export let data;
 	export let form;
@@ -16,16 +18,17 @@
 	let { session, supabase, profile } = data;
 	$: ({ session, supabase, profile } = data);
 
-	let profileForm: HTMLFormElement;
-	let loading = false;
 	let fullName: string = profile?.full_name ?? '';
 	let username: string = profile?.username ?? '';
 	let avatarUrl: string = profile?.avatar_url ?? '';
 
+	let isLoading = false;
+
 	const handleSubmit: SubmitFunction = () => {
-		loading = true;
-		return async () => {
-			loading = false;
+		isLoading = true;
+		return async ({ update }) => {
+			await update();
+			isLoading = false;
 		};
 	};
 
@@ -38,17 +41,25 @@
 	// };
 </script>
 
+<LoadingOverlay bind:isLoading />
 <LargePageTitle>Complete your account</LargePageTitle>
 
 <div class="form-widget flex-col flex space-y-6">
 	<form
 		action="?/update"
-		bind:this={profileForm}
 		class="form-widget flex-col flex space-y-8"
 		enctype="multipart/form-data"
 		method="POST"
 		use:enhance={handleSubmit}
 	>
+	{#if form}
+		<ErrorCard
+			title="Failed to update account"
+			message={form.message}
+			failed={form.failed}
+		/>
+	{/if}
+
 		<TextField
 			id="email"
 			label="Email"
@@ -67,7 +78,7 @@
 			name="fullName"
 			placeholder="Full Name"
 			type="text"
-			value={form?.fullName ?? fullName}
+			value={fullName}
 		/>
 		<TextField
 			id="username"
@@ -75,16 +86,15 @@
 			name="username"
 			placeholder="Username"
 			type="text"
-			value={form?.username ?? username}
+			value={username}
 		/>
 
 		<ImageInput
 			id="avatar_url"
 			label="Profile picture"
-			multiple
 			name="avatar_url"
 			overrideShowFilesInitially
-			srcs={[session.user.user_metadata.avatar_url]}
+			srcs={[avatarUrl]}
 		/>
 
 		<!--		<Avatar-->
@@ -95,9 +105,9 @@
 		<!--		/>-->
 
 		<Button
-			class="w-full"
-			disabled={loading}
-			type="submit">{loading ? 'Loading...' : 'Update'}</Button
+			disabled={isLoading}
+			type="submit"
+			width="full">{isLoading ? 'Loading...' : 'Update'}</Button
 		>
 	</form>
 
