@@ -84,7 +84,7 @@
 			multiple
 			name="avatar_url"
 			overrideShowFilesInitially
-			srcs={session.user.user_metadata.avatar_url ?? ''}
+			srcs={[session.user.user_metadata.avatar_url] ?? ''}
 		/>
 
 		<!--		<Avatar-->

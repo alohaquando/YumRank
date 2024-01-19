@@ -46,12 +46,10 @@ export const actions = {
         const content = formData.get('content') as string;
         const postImages = formData.getAll('postImages') as File[];
 
-        console.log(postImages);
-
         const { data: currentData, error: fetchError } = await supabase
-            .from('postss')
+            .from('posts')
             .select('post_image_urls')
-            .eq('id', BigInt(params.postId))
+            .eq('id', Number(params.postId))
             .single();
 
         if (fetchError) {
@@ -65,23 +63,17 @@ export const actions = {
 
         if (postImages.length > 0 && postImages[0].type !== 'application/octet-stream') {
             postImagesUrls = await uploadAndGetPublicUrlsFromSelected(supabase, postImages, 'postimages');
-            console.log(postImagesUrls);
-            if (oldPostImagesUrls.length > 1) {
-                for (const url of oldPostImagesUrls) {
-                    const [, , , , , , , , filename] = url.split('/');
-                    await deleteFromBucket(supabase, 'postimages', filename);
-                }
-            } else if (oldPostImagesUrls.length === 1) {
-                const [, , , , , , , , filename] = oldPostImagesUrls[0].split('/');
+            for (const url of oldPostImagesUrls) {
+                const [, , , , , , , , filename] = url.split('/');
                 await deleteFromBucket(supabase, 'postimages', filename);
             }
         }
 
         const upsertData = {
+            id: Number(params.postId),
             content,
             post_image_urls: postImagesUrls && postImagesUrls.length > 0 ? postImagesUrls : undefined,
         };
-
 
         const { error } = await supabase.from('posts').upsert(upsertData);
 
