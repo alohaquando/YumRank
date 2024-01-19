@@ -66,8 +66,13 @@ export const actions = {
         if (postImages.length > 0 && postImages[0].type !== 'application/octet-stream') {
             postImagesUrls = await uploadAndGetPublicUrlsFromSelected(supabase, postImages, 'postimages');
             console.log(postImagesUrls);
-            for (const url of oldPostImagesUrls) {
-                const [, , , , , , , , filename] = url.split('/');
+            if (oldPostImagesUrls.length > 1) {
+                for (const url of oldPostImagesUrls) {
+                    const [, , , , , , , , filename] = url.split('/');
+                    await deleteFromBucket(supabase, 'postimages', filename);
+                }
+            } else if (oldPostImagesUrls.length === 1) {
+                const [, , , , , , , , filename] = oldPostImagesUrls[0].split('/');
                 await deleteFromBucket(supabase, 'postimages', filename);
             }
         }
