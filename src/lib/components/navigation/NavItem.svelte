@@ -52,6 +52,7 @@
 </script>
 
 <a
+	data-sveltekit-preload-data="tap"
 	class="flex flex-col w-16 justify-center items-center space-y-1 transition {stateClasses}"
 	{href}
 >

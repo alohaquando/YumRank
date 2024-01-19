@@ -48,7 +48,7 @@
 				transition:fade={{ duration: 50 }}>
 				<ul aria-labelledby="dropdownDefaultButton" class="py-2 text-sm text-gray-700 ">
 					<li>
-						<a class=" px-4 py-4 hover:bg-red-50 transition flex flex-nowrap space-x-2 items-center cursor-pointer"
+						<a data-sveltekit-preload-data="tap" class=" px-4 py-4 hover:bg-red-50 transition flex flex-nowrap space-x-2 items-center cursor-pointer"
 							 href={postEditHref}>
 							<Fa icon={faPen} />
 							<Body>Edit</Body>
