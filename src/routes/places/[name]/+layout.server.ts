@@ -1,5 +1,5 @@
 import { fail } from '@sveltejs/kit';
-
+export const prerender = true;
 export const load = async ({ locals: { supabase, getSession, userConnections }, params }) => {
 	const session = await getSession();
 
@@ -14,18 +14,12 @@ export const load = async ({ locals: { supabase, getSession, userConnections }, 
 		.single();
 
 	const placeOwner = restaurant?.owner_id as string;
+	const placeId = restaurant?.id;
 
 	if (placesError) {
 		console.error(placesError);
 		return;
 	}
-
-	const placeIdData = await supabase
-		.from('restaurants')
-		.select('id')
-		.eq('name', placeName)
-		.single();
-	const placeId = placeIdData?.data?.id;
 
 	// Get all checkIns
 	const { data: checkIns, error: checkInsError } = await supabase
