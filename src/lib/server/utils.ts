@@ -15,7 +15,7 @@ export async function uploadAndGetPublicUrlFromSelected(
 				const fileExt = file.name.split('.').pop();
 				const fileName = `${Math.random().toString().split('.').pop()}.${fileExt}`;
 
-				const { error } = await supabase.storage.from(bucket).upload(fileName, file);
+				const { error } = await supabase.storage.from(bucket).upload(fileName, file, {cacheControl: '3600'});
 
 				if (error) {
 					reject(error);
@@ -47,7 +47,7 @@ export async function uploadAndGetPublicUrlsFromSelected(
 					const fileExt = file.name.split('.').pop();
 					const fileName = `${Math.random().toString().split('.').pop()}.${fileExt}`;
 
-					const { error } = await supabase.storage.from(bucket).upload(fileName, file);
+					const { error } = await supabase.storage.from(bucket).upload(fileName, file, {cacheControl: '3600',});
 
 					if (error) {
 						reject(error);
