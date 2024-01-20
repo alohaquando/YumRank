@@ -84,14 +84,6 @@
 	src={data.restaurant.logo_url}
 />
 
-<!-- <div class="w-full h-80 rounded-3xl overflow-clip">
-	<Image
-		alt="Thumbnail"
-		class="w-full h-80"
-		src={data.restaurant.res_images[0]}
-	/>
-</div> -->
-
 	<Button on:click={openCamera} width="full">Open Camera</Button>
 
 	<!-- svelte-ignore a11y-media-has-caption -->
@@ -107,23 +99,4 @@
 		height="480"
 		style="display:none;"
 	/>
-
-	
-<!-- 
-	<div class="flex flex-col space-y-8">
-		<AlertCard>
-			<Fa
-				icon={faCamera}
-				slot="icon"
-			/>
-			<Title slot="title">Open your camera app</Title>
-			<Body
-				class="px-8"
-				slot="body"
-				>You can use the camera app on your phone to scan the QR code provided by the service member
-			</Body>
-		</AlertCard>
-
-		<Divider />
-	</div> -->
 </div>
