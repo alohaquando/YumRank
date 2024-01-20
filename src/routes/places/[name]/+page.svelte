@@ -91,7 +91,12 @@
 		if (error) {
 			console.log(error);
 		} else {
-			goto(`/places/${urlParams}checking-in/confirm`);
+			if ($page.url.hostname === 'localhost') {
+				goto(`/places/${urlParams}/checking-in/leave-review`);
+			} else {
+				goto(`/places/${urlParams}checking-in/confirm`);
+			}
+			// goto(`/places/${urlParams}/checking-in/confirm`);
 		}
 	}
 </script>
