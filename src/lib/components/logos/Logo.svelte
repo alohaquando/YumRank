@@ -6,7 +6,6 @@
 </script>
 
 <a
-	data-sveltekit-preload-data="tap"
 	class="flex flex-row space-x-2 place-items-center px-6"
 	{href}
 >

@@ -33,7 +33,7 @@
 	export const requestData = async () => {
 		if (webSocketEstablished) return;
 		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-		ws = new WebSocket(`${protocol}//${window.location.host}/websocket:8080`);
+		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
 
 		ws.addEventListener('open', (event) => {
 			webSocketEstablished = true;

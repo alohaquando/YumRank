@@ -21,7 +21,6 @@
 </script>
 
 <a
-	data-sveltekit-preload-data="tap"
 	class="flex w-full overflow-auto space-x-4"
 	{href}
 >
