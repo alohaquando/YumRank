@@ -60,7 +60,7 @@
 				const longitude = mapsInfo[0].location.longitude;
 				const restaurantName = review.restaurants.name;
 				const merged = { ...review, latitude, longitude, restaurantName };
-				await markersData.push(merged);
+				markersData.push(merged);
 			}
 			dataloaded = true;
 		} catch (error) {
@@ -107,7 +107,7 @@
 			<span class="">{data.myProfile.full_name}</span>
 		</LargePageTitle>
 
-		{#if data.myReviews.length > 0}
+		{#if data.myReviews.length > 0 && dataloaded}
 			<div class="flex flex-col space-y-6">
 				<SectionTitle>Check-ins</SectionTitle>
 				<Map markersData={markersData} />

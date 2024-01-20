@@ -22,6 +22,7 @@ export type ExtendedGlobal = typeof globalThis & {
 };
 
 export const onHttpServerUpgrade = (req: IncomingMessage, sock: Duplex, head: Buffer) => {
+	console.log('Upgrade request received:', req.url);
 	const { pathname } = parse(req.url || '', true);
 	if (pathname !== '/websocket') return;
 
