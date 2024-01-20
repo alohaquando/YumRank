@@ -76,11 +76,27 @@
 <LargePageTitle showBackButton>Checking in at</LargePageTitle>
 
 <div class="flex-col flex space-y-4">
+	<PlaceItems
+	address={data.restaurant.address}
+	name={data.restaurant.name}
+	src={data.restaurant.logo_url}
+/>
+
+<!-- <div class="w-full h-80 rounded-3xl overflow-clip">
+	<Image
+		alt="Thumbnail"
+		class="w-full h-80"
+		src={data.restaurant.res_images[0]}
+	/>
+</div> -->
+
+	<Button on:click={openCamera} width="full">Open Camera</Button>
+
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video
 		id="video"
-		width="640"
 		height="480"
+		class="rounded-3xl bg-red-50 w-full"
 	/>
 	<canvas
 		id="canvas"
@@ -88,22 +104,9 @@
 		height="480"
 		style="display:none;"
 	/>
-	<Button on:click={openCamera}>Open Camera</Button>
 
-	<PlaceItems
-		address={data.restaurant.address}
-		name={data.restaurant.name}
-		src={data.restaurant.logo_url}
-	/>
-
-	<div class="w-full h-80 rounded-3xl overflow-clip">
-		<Image
-			alt="Thumbnail"
-			class="w-full h-80"
-			src={data.restaurant.res_images[0]}
-		/>
-	</div>
-
+	
+<!-- 
 	<div class="flex flex-col space-y-8">
 		<AlertCard>
 			<Fa
@@ -119,5 +122,5 @@
 		</AlertCard>
 
 		<Divider />
-	</div>
+	</div> -->
 </div>
