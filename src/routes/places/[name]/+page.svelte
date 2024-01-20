@@ -91,7 +91,7 @@
 		if (error) {
 			console.log(error);
 		} else {
-			goto(`/places/${urlParams}/checking-in/confirm`);
+			goto(`/places/${urlParams}checking-in/confirm`);
 		}
 	}
 </script>
