@@ -12,7 +12,7 @@
 	<div class="flex flex-row space-x-2 items-center">
 		<Image
 			alt={name}
-			class="w-16 h-16 rounded-3xl ring-1 ring-gray-200"
+			class="w-16 h-16 rounded-3xl ring-1 ring-gray-200 shrink-0"
 			{src}
 		/>
 		<div class="flex flex-col space-y-1">
