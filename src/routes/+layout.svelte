@@ -50,7 +50,7 @@
 								if (noti?.some((notification) => !notification.seen)) {
 									badgeNotificationButton = true;
 								}
-							})
+							});
 					}
 				});
 		}
@@ -63,7 +63,6 @@
 
 		return () => subscription.unsubscribe();
 	});
-
 
 
 	let toggleNotificationDialog = async () => {
@@ -101,7 +100,7 @@
 					notifications = noti;
 				}
 			}
-		} 
+		}
 		showNotificationsDialog = !showNotificationsDialog;
 		badgeNotificationButton = false;
 	};
@@ -109,15 +108,15 @@
 
 <svelte:head>
 	<title
-		>{$page.url.pathname.split('/').pop() !== ''
-			? $page.url.pathname
-					.split('/')
-					.pop()
-					?.replace(/%20|-/g, ' ')
-					.replace(/^\w/, function (match) {
-						return match.toUpperCase();
-					})
-			: 'YumRank'}</title
+	>{$page.url.pathname.split('/').pop() !== ''
+		? $page.url.pathname
+			.split('/')
+			.pop()
+			?.replace(/%20|-/g, ' ')
+			.replace(/^\w/, function(match) {
+				return match.toUpperCase();
+			})
+		: 'YumRank'}</title
 	>
 	<link
 		href={faviconPNG}
@@ -140,6 +139,7 @@
 		bind:badgeNotificationButton
 		class="fixed top-0 z-50"
 		notificationButtonOnClick={toggleNotificationDialog}
+		showNotificationButton={data.session !== null}
 	/>
 	<div class="container mx-auto bg-white px-6 sm:max-w-[48rem]">
 		<slot />
@@ -171,7 +171,7 @@
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
 							class="{notification.seen ? 'opacity-50' : ''}"
-							
+
 						>
 							<Fa
 								icon={faBell}
@@ -179,7 +179,7 @@
 							/>
 
 							<Body slot="text"
-								>{notification.profiles.username} want to leave a review to {notification.restaurants.name}</Body
+							>{notification.profiles.username} want to leave a review to {notification.restaurants.name}</Body
 							>
 						</ListItem>
 					{:else}
@@ -187,7 +187,7 @@
 							href="/places/{notification.restaurants.name}/{notification.id}"
 							on:click={toggleNotificationDialog}
 							class="{notification.seen ? 'opacity-50' : ''}"
-						
+
 						>
 							<Fa
 								icon={faBell}

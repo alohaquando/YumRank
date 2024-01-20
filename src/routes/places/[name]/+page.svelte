@@ -34,8 +34,13 @@
 	const urlParams = $page.url.pathname.split('/').slice(2).join('/');
 
 	let isFavoriteLoading = false;
-	const handleFavoriteToggle: SubmitFunction = () => {
+	const handleFavoriteToggle: SubmitFunction = async () => {
 		isFavoriteLoading = true;
+
+		if (!data.session) {
+			await goto('/sign-in');
+		}
+
 		return async ({ update }) => {
 			await update();
 			isFavoriteLoading = false;
@@ -69,6 +74,10 @@
 	// };
 
 	async function checkIn() {
+		if (!data.session) {
+			await goto('/sign-in');
+		}
+
 		const { error } = await supabase
 			.from('notifications')
 			.insert([

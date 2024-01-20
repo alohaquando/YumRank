@@ -11,23 +11,26 @@
 	export let notificationButtonOnClick = () => {
 	};
 	export let badgeNotificationButton: boolean = true;
+	export let showNotificationButton = false;
 </script>
 
 <div class="h-14 border-b border-gray-200 flex bg-white w-full {customClasses}">
 	<div class="container mx-auto flex items-center justify-between pr-6">
 		<Logo href="/" />
 		<div class="relative">
-			<IconButton
-				design="text"
-				on:click={() => {
+			{#if (showNotificationButton)}
+				<IconButton
+					design="text"
+					on:click={() => {
 					notificationButtonOnClick();
 				}}
-			>
-				<Fa
-					class="text-lg"
-					icon={faBell}
-				/>
-			</IconButton>
+				>
+					<Fa
+						class="text-lg"
+						icon={faBell}
+					/>
+				</IconButton>
+			{/if}
 			{#if badgeNotificationButton}
 				<div class="absolute top-0 right-0 h-3 w-3 bg-red-500 rounded-full" />
 				<div class="absolute top-0 right-0 h-3 w-3 bg-red-500 rounded-full animate-ping" />
