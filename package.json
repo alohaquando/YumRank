@@ -2,10 +2,11 @@
 	"name": "yumrank",
 	"version": "0.0.1",
 	"private": true,
-	"scripts": {
+	"scripts": {  
 		"dev": "vite dev",
 		"dev-host": "vite dev --host",
 		"build": "vite build",
+		"start": "node build",
 		"preview": "vite preview",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
