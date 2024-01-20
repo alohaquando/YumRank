@@ -7,6 +7,7 @@
 	import ImageInput from '$lib/components/inputs/ImageInput.svelte';
 	import ErrorCard from '$lib/components/cards/FormStatusCard.svelte';
 	import LoadingOverlay from '$lib/components/layouts/LoadingOverlay.svelte';
+	import TextArea from '$lib/components/inputs/TextArea.svelte';
 
 	export let data;
 	export let form;
@@ -62,13 +63,12 @@
 		type="text"
 	/>
 
-	<TextField
+	<TextArea
 		id="description"
 		label="Description"
 		name="description"
 		placeholder="Description"
 		required
-		type="text"
 	/>
 
 	<ImageInput
