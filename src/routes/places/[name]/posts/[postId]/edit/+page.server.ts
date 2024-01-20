@@ -48,7 +48,7 @@ export const actions = {
 
         const { data: currentData, error: fetchError } = await supabase
             .from('posts')
-            .select('post_image_urls')
+            .select('restaurant_id, post_image_urls')
             .eq('id', Number(params.postId))
             .single();
 
@@ -71,6 +71,7 @@ export const actions = {
 
         const upsertData = {
             id: Number(params.postId),
+            restaurant_id: currentData?.restaurant_id,
             content,
             post_image_urls: postImagesUrls && postImagesUrls.length > 0 ? postImagesUrls : undefined,
         };
