@@ -92,7 +92,7 @@
 			console.log(error);
 		} else {
 			if ($page.url.hostname === 'localhost') {
-				goto(`/places/${urlParams}/checking-in/leave-review`);
+				goto(`/places/${urlParams}/checking-in/confirm`);
 			} else {
 				goto(`/places/${urlParams}checking-in/confirm`);
 			}
