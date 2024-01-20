@@ -51,17 +51,19 @@
 
 <div class="h-56 md:hidden" />
 
-<div class="flex w-full justify-between">
-	<div class="flex-col flex space-y-1.5 pt-2">
-		<Headline class="overflow-ellipsis">{placeName}</Headline>
-		<Title class="overflow-ellipsis">{address}</Title>
-		<Body class="opacity-80">{desc}</Body>
+<div class="flex w-full flex-col space-y-4">
+	<div class="flex w-full justify-between">
+		<div class="flex-col flex space-y-1.5 pt-2">
+			<Headline class="overflow-ellipsis">{placeName}</Headline>
+			<Title class="overflow-ellipsis">{address}</Title>
+		</div>
+		<Image
+			alt="Images of {placeName}"
+			class="w-20 h-fit rounded-3xl shrink-0"
+			src={placeLogoSrc}
+		/>
 	</div>
-	<Image
-		alt="Images of {placeName}"
-		class="w-20 h-fit rounded-3xl shrink-0"
-		src={placeLogoSrc}
-	/>
+	<Body class="opacity-80">{desc}</Body>
 </div>
 
 <div class="flex space-x-4">
