@@ -59,7 +59,7 @@
 	</div>
 	<Image
 		alt="Images of {placeName}"
-		class="w-20 h-fit aspect-square rounded-3xl snap-start snap-always	"
+		class="w-20 h-fit rounded-3xl shrink-0"
 		src={placeLogoSrc}
 	/>
 </div>
