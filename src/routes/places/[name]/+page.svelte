@@ -91,12 +91,15 @@
 		if (error) {
 			console.log(error);
 		} else {
-			if ($page.url.hostname === 'localhost') {
-				goto(`/places/${urlParams}/checking-in/confirm`);
-			} else {
+			if (urlParams.slice(-1) === '/') {
 				goto(`/places/${urlParams}checking-in/confirm`);
 			}
-			// goto(`/places/${urlParams}/checking-in/confirm`);
+			// if ($page.url.hostname === 'localhost') {
+			// 	goto(`/places/${urlParams}/checking-in/confirm`);
+			// } else {
+			// 	goto(`/places/${urlParams}checking-in/confirm`);
+			// }
+			goto(`/places/${urlParams}/checking-in/confirm`);
 		}
 	}
 </script>

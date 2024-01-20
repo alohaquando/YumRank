@@ -30,7 +30,9 @@
 	let scanning = false;
 
 	async function openCamera() {
-		stream = await navigator.mediaDevices.getUserMedia({ video: true });
+		stream = await navigator.mediaDevices.getUserMedia({ 
+			video: { facingMode: { exact: "environment" } } 
+		});
 		video.srcObject = stream;
 		video.play();
 		scanning = true;
@@ -94,6 +96,7 @@
 
 	<!-- svelte-ignore a11y-media-has-caption -->
 	<video
+		autoPlay={true} playsInline={true} muted={true}
 		id="video"
 		height="480"
 		class="rounded-3xl bg-red-50 w-full"
