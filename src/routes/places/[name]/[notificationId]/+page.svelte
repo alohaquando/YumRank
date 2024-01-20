@@ -20,6 +20,8 @@
 	let ws: WebSocket | null = null;
 	let log: string[] = [];
 
+	let qrGenerated = false;
+
 	const logEvent = (str: string) => {
 		log = [...log, str];
 	};
@@ -56,10 +58,10 @@
 
 	async function newQR() {
 		const upsertData = {
-            restaurant_id: data.noti?.restaurant_id,
+			restaurant_id: data.noti?.restaurant_id,
 			user_id: data.noti?.sender_id,
-			qr_code_exp: new Date(Date.now() + 2 * 60 * 1000).toISOString(),
-        };
+			qr_code_exp: new Date(Date.now() + 2 * 60 * 1000).toISOString()
+		};
 		const { error } = await supabase
 			.from('qrscanning')
 			.upsert(upsertData, { onConflict: ['restaurant_id', 'user_id'] });
@@ -68,6 +70,7 @@
 			console.log(error);
 		} else {
 			requestData();
+			qrGenerated = true;
 		}
 	}
 </script>
@@ -87,25 +90,32 @@
 	</ActionChip>
 
 	{#if data.noti.type === 'checkin'}
-		<Headline class="text-center max-w-md mx-auto">
-			Inform {data.noti?.profiles?.username} to scan the QR code to check-in {data.noti?.restaurants?.name}
-		</Headline>
+		<Title class="text-center max-w-md mx-auto">
+			{#if !qrGenerated}
+				Click the button to generate a QR code for checking in
+			{:else }
+				Inform {data.noti?.profiles?.username} to scan the QR code to check-in {data.noti?.restaurants?.name}
+			{/if}
+		</Title>
+
+		{#if !qrGenerated}
+			<Button design="filled" on:click={() => newQR()} class="w-full">Generate QR code</Button>
+		{/if}
 
 		<ul>
 			{#each log as event}
 				{#if event.includes('image/png')}
-					<img src={event} alt="QR" />
+					<img src={event} alt="QR" class="w-full aspect-square max-h-[50vh] object-contain" />
 				{/if}
 			{/each}
 		</ul>
 
-		<Button on:click={() => newQR()} class="!text-sm opacity-70 text-center">Generate</Button>
 	{:else}
-	<Headline class="text-center max-w-md mx-auto"
-	>{data.noti?.profiles?.username} left a review for {data.noti?.restaurants
-		?.name}</Headline
->
+		<Headline class="text-center max-w-md mx-auto"
+		>{data.noti?.profiles?.username} left a review for {data.noti?.restaurants
+			?.name}</Headline
+		>
 	{/if}
 
-	
+
 </div>
