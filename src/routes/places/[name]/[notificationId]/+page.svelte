@@ -10,51 +10,54 @@
 	import { page } from '$app/stores';
 	import { goto } from '$app/navigation';
 	import Button from '$lib/components/buttons/Button.svelte';
+	import qrCode from 'qrcode';
 
 	// let isScanned = false;
 	export let data;
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
 
-	let webSocketEstablished = false;
-	let ws: WebSocket | null = null;
-	let log: string[] = [];
+	// let webSocketEstablished = false;
+	// let ws: WebSocket | null = null;
+	// let log: string[] = [];
 
 	let qrGenerated = false;
 
-	const logEvent = (str: string) => {
-		log = [...log, str];
-	};
+	// const logEvent = (str: string) => {
+	// 	log = [...log, str];
+	// };
 
 	const urlParts = $page.url.pathname.split('/');
 	urlParts.pop(); // Remove the last part
 	const urlParams = urlParts.slice(2).join('/');
 
-	export const requestData = async () => {
-		if (webSocketEstablished) return;
-		const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-		ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
+	// export const requestData = async () => {
+	// 	if (webSocketEstablished) return;
+	// 	const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+	// 	ws = new WebSocket(`${protocol}//${window.location.host}/websocket`);
 
-		ws.addEventListener('open', (event) => {
-			webSocketEstablished = true;
-			console.log('[websocket] connection open', event);
-		});
-		ws.addEventListener('close', (event) => {
-			console.log('[websocket] connection closed', event);
-		});
-		ws.addEventListener('message', (event) => {
-			console.log('[websocket] message received', event);
-			logEvent(event.data);
-		});
-		const res = await fetch(`/places/${urlParams}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json'
-			}
-		});
-		// const data = await res.json();
-		// logEvent(`[GET] data received: ${data.ownerId}`);
-	};
+	// 	ws.addEventListener('open', (event) => {
+	// 		webSocketEstablished = true;
+	// 		console.log('[websocket] connection open', event);
+	// 	});
+	// 	ws.addEventListener('close', (event) => {
+	// 		console.log('[websocket] connection closed', event);
+	// 	});
+	// 	ws.addEventListener('message', (event) => {
+	// 		console.log('[websocket] message received', event);
+	// 		logEvent(event.data);
+	// 	});
+	// 	const res = await fetch(`/places/${urlParams}`, {
+	// 		method: 'GET',
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 		}
+	// 	});
+	// 	// const data = await res.json();
+	// 	// logEvent(`[GET] data received: ${data.ownerId}`);
+	// };
+
+	let qrDataUrl = '';
 
 	async function newQR() {
 		const upsertData = {
@@ -69,7 +72,14 @@
 		if (error) {
 			console.log(error);
 		} else {
-			requestData();
+			let qrData = {
+                expirationTime: new Date(Date.now() + 2 * 60 * 1000).toISOString() // 2 minutes from now
+            };
+
+            qrCode.toDataURL(JSON.stringify(qrData), (err, url) => {
+                if (err) console.log(err);
+                qrDataUrl = url;
+            });
 			qrGenerated = true;
 		}
 	}
@@ -102,13 +112,16 @@
 			<Button design="filled" on:click={() => newQR()} class="w-full">Generate QR code</Button>
 		{/if}
 
-		<ul>
+		<!-- <ul>
 			{#each log as event}
 				{#if event.includes('image/png')}
 					<img src={event} alt="QR" class="w-full aspect-square max-h-[50vh] object-contain" />
 				{/if}
 			{/each}
-		</ul>
+		</ul> -->
+		{#if qrDataUrl}
+			<img src={qrDataUrl} alt="QR Code" class="w-full aspect-square max-h-[50vh] object-contain" />
+		{/if}
 
 	{:else}
 		<Headline class="text-center max-w-md mx-auto"

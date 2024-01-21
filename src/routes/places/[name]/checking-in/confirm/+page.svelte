@@ -16,13 +16,13 @@
 	import { goto } from '$app/navigation';
 	import { onMount, afterUpdate, tick } from 'svelte';
 	import jsQR from 'jsqr';
-	import { page } from '$app/stores';
+	import ErrorCard from '$lib/components/cards/FormStatusCard.svelte';
 
 	export let data;
 	let { session, supabase } = data;
 	$: ({ session, supabase } = data);
 
-
+	let invalid = false;
 	let video: any;
 	let canvas: any;
 	let context: any;
@@ -58,7 +58,7 @@
 				if (exp.expirationTime > new Date(Date.now()).toISOString()) {
 					goto('/places/' + data.restaurant.name + '/checking-in/leave-review/');
 				} else {
-					console.log('expired');
+					invalid = true;
 				}
 			} else {
 				console.log('no data');
@@ -76,6 +76,12 @@
 </script>
 
 <LargePageTitle showBackButton>Checking in at</LargePageTitle>
+
+{#if invalid}
+	<ErrorCard
+		title="QR code expired"
+	/>
+{/if}
 
 <div class="flex-col flex space-y-4">
 	<PlaceItems
