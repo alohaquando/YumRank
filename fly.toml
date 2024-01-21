@@ -10,6 +10,7 @@ primary_region = "sin"
 
 [env]
   PORT = "8080"
+  BODY_SIZE_LIMIT=0
 
 [[services]]
   internal_port = 8080
