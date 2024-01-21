@@ -77,18 +77,19 @@
 
 <LargePageTitle showBackButton>Checking in at</LargePageTitle>
 
-{#if invalid}
-	<ErrorCard
-		title="QR code expired"
-	/>
-{/if}
-
 <div class="flex-col flex space-y-4">
 	<PlaceItems
 	address={data.restaurant.address}
 	name={data.restaurant.name}
 	src={data.restaurant.logo_url}
 />
+{#if invalid}
+	<ErrorCard
+		title="QR scanning failed"
+		message="QR code expired after 2 minutes. Please use another one"
+		failed={!invalid}
+	/>
+{/if}
 
 	<Button on:click={openCamera} width="full">Open Camera</Button>
 
