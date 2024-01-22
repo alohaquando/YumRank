@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import RatingMarker from '$lib/components/map/RatingMarker.svelte';
 	import { goto } from '$app/navigation';
+	import { PUBLIC_GOOGLE_MAPS_API } from '$env/static/public';
 
 	export let initialLat: number = 10.777499861979388;
 	export let initialLong: number = 106.69538241308348;
@@ -21,12 +22,6 @@
 
 
 	onMount(async () => {
-		// let loader = new Loader({
-		// 	apiKey: 'AIzaSyBGJm4FHAYg8fs_xcFKPbXn5E9xXz-HDyU',
-		// 	id: '__googleMapsScriptId',
-		// 	version: 'weekly',
-		// 	libraries: ['maps', 'marker']
-		// });
 
 
 		(g => {
@@ -48,7 +43,7 @@
 				}));
 			d[l] ? console.warn(p + ' only loads once. Ignoring:', g) : d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n));
 		})({
-			key: 'AIzaSyAmfUrL4XL1BvkX3ua_vy0F-p84phgX8fI',
+			key: PUBLIC_GOOGLE_MAPS_API,
 			v: 'weekly'
 			// Use the 'v' parameter to indicate the version to use (weekly, beta, alpha, etc.).
 			// Add other bootstrap parameters as needed, using camel case.

@@ -12,6 +12,7 @@
 	import Divider from '$lib/components/layouts/Divider.svelte';
 	import ListItem from '$lib/components/lists/ListItem.svelte';
 	import Map from '$lib/components/map/Map.svelte';
+	import { PUBLIC_GOOGLE_MAPS_API } from '$env/static/public';
 
 	let placeName: string;
 	let allPlace = [];
@@ -22,7 +23,7 @@
 
 	async function searchTextQuery(query: string) {
 		const url = 'https://places.googleapis.com/v1/places:searchText';
-		const apiKey = 'AIzaSyBGJm4FHAYg8fs_xcFKPbXn5E9xXz-HDyU';
+		const apiKey = PUBLIC_GOOGLE_MAPS_API;
 
 		try {
 			const response = await fetch(url, {

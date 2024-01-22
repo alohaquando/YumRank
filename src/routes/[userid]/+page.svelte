@@ -4,6 +4,7 @@
 	import LargePageTitle from '$lib/components/layouts/LargePageTitle.svelte';
 	import Image from '$lib/components/media/Image.svelte';
 	import Body from '$lib/components/typography/Body.svelte';
+	import { PUBLIC_GOOGLE_MAPS_API } from '$env/static/public';
 
 	let placeName: string;
 	let allPlace = [];
@@ -14,7 +15,7 @@
 
 	async function searchTextQuery(query: string) {
 		const url = 'https://places.googleapis.com/v1/places:searchText';
-		const apiKey = 'AIzaSyBGJm4FHAYg8fs_xcFKPbXn5E9xXz-HDyU';
+		const apiKey = PUBLIC_GOOGLE_MAPS_API;
 
 		try {
 			const response = await fetch(url, {
